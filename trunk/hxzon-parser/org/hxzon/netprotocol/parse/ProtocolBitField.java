@@ -5,6 +5,7 @@ import org.hxzon.netprotocol.packet.Packet;
 public class ProtocolBitField extends ProtocolField {
 
 	public ProtocolBitField(String name, String display, int offset, int bitOffset, int bitLen, Packet srcPacket) {
+		setPacket(srcPacket);
 		setName(name);
 		setDisplayString(display);
 		int len = (bitLen + 7) / 8;

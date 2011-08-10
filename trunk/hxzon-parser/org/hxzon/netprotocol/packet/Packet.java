@@ -3,19 +3,19 @@ package org.hxzon.netprotocol.packet;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hxzon.netprotocol.common.GeneralPacket;
-import org.hxzon.netprotocol.common.GeneralPacketPayload;
+import org.hxzon.netprotocol.common.IPacket;
+import org.hxzon.netprotocol.common.IPacketPayload;
 import org.hxzon.netprotocol.parse.ProtocolBindingList;
 import org.hxzon.netprotocol.parse.ProtocolField;
 import org.hxzon.util.BytesUtil;
 
-public class Packet implements GeneralPacket {
+public class Packet implements IPacket {
 	private byte[] srcData;
 	private int offset;
 	private int headerLength;
-	private GeneralPacket srcPacket;
-	private GeneralPacketPayload payload;
-	private GeneralPacket lastPacket;
+	private IPacket srcPacket;
+	private IPacketPayload payload;
+	private IPacket lastPacket;
 	private List<ProtocolField> headerFields;
 
 	public Packet() {
@@ -91,33 +91,33 @@ public class Packet implements GeneralPacket {
 		return new ProtocolField[0];
 	}
 
-	public GeneralPacketPayload getPayload() {
+	public IPacketPayload getPayload() {
 		if (payload == null) {
 			payload = parsePayload();
 		}
 		return payload;
 	}
 
-	public GeneralPacket getLastPacket() {
+	public IPacket getLastPacket() {
 		if (lastPacket == null) {
-			GeneralPacketPayload packet = getPayload();
-			while (packet instanceof GeneralPacket) {
-				packet = ((GeneralPacket) packet).getPayload();
+			IPacketPayload packet = getPayload();
+			while (packet instanceof IPacket) {
+				packet = ((IPacket) packet).getPayload();
 			}
 			lastPacket = packet.getSrcPacket();
 		}
 		return lastPacket;
 	}
 
-	public void setPayload(GeneralPacketPayload payload) {
+	public void setPayload(IPacketPayload payload) {
 		this.payload = payload;
 	}
 
-	public GeneralPacket getSrcPacket() {
+	public IPacket getSrcPacket() {
 		return srcPacket;
 	}
 
-	public void setSrcPacket(GeneralPacket srcPacket) {
+	public void setSrcPacket(IPacket srcPacket) {
 		this.srcPacket = srcPacket;
 		this.srcData = srcPacket.getSrcData();
 		this.offset = srcPacket.getOffset() + srcPacket.getHeaderLength();
@@ -128,7 +128,7 @@ public class Packet implements GeneralPacket {
 		}
 	}
 
-	private GeneralPacketPayload parsePayload() {
+	private IPacketPayload parsePayload() {
 		if (srcData.length <= this.offset + this.headerLength) {
 			payload = new NullPayload();
 			payload.setSrcPacket(this);

@@ -1,7 +1,7 @@
 package org.hxzon.netprotocol.packet;
 
 import org.hxzon.asn1.smv.SmvPduParser;
-import org.hxzon.netprotocol.common.GeneralPacketPayload;
+import org.hxzon.netprotocol.common.IPacketPayload;
 import org.hxzon.netprotocol.parse.ProtocolBinding;
 import org.hxzon.netprotocol.parse.ProtocolBindingList;
 import org.hxzon.netprotocol.parse.ProtocolField;
@@ -102,8 +102,8 @@ public class SmvPacket extends Packet {
 		return smvPdu;
 	}
 
-	public GeneralPacketPayload getPayload() {
-		GeneralPacketPayload payload = (GeneralPacketPayload) fetchSmvpdu();
+	public IPacketPayload getPayload() {
+		IPacketPayload payload = (IPacketPayload) fetchSmvpdu();
 		payload.setSrcPacket(this);
 		return payload;
 	}

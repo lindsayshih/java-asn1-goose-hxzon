@@ -2,7 +2,7 @@ package org.hxzon.netprotocol.packet;
 
 import org.hxzon.asn1.goose.GoosePdu;
 import org.hxzon.asn1.goose.GoosePduParser;
-import org.hxzon.netprotocol.common.GeneralPacketPayload;
+import org.hxzon.netprotocol.common.IPacketPayload;
 import org.hxzon.netprotocol.parse.ProtocolBinding;
 import org.hxzon.netprotocol.parse.ProtocolBindingList;
 import org.hxzon.netprotocol.parse.ProtocolField;
@@ -103,8 +103,8 @@ public class GoosePacket extends Packet {
 		return goosePdu;
 	}
 
-	public GeneralPacketPayload getPayload() {
-		GeneralPacketPayload payload = (GeneralPacketPayload) fetchGoosepdu();
+	public IPacketPayload getPayload() {
+		IPacketPayload payload = (IPacketPayload) fetchGoosepdu();
 		payload.setSrcPacket(this);
 		return payload;
 	}
