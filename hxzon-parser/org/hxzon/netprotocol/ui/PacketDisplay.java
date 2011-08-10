@@ -65,13 +65,19 @@ public class PacketDisplay extends JPanel {
 				offset = offset * 2 + offset;
 				end = end * 2 + end;
 				offset += offset / 48;
-				end += end / 48 - 1;
-//                hexPane.requestFocus();
-//                hexPane.select(offset, end);
-				StyledDocument doc = hexPane.getStyledDocument();
-				doc.setCharacterAttributes(0, doc.getLength(), notSelected, true);
-				doc.setCharacterAttributes(offset, end - offset, selected, true);
-				hexPane.select(offset, end);//let auto scroll
+				end += end / 48;
+				//fix bug when len=0 make end=offset
+				if (end > offset) {
+					end -= 1;
+				}
+				try {
+					StyledDocument doc = hexPane.getStyledDocument();
+					doc.setCharacterAttributes(0, doc.getLength(), notSelected, true);
+					doc.setCharacterAttributes(offset, end - offset, selected, true);
+					hexPane.select(offset, end);//let auto scroll
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
 			}
 
 		});
@@ -85,18 +91,26 @@ public class PacketDisplay extends JPanel {
 	}
 
 	public void updateData(Packet packet) {
-		byte[] data = packet.getSrcData();
-		try {
-			messageTree.updateModel(packet);//must before editPane.setText or throw exception
-		} catch (Exception e) {
+		if (packet != null) {
+			byte[] data = packet.getSrcData();
+			try {
+				messageTree.updateModel(packet);//must before editPane.setText or throw exception
+			} catch (Exception e) {
+				messageTree.updateModel(null);
+				e.printStackTrace();
+			}
+			indexPane.setText(BytesUtil.toIndex(data));
+			indexPane.select(0, 0);
+			String hex = BytesUtil.toDisplayHexString(data);
+			hexPane.setText(hex);
+			hexPane.select(0, 0);
+		} else {
 			messageTree.updateModel(null);
-			e.printStackTrace();
+			indexPane.setText("");
+			indexPane.select(0, 0);
+			hexPane.setText("");
+			hexPane.select(0, 0);
 		}
-		indexPane.setText(BytesUtil.toIndex(data));
-		indexPane.select(0, 0);
-		String hex = BytesUtil.toDisplayHexString(data);
-		hexPane.setText(hex);
-		hexPane.select(0, 0);
 	}
 
 	public JTree getMessageTree() {

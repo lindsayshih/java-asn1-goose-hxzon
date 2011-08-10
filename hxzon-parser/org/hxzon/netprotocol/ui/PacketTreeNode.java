@@ -52,7 +52,7 @@ public class PacketTreeNode implements TreeNode {
 //				if (payload instanceof NullPayload) {
 //
 //				} else {
-					this.add(payload);
+				this.add(payload);
 //				}
 			}
 		} else {
@@ -64,7 +64,7 @@ public class PacketTreeNode implements TreeNode {
 		userObject = field;
 		this.len = field.getLen();
 		this.offset = field.getOffset();
-		this.setDisplayString(field.getDisplayString() + ":" + field.getValueAsDisplay());
+		this.setDisplayString(field.getDisplayString() + ":" + field.getValueAsDisplay() + "[" + field.getOffset() + "," + field.getLen() + "]");
 		children = new ArrayList<PacketTreeNode>(0);
 	}
 
@@ -103,7 +103,7 @@ public class PacketTreeNode implements TreeNode {
 //				this.add(new PacketTreeNode(packet));
 		} else if (packet instanceof BerNode) {
 			add((BerNode) packet);
-		}else{
+		} else {
 			this.implAddChildNode(new PacketTreeNode(packet));
 		}
 //		this.implAddChildNode(new PacketTreeNode(packet));
