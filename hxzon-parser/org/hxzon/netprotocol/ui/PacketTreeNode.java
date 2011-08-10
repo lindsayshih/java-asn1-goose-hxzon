@@ -38,22 +38,22 @@ public class PacketTreeNode implements TreeNode {
 			return;
 		}
 		userObject = packet;
+		this.setDisplayString(packet.getDisplayString());
 		this.offset = packet.getOffset();
 		if (packet instanceof IPacket) {
 			IPacket gpacket = (IPacket) packet;
 			this.len = gpacket.getHeaderLength();
-			this.setDisplayString(gpacket.getDisplayString());
 			if (gpacket.getSrcPacket() == null) {
 				IPacketPayload payload = gpacket.getPayload();
 				while (payload instanceof IPacket) {
 					this.add((IPacket) payload);
 					payload = ((IPacket) payload).getPayload();
 				}
-				if (payload instanceof NullPayload) {
-
-				} else {
+//				if (payload instanceof NullPayload) {
+//
+//				} else {
 					this.add(payload);
-				}
+//				}
 			}
 		} else {
 			this.len = packet.getLength();
@@ -103,6 +103,8 @@ public class PacketTreeNode implements TreeNode {
 //				this.add(new PacketTreeNode(packet));
 		} else if (packet instanceof BerNode) {
 			add((BerNode) packet);
+		}else{
+			this.implAddChildNode(new PacketTreeNode(packet));
 		}
 //		this.implAddChildNode(new PacketTreeNode(packet));
 	}

@@ -4,4 +4,8 @@ public class EmptyPayload extends DataPayload {
 	public String getType() {
 		return getSrcPacket().getType();
 	}
+	
+	public String getDisplayString() {
+		return "empty";
+	}
 }

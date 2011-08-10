@@ -44,6 +44,10 @@ public class OsiPresentationPacket extends Packet {
 		return null;
 	}
 
+	public boolean isEmptyPayload() {
+		return true;
+	}
+
 	public String getType() {
 		return "osi presentation";
 	}
