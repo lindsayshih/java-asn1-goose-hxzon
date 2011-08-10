@@ -16,7 +16,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import org.hxzon.asn1.core.parse.ext.Asn1Utils;
 import org.hxzon.netprotocol.packet.CotpPacket;
 import org.hxzon.netprotocol.packet.EthernetPacket;
 import org.hxzon.netprotocol.packet.GoosePacket;
@@ -46,7 +45,6 @@ public class DisplayFrame2 extends JFrame {
 		new CotpPacket();
 		new OsiSessionPacket();
 		new OsiPresentationPacket();
-		Asn1Utils.setNotAddChoiceNode(true);
 	}
 	private PacketTable packetsTable;
 	private PacketDisplay packetDisplay;

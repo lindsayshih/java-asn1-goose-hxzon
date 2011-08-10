@@ -7,8 +7,8 @@ import org.hxzon.asn1.core.type.base.BerNode;
 import org.hxzon.asn1.core.type.ext.BerChoice;
 
 
-public class UserData extends BerChoice implements UserDataContainer {
-	public UserData() {
+public class OsiUserData extends BerChoice implements UserDataContainer {
+	public OsiUserData() {
 		setName("user data");
 		setDisplayString("user data");
 	}

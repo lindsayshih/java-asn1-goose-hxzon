@@ -10,14 +10,15 @@ import javax.swing.tree.TreeNode;
 import org.hxzon.asn1.core.parse.Tag;
 import org.hxzon.asn1.core.type.base.BerConstruct;
 import org.hxzon.asn1.core.type.base.BerNode;
+import org.hxzon.asn1.core.type.ext.BerChoice;
 import org.hxzon.asn1.core.type.ext.FakeBerConstruct;
 import org.hxzon.netprotocol.common.IPacket;
 import org.hxzon.netprotocol.common.IPacketPayload;
 import org.hxzon.netprotocol.packet.OsiPresentationPacket;
 import org.hxzon.netprotocol.parse.ProtocolField;
 
-
 public class PacketTreeNode implements TreeNode {
+	private boolean removeBerChoice = true;
 	private PacketTreeNode parent;
 	private List<PacketTreeNode> children;
 	private Object userObject;
@@ -136,6 +137,9 @@ public class PacketTreeNode implements TreeNode {
 	public void add(BerNode asn1) {
 		if (asn1 == null) {
 			return;
+		}
+		if (removeBerChoice && asn1 instanceof BerChoice && !((BerChoice) asn1).hasTag()) {
+			asn1 = ((BerChoice) asn1).getLastRealNode();
 		}
 		PacketTreeNode node = new PacketTreeNode(asn1);
 		this.implAddChildNode(node);

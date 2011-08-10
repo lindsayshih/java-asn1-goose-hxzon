@@ -231,13 +231,13 @@ public class Asn1Utils {
 		return node;
 	}
 
-	private static boolean notAddChoiceNode = true;
-
-	public static void setNotAddChoiceNode(boolean b) {
-		notAddChoiceNode = b;
-	}
-
-	public static boolean isNotAddChoiceNode() {
-		return notAddChoiceNode;
-	}
+//	private static boolean notAddChoiceNode = true;
+//
+//	public static void setNotAddChoiceNode(boolean b) {
+//		notAddChoiceNode = b;
+//	}
+//
+//	public static boolean isNotAddChoiceNode() {
+//		return notAddChoiceNode;
+//	}
 }
