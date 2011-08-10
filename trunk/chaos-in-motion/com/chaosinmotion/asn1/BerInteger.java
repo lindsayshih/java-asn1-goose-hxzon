@@ -114,11 +114,20 @@ public class BerInteger extends BerNode {
 		return "BerInteger";
 	}
 
+	private boolean unsigned = false;
 	private int bitLen = 64;
 
-	public BerInteger limitBitLength(int bitLen) {
+	public BerInteger limitBitLength(int bitLen, boolean unsigned) {
 		this.bitLen = bitLen;
+		this.unsigned = unsigned;
+		if (bitLen < 32) {
+			System.out.println(bitLen);
+		}
 		return this;
+	}
+
+	public BerInteger limitBitLength(int bitLen) {
+		return limitBitLength(bitLen, false);
 	}
 
 	//add by hxzon
@@ -133,6 +142,6 @@ public class BerInteger extends BerNode {
 
 	//add by hxzon
 	public String getValueAsString() {
-		return String.valueOf(getValue());
+		return String.valueOf(getValue()) + "[len=" + bitLen + (unsigned ? ",unsigned]" : ",signed]");
 	}
 }
