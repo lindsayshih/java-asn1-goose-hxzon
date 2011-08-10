@@ -1,0 +1,111 @@
+package org.hxzon.asn1.goose;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+
+import org.hxzon.asn1.Asn1Utils;
+
+import com.chaosinmotion.asn1.BerInputStream;
+import com.chaosinmotion.asn1.BerNode;
+import com.chaosinmotion.asn1.BerParser;
+import com.chaosinmotion.asn1.BerSequence;
+import com.chaosinmotion.asn1.Tag;
+
+public class GoosePduParser extends BerParser {
+	protected GoosePduParser() {
+
+	}
+
+	public static final GoosePduParser parser = new GoosePduParser();
+
+	public static final int State_goosepdu = State_Start;
+	public static final int State_dataset = 1;
+
+	public BerNode create(int tag, BerInputStream stream, int state) {
+		switch (state) {
+		case State_goosepdu:
+
+			switch (tag) {
+			case Tag.APPLICATION | 1:
+				return new BerSequence().init("goosepdu", "goosepdu", tag, stream, state, this);
+			case Tag.CONTEXT | 0:
+				return Asn1Utils.createBerVisibleString("gocbRef", "控制块引用", tag, stream);
+			case Tag.CONTEXT | 1:
+				return Asn1Utils.createBerInteger("timeAllowedtoLive", "生存时间", tag, stream);
+			case Tag.CONTEXT | 2:
+				return Asn1Utils.createBerVisibleString("datSet", "数据集引用", tag, stream);
+			case Tag.CONTEXT | 3:
+				return Asn1Utils.createBerVisibleString("goID", "Goose应用标识", tag, stream);
+			case Tag.CONTEXT | 4:
+				return Asn1Utils.createBerIecUtcTime("t", "事件时间", tag, stream);
+			case Tag.CONTEXT | 5:
+				return Asn1Utils.createBerInteger("stNum", "状态计数", tag, stream);
+			case Tag.CONTEXT | 6:
+				return Asn1Utils.createBerInteger("qtNum", "序列计数", tag, stream);
+			case Tag.CONTEXT | 7:
+				return Asn1Utils.createBerBoolean("test", "测试", tag, stream);
+			case Tag.CONTEXT | 8:
+				return Asn1Utils.createBerInteger("confRev", "版本", tag, stream);
+			case Tag.CONTEXT | 9:
+				return Asn1Utils.createBerBoolean("ndsCom", "ndsCom", tag, stream);
+			case Tag.CONTEXT | 10:
+				return Asn1Utils.createBerInteger("numDatSetEntries", "数据集条目数", tag, stream);
+			case Tag.CONTEXT | 11:
+				return new BerSequence().init("dataset", "数据集", tag, stream, State_dataset, this);
+			default:
+				return Asn1Utils.createUnknownTagBerNode(tag, stream);
+
+			}
+		case State_dataset: {
+			switch (tag) {
+//			case Tag.CONTEXT | 1:
+//				return Asn1Utils.createBerSequenceOf("array", "array", tag, stream, GooseDataset.class);
+//			case Tag.CONTEXT | 2:
+//				return Asn1Utils.createBerSequenceOf("structure", "structure", tag, stream, GooseDataset.class);
+			case Tag.CONTEXT | 3:
+				return Asn1Utils.createBerBoolean("boolean", "boolean", tag, stream);
+			case Tag.CONTEXT | 4:
+				return Asn1Utils.createBerOctetString("bit-string", "bit-string", tag, stream);
+			case Tag.CONTEXT | 5:
+				return Asn1Utils.createBerInteger("integer", "integer", tag, stream);
+			case Tag.CONTEXT | 6:
+				return Asn1Utils.createBerInteger("unsigned", "unsigned", tag, stream);//unsigned
+			case Tag.CONTEXT | 7:
+				return Asn1Utils.createBerOctetString("floating-point", "floating-point", tag, stream);
+			case Tag.CONTEXT | 8:
+				return Asn1Utils.createBerReal("real", "real", tag, stream);
+			case Tag.CONTEXT | 9:
+				return Asn1Utils.createBerOctetString("octet-string", "octet-string", tag, stream);
+			case Tag.CONTEXT | 10:
+				return Asn1Utils.createBerVisibleString("visible-string", "visible-string", tag, stream);
+			case Tag.CONTEXT | 12:
+				return Asn1Utils.createBerIecUtcTime("binary-time", "binary-time", tag, stream);
+			case Tag.CONTEXT | 13:
+				return Asn1Utils.createBerInteger("bcd", "bcd", tag, stream);
+			case Tag.CONTEXT | 14:
+				return Asn1Utils.createBerBitString("booleanArray", "booleanArray", tag, stream);
+			default:
+				return Asn1Utils.createUnknownTagBerNode(tag, stream);
+			}
+		}
+		default:
+			throw new RuntimeException("unknow state");
+		}
+	}
+
+//	public GoosePdu parseGoose(GoosePdu goose, int offset) {
+//		return parseGoose(goose.getData(), offset);
+//	}
+
+	public BerNode parseGoose(byte[] data, int offset) {
+		ByteArrayInputStream inStream = new ByteArrayInputStream(data);
+		BerInputStream in = new BerInputStream(inStream);
+		in.setTagOffset(offset);
+		try {
+			return super.readPacket(in);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+}

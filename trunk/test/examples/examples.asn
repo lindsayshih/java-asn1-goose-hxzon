@@ -1,0 +1,67 @@
+
+-- **********************************************************************
+
+
+Examples DEFINITIONS IMPLICIT TAGS ::=
+
+BEGIN
+
+
+AirRecord ::= SEQUENCE
+{
+	hot 			[0] 		BOOLEAN	OPTIONAL,
+	degree					 	INTEGER,
+	cloud			[1]			Cloud	OPTIONAL,
+	domain						EnumExample OPTIONAL
+}
+
+Cloud ::=  SET {
+	speed			OCTET STRING,
+	isBlue	[5]		BOOLEAN
+}
+
+
+EnumExample ::= ENUMERATED {
+	delivered 	(0),
+	expired 		(1)
+}
+
+MiddleSeq ::= SEQUENCE
+{
+	status		[22]	 	INTEGER,
+	location	[APPLICATION 11]	INTEGER
+}
+
+MiddleSeq2 ::= SEQUENCE
+{
+	status2		[33]	 	INTEGER
+}
+
+MiddleType ::= TaggedTypeExample
+
+MyExample ::= SET OF INTEGER
+
+MySequence ::= SEQUENCE
+{
+	status		[127] EXPLICIT	 	TaggedTypeExample,
+	location	[APPLICATION 1]	EXPLICIT OCTET STRING OPTIONAL
+}
+
+MyCallDetailRecord ::= SEQUENCE
+{
+	origAddress 	[0] 			INTEGER,
+	recipAddress	[APPLICATION 5] INTEGER 	OPTIONAL,
+	internal						MiddleSeq,
+	internal2						MiddleSeq,
+	origg			[7]				INTEGER,
+	internal3						MiddleSeq2,
+	origg2			[10] EXPLICIT 	INTEGER
+}
+
+-- JAC will not create TaggedtypeExample.java class by default, because here it is defined as a "tagged type".
+-- But you can still generate the class with a little trick. 
+-- Have a look at the comments in the top of the cretaed TaggedTypeExample.java class in the project to see the example.
+
+TaggedTypeExample   ::= [20] EXPLICIT   INTEGER
+
+END
