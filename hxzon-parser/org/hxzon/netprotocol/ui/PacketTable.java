@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
 
 import org.hxzon.netprotocol.packet.Packet;
@@ -25,33 +22,18 @@ public class PacketTable extends JTable {
 		addPacket(new Packet(BytesUtil.fromHexString(testMms1)));
 		addPacket(new Packet(BytesUtil.fromHexString(testMms2)));
 		addPacket(new Packet(BytesUtil.fromHexString(testError)));
-		this.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+		addPacket(new Packet(BytesUtil.fromHexString(testError2)));
+		this.getSelectionModel().addListSelectionListener(new ListSelectionAction() {
 
-			@Override
-			public void valueChanged(ListSelectionEvent e) {
-				if (!e.getValueIsAdjusting()) {
-					ListSelectionModel lsm = (ListSelectionModel) e.getSource();
-//					int row1=e.getFirstIndex();
-//					int row2=e.getLastIndex();
-//					System.out.println(row1+","+row2);
-					if (lsm.isSelectionEmpty()) {
-						display.getPacketDisplay().updateData(null);
-					} else {
-						// Find out which indexes are selected.
-						int minIndex = lsm.getMinSelectionIndex();
-						int maxIndex = lsm.getMaxSelectionIndex();
-						for (int i = minIndex; i <= maxIndex; i++) {
-							if (lsm.isSelectedIndex(i)) {
-								Packet packet = getModel().getPacket(i);
-								display.getPacketDisplay().updateData(packet);
-//		                    	System.out.println(i);
-							}
-						}
-					}
-
+			public void whenSelect(Object source, int i) {
+				if (i == -1) {
+					display.getPacketDisplay().updateData(null);
+				} else {
+					Packet packet = getModel().getPacket(i);
+					display.getPacketDisplay().updateData(packet);
 				}
+//		                    	System.out.println(i);
 			}
-
 		});
 	}
 
@@ -156,4 +138,5 @@ public class PacketTable extends JTable {
 			+ "00 00 00 00 00 13 da 00 00 00 00 00 00 2a fb 00" + "00 00 00 ff ff c1 2b 00 00 00 00 00 00 13 da 00" + "00 00 00 00 00 13 da 00 00 00 00               ";
 	public static String testError = "00 50 04 07 76 d6 00 0c 02 b0 85 1c 08 00 45 00 " + "00 28 ae cf 00 00 40 06 6b 59 ac 1e 03 07 ac 1e " + "05 64 00 66 05 4a 52 4d f8 2c 53 2d 34 9a 50 10 "
 			+ "39 08 3e 33 00 00 03 00 00 72 02 f0 ";
+	public static String testError2 = "00 00 00 00 00 00 00 00";
 }

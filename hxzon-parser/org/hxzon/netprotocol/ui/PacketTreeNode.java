@@ -12,7 +12,6 @@ import org.hxzon.netprotocol.common.IPacket;
 import org.hxzon.netprotocol.common.IPacketPayload;
 import org.hxzon.netprotocol.packet.OsiPresentationPacket;
 import org.hxzon.netprotocol.parse.ProtocolField;
-import org.hxzon.netprotocol.payload.NullPayload;
 
 import com.chaosinmotion.asn1.BerConstruct;
 import com.chaosinmotion.asn1.BerNode;
