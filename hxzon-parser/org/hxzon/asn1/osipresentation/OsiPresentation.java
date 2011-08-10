@@ -21,7 +21,7 @@ public class OsiPresentation extends BerSequence implements UserDataContainer, I
 //			return new OsiPresentation(tag, this, stream);
 		default:
 //			return Asn1Utils.createUnknownTagBerNode(tag, stream);
-			return new UserData().init(tag, stream, false);
+			return new OsiUserData().init(tag, stream, false);
 		}
 	}
 
