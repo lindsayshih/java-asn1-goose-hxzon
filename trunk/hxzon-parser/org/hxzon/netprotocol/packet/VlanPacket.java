@@ -42,7 +42,7 @@ public class VlanPacket extends Packet {
 //		this.type = type;
 	}
 
-	public String toString() {
+	public String getType() {
 		return "vlan";
 	}
 }

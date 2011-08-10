@@ -177,7 +177,7 @@ public class TcpPacket extends Packet {
 		this.urgentPointer = urgentPointer;
 	}
 
-	public String toString() {
+	public String getType() {
 		return "tcp";
 	}
 }

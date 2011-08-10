@@ -6,6 +6,7 @@ import org.hxzon.netprotocol.parse.ProtocolBindingList;
 import org.hxzon.netprotocol.parse.ProtocolBitField;
 import org.hxzon.netprotocol.parse.ProtocolField;
 import org.hxzon.netprotocol.parse.ProtocolInt31Field;
+import org.hxzon.netprotocol.payload.NullPayload;
 
 public class CotpPacket extends Packet {
 	static {
@@ -126,7 +127,7 @@ public class CotpPacket extends Packet {
 		return super.getPayload();
 	}
 
-	public String toString() {
+	public String getType() {
 		return "cotp";
 	}
 

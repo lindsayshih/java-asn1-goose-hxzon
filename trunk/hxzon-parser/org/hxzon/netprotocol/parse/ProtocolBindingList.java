@@ -12,7 +12,7 @@ public class ProtocolBindingList {
 	static Map<Class<? extends Packet>, List<ProtocolBinding>> map = new HashMap<Class<? extends Packet>, List<ProtocolBinding>>();
 
 	public static <T extends Packet> void addBinding(ProtocolBinding<T> binding) {
-		Class<T> packetType=(Class<T>)((ParameterizedType) binding.getClass().getGenericInterfaces()[0]).getActualTypeArguments()[0];
+		Class<T> packetType = (Class<T>) ((ParameterizedType) binding.getClass().getGenericInterfaces()[0]).getActualTypeArguments()[0];
 		List<ProtocolBinding> list = map.get(packetType);
 		if (list == null) {
 			list = new ArrayList<ProtocolBinding>();
@@ -26,7 +26,7 @@ public class ProtocolBindingList {
 	}
 
 	public static <T extends Packet> void addBinding(List<ProtocolBinding> bindings) {
-		Class<T> packetType=(Class<T>)((ParameterizedType) bindings.get(0).getClass().getGenericInterfaces()[0]).getActualTypeArguments()[0];
+		Class<T> packetType = (Class<T>) ((ParameterizedType) bindings.get(0).getClass().getGenericInterfaces()[0]).getActualTypeArguments()[0];
 		List<ProtocolBinding> list = map.get(packetType);
 		if (list == null) {
 			list = new ArrayList<ProtocolBinding>();
@@ -41,15 +41,14 @@ public class ProtocolBindingList {
 			for (ProtocolBinding binding : list) {
 				Packet next = binding.match(packet);
 				if (next != null) {
-					next.setSrcPacket(packet);
 					return next;
 				}
 			}
 		}
 		return null;
 	}
-	
-	public static void scanPackage(Package packageName){
+
+	public static void scanPackage(Package packageName) {
 //		packageName.
 	}
 

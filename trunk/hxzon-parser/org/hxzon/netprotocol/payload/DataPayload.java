@@ -1,27 +1,23 @@
-package org.hxzon.netprotocol.packet;
+package org.hxzon.netprotocol.payload;
 
 import org.hxzon.netprotocol.common.IPacket;
 import org.hxzon.netprotocol.common.IPacketPayload;
 import org.hxzon.util.BytesUtil;
 
-public class UnknownPayload implements IPacketPayload {
+public class DataPayload implements IPacketPayload {
 	private byte[] srcData;
 	private int offset;
-	private int length;
 	private IPacket srcPacket;
-
-	public String toString() {
-		return "payload";
-	}
+	private boolean miss;
 
 	@Override
 	public byte[] getData() {
-		return BytesUtil.copyBytes(srcData, offset, length);
+		return BytesUtil.copyBytes(srcData, offset, getLength());
 	}
 
 	@Override
 	public int getLength() {
-		return length;
+		return srcData.length - offset;
 	}
 
 	@Override
@@ -44,7 +40,10 @@ public class UnknownPayload implements IPacketPayload {
 		this.srcPacket = srcPacket;
 		this.srcData = srcPacket.getSrcData();
 		this.offset = srcPacket.getOffset() + srcPacket.getHeaderLength();
-		this.length = this.srcData.length - this.offset;
-
 	}
+
+	public String getDisplayString() {
+		return "user data";
+	}
+
 }
