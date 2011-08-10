@@ -1,14 +1,14 @@
 package org.hxzon.asn1.osipresentation;
 
-import org.hxzon.asn1.FakeBerConstruct;
-import org.hxzon.asn1.osipresentation.PdvList.PresentationDataValues;
+import org.hxzon.netprotocol.common.IPacket;
+import org.hxzon.netprotocol.common.IPacketPayload;
+import org.hxzon.util.BytesUtil;
 
-import com.chaosinmotion.asn1.BerConstruct;
 import com.chaosinmotion.asn1.BerInputStream;
 import com.chaosinmotion.asn1.BerNode;
 import com.chaosinmotion.asn1.BerSequence;
 
-public class OsiPresentation extends BerSequence {
+public class OsiPresentation extends BerSequence implements UserDataContainer, IPacketPayload {
 	public OsiPresentation() {
 		setName("iso 8823 osi presentation");
 		setDisplayString("iso 8823 osi presentation");
@@ -27,40 +27,45 @@ public class OsiPresentation extends BerSequence {
 
 	SingleAsn1Type userData;
 
-	public SingleAsn1Type getUserData() {
-		if (userData == null) {
-			for (BerNode node : getChildren()) {
-				node = findUserData(node);
-				if (node != null) {
-					userData = (SingleAsn1Type) node;
-					return userData;
-				}
+	public BerNode[] getUserData() {
+		for (BerNode child : getChildren()) {
+			if (child instanceof UserDataContainer) {
+				return ((UserDataContainer) child).getUserData();
 			}
-			userData = null;
 		}
-		return userData;
+		return new BerNode[0];
 	}
 
-	public SingleAsn1Type findUserData(BerNode node) {
-		if (node instanceof SingleAsn1Type) {
-			return (SingleAsn1Type) node;
-		}
-		if (node instanceof BerConstruct) {
-			for (BerNode tmp : ((BerConstruct) node).getChildren()) {
-				tmp = findUserData(tmp);
-				if (tmp != null) {
-					return (SingleAsn1Type) tmp;
-				}
-			}
-		}
-		if (node instanceof FakeBerConstruct) {
-			for (BerNode tmp : ((FakeBerConstruct) node).getChildren()) {
-				tmp = findUserData(tmp);
-				if (tmp != null) {
-					return (SingleAsn1Type) tmp;
-				}
-			}
-		}
-		return null;
+	private IPacket srcPacket;
+
+	@Override
+	public byte[] getData() {
+		return BytesUtil.copyBytes(getSrcData(), getOffset(), getLength());
 	}
+
+	@Override
+	public int getLength() {
+		return super.getTotalLen();
+	}
+
+	@Override
+	public int getOffset() {
+		return super.getTagOffset();
+	}
+
+	@Override
+	public byte[] getSrcData() {
+		return this.srcPacket.getSrcData();
+	}
+
+	@Override
+	public IPacket getSrcPacket() {
+		return this.srcPacket;
+	}
+
+	@Override
+	public void setSrcPacket(IPacket srcPacket) {
+		this.srcPacket = srcPacket;
+	}
+
 }

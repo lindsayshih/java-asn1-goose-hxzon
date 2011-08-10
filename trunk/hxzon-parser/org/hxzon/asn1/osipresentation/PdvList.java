@@ -9,7 +9,7 @@ import com.chaosinmotion.asn1.BerNode;
 import com.chaosinmotion.asn1.BerSequence;
 import com.chaosinmotion.asn1.Tag;
 
-public class PdvList extends BerSequence {
+public class PdvList extends BerSequence implements UserDataContainer {
 //FullyEncodedData
 	public PdvList() {
 		setName("item");
@@ -46,7 +46,16 @@ public class PdvList extends BerSequence {
 		}
 	}
 
-	public static class PresentationDataValues extends BerChoice {
+	public BerNode[] getUserData() {
+		for (BerNode child : getChildren()) {
+			if (child instanceof UserDataContainer) {
+				return ((UserDataContainer) child).getUserData();
+			}
+		}
+		return null;
+	}
+
+	public static class PresentationDataValues extends BerChoice implements UserDataContainer {
 
 		public PresentationDataValues() {
 			setName("presentation data values");
@@ -74,6 +83,15 @@ public class PdvList extends BerSequence {
 			default:
 				return Asn1Utils.createUnknown(tag, stream);
 			}
+		}
+
+		public BerNode[] getUserData() {
+			BerNode child = this.getRealNode();
+			if (child instanceof UserDataContainer) {
+				//single asn1 type
+				return ((UserDataContainer) child).getUserData();
+			}
+			return new BerNode[] { child };
 		}
 
 	}

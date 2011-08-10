@@ -112,8 +112,9 @@ public class PacketTreeNode implements TreeNode {
 //		PacketTreeNode node = new PacketTreeNode(packet);
 //		this.implAddChildNode(node);
 //		node.add(packet.fetchPresentation());
-		this.add(packet.fetchPresentation());
-		this.add(packet.fetchPresentationPayload());
+		for (BerNode node : packet.getUserData()) {
+			this.add(node);
+		}
 	}
 
 	public void add(String value) {
