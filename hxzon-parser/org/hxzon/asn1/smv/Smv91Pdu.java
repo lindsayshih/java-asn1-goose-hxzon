@@ -79,5 +79,9 @@ public class Smv91Pdu extends BerOctetString implements FakeBerConstruct, IPacke
 	public void setSrcPacket(IPacket srcPacket) {
 		this.srcPacket = srcPacket;
 	}
+	
+	public String getType(){
+		return "9-1采样值";
+	}
 
 }

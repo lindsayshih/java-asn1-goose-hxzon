@@ -140,6 +140,10 @@ public class Packet implements IPacket {
 		return lastPacket;
 	}
 
+	public String getLastPayloadType() {
+		return getLastPacket().getPayload().getType();
+	}
+
 	public void setPayload(IPacketPayload payload) {
 		this.payload = payload;
 	}
