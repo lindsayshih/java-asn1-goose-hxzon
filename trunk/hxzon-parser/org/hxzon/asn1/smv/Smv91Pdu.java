@@ -24,7 +24,7 @@ public class Smv91Pdu extends BerOctetString implements FakeBerConstruct, Genera
 	protected void readValue(BerInputStream stream) {
 		super.readValue(stream);
 		byte[] value = getValue();
-		int asduNum = BytesUtil.toInt(value, 0, 2);
+		int asduNum = (int) BytesUtil.toSigned(value, 0, 2);
 		fList = new ArrayList<BerNode>(asduNum + 1);
 		BerNode numberOfAsdu = Asn1Utils.createFakeBerInteger("number of asdu", "asdu条目数", asduNum, this.getValueOffset() + 0, 2);
 		fList.add(numberOfAsdu);

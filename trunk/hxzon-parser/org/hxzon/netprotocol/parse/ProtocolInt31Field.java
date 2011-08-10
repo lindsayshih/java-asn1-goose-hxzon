@@ -8,7 +8,7 @@ public class ProtocolInt31Field extends ProtocolField {
 		setDisplayString(display);
 		setSaveOffsetAndLen(srcPacket, offset, len);
 		if (isRight()) {
-			value = srcPacket.getInt(getOffset(), getLen());
+			value = (int) srcPacket.getSigned(getOffset(), getLen());
 		}
 	}
 

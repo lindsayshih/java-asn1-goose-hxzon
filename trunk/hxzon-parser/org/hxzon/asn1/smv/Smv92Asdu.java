@@ -94,8 +94,8 @@ public class Smv92Asdu extends BerSequence {
 			fList = new ArrayList<BerNode>(data.length / 4);
 			FakeBerNode node;
 			for (int i = 0; i < data.length; i += 8) {
-				long value = BytesUtil.toInt(data, i, 4);
-				long quality = BytesUtil.toULong(data, i + 4, 4);
+				long value = BytesUtil.toSigned(data, i, 4);
+				long quality = BytesUtil.toSigned(data, i + 4, 4);
 				node = new Smv92AsduDataItem(value, quality);
 				node.setTagOffset(super.getValueOffset() + i);
 				node.setTotalLen(8);

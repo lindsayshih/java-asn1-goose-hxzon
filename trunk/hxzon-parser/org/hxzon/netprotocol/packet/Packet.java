@@ -151,14 +151,12 @@ public class Packet implements GeneralPacket {
 		return BytesUtil.toHexString(srcData, offset, len);
 	}
 
-	public int getInt(int offset, int len) {
-//		return Integer.valueOf(getHexString(offset, len), 16);
-		return BytesUtil.toInt(srcData, offset, len);
+	public long getSigned(int offset, int len) {
+		return BytesUtil.toSigned(srcData, offset, len);
 	}
 
-	public long getLong(int offset, int len) {
-//		return Long.valueOf(getHexString(offset, len), 16);
-		return BytesUtil.toULong(srcData, offset, len);
+	public long getUnsigned(int offset, int len) {
+		return BytesUtil.toUnsigned(srcData, offset, len);
 	}
 
 	public int getIntByBit(int offset, int len, int bitOffset, int bitLen) {
