@@ -46,7 +46,6 @@ import java.util.BitSet;
 
 import org.hxzon.asn1.core.type.ext.BitStringPresentation;
 
-
 /**
  * The input stream reader provides primitives for reading some fundamental objects
  * from a BER input stream
@@ -479,8 +478,8 @@ public class BerInputStream extends LengthInputStream {
 
 	private int readBerBitString2(BitStringPresentation set, int start, boolean primitive) throws IOException {
 		int length;
-		byte b;
-		byte m;
+		byte bitPadLen;
+		byte bitByte;
 		int i, j;
 
 		if (primitive) {
@@ -490,24 +489,30 @@ public class BerInputStream extends LengthInputStream {
 			 */
 
 			length = readBerLength();
-			if (length < 0)
+			if (length < 0) {
 				throw new AsnEncodingException("Ill formed bit stream");
-			b = readByte();
-			--length;
+			}
+			//add by hxzon for when len=1//FIXME is it right when len=1 means no pad?
+			if (length != 1) {
+				bitPadLen = readByte();
+				--length;
+			} else {
+				bitPadLen = 0;
+			}
 			//add by hxzon
-			set.init(b, length);
+			set.init(bitPadLen, length);
 			//end add
 			for (i = 1; i < length; ++i) {
-				m = readByte();
+				bitByte = readByte();
 				for (j = 0; j < 8; ++j) {
-					if (0 != (m & (0x80 >> j)))
+					if (0 != (bitByte & (0x80 >> j)))
 						set.getValue().set(start);
 					++start;
 				}
 			}
-			m = readByte();
-			for (j = 0; j < 8 - b; ++j) {
-				if (0 != (m & (0x80 >> j)))
+			bitByte = readByte();
+			for (j = 0; j < 8 - bitPadLen; ++j) {
+				if (0 != (bitByte & (0x80 >> j)))
 					set.getValue().set(start);
 				++start;
 			}
