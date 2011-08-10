@@ -1,14 +1,19 @@
-package org.hxzon.asn1.goose;
+package org.hxzon.asn1.core.type.ext;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.hxzon.asn1.core.type.BerOctetString;
 import org.hxzon.util.BytesUtil;
 
-
-public class GooseUtcTime extends BerOctetString {
-	private static final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd,hh:mm:ss.SSSSSS");
+public class UtcTime extends BerOctetString {
+	private static final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd,hh:mm:ss");
+	private static final DecimalFormat decimalFormat = new DecimalFormat();
+	private static final String numberPattern = "000000";
+	static {
+		decimalFormat.applyPattern(numberPattern);
+	}
 
 //	public GooseUtcTime(int tag, BerInputStream stream) throws IOException {
 //		super(tag, stream);
@@ -24,8 +29,12 @@ public class GooseUtcTime extends BerOctetString {
 		String str = BytesUtil.toHexString(getValue());
 		long secends = Long.parseLong(str.substring(0, 8), 16);
 		long millis = Long.parseLong(str.substring(8, 14), 16);
-        Date date = new Date(secends * 1000 + millis / (2 ^ 24));
-//		Date date = new Date(secends * 1000 + millis);
-		return format.format(date) + "," + str.substring(14);
+		millis = millis / (2 ^ 24);
+		Date date = new Date(secends * 1000 + millis / (2 ^ 24));
+//		Date date = new Date(secends * 1000 + millis / 1000);
+//		Date date = new Date(secends * 1000);
+//		return format.format(date) + "," + str.substring(14);
+		return format.format(date) + "." + decimalFormat.format(millis) + "," + str.substring(14);
+//		return format.format(date) + "." + millis / (2 ^ 24) + "," + str.substring(14);
 	}
 }
