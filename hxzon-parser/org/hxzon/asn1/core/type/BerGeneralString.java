@@ -43,7 +43,7 @@ import org.hxzon.asn1.core.parse.BerInputStream;
 import org.hxzon.asn1.core.parse.BerOutputStream;
 import org.hxzon.asn1.core.parse.Tag;
 import org.hxzon.asn1.core.type.base.BerNode;
-
+import org.hxzon.util.BytesUtil;
 
 /**
  * Represents a generic UTF8 encoded string
@@ -51,22 +51,6 @@ import org.hxzon.asn1.core.type.base.BerNode;
 public class BerGeneralString extends BerNode {
 	private String fValue;
 
-//    /**
-//     * Construct a new boolean object with the specified tag
-//     * @param tag
-//     * @param value
-//     */
-//    public BerGeneralString(int tag, String value)
-//    {
-//        super(tag);
-//        fValue = value;
-//    }
-//    
-//    public BerGeneralString(String value)
-//    {
-//        this(Tag.GENERALSTRING, value);
-//    }
-//    
 //    /**
 //     * Construct a boolean from the input stream
 //     * @param tag
@@ -111,7 +95,7 @@ public class BerGeneralString extends BerNode {
 	//add by hxzon
 	protected void readValue(BerInputStream stream) {
 		try {
-			fValue = new String(stream.readOctetString(0 == (getTag() & Tag.CONSTRUCTED)), "UTF-8");
+			fValue = BytesUtil.toUTF8String(stream.readOctetString(0 == (getTag() & Tag.CONSTRUCTED)));
 			super.setOffsetAndLen(stream);
 		} catch (IOException e) {
 			e.printStackTrace();

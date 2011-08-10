@@ -39,31 +39,16 @@ package org.hxzon.asn1.core.type;
 
 import org.hxzon.asn1.core.parse.Tag;
 
-
 /**
  * Represents the enumerated type.
  */
-public class BerEnumerated extends BerInteger
-{
-//    /**
-//     * Enumerated type constructor; this builds the default enumerated type
-//     * @param value
-//     */
-//    public BerEnumerated(long value)
-//    {
-//        super(Tag.ENUMERATED,value);
-//    }
-//
+public class BerEnumerated extends BerInteger {
 //    public BerEnumerated(int tag, BerInputStream stream) throws IOException
 //    {
 //        super(tag, stream);
 //    }
-//
-//    public BerEnumerated(int tag, long value)
-//    {
-//        super(tag, value);
-//    }
-	public BerEnumerated(){
-		setTag(Tag.ENUMERATED);
+
+	public BerEnumerated() {
+		setTypeTag(Tag.ENUMERATED);
 	}
 }

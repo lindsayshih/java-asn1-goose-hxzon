@@ -39,25 +39,17 @@ package org.hxzon.asn1.core.type;
 import org.hxzon.asn1.core.parse.Tag;
 import org.hxzon.asn1.core.type.base.BerConstruct;
 
-
 /**
  * An embedded PDV type as defined in RFC 3641. This is encoded the same way as a
  * sequence, which to me is a construct, so we encode this as a construct object.
  */
 public class BerEmbeddedPDV extends BerConstruct {
-	/**
-	 * Construct a new BerSequence with the specified tag
-	 * @param tag
-	 */
-	public BerEmbeddedPDV(int tag) {
-		super(tag);
-	}
 
 	/**
 	 * Construct a new BerSequence with the default set type
 	 */
 	public BerEmbeddedPDV() {
-		this(Tag.EMBEDDEDPDV);
+		super(Tag.EMBEDDEDPDV);
 	}
 
 //    /**

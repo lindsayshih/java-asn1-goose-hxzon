@@ -40,7 +40,6 @@ package org.hxzon.asn1.core.type;
 import org.hxzon.asn1.core.parse.Tag;
 import org.hxzon.asn1.core.type.base.BerAbstractString;
 
-
 /**
  * Numeric string. A numeric string is a sequence of characters that consist
  * only of 0-9
@@ -51,16 +50,7 @@ public class BerNumericString extends BerAbstractString {
 //        super(tag, value);
 //        if (!validate(value)) throw new AsnEncodingException("Illegal numeric value");
 //    }
-//
-//    public BerNumericString(int tag, BerInputStream stream) throws IOException
-//    {
-//        super(tag, stream);
-//    }
-//    
-//    public BerNumericString(String value) throws AsnEncodingException
-//    {
-//        this(Tag.NUMERICSTRING,value);
-//    }
+
 	public BerNumericString() {
 		super(Tag.NUMERICSTRING);
 	}

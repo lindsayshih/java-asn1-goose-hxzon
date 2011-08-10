@@ -45,7 +45,6 @@ import org.hxzon.asn1.core.parse.Tag;
 import org.hxzon.asn1.core.type.base.BerNode;
 import org.hxzon.util.BytesUtil;
 
-
 /**
  * The BER Primitive object represents a properly formatted BER object which
  * is unknown, but well formed.
@@ -53,17 +52,6 @@ import org.hxzon.util.BytesUtil;
 public class BerPrimitive extends BerNode {
 	private byte[] fValue;
 
-//    /**
-//     * Construct a new primitive object
-//     * @param tag
-//     * @param data
-//     */
-//    public BerPrimitive(int tag, byte[] data)
-//    {
-//        super(tag);
-//        fData = data;
-//    }
-//    
 //    /**
 //     * Construct a new primitive object by reading it in from the input stream
 //     * @param tag

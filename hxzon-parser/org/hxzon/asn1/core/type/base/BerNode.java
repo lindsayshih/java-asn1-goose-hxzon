@@ -49,25 +49,27 @@ import org.hxzon.asn1.core.type.ext.IBerConstruct;
  * code for writing the contents of this node
  */
 public abstract class BerNode {
+	//add by hxzon
+	private int typeTag;
 	private int fTag;
 
-	protected BerNode(int tag) {
-		fTag = tag;
+	protected BerNode(int typeTag) {
+		this.typeTag = typeTag;
 	}
 
-	/**
-	 * Get the tag representing this object
-	 * @return
-	 */
 	public int getTag() {
 		return fTag;
 	}
 
-	/**
-	 * Change the tag of this object to the specified value
-	 * @param tag
-	 */
 	public void setTag(int tag) {
+		fTag = tag;
+	}
+
+	public int getTypeTag() {
+		return fTag;
+	}
+
+	protected void setTypeTag(int tag) {
 		fTag = tag;
 	}
 

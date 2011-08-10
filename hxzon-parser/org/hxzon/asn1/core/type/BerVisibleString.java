@@ -39,7 +39,6 @@ package org.hxzon.asn1.core.type;
 import org.hxzon.asn1.core.parse.Tag;
 import org.hxzon.asn1.core.type.base.BerAbstractString;
 
-
 /**
  * Represents the BER Visible String character set, which is the subset of ASCII
  * minus the control characters.
@@ -50,16 +49,7 @@ public class BerVisibleString extends BerAbstractString {
 //        super(tag, value);
 //        if (!validate(value)) throw new AsnEncodingException("Illegal IA5 string");
 //    }
-//
-//    public BerVisibleString(int tag, BerInputStream stream) throws IOException
-//    {
-//        super(tag, stream);
-//    }
-//    
-//    public BerVisibleString(String value) throws AsnEncodingException
-//    {
-//        this(Tag.VISIBLESTRING,value);
-//    }
+
 	public BerVisibleString() {
 		super(Tag.VISIBLESTRING);
 	}

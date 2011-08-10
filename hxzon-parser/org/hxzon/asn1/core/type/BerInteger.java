@@ -45,33 +45,12 @@ import org.hxzon.asn1.core.parse.Tag;
 import org.hxzon.asn1.core.type.base.BerNode;
 import org.hxzon.util.DebugUtil;
 
-
 /**
  * Represents an integer in the BER stream
  */
 public class BerInteger extends BerNode {
 	private long fValue;
 
-//    /**
-//     * Construct a new boolean object with the specified tag
-//     * @param tag
-//     * @param value
-//     */
-//    public BerInteger(int tag, long value)
-//    {
-//        super(tag);
-//        fValue = value;
-//    }
-//    
-//    /**
-//     * Construct a boolean of type BOOLEAN
-//     * @param value
-//     */
-//    public BerInteger(long value)
-//    {
-//        this(Tag.INTEGER,value);
-//    }
-//    
 //    /**
 //     * Construct a boolean from the input stream
 //     * @param tag

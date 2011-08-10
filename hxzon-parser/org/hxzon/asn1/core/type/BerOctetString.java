@@ -57,26 +57,6 @@ public class BerOctetString extends BerNode {
 	private byte[] fValue;
 
 //    /**
-//     * Construct a new boolean object with the specified tag
-//     * @param tag
-//     * @param value
-//     */
-//    public BerOctetString(int tag, byte[] value)
-//    {
-//        super(tag);
-//        fValue = value;
-//    }
-//    
-//    /**
-//     * Construct a boolean of type BOOLEAN
-//     * @param value
-//     */
-//    public BerOctetString(byte[] value)
-//    {
-//        this(Tag.OCTETSTRING,value);
-//    }
-//    
-//    /**
 //     * Construct a boolean from the input stream
 //     * @param tag
 //     * @param stream

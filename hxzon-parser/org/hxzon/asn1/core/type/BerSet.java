@@ -39,21 +39,13 @@ package org.hxzon.asn1.core.type;
 import org.hxzon.asn1.core.parse.Tag;
 import org.hxzon.asn1.core.type.base.BerConstruct;
 
-
 public class BerSet extends BerConstruct {
-	/**
-	 * Construct a new BerSet with the specified tag
-	 * @param tag
-	 */
-	public BerSet(int tag) {
-		super(tag);
-	}
 
 	/**
 	 * Construct a new BerSet with the default set type
 	 */
 	public BerSet() {
-		this(Tag.SET);
+		super(Tag.SET);
 	}
 
 //    /**

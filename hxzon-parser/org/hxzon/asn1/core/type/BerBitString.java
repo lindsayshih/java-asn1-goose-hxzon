@@ -54,26 +54,6 @@ public class BerBitString extends BerNode {
 	private BitStringPresentation fValue;
 
 //    /**
-//     * Construct a new boolean object with the specified tag
-//     * @param tag
-//     * @param value
-//     */
-//    public BerBitString(int tag, BitSet value)
-//    {
-//        super(tag);
-//        fValue = value;
-//    }
-//    
-//    /**
-//     * Construct a boolean of type BOOLEAN
-//     * @param value
-//     */
-//    public BerBitString(BitSet value)
-//    {
-//        this(Tag.BITSTRING,value);
-//    }
-//    
-//    /**
 //     * Construct a boolean from the input stream
 //     * @param tag
 //     * @param stream

@@ -39,7 +39,6 @@ package org.hxzon.asn1.core.type;
 import org.hxzon.asn1.core.parse.Tag;
 import org.hxzon.asn1.core.type.base.BerAbstractString;
 
-
 /**
  * Represents a printable string type
  */
@@ -48,16 +47,6 @@ public class BerPrintableString extends BerAbstractString {
 //    {
 //        super(tag, value);
 //        if (!validate(value)) throw new AsnEncodingException("Illegal printable string");
-//    }
-//
-//    public BerPrintableString(int tag, BerInputStream stream) throws IOException
-//    {
-//        super(tag, stream);
-//    }
-//    
-//    public BerPrintableString(String value) throws AsnEncodingException
-//    {
-//        this(Tag.PRINTABLESTRING,value);
 //    }
 	public BerPrintableString() {
 		super(Tag.PRINTABLESTRING);

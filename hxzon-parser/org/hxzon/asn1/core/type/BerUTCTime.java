@@ -47,7 +47,7 @@ import org.hxzon.asn1.core.parse.BerInputStream;
 import org.hxzon.asn1.core.parse.BerOutputStream;
 import org.hxzon.asn1.core.parse.Tag;
 import org.hxzon.asn1.core.type.base.BerNode;
-
+import org.hxzon.util.BytesUtil;
 
 /**
  * Represents a UTC time object.
@@ -55,19 +55,9 @@ import org.hxzon.asn1.core.type.base.BerNode;
 public class BerUTCTime extends BerNode {
 	private static SimpleDateFormat gFormat;
 	private Date fValue;
+	//add by hxzon
+	private String origValue;
 
-//    public BerUTCTime(int tag, Date date)
-//    {
-//        super(tag);
-//        
-//        fDate = date;
-//    }
-//    
-//    public BerUTCTime(Date date)
-//    {
-//        this(Tag.UTCTIME,date);
-//    }
-//
 //    /**
 //     * Construct a boolean from the input stream
 //     * @param tag
@@ -139,7 +129,8 @@ public class BerUTCTime extends BerNode {
 	//add by hxzon
 	protected void readValue(BerInputStream stream) {
 		try {
-			fValue = parseDate(new String(stream.readOctetString(0 == (getTag() & Tag.CONSTRUCTED)), "UTF-8"));
+			origValue = BytesUtil.toUTF8String(stream.readOctetString(0 == (getTag() & Tag.CONSTRUCTED)));
+			fValue = parseDate(origValue);
 			super.setOffsetAndLen(stream);
 		} catch (IOException e) {
 			e.printStackTrace();
