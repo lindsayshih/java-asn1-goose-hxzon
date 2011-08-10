@@ -58,6 +58,10 @@ public class GooseDataset extends BerSequence {
 			return Asn1Utils.createBerIntegerX("bcd", "bcd", tag, stream);
 		case Tag.CONTEXT | 14:
 			return Asn1Utils.createBerBitString("booleanArray", "booleanArray", tag, stream);
+		case Tag.CONTEXT | 17:
+			return Asn1Utils.createBerIecUtcTime("utc-time", "utc-time", tag, stream);
+		case Tag.CONTEXT | 18:
+			return Asn1Utils.createBerUtf8String("utf8-string", "utf8-string", tag, stream);
 		default:
 			return Asn1Utils.createUnknown(tag, stream);
 		}

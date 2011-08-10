@@ -184,6 +184,10 @@ public class Asn1Utils {
 	public static BerNode createBerVisibleString(String name, String display, int tag, BerInputStream stream) {
 		return new BerVisibleString().init(name, display, tag, stream);
 	}
+	
+	public static BerNode createBerUtf8String(String name, String display, int tag, BerInputStream stream) {
+		return new BerUTF8String().init(name, display, tag, stream);
+	}
 
 	public static BerNode createBerOctetString(String name, String display, int tag, BerInputStream stream) {
 		return new BerOctetString().init(name, display, tag, stream);

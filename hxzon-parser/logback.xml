@@ -32,8 +32,8 @@
 	<logger name="org.hxzon" level="INFO" />
 	<logger name="org.hxzon.project" level="DEBUG" />
 	<logger name="org.hxzon.asn1" level="TRACE" />
-	<logger name="org.hxzon.netprotocol" level="WARN" />
-	<logger name="com.chaosinmotion.asn1" level="WARN" />
+	<logger name="org.hxzon.netprotocol" level="TRACE" />
+	<logger name="com.chaosinmotion.asn1" level="TRACE" />
 	<root level="WARN">
 		<appender-ref ref="stdout" />
 		<!-- 
