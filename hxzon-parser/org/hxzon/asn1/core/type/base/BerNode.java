@@ -66,7 +66,7 @@ public abstract class BerNode {
 	}
 
 	public int getTypeTag() {
-		return fTag;
+		return typeTag;
 	}
 
 	protected void setTypeTag(int tag) {
@@ -85,7 +85,7 @@ public abstract class BerNode {
 	 */
 	//change by getType()
 //    public abstract String toString();
-	public abstract String getType();
+	public abstract String getAsn1TypeDesc();
 
 	public String getTagDisplay() {
 		return Tag.toString(fTag);

@@ -56,7 +56,7 @@ public class BerPrintableString extends BerAbstractString {
 		return validateString(str, ASCII | NUMBER | MINUS | PUNCT);
 	}
 
-	public String getType() {
+	public String getAsn1TypeDesc() {
 		return "BerPrintableString";
 	}
 

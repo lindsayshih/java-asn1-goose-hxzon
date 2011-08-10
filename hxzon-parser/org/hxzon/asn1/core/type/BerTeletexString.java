@@ -47,7 +47,7 @@ public class BerTeletexString extends BerOctetString {
 		setTag(Tag.TELETEXSTRING);
 	}
 
-	public String getType() {
+	public String getAsn1TypeDesc() {
 		return "BerTeletexString";
 	}
 }

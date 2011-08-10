@@ -108,7 +108,7 @@ public class GoosePacket extends Packet {
 		return (IPacketPayload) fetchGoosepdu();
 	}
 
-	public String getType() {
+	public String getProtocolTypeDesc() {
 		return "goose";
 	}
 }

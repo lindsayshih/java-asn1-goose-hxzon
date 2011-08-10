@@ -7,7 +7,6 @@ import org.hxzon.netprotocol.common.IPacket;
 import org.hxzon.netprotocol.common.IPacketPayload;
 import org.hxzon.util.BytesUtil;
 
-
 public class OsiPresentation extends BerSequence implements UserDataContainer, IPacketPayload {
 	public OsiPresentation() {
 		setName("iso 8823 osi presentation");
@@ -66,6 +65,10 @@ public class OsiPresentation extends BerSequence implements UserDataContainer, I
 	@Override
 	public void setSrcPacket(IPacket srcPacket) {
 		this.srcPacket = srcPacket;
+	}
+
+	public String getProtocolTypeDesc() {
+		return "osi presentation";
 	}
 
 }

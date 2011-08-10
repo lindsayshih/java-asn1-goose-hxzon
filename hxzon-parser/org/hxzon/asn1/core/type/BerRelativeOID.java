@@ -90,7 +90,7 @@ public class BerRelativeOID extends BerNode {
 		return fValue;
 	}
 
-	public String getType() {
+	public String getAsn1TypeDesc() {
 		return "BerRelativeOID";
 	}
 

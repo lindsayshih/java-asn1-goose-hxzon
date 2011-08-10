@@ -15,5 +15,5 @@ public interface IPacketPayload {
 
 	public String getDisplayString();
 	
-	public String getType();
+	public String getProtocolTypeDesc();
 }

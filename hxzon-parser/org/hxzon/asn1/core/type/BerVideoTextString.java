@@ -47,7 +47,7 @@ public class BerVideoTextString extends BerOctetString {
 		setTypeTag(Tag.VIDEOTEXTSTRING);
 	}
 
-	public String getType() {
+	public String getAsn1TypeDesc() {
 		return "BerVideoTextString";
 	}
 }

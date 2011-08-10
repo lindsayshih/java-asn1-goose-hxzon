@@ -48,7 +48,7 @@ public class BerGraphicsString extends BerOctetString {
 		setTypeTag(Tag.GRAPHICSTRING);
 	}
 
-	public String getType() {
+	public String getAsn1TypeDesc() {
 		return "BerGraphicsString";
 	}
 }

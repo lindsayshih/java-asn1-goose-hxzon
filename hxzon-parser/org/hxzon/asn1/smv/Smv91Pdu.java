@@ -12,7 +12,6 @@ import org.hxzon.netprotocol.common.IPacket;
 import org.hxzon.netprotocol.common.IPacketPayload;
 import org.hxzon.util.BytesUtil;
 
-
 public class Smv91Pdu extends BerOctetString implements FakeBerConstruct, IPacketPayload {
 	public Smv91Pdu() {
 		setName("smv9-1");
@@ -79,8 +78,8 @@ public class Smv91Pdu extends BerOctetString implements FakeBerConstruct, IPacke
 	public void setSrcPacket(IPacket srcPacket) {
 		this.srcPacket = srcPacket;
 	}
-	
-	public String getType(){
+
+	public String getProtocolTypeDesc() {
 		return "9-1采样值";
 	}
 

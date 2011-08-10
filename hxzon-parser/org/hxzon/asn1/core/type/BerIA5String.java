@@ -69,7 +69,7 @@ public class BerIA5String extends BerAbstractString {
 		return true;
 	}
 
-	public String getType() {
+	public String getAsn1TypeDesc() {
 		return "BerIA5String";
 	}
 

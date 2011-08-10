@@ -199,7 +199,7 @@ public abstract class BerConstruct extends BerNode implements IBerConstruct {
 
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
-		sb.append(getType()).append(",").append(Tag.toString(getTag())).append(fList.size()).append(" items,").append("offset=").append(getTagOffset()).append(",len=").append(getTotalLen());
+		sb.append(getAsn1TypeDesc()).append(",").append(Tag.toString(getTag())).append(fList.size()).append(" items,").append("offset=").append(getTagOffset()).append(",len=").append(getTotalLen());
 		sb.append("\n{");
 		Iterator<BerNode> it = fList.iterator();
 		while (it.hasNext()) {

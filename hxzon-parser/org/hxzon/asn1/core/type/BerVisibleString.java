@@ -64,7 +64,7 @@ public class BerVisibleString extends BerAbstractString {
 		return true;
 	}
 
-	public String getType() {
+	public String getAsn1TypeDesc() {
 		return "BerVisibleString";
 	}
 

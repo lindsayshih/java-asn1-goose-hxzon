@@ -78,7 +78,7 @@ public class UdpPacket extends Packet {
 		this.checksum = checksum;
 	}
 
-	public String getType() {
+	public String getProtocolTypeDesc() {
 		return "udp";
 	}
 }

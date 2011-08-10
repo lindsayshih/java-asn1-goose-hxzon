@@ -137,7 +137,7 @@ public class BerGeneralTime extends BerNode {
 		}
 	}
 
-	public String getType() {
+	public String getAsn1TypeDesc() {
 		return "BerGeneralTime";
 	}
 

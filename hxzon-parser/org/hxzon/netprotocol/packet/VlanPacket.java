@@ -68,7 +68,7 @@ public class VlanPacket extends Packet {
 		return valnId;
 	}
 
-	public String getType() {
+	public String getProtocolTypeDesc() {
 		return "vlan";
 	}
 }

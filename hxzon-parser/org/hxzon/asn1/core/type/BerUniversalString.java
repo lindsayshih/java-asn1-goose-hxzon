@@ -47,7 +47,7 @@ public class BerUniversalString extends BerOctetString {
 		setTypeTag(Tag.UNIVERSALSTRING);
 	}
 
-	public String getType() {
+	public String getAsn1TypeDesc() {
 		return "BerUniversalString";
 	}
 }

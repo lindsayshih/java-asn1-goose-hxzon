@@ -12,7 +12,6 @@ import org.hxzon.netprotocol.common.IPacket;
 import org.hxzon.netprotocol.common.IPacketPayload;
 import org.hxzon.util.BytesUtil;
 
-
 public class Smv92Pdu extends BerSequence implements IPacketPayload {
 	public Smv92Pdu() {
 		setName("smv9-2Pdu");
@@ -98,7 +97,7 @@ public class Smv92Pdu extends BerSequence implements IPacketPayload {
 		this.srcPacket = srcPacket;
 	}
 
-	public String getType() {
+	public String getProtocolTypeDesc() {
 		return "9-2采样值";
 	}
 

@@ -47,7 +47,7 @@ public class BerBMPString extends BerOctetString {
 		setTypeTag(Tag.BMPSTRING);
 	}
 
-	public String getType() {
+	public String getAsn1TypeDesc() {
 		return "BerBMPString";
 	}
 }

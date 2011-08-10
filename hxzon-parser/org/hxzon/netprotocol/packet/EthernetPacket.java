@@ -62,7 +62,7 @@ public class EthernetPacket extends Packet {
 		return type;
 	}
 
-	public String getType() {
+	public String getProtocolTypeDesc() {
 		return "ethernet";
 	}
 }

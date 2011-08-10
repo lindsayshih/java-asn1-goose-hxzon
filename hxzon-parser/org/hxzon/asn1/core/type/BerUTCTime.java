@@ -122,7 +122,7 @@ public class BerUTCTime extends BerNode {
 		}
 	}
 
-	public String getType() {
+	public String getAsn1TypeDesc() {
 		return "BerUTCTime";
 	}
 
