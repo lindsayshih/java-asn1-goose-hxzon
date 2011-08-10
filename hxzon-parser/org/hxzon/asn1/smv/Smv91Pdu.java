@@ -68,6 +68,10 @@ public class Smv91Pdu extends BerOctetString implements FakeBerConstruct, IPacke
 	public byte[] getSrcData() {
 		return this.srcPacket.getSrcData();
 	}
+	
+	public void setSrcData(byte[] srcData){
+		
+	}
 
 	@Override
 	public IPacket getSrcPacket() {
@@ -77,6 +81,10 @@ public class Smv91Pdu extends BerOctetString implements FakeBerConstruct, IPacke
 	@Override
 	public void setSrcPacket(IPacket srcPacket) {
 		this.srcPacket = srcPacket;
+	}
+	
+	public void initBySrcPacket(IPacket srcPacket){
+		this.setSrcPacket(srcPacket);
 	}
 
 	public String getProtocolTypeDesc() {

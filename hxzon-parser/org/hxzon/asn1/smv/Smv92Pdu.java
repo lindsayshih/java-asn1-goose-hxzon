@@ -87,6 +87,10 @@ public class Smv92Pdu extends BerSequence implements IPacketPayload {
 		return this.srcPacket.getSrcData();
 	}
 
+	public void setSrcData(byte[] srcData) {
+
+	}
+
 	@Override
 	public IPacket getSrcPacket() {
 		return srcPacket;
@@ -95,6 +99,10 @@ public class Smv92Pdu extends BerSequence implements IPacketPayload {
 	@Override
 	public void setSrcPacket(IPacket srcPacket) {
 		this.srcPacket = srcPacket;
+	}
+
+	public void initBySrcPacket(IPacket srcPacket) {
+		this.setSrcPacket(srcPacket);
 	}
 
 	public String getProtocolTypeDesc() {
