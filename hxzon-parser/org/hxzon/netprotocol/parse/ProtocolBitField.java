@@ -9,7 +9,9 @@ public class ProtocolBitField extends ProtocolField {
 		setDisplayString(display);
 		int len = (bitLen + 7) / 8;
 		setSaveOffsetAndLen(srcPacket, offset, len);
-		value = srcPacket.getIntByBit(getOffset(), getLen(), bitOffset, bitLen);
+		if (isRight()) {
+			value = srcPacket.getIntByBit(getOffset(), getLen(), bitOffset, bitLen);
+		}
 	}
 
 	private int value;

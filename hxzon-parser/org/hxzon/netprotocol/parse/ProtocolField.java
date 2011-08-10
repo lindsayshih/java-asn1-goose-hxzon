@@ -7,8 +7,26 @@ public abstract class ProtocolField {
 	private int len;
 	private String name;
 	private String displayString;
+	private int miss = State_Rigth;
+	public static final int State_Rigth = 0;
+	public static final int State_WrongOffset = 1;
+	public static final int State_WrongLen = 2;
 
 	public abstract String getValueAsString();
+
+	public String getValueAsDisplay() {
+		if (miss == State_WrongOffset) {
+			return "wrong offset";
+		} else if (miss == State_WrongLen) {
+			return "miss";
+		} else {
+			return getValueAsString();
+		}
+	}
+
+	public boolean isRight() {
+		return miss == State_Rigth;
+	}
 
 	public void setSaveOffsetAndLen(Packet packet, int offset, int len) {
 		int headerLength = packet.getHeaderLength();
@@ -18,6 +36,7 @@ public abstract class ProtocolField {
 		if (offset > headerLength) {
 			System.err.println("err offset(" + offset + ") when headerLength=" + headerLength);
 			offset = headerLength;
+			miss = State_WrongOffset;
 		}
 		setOffset(packet.getOffset() + offset);
 		if (len < 0) {
@@ -26,6 +45,7 @@ public abstract class ProtocolField {
 		if (offset + len > headerLength) {
 			System.err.println("err len(" + len + ") when offset=" + offset + ",and headerLength=" + headerLength);
 			len = headerLength - offset;
+			miss = State_WrongLen;
 		}
 		setLen(len);
 	}

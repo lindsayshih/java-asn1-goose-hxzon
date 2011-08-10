@@ -24,19 +24,7 @@ public class BytesUtil {
 		return (toUInt(orig) >> (8 - bitOffset - bitLen)) & ((2 << (bitLen - 1)) - 1);
 	}
 
-	public static byte[] copyBytes(byte[] orig, int offset, int len) {
-		byte[] result = new byte[len];
-		for (int i = 0; i < len; i++) {
-			result[i] = orig[offset + i];
-		}
-		return result;
-	}
-
-	public static byte[] copyBytes(byte[] orig, int offset) {
-		return copyBytes(orig, offset, orig.length - offset);
-	}
-
-//	public static int toInt(byte[] orig, int offset, int len, int bitOffset) {
+	//	public static int toInt(byte[] orig, int offset, int len, int bitOffset) {
 //		int bitLen = len * 8 - bitOffset;
 //		int byteLen = bitLen / 8;
 //		int result = 0;
@@ -329,6 +317,18 @@ public class BytesUtil {
 			result[i] = fromHexCharArray(ch[i * 2], ch[i * 2 + 1]);
 		}
 		return result;
+	}
+
+	public static byte[] copyBytes(byte[] orig, int offset, int len) {
+		byte[] result = new byte[len];
+		for (int i = 0; i < len; i++) {
+			result[i] = orig[offset + i];
+		}
+		return result;
+	}
+
+	public static byte[] copyBytes(byte[] orig, int offset) {
+		return copyBytes(orig, offset, orig.length - offset);
 	}
 
 }
