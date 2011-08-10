@@ -1,13 +1,10 @@
 package org.hxzon.netprotocol.ui;
 
 import org.hxzon.netprotocol.packet.Packet;
-import org.hxzon.pcap.PcapPacketListener;
 import org.hxzon.pcap.PcapPacket;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.hxzon.pcap.PcapPacketListener;
 
 public class PacketHandlerListener implements PcapPacketListener {
-	private static Logger logger = LoggerFactory.getLogger(PacketHandlerListener.class);
 	private DisplayFrame2 display;
 	private int i = 0;
 

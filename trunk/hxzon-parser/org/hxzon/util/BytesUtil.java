@@ -87,6 +87,13 @@ public class BytesUtil {
 //		}
 //		return result;
 //	}
+	public static long toSigned(byte[] orig) {
+		return toSigned(orig, 0, orig.length);
+	}
+
+	public static long toUnsigned(byte[] orig) {
+		return toUnsigned(orig, 0, orig.length);
+	}
 
 	public static long toSigned(byte[] orig, int offset, int len) {
 		if (len <= 0) {
@@ -101,7 +108,7 @@ public class BytesUtil {
 		}
 		return result;
 	}
-	
+
 	public static long toUnsigned(byte[] orig, int offset, int len) {
 		if (len <= 0) {
 			return 0;
@@ -343,11 +350,11 @@ public class BytesUtil {
 	public static byte[] copyBytes(byte[] orig, int offset) {
 		return copyBytes(orig, offset, orig.length - offset);
 	}
-	
-	public static byte[] reverse(byte[] orig,int offset,int len){
-		byte[] result=new byte[len];
-		for(int i=0;i<len;i++){
-			result[len-1-i]=orig[offset+i];
+
+	public static byte[] reverse(byte[] orig, int offset, int len) {
+		byte[] result = new byte[len];
+		for (int i = 0; i < len; i++) {
+			result[len - 1 - i] = orig[offset + i];
 		}
 		return result;
 	}

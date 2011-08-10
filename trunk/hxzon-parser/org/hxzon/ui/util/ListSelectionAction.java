@@ -4,11 +4,9 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.hxzon.util.DebugUtil;
 
 public abstract class ListSelectionAction implements ListSelectionListener {
-	private static final Logger logger = LoggerFactory.getLogger(ListSelectionAction.class);
 	private int minIndex = -1;
 	private int maxIndex = -1;
 
@@ -36,7 +34,7 @@ public abstract class ListSelectionAction implements ListSelectionListener {
 						if (selectOne()) {
 							break;
 						}
-						logger.debug("select" + i);
+						DebugUtil.debug("select" + i);
 					}
 				}
 			}

@@ -45,15 +45,13 @@ import java.util.Iterator;
 import org.hxzon.asn1.Asn1Utils;
 import org.hxzon.asn1.BerChoice;
 import org.hxzon.asn1.IBerConstruct;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.hxzon.util.DebugUtil;
 
 /**
  * Represents a constructed object. A constructed object is a collection of other
  * BerNode objects.
  */
 public abstract class BerConstruct extends BerNode implements IBerConstruct {
-	private static final Logger logger = LoggerFactory.getLogger(BerConstruct.class);
 	private ArrayList<BerNode> fList;
 
 	protected BerConstruct(int tag) {
@@ -216,7 +214,7 @@ public abstract class BerConstruct extends BerNode implements IBerConstruct {
 			readTag = seq.readBerTag();
 			while (Tag.EOFTYPE != readTag) {
 				BerNode cnode = create(readTag, stream);
-				logger.trace("create " + cnode.getDisplayString() + "," + cnode.getTagDisplay() + ",tag offset:" + cnode.getTagOffset() + ",len:" + cnode.getTotalLen());
+				DebugUtil.trace("create " + cnode.getDisplayString() + "," + cnode.getTagDisplay() + ",tag offset:" + cnode.getTagOffset() + ",len:" + cnode.getTotalLen());
 				//if child is a choice ,and no tag ,and global set don't add choice node
 				if (cnode instanceof BerChoice && !((BerChoice) cnode).hasTag() && Asn1Utils.isNotAddChoiceNode()) {
 					cnode.setParent(this);
