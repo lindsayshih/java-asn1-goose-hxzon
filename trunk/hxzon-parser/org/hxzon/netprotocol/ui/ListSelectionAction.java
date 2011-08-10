@@ -4,7 +4,11 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public abstract class ListSelectionAction implements ListSelectionListener {
+	private static final Logger logger = LoggerFactory.getLogger(ListSelectionAction.class);
 	private int minIndex = -1;
 	private int maxIndex = -1;
 
@@ -29,7 +33,10 @@ public abstract class ListSelectionAction implements ListSelectionListener {
 				for (int i = minIndex; i <= maxIndex; i++) {
 					if (lsm.isSelectedIndex(i)) {
 						whenSelect(e.getSource(), i);
-//                    	System.out.println(i);
+						if (selectOne()) {
+							break;
+						}
+						logger.debug("select" + i);
 					}
 				}
 			}
@@ -38,4 +45,6 @@ public abstract class ListSelectionAction implements ListSelectionListener {
 	}
 
 	public abstract void whenSelect(Object source, int i);
+
+	public abstract boolean selectOne();
 }

@@ -39,10 +39,14 @@ package com.chaosinmotion.asn1;
 
 import java.io.IOException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Represents an integer in the BER stream
  */
 public class BerInteger extends BerNode {
+	private static final Logger logger = LoggerFactory.getLogger(BerInteger.class);
 	private long fValue;
 
 //    /**
@@ -121,7 +125,7 @@ public class BerInteger extends BerNode {
 		this.bitLen = bitLen;
 		this.unsigned = unsigned;
 		if (bitLen < 32) {
-			System.out.println(bitLen);
+			logger.debug("bitLen:" + bitLen);
 		}
 		return this;
 	}
