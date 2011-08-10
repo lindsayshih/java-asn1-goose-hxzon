@@ -1,0 +1,32 @@
+
+IntegerAsn1 DEFINITIONS IMPLICIT TAGS ::=
+
+BEGIN
+
+Integer-normal ::= INTEGER
+
+-- JAC generates the min max range controls of the following asn1 integer type definitions :
+
+Integer-normal-constraint ::= INTEGER
+{
+	min 	(1),
+	max 	(200) 
+} 
+
+
+Integer-less-constraint ::=  INTEGER (1..31)
+
+Integer-different-constraint-2            ::= INTEGER
+{
+    noHotBilling        (0),
+    hotBilling        (1)
+}
+
+Integer-different-constraint-3            ::= INTEGER
+{
+    noHotBilling        (0),
+    hotBilling        (1),
+	commonBilling        (23)
+}
+
+END

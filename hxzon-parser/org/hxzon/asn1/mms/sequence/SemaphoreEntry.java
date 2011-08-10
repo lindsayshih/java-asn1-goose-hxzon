@@ -1,0 +1,56 @@
+package org.hxzon.asn1.mms.sequence;
+
+import org.hxzon.asn1.Asn1Utils;
+import org.hxzon.asn1.mms.common.Identifier;
+import org.hxzon.asn1.mms.common.Priority;
+
+import com.chaosinmotion.asn1.BerInputStream;
+import com.chaosinmotion.asn1.BerInteger;
+import com.chaosinmotion.asn1.BerNode;
+import com.chaosinmotion.asn1.BerSequence;
+import com.chaosinmotion.asn1.Tag;
+
+public class SemaphoreEntry extends BerSequence {
+//	SemaphoreEntry ::= SEQUENCE
+//	{	
+//	entryId				[0] IMPLICIT OCTET STRING,
+//	entryClass			[1] IMPLICIT INTEGER
+//		{
+//		simple		(0),
+//		modifier 	(1)
+//		},
+//	applicationReference		[2] ApplicationReference,
+//	namedToken			[3] IMPLICIT Identifier OPTIONAL,
+//	priority			[4] IMPLICIT Priority DEFAULT 64,
+//	remainingTimeOut		[5] IMPLICIT Unsigned32 OPTIONAL,
+//	abortOnTimeOut			[6] IMPLICIT BOOLEAN OPTIONAL,
+//	relinquishIfConnectionLost	[7] IMPLICIT BOOLEAN DEFAULT TRUE
+//	}
+	public BerNode create(int tag, BerInputStream stream) {
+		switch (tag) {
+		case Tag.CONTEXT | 0:
+			return Asn1Utils.createBerOctetString("entryId", "entryId", tag, stream);
+		case Tag.CONTEXT | 1:
+			return new EntryClass().init("entryClass", "entryClass", tag, stream);
+		case Tag.CONTEXT | 2:
+			return new ApplicationReference().init("applicationReference", "applicationReference", tag, stream);
+		case Tag.CONTEXT | 3:
+			return new Identifier().init("namedToken", "namedToken", tag, stream);
+		case Tag.CONTEXT | 4:
+			return new Priority().init("priority", "priority", tag, stream);
+		case Tag.CONTEXT | 5:
+			return Asn1Utils.createBerUnsignedInteger("remainingTimeOut", "remainingTimeOut", tag, stream);
+		case Tag.CONTEXT | 6:
+			return Asn1Utils.createBerBoolean("abortOnTimeOut", "abortOnTimeOut", tag, stream);
+		case Tag.CONTEXT | 7:
+			return Asn1Utils.createBerBoolean("relinquishIfConnectionLost", "relinquishIfConnectionLost", tag, stream);
+		default:
+			return Asn1Utils.createUnknown(tag, stream);
+		}
+	}
+
+	public static class EntryClass extends BerInteger {
+
+	}
+
+}

@@ -1,0 +1,17 @@
+
+Data DEFINITIONS IMPLICIT TAGS::= 
+BEGIN
+
+	Cell-List ::= SEQUENCE OF Cell
+	
+    Cell ::= SEQUENCE {
+      disc OCTET STRING (SIZE(1)),
+      cell-id OCTET STRING (SIZE(4))
+    }
+	
+	Report ::= SEQUENCE {
+      message-Identifier INTEGER (0 .. 65535),
+      cell-List Cell-List
+    }
+	
+END
