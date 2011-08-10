@@ -84,4 +84,8 @@ public class Smv92Pdu extends BerSequence implements IPacketPayload {
 		this.srcPacket = srcPacket;
 	}
 
+	public String getType() {
+		return "9-2采样值";
+	}
+
 }

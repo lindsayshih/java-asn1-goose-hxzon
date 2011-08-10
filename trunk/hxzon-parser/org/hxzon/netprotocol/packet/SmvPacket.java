@@ -102,10 +102,8 @@ public class SmvPacket extends Packet {
 		return smvPdu;
 	}
 
-	public IPacketPayload getPayload() {
-		IPacketPayload payload = (IPacketPayload) fetchSmvpdu();
-		payload.setSrcPacket(this);
-		return payload;
+	public IPacketPayload exceptPayload() {
+		return (IPacketPayload) fetchSmvpdu();
 	}
 
 	public String getType() {

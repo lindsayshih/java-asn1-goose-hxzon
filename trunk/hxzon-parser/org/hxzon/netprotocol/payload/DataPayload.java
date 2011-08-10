@@ -46,4 +46,8 @@ public class DataPayload implements IPacketPayload {
 		return "user data";
 	}
 
+	public String getType() {
+		return "user data";
+	}
+
 }

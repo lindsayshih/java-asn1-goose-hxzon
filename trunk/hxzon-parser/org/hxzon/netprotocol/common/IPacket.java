@@ -20,5 +20,6 @@ public interface IPacket extends IPacketPayload {
 
 	public IPacket getLastPacket();
 
-	public String getType();
+	public String getLastPayloadType();
+
 }

@@ -103,10 +103,8 @@ public class GoosePacket extends Packet {
 		return goosePdu;
 	}
 
-	public IPacketPayload getPayload() {
-		IPacketPayload payload = (IPacketPayload) fetchGoosepdu();
-		payload.setSrcPacket(this);
-		return payload;
+	public IPacketPayload exceptPayload() {
+		return (IPacketPayload) fetchGoosepdu();
 	}
 
 	public String getType() {

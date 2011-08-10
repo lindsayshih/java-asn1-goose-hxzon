@@ -92,7 +92,7 @@ public class PacketTable extends JTable {
 			case 0:
 				return rowIndex + 1;
 			case 1:
-				return packets.get(rowIndex).getLastPacket().getDisplayString();
+				return packets.get(rowIndex).getLastPayloadType();
 			default:
 				return null;
 			}

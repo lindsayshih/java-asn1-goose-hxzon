@@ -101,4 +101,8 @@ public class GoosePdu extends BerSequence implements IPacketPayload {
 		this.srcPacket = srcPacket;
 	}
 
+	public String getType() {
+		return "Goose";
+	}
+
 }
