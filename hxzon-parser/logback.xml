@@ -7,19 +7,18 @@
 			</pattern>
 		</encoder>
 	</appender>
-	<appender name="R"
-		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
-			<layout class="ch.qos.logback.classic.html.HTMLLayout">
-				<pattern>%d{yy-MM-dd HH:mm:ss}%level%t%(%C{1}.%M(%L\))%msg</pattern>
-			</layout>
-		</encoder>
-		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<MaxHistory>7</MaxHistory>
-			<FileNamePattern>${fileName}.log.%d{yyyy-MM-dd}.html
-			</FileNamePattern>
-		</rollingPolicy>
-	</appender>
+	<!--
+		<appender name="R"
+		class="ch.qos.logback.core.rolling.RollingFileAppender"> <encoder
+		class="ch.qos.logback.core.encoder.LayoutWrappingEncoder"> <layout
+		class="ch.qos.logback.classic.html.HTMLLayout"> <pattern>%d{yy-MM-dd
+		HH:mm:ss}%level%t%(%C{1}.%M(%L\))%msg</pattern> </layout> </encoder>
+		<rollingPolicy
+		class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+		<MaxHistory>7</MaxHistory>
+		<FileNamePattern>${fileName}.log.%d{yyyy-MM-dd}.html
+		</FileNamePattern> </rollingPolicy> </appender>
+	-->
 	<logger name="org.springframework" level="WARN" />
 	<logger name="org.hibernate.type" level="WARN" />
 	<logger name="org.hibernate" level="WARN" />

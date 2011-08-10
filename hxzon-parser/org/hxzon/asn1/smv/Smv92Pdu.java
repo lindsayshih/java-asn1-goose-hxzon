@@ -1,6 +1,9 @@
 package org.hxzon.asn1.smv;
 
+import java.util.List;
+
 import org.hxzon.asn1.Asn1Utils;
+import org.hxzon.asn1.BerSequenceOf;
 import org.hxzon.netprotocol.common.IPacket;
 import org.hxzon.netprotocol.common.IPacketPayload;
 import org.hxzon.util.BytesUtil;
@@ -49,6 +52,17 @@ public class Smv92Pdu extends BerSequence implements IPacketPayload {
 			return Asn1Utils.createBerSequenceOf("seq of asdu", "asdu集", tag, stream, Smv92Asdu.class);
 		default:
 			return Asn1Utils.createUnknown(tag, stream);
+		}
+	}
+
+	public void updateSmv92AsduDataDisplay(List<String> displays) {
+		for (BerNode child : getChildren()) {
+			if (child.getTag() == (Tag.CONTEXT | 2)) {
+				BerSequenceOf seqOf = (BerSequenceOf) child;
+				for (BerNode smv92Asdu : seqOf.getChildren()) {
+					((Smv92Asdu) smv92Asdu).updateAsduDataDisplay(displays);
+				}
+			}
 		}
 	}
 

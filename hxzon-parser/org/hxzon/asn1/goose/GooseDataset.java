@@ -1,5 +1,7 @@
 package org.hxzon.asn1.goose;
 
+import java.util.List;
+
 import org.hxzon.asn1.Asn1Utils;
 
 import com.chaosinmotion.asn1.BerInputStream;
@@ -64,6 +66,14 @@ public class GooseDataset extends BerSequence {
 			return Asn1Utils.createBerUtf8String("utf8-string", "utf8-string", tag, stream);
 		default:
 			return Asn1Utils.createUnknown(tag, stream);
+		}
+	}
+
+	public void updateDatasetDisplay(List<String> displays) {
+		BerNode[] children = getChildren();
+		int maxIndex = Math.max(displays.size(), children.length);
+		for (int i = 0; i < maxIndex; i++) {
+			children[i].setDisplayString(displays.get(i));
 		}
 	}
 
