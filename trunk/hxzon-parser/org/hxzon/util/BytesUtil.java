@@ -1,5 +1,7 @@
 package org.hxzon.util;
 
+import java.io.UnsupportedEncodingException;
+
 public class BytesUtil {
 	//2<<0=1;2<<1=2;2<<2=4;2<<3=8;2<<4=16;2<<5=32;
 	//2<<6=64;2<<7=128;2<<8=256;2<<9=512
@@ -338,6 +340,16 @@ public class BytesUtil {
 		}
 		return result;
 	}
+
+	public static String toUTF8String(byte[] orig) {
+		try {
+			return new String(orig, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			return "";
+		}
+	}
+
+	//--------------------------------------------------
 
 	public static byte[] copyBytes(byte[] orig, int offset, int len) {
 		byte[] result = new byte[len];

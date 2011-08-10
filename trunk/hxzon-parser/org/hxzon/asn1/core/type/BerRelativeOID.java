@@ -44,7 +44,6 @@ import org.hxzon.asn1.core.parse.BerOutputStream;
 import org.hxzon.asn1.core.parse.Tag;
 import org.hxzon.asn1.core.type.base.BerNode;
 
-
 /**
  * Represents an object identifier in the BER stream. An object identifier is a
  * sequence of integers which represent an OID.
@@ -55,26 +54,6 @@ import org.hxzon.asn1.core.type.base.BerNode;
 public class BerRelativeOID extends BerNode {
 	private long[] fValue;
 
-	/**
-	 * Construct a new boolean object with the specified tag
-	 * @param tag
-	 * @param value
-	 */
-//    public BerRelativeOID(int tag, long[] value)
-//    {
-//        super(tag);
-//        fValue = value;
-//    }
-//    
-//    /**
-//     * Construct a boolean of type BOOLEAN
-//     * @param value
-//     */
-//    public BerRelativeOID(long[] value)
-//    {
-//        this(Tag.RELATIVEOID,value);
-//    }
-//    
 //    /**
 //     * Construct a boolean from the input stream
 //     * @param tag

@@ -44,27 +44,14 @@ import org.hxzon.asn1.core.parse.BerInputStream;
 import org.hxzon.asn1.core.parse.BerOutputStream;
 import org.hxzon.asn1.core.parse.Tag;
 import org.hxzon.asn1.core.type.base.BerNode;
-
+import org.hxzon.util.DebugUtil;
 
 /**
  * Represents a null object. This object represents a 'null', which is distinct
  * from no data.
  */
 public class BerNull extends BerNode {
-//    /**
-//     * Construct a new boolean object with the specified tag
-//     * @param tag
-//     * @param value
-//     */
-//    public BerNull(int tag)
-//    {
-//        super(tag);
-//    }
 
-	/**
-	 * Construct a boolean of type BOOLEAN
-	 * @param value
-	 */
 	public BerNull() {
 		super(Tag.NULL);
 	}
@@ -107,7 +94,7 @@ public class BerNull extends BerNode {
 				throw new AsnEncodingException("Illegal null object");
 			super.setOffsetAndLen(stream);
 		} catch (IOException e) {
-			e.printStackTrace();
+			DebugUtil.error("BerNull read value error", e);
 		}
 	}
 

@@ -38,35 +38,16 @@ package org.hxzon.asn1.core.type;
 
 import org.hxzon.asn1.core.parse.Tag;
 
-
 /**
  * Represents a universal string string, which is (as far as I'm concerned) an arbitrary
  * array of 8-bit bytes
  */
-public class BerCharacterString extends BerOctetString
-{
-//    public BerCharacterString(int tag, byte[] value)
-//    {
-//        super(tag, value);
-//    }
-//
-//    public BerCharacterString(byte[] value)
-//    {
-//        this(Tag.CHARACTERSTRING,value);
-//    }
-//
-//    public BerCharacterString(int tag, BerInputStream stream) throws IOException
-//    {
-//        super(tag, stream);
-//    }
-	public BerCharacterString(){
-		setTag(Tag.CHARACTERSTRING);
+public class BerCharacterString extends BerOctetString {
+	public BerCharacterString() {
+		setTypeTag(Tag.CHARACTERSTRING);
 	}
 
-    public String getType()
-    {
-        return "BerCharacterString";
-    }
+	public String getType() {
+		return "BerCharacterString";
+	}
 }
-
-

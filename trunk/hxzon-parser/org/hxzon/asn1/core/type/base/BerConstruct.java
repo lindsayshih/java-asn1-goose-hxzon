@@ -59,8 +59,8 @@ import org.hxzon.util.DebugUtil;
 public abstract class BerConstruct extends BerNode implements IBerConstruct {
 	private ArrayList<BerNode> fList;
 
-	protected BerConstruct(int tag) {
-		super(tag);
+	protected BerConstruct(int typeTag) {
+		super(typeTag);
 
 		fList = new ArrayList<BerNode>();
 	}

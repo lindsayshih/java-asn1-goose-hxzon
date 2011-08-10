@@ -52,26 +52,6 @@ public class BerBoolean extends BerNode {
 	private boolean fValue;
 
 //    /**
-//     * Construct a new boolean object with the specified tag
-//     * @param tag
-//     * @param value
-//     */
-//    public BerBoolean(int tag, boolean value)
-//    {
-//        super(tag);
-//        fValue = value;
-//    }
-//    
-//    /**
-//     * Construct a boolean of type BOOLEAN
-//     * @param value
-//     */
-//    public BerBoolean(boolean value)
-//    {
-//        this(Tag.BOOLEAN,value);
-//    }
-//    
-//    /**
 //     * Construct a boolean from the input stream
 //     * @param tag
 //     * @param stream

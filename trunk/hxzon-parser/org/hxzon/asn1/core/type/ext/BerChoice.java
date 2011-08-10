@@ -6,8 +6,8 @@ import org.hxzon.asn1.core.parse.BerInputStream;
 import org.hxzon.asn1.core.parse.BerOutputStream;
 import org.hxzon.asn1.core.parse.BerParser;
 import org.hxzon.asn1.core.parse.Tag;
+import org.hxzon.asn1.core.parse.ext.Asn1Utils;
 import org.hxzon.asn1.core.type.base.BerNode;
-
 
 public class BerChoice extends BerNode implements FakeBerConstruct {
 	private boolean hasTag = false;
@@ -88,7 +88,7 @@ public class BerChoice extends BerNode implements FakeBerConstruct {
 //	}
 
 	public BerNode create(int tag, BerInputStream stream) {
-		throw new UnsupportedOperationException("never implement");
+		return Asn1Utils.createUnknown(tag, stream);
 	}
 
 	@Override

@@ -38,35 +38,16 @@ package org.hxzon.asn1.core.type;
 
 import org.hxzon.asn1.core.parse.Tag;
 
-
 /**
  * Represents an object descriptor string, which is (as far as I'm concerned) an arbitrary
  * array of 8-bit bytes
  */
-public class BerObjectDescriptor extends BerOctetString
-{
-//    public BerObjectDescriptor(int tag, byte[] value)
-//    {
-//        super(tag, value);
-//    }
-//
-//    public BerObjectDescriptor(byte[] value)
-//    {
-//        this(Tag.OBJECTDESCRIPTOR,value);
-//    }
-//
-//    public BerObjectDescriptor(int tag, BerInputStream stream) throws IOException
-//    {
-//        super(tag, stream);
-//    }
-	public BerObjectDescriptor(){
-		setTag(Tag.OBJECTDESCRIPTOR);
+public class BerObjectDescriptor extends BerOctetString {
+	public BerObjectDescriptor() {
+		setTypeTag(Tag.OBJECTDESCRIPTOR);
 	}
 
-    public String getType()
-    {
-        return "BerObjectDescriptor";
-    }
+	public String getType() {
+		return "BerObjectDescriptor";
+	}
 }
-
-

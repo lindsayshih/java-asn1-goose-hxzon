@@ -39,25 +39,14 @@ package org.hxzon.asn1.core.type;
 import org.hxzon.asn1.core.parse.Tag;
 import org.hxzon.asn1.core.type.base.BerConstruct;
 
-
 /**
  * An external type as defined in RFC 3641. This is encoded the same way as a
  * sequence, which to me is a construct, so we encode this as a construct object.
  */
 public class BerExternal extends BerConstruct {
-	/**
-	 * Construct a new BerSequence with the specified tag
-	 * @param tag
-	 */
-	public BerExternal(int tag) {
-		super(tag);
-	}
 
-	/**
-	 * Construct a new BerSequence with the default set type
-	 */
 	public BerExternal() {
-		this(Tag.EXTERNAL);
+		super(Tag.EXTERNAL);
 	}
 
 //    /**

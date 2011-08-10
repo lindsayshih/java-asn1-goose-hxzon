@@ -40,7 +40,6 @@ package org.hxzon.asn1.core.type;
 import org.hxzon.asn1.core.parse.Tag;
 import org.hxzon.asn1.core.type.base.BerAbstractString;
 
-
 /**
  * Represents a 7-bit ASCII (IA5) string
  */
@@ -55,11 +54,7 @@ public class BerIA5String extends BerAbstractString {
 //    {
 //        super(tag, stream);
 //    }
-//    
-//    public BerIA5String(String value) throws AsnEncodingException
-//    {
-//        this(Tag.IA5STRING,value);
-//    }
+
 	public BerIA5String() {
 		super(Tag.IA5STRING);
 	}

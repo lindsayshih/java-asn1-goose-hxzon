@@ -42,7 +42,7 @@ import java.io.IOException;
 import org.hxzon.asn1.core.parse.BerInputStream;
 import org.hxzon.asn1.core.parse.BerOutputStream;
 import org.hxzon.asn1.core.parse.Tag;
-
+import org.hxzon.util.BytesUtil;
 
 /**
  * Represents an abstract string. This is the base of the limited syntax strings
@@ -59,31 +59,8 @@ public abstract class BerAbstractString extends BerNode {
 	protected static final int MINUS = 0x0008; // -
 	protected static final int PUNCT = 0x0010; // ' ( ) + , - . / : ? sp
 
-//    /**
-//     * Construct a new boolean object with the specified tag
-//     * @param tag
-//     * @param value
-//     */
-//    public BerAbstractString(int tag, String value)
-//    {
-//        super(tag);
-//        fValue = value;
-//    }
-//    
-//    /**
-//     * Construct a boolean from the input stream
-//     * @param tag
-//     * @param stream
-//     * @throws IOException
-//     */
-//    public BerAbstractString(int tag, BerInputStream stream) throws IOException
-//    {
-//        super(tag);
-//        
-//        fValue = new String(stream.readOctetString(0 == (tag & Tag.CONSTRUCTED)),"UTF-8");
-//    }
-	public BerAbstractString(int tag) {
-		super(tag);
+	public BerAbstractString(int typeTag) {
+		super(typeTag);
 	}
 
 	/**
@@ -159,7 +136,7 @@ public abstract class BerAbstractString extends BerNode {
 	//add by hxzon
 	protected void readValue(BerInputStream stream) {
 		try {
-			fValue = new String(stream.readOctetString(0 == (getTag() & Tag.CONSTRUCTED)), "UTF-8");
+			fValue = BytesUtil.toUTF8String(stream.readOctetString(0 == (getTag() & Tag.CONSTRUCTED)));
 			super.setOffsetAndLen(stream);
 		} catch (IOException e) {
 			e.printStackTrace();

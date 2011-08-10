@@ -38,34 +38,16 @@ package org.hxzon.asn1.core.type;
 
 import org.hxzon.asn1.core.parse.Tag;
 
-
 /**
  * Represents a VideoText string, which is (as far as I'm concerned) an arbitrary
  * array of 8-bit bytes
  */
-public class BerVideoTextString extends BerOctetString
-{
-//    public BerVideoTextString(int tag, byte[] value)
-//    {
-//        super(tag, value);
-//    }
-//
-//    public BerVideoTextString(byte[] value)
-//    {
-//        this(Tag.VIDEOTEXTSTRING,value);
-//    }
-//
-//    public BerVideoTextString(int tag, BerInputStream stream) throws IOException
-//    {
-//        super(tag, stream);
-//    }
-	public BerVideoTextString(){
-		setTag(Tag.VIDEOTEXTSTRING);
+public class BerVideoTextString extends BerOctetString {
+	public BerVideoTextString() {
+		setTypeTag(Tag.VIDEOTEXTSTRING);
 	}
 
-    public String getType() {
+	public String getType() {
 		return "BerVideoTextString";
 	}
 }
-
-

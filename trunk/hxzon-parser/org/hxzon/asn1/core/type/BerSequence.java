@@ -39,24 +39,16 @@ package org.hxzon.asn1.core.type;
 import org.hxzon.asn1.core.parse.Tag;
 import org.hxzon.asn1.core.type.base.BerConstruct;
 
-
 /**
  * A sequence is an ordered collection of objects in a Ber object
  */
 public class BerSequence extends BerConstruct {
-	/**
-	 * Construct a new BerSequence with the specified tag
-	 * @param tag
-	 */
-	public BerSequence(int tag) {
-		super(tag);
-	}
 
 	/**
 	 * Construct a new BerSequence with the default set type
 	 */
 	public BerSequence() {
-		this(Tag.SEQUENCE);
+		super(Tag.SEQUENCE);
 	}
 
 //    /**

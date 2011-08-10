@@ -39,34 +39,16 @@ package org.hxzon.asn1.core.type;
 
 import org.hxzon.asn1.core.parse.Tag;
 
-
 /**
  * Represents a Graphics string, which is (as far as I'm concerned) an arbitrary
  * array of 8-bit bytes
  */
-public class BerGraphicsString extends BerOctetString
-{
-//    public BerGraphicsString(int tag, byte[] value)
-//    {
-//        super(tag, value);
-//    }
-//
-//    public BerGraphicsString(byte[] value)
-//    {
-//        this(Tag.GRAPHICSTRING,value);
-//    }
-//
-//    public BerGraphicsString(int tag, BerInputStream stream) throws IOException
-//    {
-//        super(tag, stream);
-//    }
-	public BerGraphicsString(){
-		setTag(Tag.GRAPHICSTRING);
+public class BerGraphicsString extends BerOctetString {
+	public BerGraphicsString() {
+		setTypeTag(Tag.GRAPHICSTRING);
 	}
-    
-    public String getType() {
+
+	public String getType() {
 		return "BerGraphicsString";
 	}
 }
-
-

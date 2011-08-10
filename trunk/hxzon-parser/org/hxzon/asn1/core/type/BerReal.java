@@ -43,33 +43,12 @@ import org.hxzon.asn1.core.parse.BerOutputStream;
 import org.hxzon.asn1.core.parse.Tag;
 import org.hxzon.asn1.core.type.base.BerNode;
 
-
 /**
  * Represents a floating point value in the BER stream
  */
 public class BerReal extends BerNode {
 	private double fValue;
 
-//    /**
-//     * Construct a new boolean object with the specified tag
-//     * @param tag
-//     * @param value
-//     */
-//    public BerReal(int tag, double value)
-//    {
-//        super(tag);
-//        fValue = value;
-//    }
-//    
-//    /**
-//     * Construct a boolean of type BOOLEAN
-//     * @param value
-//     */
-//    public BerReal(double value)
-//    {
-//        this(Tag.REAL,value);
-//    }
-//    
 //    /**
 //     * Construct a boolean from the input stream
 //     * @param tag
