@@ -1,7 +1,8 @@
-package org.hxzon.asn1;
+package org.hxzon.asn1.core.type.ext;
 
-import com.chaosinmotion.asn1.BerOctetString;
-import com.chaosinmotion.asn1.Tag;
+import org.hxzon.asn1.core.parse.Tag;
+import org.hxzon.asn1.core.type.BerOctetString;
+
 
 public class UnknownBerNode extends BerOctetString {
 

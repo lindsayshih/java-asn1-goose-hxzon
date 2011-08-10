@@ -1,6 +1,6 @@
 package org.hxzon.asn1.mms.common;
 
-import com.chaosinmotion.asn1.BerBitString;
+import org.hxzon.asn1.core.type.BerBitString;
 
 public class Transitions extends BerBitString{
 //	Transitions ::= BIT STRING

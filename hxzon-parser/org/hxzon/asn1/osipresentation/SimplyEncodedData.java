@@ -1,6 +1,6 @@
 package org.hxzon.asn1.osipresentation;
 
-import com.chaosinmotion.asn1.BerOctetString;
+import org.hxzon.asn1.core.type.BerOctetString;
 
 public class SimplyEncodedData extends BerOctetString {
 

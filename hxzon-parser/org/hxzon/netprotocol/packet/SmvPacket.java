@@ -1,5 +1,6 @@
 package org.hxzon.netprotocol.packet;
 
+import org.hxzon.asn1.core.type.base.BerNode;
 import org.hxzon.asn1.smv.SmvPduParser;
 import org.hxzon.netprotocol.common.IPacketPayload;
 import org.hxzon.netprotocol.parse.ProtocolBinding;
@@ -7,7 +8,6 @@ import org.hxzon.netprotocol.parse.ProtocolBindingList;
 import org.hxzon.netprotocol.parse.ProtocolField;
 import org.hxzon.netprotocol.parse.ProtocolInt31Field;
 
-import com.chaosinmotion.asn1.BerNode;
 
 public class SmvPacket extends Packet {
 	static {

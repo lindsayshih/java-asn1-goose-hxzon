@@ -2,16 +2,16 @@ package org.hxzon.asn1.smv;
 
 import java.util.List;
 
-import org.hxzon.asn1.Asn1Utils;
-import org.hxzon.asn1.BerSequenceOf;
+import org.hxzon.asn1.core.parse.BerInputStream;
+import org.hxzon.asn1.core.parse.Tag;
+import org.hxzon.asn1.core.parse.ext.Asn1Utils;
+import org.hxzon.asn1.core.type.BerSequence;
+import org.hxzon.asn1.core.type.base.BerNode;
+import org.hxzon.asn1.core.type.ext.BerSequenceOf;
 import org.hxzon.netprotocol.common.IPacket;
 import org.hxzon.netprotocol.common.IPacketPayload;
 import org.hxzon.util.BytesUtil;
 
-import com.chaosinmotion.asn1.BerInputStream;
-import com.chaosinmotion.asn1.BerNode;
-import com.chaosinmotion.asn1.BerSequence;
-import com.chaosinmotion.asn1.Tag;
 
 public class Smv92Pdu extends BerSequence implements IPacketPayload {
 	public Smv92Pdu() {

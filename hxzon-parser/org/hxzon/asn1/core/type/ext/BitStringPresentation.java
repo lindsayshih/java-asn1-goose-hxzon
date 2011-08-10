@@ -1,4 +1,4 @@
-package org.hxzon.asn1;
+package org.hxzon.asn1.core.type.ext;
 
 import java.util.BitSet;
 

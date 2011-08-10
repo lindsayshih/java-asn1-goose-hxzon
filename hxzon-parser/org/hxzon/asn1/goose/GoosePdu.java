@@ -2,15 +2,15 @@ package org.hxzon.asn1.goose;
 
 import java.util.List;
 
-import org.hxzon.asn1.Asn1Utils;
+import org.hxzon.asn1.core.parse.BerInputStream;
+import org.hxzon.asn1.core.parse.Tag;
+import org.hxzon.asn1.core.parse.ext.Asn1Utils;
+import org.hxzon.asn1.core.type.BerSequence;
+import org.hxzon.asn1.core.type.base.BerNode;
 import org.hxzon.netprotocol.common.IPacket;
 import org.hxzon.netprotocol.common.IPacketPayload;
 import org.hxzon.util.BytesUtil;
 
-import com.chaosinmotion.asn1.BerInputStream;
-import com.chaosinmotion.asn1.BerNode;
-import com.chaosinmotion.asn1.BerSequence;
-import com.chaosinmotion.asn1.Tag;
 
 public class GoosePdu extends BerSequence implements IPacketPayload {
 

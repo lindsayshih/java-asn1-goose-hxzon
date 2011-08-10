@@ -1,6 +1,6 @@
 package org.hxzon.asn1.osipresentation;
 
-import com.chaosinmotion.asn1.BerOID;
+import org.hxzon.asn1.core.type.BerOID;
 
 public class TransferSyntaxName extends BerOID {
 

@@ -1,6 +1,6 @@
-package org.hxzon.asn1;
+package org.hxzon.asn1.core.type.ext;
 
-import com.chaosinmotion.asn1.BerNode;
+import org.hxzon.asn1.core.type.base.BerNode;
 
 public interface IBerConstruct {
 	public BerNode[] getChildren();

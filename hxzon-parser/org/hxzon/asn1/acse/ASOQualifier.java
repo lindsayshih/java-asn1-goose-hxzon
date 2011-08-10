@@ -1,6 +1,6 @@
 package org.hxzon.asn1.acse;
 
-import org.hxzon.asn1.BerChoice;
+import org.hxzon.asn1.core.type.ext.BerChoice;
 
 public class ASOQualifier extends BerChoice {
 //	ASO-qualifier ::= CHOICE {

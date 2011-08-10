@@ -1,7 +1,11 @@
 package org.hxzon.asn1.mms.choice;
 
-import org.hxzon.asn1.Asn1Utils;
-import org.hxzon.asn1.BerChoice;
+import org.hxzon.asn1.core.parse.BerInputStream;
+import org.hxzon.asn1.core.parse.Tag;
+import org.hxzon.asn1.core.parse.ext.Asn1Utils;
+import org.hxzon.asn1.core.type.BerNull;
+import org.hxzon.asn1.core.type.base.BerNode;
+import org.hxzon.asn1.core.type.ext.BerChoice;
 import org.hxzon.asn1.mms.common.FileName;
 import org.hxzon.asn1.mms.common.Identifier;
 import org.hxzon.asn1.mms.sequence.AcknowledgeEventNotificationRequest;
@@ -55,10 +59,6 @@ import org.hxzon.asn1.mms.sequence.TriggerEventRequest;
 import org.hxzon.asn1.mms.sequence.WriteJournalRequest;
 import org.hxzon.asn1.mms.sequence.WriteRequest;
 
-import com.chaosinmotion.asn1.BerInputStream;
-import com.chaosinmotion.asn1.BerNode;
-import com.chaosinmotion.asn1.BerNull;
-import com.chaosinmotion.asn1.Tag;
 
 public class ConfirmedServiceRequest extends BerChoice {
 

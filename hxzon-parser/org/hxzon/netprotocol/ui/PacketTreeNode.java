@@ -7,15 +7,15 @@ import java.util.List;
 
 import javax.swing.tree.TreeNode;
 
-import org.hxzon.asn1.FakeBerConstruct;
+import org.hxzon.asn1.core.parse.Tag;
+import org.hxzon.asn1.core.type.base.BerConstruct;
+import org.hxzon.asn1.core.type.base.BerNode;
+import org.hxzon.asn1.core.type.ext.FakeBerConstruct;
 import org.hxzon.netprotocol.common.IPacket;
 import org.hxzon.netprotocol.common.IPacketPayload;
 import org.hxzon.netprotocol.packet.OsiPresentationPacket;
 import org.hxzon.netprotocol.parse.ProtocolField;
 
-import com.chaosinmotion.asn1.BerConstruct;
-import com.chaosinmotion.asn1.BerNode;
-import com.chaosinmotion.asn1.Tag;
 
 public class PacketTreeNode implements TreeNode {
 	private PacketTreeNode parent;

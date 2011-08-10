@@ -1,13 +1,13 @@
 package org.hxzon.asn1.mms.sequence;
 
-import org.hxzon.asn1.Asn1Utils;
+import org.hxzon.asn1.core.parse.BerInputStream;
+import org.hxzon.asn1.core.parse.Tag;
+import org.hxzon.asn1.core.parse.ext.Asn1Utils;
+import org.hxzon.asn1.core.type.BerInteger;
+import org.hxzon.asn1.core.type.BerSequence;
+import org.hxzon.asn1.core.type.base.BerNode;
 import org.hxzon.asn1.mms.choice.ObjectName;
 
-import com.chaosinmotion.asn1.BerInputStream;
-import com.chaosinmotion.asn1.BerInteger;
-import com.chaosinmotion.asn1.BerNode;
-import com.chaosinmotion.asn1.BerSequence;
-import com.chaosinmotion.asn1.Tag;
 
 public class GetEventEnrollmentAttributesRequest extends BerSequence {
 //	GetEventEnrollmentAttributes-Request ::= SEQUENCE

@@ -3,15 +3,15 @@ package org.hxzon.asn1.smv;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hxzon.asn1.Asn1Utils;
-import org.hxzon.asn1.FakeBerConstruct;
+import org.hxzon.asn1.core.parse.BerInputStream;
+import org.hxzon.asn1.core.parse.ext.Asn1Utils;
+import org.hxzon.asn1.core.type.BerOctetString;
+import org.hxzon.asn1.core.type.base.BerNode;
+import org.hxzon.asn1.core.type.ext.FakeBerConstruct;
 import org.hxzon.netprotocol.common.IPacket;
 import org.hxzon.netprotocol.common.IPacketPayload;
 import org.hxzon.util.BytesUtil;
 
-import com.chaosinmotion.asn1.BerInputStream;
-import com.chaosinmotion.asn1.BerNode;
-import com.chaosinmotion.asn1.BerOctetString;
 
 public class Smv91Pdu extends BerOctetString implements FakeBerConstruct, IPacketPayload {
 	public Smv91Pdu() {

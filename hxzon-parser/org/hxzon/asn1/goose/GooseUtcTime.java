@@ -3,9 +3,9 @@ package org.hxzon.asn1.goose;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.hxzon.asn1.core.type.BerOctetString;
 import org.hxzon.util.BytesUtil;
 
-import com.chaosinmotion.asn1.BerOctetString;
 
 public class GooseUtcTime extends BerOctetString {
 	private static final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd,hh:mm:ss.SSSSSS");

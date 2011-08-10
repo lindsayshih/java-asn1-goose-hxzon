@@ -1,7 +1,10 @@
 package org.hxzon.asn1.mms;
 
-import org.hxzon.asn1.Asn1Utils;
-import org.hxzon.asn1.BerChoice;
+import org.hxzon.asn1.core.parse.BerInputStream;
+import org.hxzon.asn1.core.parse.Tag;
+import org.hxzon.asn1.core.parse.ext.Asn1Utils;
+import org.hxzon.asn1.core.type.base.BerNode;
+import org.hxzon.asn1.core.type.ext.BerChoice;
 import org.hxzon.asn1.mms.sequence.CancelErrorPdu;
 import org.hxzon.asn1.mms.sequence.ConfirmedErrorPdu;
 import org.hxzon.asn1.mms.sequence.ConfirmedRequestPdu;
@@ -12,9 +15,6 @@ import org.hxzon.asn1.mms.sequence.RejectPdu;
 import org.hxzon.asn1.mms.sequence.ServiceError;
 import org.hxzon.asn1.mms.sequence.UnconfirmedPdu;
 
-import com.chaosinmotion.asn1.BerInputStream;
-import com.chaosinmotion.asn1.BerNode;
-import com.chaosinmotion.asn1.Tag;
 
 public class MmsPdu extends BerChoice {
 

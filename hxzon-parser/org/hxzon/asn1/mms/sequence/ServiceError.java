@@ -1,16 +1,16 @@
 package org.hxzon.asn1.mms.sequence;
 
-import org.hxzon.asn1.Asn1Utils;
-import org.hxzon.asn1.BerChoice;
+import org.hxzon.asn1.core.parse.BerInputStream;
+import org.hxzon.asn1.core.parse.Tag;
+import org.hxzon.asn1.core.parse.ext.Asn1Utils;
+import org.hxzon.asn1.core.type.BerInteger;
+import org.hxzon.asn1.core.type.BerSequence;
+import org.hxzon.asn1.core.type.base.BerNode;
+import org.hxzon.asn1.core.type.ext.BerChoice;
 import org.hxzon.asn1.mms.choice.ErrorClass;
 import org.hxzon.asn1.mms.choice.ObjectName;
 import org.hxzon.asn1.mms.common.ProgramInvocationState;
 
-import com.chaosinmotion.asn1.BerInputStream;
-import com.chaosinmotion.asn1.BerInteger;
-import com.chaosinmotion.asn1.BerNode;
-import com.chaosinmotion.asn1.BerSequence;
-import com.chaosinmotion.asn1.Tag;
 
 public class ServiceError extends BerSequence {
 //	ServiceError ::= SEQUENCE 

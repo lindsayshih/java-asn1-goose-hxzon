@@ -1,7 +1,10 @@
 package org.hxzon.asn1.mms.choice;
 
-import org.hxzon.asn1.Asn1Utils;
-import org.hxzon.asn1.BerChoice;
+import org.hxzon.asn1.core.parse.BerInputStream;
+import org.hxzon.asn1.core.parse.Tag;
+import org.hxzon.asn1.core.parse.ext.Asn1Utils;
+import org.hxzon.asn1.core.type.base.BerNode;
+import org.hxzon.asn1.core.type.ext.BerChoice;
 import org.hxzon.asn1.mms.common.InputResponse;
 import org.hxzon.asn1.mms.sequence.AlterEventEnrollmentResponse;
 import org.hxzon.asn1.mms.sequence.DeleteNamedTypeResponse;
@@ -37,9 +40,6 @@ import org.hxzon.asn1.mms.sequence.ReportSemaphoreStatusResponse;
 import org.hxzon.asn1.mms.sequence.StatusResponse;
 import org.hxzon.asn1.mms.sequence.UploadSegmentResponse;
 
-import com.chaosinmotion.asn1.BerInputStream;
-import com.chaosinmotion.asn1.BerNode;
-import com.chaosinmotion.asn1.Tag;
 
 public class ConfirmedServiceResponse extends BerChoice {
 	public ConfirmedServiceResponse() {

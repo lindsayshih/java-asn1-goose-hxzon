@@ -1,8 +1,9 @@
-package org.hxzon.asn1;
+package org.hxzon.asn1.core.type.ext;
 
-import com.chaosinmotion.asn1.BerInputStream;
-import com.chaosinmotion.asn1.BerNode;
-import com.chaosinmotion.asn1.BerSequence;
+import org.hxzon.asn1.core.parse.BerInputStream;
+import org.hxzon.asn1.core.type.BerSequence;
+import org.hxzon.asn1.core.type.base.BerNode;
+
 
 public class BerSequenceOf extends BerSequence {
 	private Class<? extends BerNode> type;
