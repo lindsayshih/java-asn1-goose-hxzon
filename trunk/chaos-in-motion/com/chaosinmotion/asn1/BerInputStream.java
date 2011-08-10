@@ -45,12 +45,15 @@ import java.io.OutputStream;
 import java.util.BitSet;
 
 import org.hxzon.asn1.BitStringPresentation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The input stream reader provides primitives for reading some fundamental objects
  * from a BER input stream
  */
 public class BerInputStream extends LengthInputStream {
+	private static final Logger logger = LoggerFactory.getLogger(BerInputStream.class);
 	private byte[] fBuffer; // internal copy buffer
 
 	/**
@@ -72,8 +75,9 @@ public class BerInputStream extends LengthInputStream {
 	 */
 	private byte readByte() throws IOException {
 		int b = read();
-		if (b == -1)
+		if (b == -1) {
 			throw new EOFException();
+		}
 		totalLen++;//add by hxzon
 		return (byte) b;
 	}
@@ -89,7 +93,13 @@ public class BerInputStream extends LengthInputStream {
 		byte h, x;
 		int type;
 
-		h = readByte();
+		//change by hxzon
+		try {
+			h = readByte();
+		} catch (EOFException e) {
+			//add by hxzon//FIXME
+			return Tag.EOFTYPE;
+		}
 		type = h & 0x1F;
 		if (type == 0x1F) {
 			/* Multi-byte type */
@@ -458,7 +468,7 @@ public class BerInputStream extends LengthInputStream {
 			 * The current tag is compound. Read all of the components
 			 */
 
-			ReadSequence rseq = new ReadSequence(this);
+			ReadSequence rseq = new ReadSequence("read bit string", this);
 
 			int tag;
 			while (0 != (tag = rseq.readBerTag())) {
@@ -508,7 +518,7 @@ public class BerInputStream extends LengthInputStream {
 			 * The current tag is compound. Read all of the components
 			 */
 
-			ReadSequence rseq = new ReadSequence(this);
+			ReadSequence rseq = new ReadSequence("read bit string2", this);
 
 			int tag;
 			while (0 != (tag = rseq.readBerTag())) {
@@ -591,7 +601,7 @@ public class BerInputStream extends LengthInputStream {
 			 * This is a compound string. Read each of the components
 			 * as strings inside of me, recursing for each
 			 */
-			ReadSequence rseq = new ReadSequence(this);
+			ReadSequence rseq = new ReadSequence("read octet string", this);
 			int tag;
 
 			while (0 != (tag = rseq.readBerTag())) {
@@ -610,12 +620,14 @@ public class BerInputStream extends LengthInputStream {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		readOctetString(baos, primitive);
 		baos.close();
+		byte[] result = baos.toByteArray();
 		//add by hxzon
 		if (primitive) {
-			totalLen += baos.toByteArray().length;
+			totalLen += result.length;
+//			logger.trace("read octet string:total len:"+totalLen);
 		}
 		//end add
-		return baos.toByteArray();
+		return result;
 	}
 
 	//-----------------------------------------
