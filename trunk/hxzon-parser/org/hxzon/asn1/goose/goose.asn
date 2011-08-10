@@ -132,5 +132,20 @@ Data ::= CHOICE {
 	bcd				[13] IMPLICIT INTEGER,
 	booleanArray	[14] IMPLICIT BIT STRING
 }
-
+//add by hxzon
+#define RT_ARR_START	        1
+#define RT_STR_START	        2
+#define	RT_BOOL		            3
+#define	RT_BIT_STRING	        4
+#define	RT_INTEGER		        5
+#define	RT_UNSIGNED	            6
+#define	RT_FLOATING_POINT	    7
+#define	RT_OCTET_STRING	        9
+#define	RT_VISIBLE_STRING	    10
+#define	RT_GENERAL_TIME	        11
+#define	RT_BINARY_TIME	        12
+#define	RT_BCD		            13
+#define	RT_BOOLEANARRAY	        14
+#define	RT_UTC_TIME	            17
+#define	RT_UTF8_STRING		    18
 END
