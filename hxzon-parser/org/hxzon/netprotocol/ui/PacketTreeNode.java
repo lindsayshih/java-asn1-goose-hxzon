@@ -8,8 +8,8 @@ import java.util.List;
 import javax.swing.tree.TreeNode;
 
 import org.hxzon.asn1.FakeBerConstruct;
-import org.hxzon.netprotocol.common.GeneralPacket;
-import org.hxzon.netprotocol.common.GeneralPacketPayload;
+import org.hxzon.netprotocol.common.IPacket;
+import org.hxzon.netprotocol.common.IPacketPayload;
 import org.hxzon.netprotocol.packet.NullPayload;
 import org.hxzon.netprotocol.packet.OsiPresentationPacket;
 import org.hxzon.netprotocol.parse.ProtocolField;
@@ -31,7 +31,7 @@ public class PacketTreeNode implements TreeNode {
 		node.setParent(this);
 	}
 
-	public PacketTreeNode(GeneralPacketPayload packet) {
+	public PacketTreeNode(IPacketPayload packet) {
 		children = new ArrayList<PacketTreeNode>();
 		if (packet == null) {
 			userObject = "error";
@@ -39,14 +39,14 @@ public class PacketTreeNode implements TreeNode {
 		}
 		userObject = packet;
 		this.offset = packet.getOffset();
-		if (packet instanceof GeneralPacket) {
-			GeneralPacket gpacket = (GeneralPacket) packet;
+		if (packet instanceof IPacket) {
+			IPacket gpacket = (IPacket) packet;
 			this.len = gpacket.getHeaderLength();
 			if (gpacket.getSrcPacket() == null) {
-				GeneralPacketPayload payload = gpacket.getPayload();
-				while (payload instanceof GeneralPacket) {
-					this.add((GeneralPacket) payload);
-					payload = ((GeneralPacket) payload).getPayload();
+				IPacketPayload payload = gpacket.getPayload();
+				while (payload instanceof IPacket) {
+					this.add((IPacket) payload);
+					payload = ((IPacket) payload).getPayload();
 				}
 				if (payload instanceof NullPayload) {
 
@@ -88,11 +88,11 @@ public class PacketTreeNode implements TreeNode {
 		this.len = len;
 	}
 
-	public void add(GeneralPacketPayload packet) {
+	public void add(IPacketPayload packet) {
 		if (packet instanceof OsiPresentationPacket) {
 			this.add(((OsiPresentationPacket) packet));
-		} else if (packet instanceof GeneralPacket) {
-			GeneralPacket gpacket = (GeneralPacket) packet;
+		} else if (packet instanceof IPacket) {
+			IPacket gpacket = (IPacket) packet;
 			PacketTreeNode node = new PacketTreeNode(gpacket);
 			this.implAddChildNode(node);
 

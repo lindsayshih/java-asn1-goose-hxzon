@@ -1,14 +1,14 @@
 package org.hxzon.netprotocol.packet;
 
-import org.hxzon.netprotocol.common.GeneralPacket;
-import org.hxzon.netprotocol.common.GeneralPacketPayload;
+import org.hxzon.netprotocol.common.IPacket;
+import org.hxzon.netprotocol.common.IPacketPayload;
 import org.hxzon.util.BytesUtil;
 
-public class UnknownPayload implements GeneralPacketPayload {
+public class UnknownPayload implements IPacketPayload {
 	private byte[] srcData;
 	private int offset;
 	private int length;
-	private GeneralPacket srcPacket;
+	private IPacket srcPacket;
 
 	public String toString() {
 		return "payload";
@@ -35,12 +35,12 @@ public class UnknownPayload implements GeneralPacketPayload {
 	}
 
 	@Override
-	public GeneralPacket getSrcPacket() {
+	public IPacket getSrcPacket() {
 		return srcPacket;
 	}
 
 	@Override
-	public void setSrcPacket(GeneralPacket srcPacket) {
+	public void setSrcPacket(IPacket srcPacket) {
 		this.srcPacket = srcPacket;
 		this.srcData = srcPacket.getSrcData();
 		this.offset = srcPacket.getOffset() + srcPacket.getHeaderLength();

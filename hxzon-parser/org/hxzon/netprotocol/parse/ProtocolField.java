@@ -3,6 +3,7 @@ package org.hxzon.netprotocol.parse;
 import org.hxzon.netprotocol.packet.Packet;
 
 public abstract class ProtocolField {
+	private Packet packet;
 	private int offset;
 	private int len;
 	private String name;
@@ -84,5 +85,13 @@ public abstract class ProtocolField {
 
 	public String toString() {
 		return name;
+	}
+
+	public Packet getPacket() {
+		return packet;
+	}
+
+	public void setPacket(Packet packet) {
+		this.packet = packet;
 	}
 }

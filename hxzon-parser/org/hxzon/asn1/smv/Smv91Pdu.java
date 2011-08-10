@@ -5,15 +5,15 @@ import java.util.List;
 
 import org.hxzon.asn1.Asn1Utils;
 import org.hxzon.asn1.FakeBerConstruct;
-import org.hxzon.netprotocol.common.GeneralPacket;
-import org.hxzon.netprotocol.common.GeneralPacketPayload;
+import org.hxzon.netprotocol.common.IPacket;
+import org.hxzon.netprotocol.common.IPacketPayload;
 import org.hxzon.util.BytesUtil;
 
 import com.chaosinmotion.asn1.BerInputStream;
 import com.chaosinmotion.asn1.BerNode;
 import com.chaosinmotion.asn1.BerOctetString;
 
-public class Smv91Pdu extends BerOctetString implements FakeBerConstruct, GeneralPacketPayload {
+public class Smv91Pdu extends BerOctetString implements FakeBerConstruct, IPacketPayload {
 	public Smv91Pdu() {
 		setName("smv9-1");
 		setDisplayString("9-1采样值");
@@ -48,7 +48,7 @@ public class Smv91Pdu extends BerOctetString implements FakeBerConstruct, Genera
 		return fList.remove(o);
 	}
 
-	private GeneralPacket srcPacket;
+	private IPacket srcPacket;
 
 	@Override
 	public byte[] getData() {
@@ -71,12 +71,12 @@ public class Smv91Pdu extends BerOctetString implements FakeBerConstruct, Genera
 	}
 
 	@Override
-	public GeneralPacket getSrcPacket() {
+	public IPacket getSrcPacket() {
 		return srcPacket;
 	}
 
 	@Override
-	public void setSrcPacket(GeneralPacket srcPacket) {
+	public void setSrcPacket(IPacket srcPacket) {
 		this.srcPacket = srcPacket;
 	}
 

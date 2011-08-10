@@ -1,6 +1,6 @@
 package org.hxzon.netprotocol.packet;
 
-import org.hxzon.netprotocol.common.GeneralPacketPayload;
+import org.hxzon.netprotocol.common.IPacketPayload;
 import org.hxzon.netprotocol.parse.ProtocolBinding;
 import org.hxzon.netprotocol.parse.ProtocolBindingList;
 import org.hxzon.netprotocol.parse.ProtocolBitField;
@@ -117,9 +117,9 @@ public class CotpPacket extends Packet {
 		return isLast;
 	}
 
-	public GeneralPacketPayload getPayload() {
+	public IPacketPayload getPayload() {
 		if (fetchIsLast().getValue() != LastUnit) {
-			GeneralPacketPayload payload = new NullPayload();
+			IPacketPayload payload = new NullPayload();
 			payload.setSrcPacket(this);
 			super.setPayload(payload);
 		}

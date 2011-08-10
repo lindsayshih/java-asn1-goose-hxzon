@@ -1,11 +1,11 @@
 package org.hxzon.netprotocol.packet;
 
-import org.hxzon.netprotocol.common.GeneralPacket;
-import org.hxzon.netprotocol.common.GeneralPacketPayload;
+import org.hxzon.netprotocol.common.IPacket;
+import org.hxzon.netprotocol.common.IPacketPayload;
 
-public class NullPayload implements GeneralPacketPayload {
+public class NullPayload implements IPacketPayload {
 
-	GeneralPacket srcPacket;
+	IPacket srcPacket;
 
 	@Override
 	public byte[] getData() {
@@ -28,12 +28,12 @@ public class NullPayload implements GeneralPacketPayload {
 	}
 
 	@Override
-	public GeneralPacket getSrcPacket() {
+	public IPacket getSrcPacket() {
 		return srcPacket;
 	}
 
 	@Override
-	public void setSrcPacket(GeneralPacket srcPacket) {
+	public void setSrcPacket(IPacket srcPacket) {
 		this.srcPacket = srcPacket;
 	}
 

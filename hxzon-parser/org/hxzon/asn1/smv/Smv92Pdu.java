@@ -1,8 +1,8 @@
 package org.hxzon.asn1.smv;
 
 import org.hxzon.asn1.Asn1Utils;
-import org.hxzon.netprotocol.common.GeneralPacket;
-import org.hxzon.netprotocol.common.GeneralPacketPayload;
+import org.hxzon.netprotocol.common.IPacket;
+import org.hxzon.netprotocol.common.IPacketPayload;
 import org.hxzon.util.BytesUtil;
 
 import com.chaosinmotion.asn1.BerInputStream;
@@ -10,7 +10,7 @@ import com.chaosinmotion.asn1.BerNode;
 import com.chaosinmotion.asn1.BerSequence;
 import com.chaosinmotion.asn1.Tag;
 
-public class Smv92Pdu extends BerSequence implements GeneralPacketPayload {
+public class Smv92Pdu extends BerSequence implements IPacketPayload {
 	public Smv92Pdu() {
 		setName("smv9-2Pdu");
 		setDisplayString("9-2采样值");
@@ -52,7 +52,7 @@ public class Smv92Pdu extends BerSequence implements GeneralPacketPayload {
 		}
 	}
 
-	private GeneralPacket srcPacket;
+	private IPacket srcPacket;
 
 	@Override
 	public byte[] getData() {
@@ -75,12 +75,12 @@ public class Smv92Pdu extends BerSequence implements GeneralPacketPayload {
 	}
 
 	@Override
-	public GeneralPacket getSrcPacket() {
+	public IPacket getSrcPacket() {
 		return srcPacket;
 	}
 
 	@Override
-	public void setSrcPacket(GeneralPacket srcPacket) {
+	public void setSrcPacket(IPacket srcPacket) {
 		this.srcPacket = srcPacket;
 	}
 
