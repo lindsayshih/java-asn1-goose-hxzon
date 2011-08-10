@@ -35,6 +35,7 @@ public class PacketTable extends JTable {
 //					int row2=e.getLastIndex();
 //					System.out.println(row1+","+row2);
 					if (lsm.isSelectionEmpty()) {
+						display.getPacketDisplay().updateData(null);
 					} else {
 						// Find out which indexes are selected.
 						int minIndex = lsm.getMinSelectionIndex();
