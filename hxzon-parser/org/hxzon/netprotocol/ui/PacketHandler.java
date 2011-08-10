@@ -2,14 +2,12 @@ package org.hxzon.netprotocol.ui;
 
 import org.hxzon.jnetpcap.JPcapPacket;
 import org.hxzon.netprotocol.packet.Packet;
+import org.hxzon.util.DebugUtil;
 import org.jnetpcap.Pcap;
 import org.jnetpcap.packet.PcapPacket;
 import org.jnetpcap.packet.PcapPacketHandler;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class PacketHandler implements PcapPacketHandler {
-	private static Logger logger = LoggerFactory.getLogger(PacketHandler.class);
 	private DisplayFrame display;
 	private Pcap pcap;
 	private int i = 0;
@@ -23,7 +21,7 @@ public class PacketHandler implements PcapPacketHandler {
 		pcap.loop(-1, this, null);
 		long endTime = System.currentTimeMillis();
 		long spanTime = endTime - startTime;
-		logger.debug("packet handler-span time:" + spanTime);
+		DebugUtil.debug("packet handler-span time:" + spanTime);
 	}
 
 	@Override

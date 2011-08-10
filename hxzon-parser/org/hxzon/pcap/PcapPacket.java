@@ -1,5 +1,7 @@
 package org.hxzon.pcap;
 
+import org.hxzon.util.BytesUtil;
+
 public class PcapPacket {
 //	Timestamp：时间戳高位，精确到seconds     
 //	Timestamp：时间戳低位，精确到microseconds
@@ -10,6 +12,33 @@ public class PcapPacket {
 	private long capLen;
 	private long packetLen;
 	private byte[] packetData;
+	private byte[] origPcapPacketHeader;
+
+	public void init(byte[] pcapPacketHeader, boolean reverse) {
+		this.origPcapPacketHeader = pcapPacketHeader;
+		if (reverse) {
+			byte[] tmp = BytesUtil.reverse(pcapPacketHeader, 0, 4);
+			seconds = BytesUtil.toUnsigned(tmp);
+			tmp = BytesUtil.reverse(pcapPacketHeader, 4, 4);
+			microSeconds = BytesUtil.toUnsigned(tmp);
+			tmp = BytesUtil.reverse(pcapPacketHeader, 8, 4);
+			capLen = BytesUtil.toUnsigned(tmp);
+			tmp = BytesUtil.reverse(pcapPacketHeader, 12, 4);
+			packetLen = BytesUtil.toUnsigned(tmp);
+//			if (capLen < 0) {
+//				capLen = BytesUtil.toUnsigned(pcapPacketHeader, 8, 4);
+//			}
+//			if (packetLen < 0) {
+//				packetLen = BytesUtil.toUnsigned(pcapPacketHeader, 12, 4);
+//			}
+		} else {
+			seconds = BytesUtil.toUnsigned(pcapPacketHeader, 0, 4);
+			microSeconds = BytesUtil.toUnsigned(pcapPacketHeader, 4, 4);
+			capLen = BytesUtil.toUnsigned(pcapPacketHeader, 8, 4);
+			packetLen = BytesUtil.toUnsigned(pcapPacketHeader, 12, 4);
+		}
+
+	}
 
 	public long getSeconds() {
 		return seconds;

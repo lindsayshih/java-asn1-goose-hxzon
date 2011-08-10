@@ -35,8 +35,7 @@ package com.chaosinmotion.asn1;
 
 import java.io.IOException;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.hxzon.util.DebugUtil;
 
 /**
  *  This is a wrapper class that supports reading in a sequence. This is called
@@ -44,7 +43,6 @@ import org.slf4j.LoggerFactory;
  *  when it's time to stop reading objects.
  */
 class ReadSequence {
-	private static final Logger logger = LoggerFactory.getLogger(ReadSequence.class);
 	private String display;
 	private BerInputStream fInputStream;
 	private long fStart;
@@ -62,7 +60,7 @@ class ReadSequence {
 		fStart = fInputStream.getReadBytes();
 
 		fEOF = (fLength == 0);
-		logger.trace("read sequence " + display + ", start:" + fStart + ",len:" + fLength);
+		DebugUtil.trace("read sequence " + display + ", start:" + fStart + ",len:" + fLength);
 	}
 
 	/**

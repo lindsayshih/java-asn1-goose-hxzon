@@ -4,11 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hxzon.util.BytesUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.hxzon.util.DebugUtil;
 
 public class PcapFile {
-	private static final Logger logger = LoggerFactory.getLogger(PcapFile.class);
 	public static final String identical = "a1b2c3d4";// (identical)
 	public static final String swapped = "d4c3b2a1";// (swapped)
 //	Pcap文件头24B各字段说明：
@@ -42,7 +40,7 @@ public class PcapFile {
 		sigFigs = BytesUtil.toUnsigned(header, 12, 4);
 		snapLen = BytesUtil.toUnsigned(header, 16, 4);
 		linkType = BytesUtil.toUnsigned(header, 20, 4);
-		logger.debug("magic:" + magic);
+		DebugUtil.debug("magic:" + magic);
 	}
 
 	public String getMagic() {

@@ -40,15 +40,12 @@ package com.chaosinmotion.asn1;
 import java.io.IOException;
 
 import org.hxzon.asn1.IBerConstruct;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Each BER object within an ASN.1 stream descends from the BerNode. This contains
  * code for writing the contents of this node
  */
 public abstract class BerNode {
-	private static final Logger logger = LoggerFactory.getLogger(BerNode.class);
 	private int fTag;
 
 	protected BerNode(int tag) {

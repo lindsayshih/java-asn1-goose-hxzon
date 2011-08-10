@@ -45,15 +45,12 @@ import java.io.OutputStream;
 import java.util.BitSet;
 
 import org.hxzon.asn1.BitStringPresentation;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * The input stream reader provides primitives for reading some fundamental objects
  * from a BER input stream
  */
 public class BerInputStream extends LengthInputStream {
-	private static final Logger logger = LoggerFactory.getLogger(BerInputStream.class);
 	private byte[] fBuffer; // internal copy buffer
 
 	/**

@@ -40,8 +40,7 @@ package com.chaosinmotion.asn1;
 import java.io.IOException;
 
 import org.hxzon.util.BytesUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.hxzon.util.DebugUtil;
 
 /**
  * Represents an octet string, or a string made up of 8-bit characters. No encoding
@@ -50,7 +49,6 @@ import org.slf4j.LoggerFactory;
  * octet strings using UTF-8 encoding.
  */
 public class BerOctetString extends BerNode {
-	private static final Logger logger = LoggerFactory.getLogger(BerOctetString.class);
 	private byte[] fValue;
 
 //    /**
@@ -119,7 +117,7 @@ public class BerOctetString extends BerNode {
 			fValue = stream.readOctetString(0 == (getTag() & Tag.CONSTRUCTED));
 			super.setOffsetAndLen(stream);
 		} catch (IOException e) {
-			logger.error("read value error", e);
+			DebugUtil.error("read value error", e);
 			fValue = new byte[0];
 		}
 	}
