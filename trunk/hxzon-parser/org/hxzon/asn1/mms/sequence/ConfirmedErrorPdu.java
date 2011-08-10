@@ -21,9 +21,9 @@ public class ConfirmedErrorPdu extends BerSequence {
 	public BerNode create(int tag, BerInputStream stream) {
 		switch (tag) {
 		case Tag.CONTEXT | 0:
-			return Asn1Utils.createBerUnsignedInteger("invokeID", "invokeID", tag, stream);
+			return Asn1Utils.createBerUnsigned32("invokeID", "invokeID", tag, stream);
 		case Tag.CONTEXT | 1:
-			return Asn1Utils.createBerUnsignedInteger("modifierPosition", "modifierPosition", tag, stream);
+			return Asn1Utils.createBerUnsigned32("modifierPosition", "modifierPosition", tag, stream);
 		case Tag.CONTEXT | 2:
 			return new ServiceError().init("serviceError", "serviceError", tag, stream);
 		default:

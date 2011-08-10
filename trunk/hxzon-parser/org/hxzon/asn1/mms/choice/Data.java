@@ -50,9 +50,9 @@ public class Data extends BerChoice {
 		case Tag.CONTEXT | 4:
 			return Asn1Utils.createBerBitString("bit-string", "bit-string", tag, stream);
 		case Tag.CONTEXT | 5:
-			return Asn1Utils.createBerInteger("integer", "integer", tag, stream);
+			return Asn1Utils.createBerIntegerX("integer", "integer", tag, stream);
 		case Tag.CONTEXT | 6:
-			return Asn1Utils.createBerUnsignedInteger("unsigned", "unsigned", tag, stream);
+			return Asn1Utils.createBerUnsignedX("unsigned", "unsigned", tag, stream);
 		case Tag.CONTEXT | 7:
 			return new FloatingPoint().init("floatingPoint", "floatingPoint", tag, stream);
 		case Tag.CONTEXT | 8:
@@ -64,7 +64,7 @@ public class Data extends BerChoice {
 		case Tag.CONTEXT | 12:
 			return new TimeOfDay().init("binary-time", "binary-time", tag, stream);
 		case Tag.CONTEXT | 13:
-			return Asn1Utils.createBerInteger("bcd", "bcd", tag, stream);
+			return Asn1Utils.createBerIntegerX("bcd", "bcd", tag, stream);
 		case Tag.CONTEXT | 14:
 			return Asn1Utils.createBerBitString("booleanArray", "booleanArray", tag, stream);
 		case Tag.CONTEXT | 15:

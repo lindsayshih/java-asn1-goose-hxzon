@@ -129,17 +129,38 @@ public class Asn1Utils {
 		return new BerOID().init(name, display, tag, stream);
 	}
 
-	public static BerNode createBerUnsignedInteger(String name, String display, int tag, BerInputStream stream) {
+//	public static BerNode createBerUnsigned(String name, String display, int tag, BerInputStream stream) {
+//		return new BerInteger().init(name, display, tag, stream);
+//	}
+
+	public static BerNode createBerUnsignedX(String name, String display, int tag, BerInputStream stream) {
 		return new BerInteger().init(name, display, tag, stream);
 	}
 
-	public static BerNode createBerInteger(String name, String display, int tag, BerInputStream stream) {
+	public static BerNode createBerUnsigned8(String name, String display, int tag, BerInputStream stream) {
 		return new BerInteger().init(name, display, tag, stream);
 	}
 
-	public static BerNode createBerInteger(String name, String display, int tag, BerInputStream stream, int bitLen) {
-		return new BerInteger().limitBitLength(bitLen).init(name, display, tag, stream);
+	public static BerNode createBerUnsigned16(String name, String display, int tag, BerInputStream stream) {
+		return new BerInteger().init(name, display, tag, stream);
 	}
+
+	public static BerNode createBerUnsigned32(String name, String display, int tag, BerInputStream stream) {
+		return new BerInteger().init(name, display, tag, stream);
+	}
+
+//	public static BerNode createBerInteger(String name, String display, int tag, BerInputStream stream) {
+//		return new BerInteger().init(name, display, tag, stream);
+//	}
+
+//	public static BerNode createBerInteger(String name, String display, int tag, BerInputStream stream, int bitLen) {
+//		return new BerInteger().limitBitLength(bitLen).init(name, display, tag, stream);
+//	}
+	
+	public static BerNode createBerIntegerX(String name, String display, int tag, BerInputStream stream) {
+		return new BerInteger().init(name, display, tag, stream);
+	}
+
 
 	public static BerNode createBerInteger8(String name, String display, int tag, BerInputStream stream) {
 		return new BerInteger().limitBitLength(8).init(name, display, tag, stream);

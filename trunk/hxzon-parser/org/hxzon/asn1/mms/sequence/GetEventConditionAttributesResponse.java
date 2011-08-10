@@ -35,13 +35,13 @@ public class GetEventConditionAttributesResponse extends BerSequence {
 		case Tag.CONTEXT | 2:
 			return new Priority().init("priority", "priority", tag, stream);
 		case Tag.CONTEXT | 3:
-			return Asn1Utils.createBerUnsignedInteger("severity", "severity", tag, stream);
+			return Asn1Utils.createBerUnsigned8("severity", "severity", tag, stream);
 		case Tag.CONTEXT | 4:
 			return Asn1Utils.createBerBoolean("alarmSummaryReports", "alarmSummaryReports", tag, stream);
 		case Tag.CONTEXT | 6:
 			return new MonitoredVariable().init("monitoredVariable", "monitoredVariable", tag, stream);
 		case Tag.CONTEXT | 7:
-			return Asn1Utils.createBerUnsignedInteger("evaluationInterval", "evaluationInterval", tag, stream);
+			return Asn1Utils.createBerUnsigned32("evaluationInterval", "evaluationInterval", tag, stream);
 		default:
 			return Asn1Utils.createUnknown(tag, stream);
 		}

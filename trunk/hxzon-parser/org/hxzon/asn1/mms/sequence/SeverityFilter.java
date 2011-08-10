@@ -16,9 +16,9 @@ public class SeverityFilter extends BerSequence {
 	public BerNode create(int tag, BerInputStream stream) {
 		switch (tag) {
 		case Tag.CONTEXT | 0:
-			return Asn1Utils.createBerUnsignedInteger("mostSevere", "mostSevere", tag, stream);
+			return Asn1Utils.createBerUnsigned8("mostSevere", "mostSevere", tag, stream);
 		case Tag.CONTEXT | 1:
-			return Asn1Utils.createBerUnsignedInteger("leastSevere", "leastSevere", tag, stream);
+			return Asn1Utils.createBerUnsigned8("leastSevere", "leastSevere", tag, stream);
 		default:
 			return Asn1Utils.createUnknown(tag, stream);
 		}

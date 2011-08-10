@@ -114,7 +114,7 @@ public class ErrorClass extends BerChoice {
 	public BerNode create(int tag, BerInputStream stream) {
 		switch (tag) {
 		case Tag.CONTEXT | 12:
-			return Asn1Utils.createBerInteger("others", "others", tag, stream);
+			return Asn1Utils.createBerIntegerX("others", "others", tag, stream);
 		default:
 			return Asn1Utils.createUnknown(tag, stream);
 		}

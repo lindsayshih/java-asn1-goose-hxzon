@@ -23,7 +23,7 @@ public class ReportEventConditionStatusResponse extends BerSequence {
 		case Tag.CONTEXT | 0:
 			return new ECState().init("currentState", "currentState", tag, stream);
 		case Tag.CONTEXT | 1:
-			return Asn1Utils.createBerUnsignedInteger("numberOfEventEnrollments", "numberOfEventEnrollments", tag, stream);
+			return Asn1Utils.createBerUnsigned32("numberOfEventEnrollments", "numberOfEventEnrollments", tag, stream);
 		case Tag.CONTEXT | 2:
 			return Asn1Utils.createBerBoolean("enabled", "enabled", tag, stream);
 		case Tag.CONTEXT | 3:

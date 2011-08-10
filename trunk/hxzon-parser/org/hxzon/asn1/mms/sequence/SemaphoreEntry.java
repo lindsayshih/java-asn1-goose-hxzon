@@ -39,7 +39,7 @@ public class SemaphoreEntry extends BerSequence {
 		case Tag.CONTEXT | 4:
 			return new Priority().init("priority", "priority", tag, stream);
 		case Tag.CONTEXT | 5:
-			return Asn1Utils.createBerUnsignedInteger("remainingTimeOut", "remainingTimeOut", tag, stream);
+			return Asn1Utils.createBerUnsigned32("remainingTimeOut", "remainingTimeOut", tag, stream);
 		case Tag.CONTEXT | 6:
 			return Asn1Utils.createBerBoolean("abortOnTimeOut", "abortOnTimeOut", tag, stream);
 		case Tag.CONTEXT | 7:

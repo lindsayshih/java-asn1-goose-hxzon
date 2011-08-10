@@ -29,7 +29,7 @@ public class AlterEventConditionMonitoringRequest extends BerSequence {
 		case Tag.CONTEXT | 3:
 			return Asn1Utils.createBerBoolean("alarmSummaryReports", "alarmSummaryReports", tag, stream);
 		case Tag.CONTEXT | 4:
-			return Asn1Utils.createBerUnsignedInteger("evaluationInterval", "evaluationInterval", tag, stream);
+			return Asn1Utils.createBerUnsigned32("evaluationInterval", "evaluationInterval", tag, stream);
 		default:
 			return Asn1Utils.createUnknown(tag, stream);
 		}

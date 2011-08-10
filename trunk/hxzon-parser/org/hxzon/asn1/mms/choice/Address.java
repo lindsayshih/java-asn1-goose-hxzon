@@ -23,7 +23,7 @@ public class Address extends BerChoice {
 	public BerNode create(int tag, BerInputStream stream) {
 		switch (tag) {
 		case Tag.CONTEXT | 0:
-			return Asn1Utils.createBerUnsignedInteger("numeric address", "numeric address", tag, stream);
+			return Asn1Utils.createBerUnsigned32("numeric address", "numeric address", tag, stream);
 		case Tag.CONTEXT | 1:
 			return Asn1Utils.createBerVisibleString("symbolic address", "symbolic address", tag, stream);
 		case Tag.CONTEXT | 2:

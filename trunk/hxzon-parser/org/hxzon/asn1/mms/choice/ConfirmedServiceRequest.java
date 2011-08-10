@@ -322,10 +322,10 @@ public class ConfirmedServiceRequest extends BerChoice {
 			return new FileOpenRequest().init("fileOpen", "fileOpen", tag, stream);
 		case Tag.CONTEXT | 73:
 			//FileRead-Request ::= Integer32
-			return Asn1Utils.createBerInteger("fileRead", "fileRead", tag, stream);
+			return Asn1Utils.createBerInteger32("fileRead", "fileRead", tag, stream);
 		case Tag.CONTEXT | 74:
 			//FileClose-Request ::= Integer32
-			return Asn1Utils.createBerInteger("fileClose", "fileClose", tag, stream);
+			return Asn1Utils.createBerInteger32("fileClose", "fileClose", tag, stream);
 		case Tag.CONTEXT | 75:
 			return new FileRenameRequest().init("fileRename", "fileRename", tag, stream);
 		case Tag.CONTEXT | 76:

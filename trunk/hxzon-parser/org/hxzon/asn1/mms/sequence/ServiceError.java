@@ -141,7 +141,7 @@ public class ServiceError extends BerSequence {
 		case Tag.CONTEXT | 0:
 			return new ErrorClass().init("errorClass", "errorClass", tag, stream, true);
 		case Tag.CONTEXT | 1:
-			return Asn1Utils.createBerInteger("additionalCode", "additionalCode", tag, stream);
+			return Asn1Utils.createBerIntegerX("additionalCode", "additionalCode", tag, stream);
 		case Tag.CONTEXT | 2:
 			return Asn1Utils.createBerVisibleString("additionalDescription", "additionalDescription", tag, stream);
 		case Tag.CONTEXT | 3:
@@ -185,13 +185,13 @@ public class ServiceError extends BerSequence {
 				return new ProgramInvocationState().init("reset", "reset", tag, stream);
 			case Tag.CONTEXT | 5:
 				//DeleteVariableAccess-Error ::= Unsigned32	-- numberDeleted
-				return Asn1Utils.createBerUnsignedInteger("deleteVariableAccess", "deleteVariableAccess", tag, stream);
+				return Asn1Utils.createBerUnsigned32("deleteVariableAccess", "deleteVariableAccess", tag, stream);
 			case Tag.CONTEXT | 6:
 				//DeleteNamedVariableList-Error ::= Unsigned32	--	number Deleted
-				return Asn1Utils.createBerUnsignedInteger("deleteNamedVariableList", "deleteNamedVariableList", tag, stream);
+				return Asn1Utils.createBerUnsigned32("deleteNamedVariableList", "deleteNamedVariableList", tag, stream);
 			case Tag.CONTEXT | 7:
 				//DeleteNamedType-Error ::= Unsigned32	--	number Deleted
-				return Asn1Utils.createBerUnsignedInteger("deleteNamedType", "deleteNamedType", tag, stream);
+				return Asn1Utils.createBerUnsigned32("deleteNamedType", "deleteNamedType", tag, stream);
 			case Tag.CONTEXT | 8:
 				//DefineEventEnrollment-Error ::= ObjectName
 				return new ObjectName().init("defineEventEnrollment-Error", "defineEventEnrollment-Error", tag, stream);

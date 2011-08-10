@@ -18,7 +18,7 @@ public class FileOpenRequest extends BerSequence {
 		case Tag.CONTEXT | 0:
 			return new FileName().init("fileName", "fileName", tag, stream);
 		case Tag.CONTEXT | 1:
-			return Asn1Utils.createBerUnsignedInteger("initialPosition", "initialPosition", tag, stream);
+			return Asn1Utils.createBerUnsigned32("initialPosition", "initialPosition", tag, stream);
 		default:
 			return Asn1Utils.createUnknown(tag, stream);
 		}
