@@ -101,6 +101,10 @@ public class GoosePdu extends BerSequence implements IPacketPayload {
 		return srcPacket.getSrcData();
 	}
 
+	public void setSrcData(byte[] srcData) {
+
+	}
+
 	@Override
 	public IPacket getSrcPacket() {
 		return srcPacket;
@@ -109,6 +113,10 @@ public class GoosePdu extends BerSequence implements IPacketPayload {
 	@Override
 	public void setSrcPacket(IPacket srcPacket) {
 		this.srcPacket = srcPacket;
+	}
+
+	public void initBySrcPacket(IPacket srcPacket) {
+		this.setSrcPacket(srcPacket);
 	}
 
 	public String getProtocolTypeDesc() {
