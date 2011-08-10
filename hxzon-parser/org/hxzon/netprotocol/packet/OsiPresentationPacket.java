@@ -1,6 +1,8 @@
 package org.hxzon.netprotocol.packet;
 
+import org.hxzon.asn1.osipresentation.OsiPresentation;
 import org.hxzon.asn1.osipresentation.OsiPresentationParser;
+import org.hxzon.netprotocol.common.IPacketPayload;
 import org.hxzon.netprotocol.parse.ProtocolBinding;
 import org.hxzon.netprotocol.parse.ProtocolBindingList;
 
@@ -17,36 +19,35 @@ public class OsiPresentationPacket extends Packet {
 
 		});
 	}
-	private BerNode osiPresentation;
 
 	protected int expectHeaderLength() {
-		return getSrcData().length - getOffset();
+//		return getSrcData().length - getOffset();
+		return 0;
 	}
 
-	public BerNode fetchPresentation() {
-		if (osiPresentation == null) {
-			osiPresentation = new OsiPresentationParser().parsePresentation(getData(), getOffset());
+	private BerNode pres;
+
+	public IPacketPayload exceptPayload() {
+		return (IPacketPayload) fetchOsiPresentation();
+	}
+
+	public BerNode[] getUserData() {
+		if (pres instanceof OsiPresentation) {
+			return ((OsiPresentation) pres).getUserData();
 		}
-//		fetchPresentationPayload();
-//		if (osiPresFakeHeader == null) {
-//			osiPresFakeHeader = osiPresentation;
-//		}
-//		return osiPresFakeHeader;
-		return osiPresentation;
-	}
-
-	public BerNode fetchPresentationPayload() {
-//		if (osiPresFakePayload == null) {
-//			osiPresFakePayload = osiPresentation.getUserData().deepCopy();
-//			osiPresentation.getUserData().clear();
-//		}
-//		return osiPresFakePayload;
 		return null;
 	}
 
-	public boolean isEmptyPayload() {
-		return true;
+	public BerNode fetchOsiPresentation() {
+		if (pres == null) {
+			pres = OsiPresentationParser.parser.parsePresentation(getSrcData(), getOffset());
+		}
+		return pres;
 	}
+
+//	public boolean isEmptyPayload() {
+//		return true;
+//	}
 
 	public String getType() {
 		return "osi presentation";

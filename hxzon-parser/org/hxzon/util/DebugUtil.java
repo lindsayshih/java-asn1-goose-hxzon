@@ -1,14 +1,31 @@
 package org.hxzon.util;
 
 public class DebugUtil {
-	public static final String error = "ERROR";
-	public static final String debug = "DEBUG";
-	public static final String info = "INFO";
-	public static final String trace = "TRACE";
+	public static final int error = 1;
+	public static final int info = 2;
+	public static final int debug = 3;
+	public static final int trace = 4;
 
-	private static void output(String type, String className, String methodName, int lineNumber, String message) {
-		String output = (type + ":" + className + "." + methodName + "(" + lineNumber + ")" + ":" + message);
-		if (error.equals(type)) {
+	private static void output(int type, String className, String methodName, int lineNumber, String message) {
+		String level = "";
+		switch (type) {
+		case 1:
+			level = "ERROR";
+			break;
+		case 2:
+			level = "INFO";
+			break;
+		case 3:
+			level = "DEBUG";
+			break;
+		case 4:
+			level = "TRACE";
+			break;
+		default:
+		}
+		className = className.substring(className.lastIndexOf('.')+1);
+		String output = (level + ":" + className + "." + methodName + "(" + lineNumber + ")" + ":" + message);
+		if (type == error) {
 			System.err.println(output);
 		} else {
 			System.out.println(output);
@@ -16,16 +33,15 @@ public class DebugUtil {
 	}
 
 	public static void error(String message) {
-
 		StackTraceElement ste = Thread.currentThread().getStackTrace()[2];
 		String className = ste.getClassName();
 		String methodName = ste.getMethodName();
 		int lineNumber = ste.getLineNumber();
 		output(error, className, methodName, lineNumber, message);
 	}
-	
-	public static void error(String message,Throwable e){
-		
+
+	public static void error(String message, Throwable e) {
+
 	}
 
 	public static void debug(String message) {
