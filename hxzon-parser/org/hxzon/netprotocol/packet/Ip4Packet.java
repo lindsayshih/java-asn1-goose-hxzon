@@ -1,12 +1,12 @@
 package org.hxzon.netprotocol.packet;
 
+import org.hxzon.netprotocol.field.ProtocolBitField;
+import org.hxzon.netprotocol.field.ProtocolField;
+import org.hxzon.netprotocol.field.ProtocolInt31Field;
+import org.hxzon.netprotocol.field.ProtocolIpField;
+import org.hxzon.netprotocol.field.ProtocolStringField;
 import org.hxzon.netprotocol.parse.ProtocolBinding;
 import org.hxzon.netprotocol.parse.ProtocolBindingList;
-import org.hxzon.netprotocol.parse.ProtocolBitField;
-import org.hxzon.netprotocol.parse.ProtocolField;
-import org.hxzon.netprotocol.parse.ProtocolInt31Field;
-import org.hxzon.netprotocol.parse.ProtocolIpField;
-import org.hxzon.netprotocol.parse.ProtocolStringField;
 import org.hxzon.util.BitUtil;
 
 public class Ip4Packet extends Packet {

@@ -2,7 +2,7 @@ package org.hxzon.netprotocol.common;
 
 import java.util.List;
 
-import org.hxzon.netprotocol.parse.ProtocolField;
+import org.hxzon.netprotocol.field.ProtocolField;
 
 public interface IPacket extends IPacketPayload {
 

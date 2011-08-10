@@ -1,11 +1,11 @@
 package org.hxzon.netprotocol.packet;
 
 import org.hxzon.netprotocol.common.IPacketPayload;
+import org.hxzon.netprotocol.field.ProtocolBitField;
+import org.hxzon.netprotocol.field.ProtocolField;
+import org.hxzon.netprotocol.field.ProtocolInt31Field;
 import org.hxzon.netprotocol.parse.ProtocolBinding;
 import org.hxzon.netprotocol.parse.ProtocolBindingList;
-import org.hxzon.netprotocol.parse.ProtocolBitField;
-import org.hxzon.netprotocol.parse.ProtocolField;
-import org.hxzon.netprotocol.parse.ProtocolInt31Field;
 import org.hxzon.netprotocol.payload.DataPayload;
 
 public class CotpPacket extends Packet {

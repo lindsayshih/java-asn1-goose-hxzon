@@ -1,10 +1,10 @@
 package org.hxzon.netprotocol.packet;
 
+import org.hxzon.netprotocol.field.ProtocolField;
+import org.hxzon.netprotocol.field.ProtocolMacField;
+import org.hxzon.netprotocol.field.ProtocolStringField;
 import org.hxzon.netprotocol.parse.ProtocolBinding;
 import org.hxzon.netprotocol.parse.ProtocolBindingList;
-import org.hxzon.netprotocol.parse.ProtocolField;
-import org.hxzon.netprotocol.parse.ProtocolMacField;
-import org.hxzon.netprotocol.parse.ProtocolStringField;
 
 public class EthernetPacket extends Packet {
 	static {
