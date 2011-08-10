@@ -1,4 +1,4 @@
-package org.hxzon.netprotocol.ui;
+package org.hxzon.ui.util;
 
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;

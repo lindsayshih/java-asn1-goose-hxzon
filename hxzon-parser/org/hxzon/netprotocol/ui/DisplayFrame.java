@@ -29,6 +29,7 @@ import org.hxzon.netprotocol.packet.TcpPacket;
 import org.hxzon.netprotocol.packet.TpktPacket;
 import org.hxzon.netprotocol.packet.UdpPacket;
 import org.hxzon.netprotocol.packet.VlanPacket;
+import org.hxzon.ui.util.ListSelectionAction;
 import org.hxzon.util.BytesUtil;
 import org.jnetpcap.Pcap;
 
@@ -95,7 +96,23 @@ public class DisplayFrame extends JFrame {
 		this.add(toolBar, BorderLayout.NORTH);
 		JSplitPane contentPane = new JSplitPane();
 		contentPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
-		packetsTable = new PacketTable(this);
+		packetsTable = new PacketTable();
+		packetsTable.getSelectionModel().addListSelectionListener(new ListSelectionAction() {
+
+			public void whenSelect(Object source, int i) {
+				if (i == -1) {
+					packetDisplay.updateData(null);
+				} else {
+					Packet packet = packetsTable.getModel().getPacket(i);
+					packetDisplay.updateData(packet);
+				}
+//		                    	System.out.println(i);
+			}
+
+			public boolean selectOne() {
+				return true;
+			}
+		});
 
 		contentPane.setTopComponent(new JScrollPane(packetsTable));
 		packetDisplay = new PacketDisplay();

@@ -7,32 +7,14 @@ import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 
 import org.hxzon.netprotocol.packet.Packet;
-import org.hxzon.util.BytesUtil;
 
 public class PacketTable extends JTable {
-	private DisplayFrame display;
 
-	public PacketTable(DisplayFrame display_) {
+	public PacketTable() {
 		super(new PacketTableModel());
-		this.display = display_;
 //		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
-		this.getSelectionModel().addListSelectionListener(new ListSelectionAction() {
-
-			public void whenSelect(Object source, int i) {
-				if (i == -1) {
-					display.getPacketDisplay().updateData(null);
-				} else {
-					Packet packet = getModel().getPacket(i);
-					display.getPacketDisplay().updateData(packet);
-				}
-//		                    	System.out.println(i);
-			}
-
-			public boolean selectOne() {
-				return true;
-			}
-		});
+		
 	}
 
 	public void addPacket(Packet packet) {

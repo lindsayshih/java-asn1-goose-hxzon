@@ -1,6 +1,6 @@
 package org.hxzon.netprotocol.ui;
 
-import org.hxzon.netprotocol.jnetpcap.JPcapPacket;
+import org.hxzon.jnetpcap.JPcapPacket;
 import org.hxzon.netprotocol.packet.Packet;
 import org.jnetpcap.Pcap;
 import org.jnetpcap.packet.PcapPacket;

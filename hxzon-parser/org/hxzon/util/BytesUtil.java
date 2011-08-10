@@ -343,5 +343,13 @@ public class BytesUtil {
 	public static byte[] copyBytes(byte[] orig, int offset) {
 		return copyBytes(orig, offset, orig.length - offset);
 	}
+	
+	public static byte[] reverse(byte[] orig,int offset,int len){
+		byte[] result=new byte[len];
+		for(int i=0;i<len;i++){
+			result[len-1-i]=orig[offset+i];
+		}
+		return result;
+	}
 
 }

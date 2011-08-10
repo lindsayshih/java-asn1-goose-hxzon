@@ -23,7 +23,7 @@ public class GoosePduParser extends BerParser {
 	public BerNode create(int tag, BerInputStream stream, int state) {
 		switch (tag) {
 		case Tag.APPLICATION | 1:
-			return new GoosePdu().init("goose pdu", "Goose Pdu", tag, stream);
+			return new GoosePdu().init("goose pdu", "goose pdu", tag, stream);
 		default:
 			return Asn1Utils.createUnknown(tag, stream);
 		}

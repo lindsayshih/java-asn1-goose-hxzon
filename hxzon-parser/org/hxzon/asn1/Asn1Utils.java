@@ -3,6 +3,7 @@ package org.hxzon.asn1;
 import java.util.Iterator;
 
 import org.hxzon.asn1.goose.GooseUtcTime;
+import org.hxzon.asn1.mms.common.FloatingPoint;
 
 import com.chaosinmotion.asn1.BerBMPString;
 import com.chaosinmotion.asn1.BerBitString;
@@ -199,6 +200,10 @@ public class Asn1Utils {
 
 	public static BerNode createBerReal(String name, String display, int tag, BerInputStream stream) {
 		return new BerReal().init(name, display, tag, stream);
+	}
+	
+	public static BerNode createFloatPoint(String name,String display,int tag,BerInputStream stream){
+		return new FloatingPoint().init(name,display,tag,stream);
 	}
 
 	public static BerNode createBerSequenceOf(String name, String display, int tag, BerInputStream stream, Class<? extends BerNode> clazz) {
