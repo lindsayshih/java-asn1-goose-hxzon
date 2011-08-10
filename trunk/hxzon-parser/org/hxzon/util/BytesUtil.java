@@ -36,22 +36,30 @@ public class BytesUtil {
 		return copyBytes(orig, offset, orig.length - offset);
 	}
 
+//	public static int toInt(byte[] orig, int offset, int len, int bitOffset) {
+//		int bitLen = len * 8 - bitOffset;
+//		int byteLen = bitLen / 8;
+//		int result = 0;
+//		int[] ints = new int[byteLen];
+////		byte[] tmp=getBytes(bytes,offset,len);
+//		for (int i = 0; i < byteLen; i++) {
+////			byte tmp2=bytes[offset+len-1-i];
+//			ints[i] = toUInt(orig[offset + len - 1 - i]) << (8 * i);//*(2^8)
+//			result += ints[i];
+//		}
+//		int first = toInt(orig[offset + bitOffset / 8], bitOffset);
+////		int first=toIntByBitLen(orig[offset+bitOffset/8],8-bitOffset);
+//		first <<= (8 * byteLen);//*(2^8)
+//		result += first;
+//		return result;
+//	}
+	public static int toInt(byte[] orig, int offset, int len, int bitOffset, int bitLen) {
+		String tmp = toBitString(orig, offset, len, bitOffset, bitLen);
+		return Integer.valueOf(tmp, 2);
+	}
+
 	public static int toInt(byte[] orig, int offset, int len, int bitOffset) {
-		int bitLen = len * 8 - bitOffset;
-		int byteLen = bitLen / 8;
-		int result = 0;
-		int[] ints = new int[byteLen];
-//		byte[] tmp=getBytes(bytes,offset,len);
-		for (int i = 0; i < byteLen; i++) {
-//			byte tmp2=bytes[offset+len-1-i];
-			ints[i] = toUInt(orig[offset + len - 1 - i]) << (8 * i);//*(2^8)
-			result += ints[i];
-		}
-		int first = toInt(orig[offset + bitOffset / 8], bitOffset);
-//		int first=toIntByBitLen(orig[offset+bitOffset/8],8-bitOffset);
-		first <<= (8 * byteLen);//*(2^8)
-		result += first;
-		return result;
+		return toInt(orig, offset, len, bitOffset, len * 8 - bitOffset);
 	}
 
 	public static int toUInt(byte orig) {
@@ -66,26 +74,43 @@ public class BytesUtil {
 		return result;
 	}
 
+//	public static int toInt2(byte[] orig, int offset, int len) {
+//		if (len > 4) {
+//			throw new IllegalArgumentException(len + " > 4 for signed int,will overflow");
+//		}
+//		int result = 0;
+//		int[] ints = toUIntArray(orig, offset, len);
+//		for (int i = 0; i < len; i++) {
+//			result |= ((long) ints[i] << ((len - 1 - i) * 8));
+//		}
+//		return result;
+//	}
+
 	public static int toInt(byte[] orig, int offset, int len) {
+		if (len <= 0) {
+			return 0;
+		}
 		if (len > 4) {
 			throw new IllegalArgumentException(len + " > 4 for signed int,will overflow");
 		}
-		int result = 0;
-		int[] ints = toUIntArray(orig, offset, len);
-		for (int i = 0; i < len; i++) {
-			result += ((long) ints[i] << ((len - 1 - i) * 8));
+		int result = orig[offset];
+		for (int i = 1; i < len; i++) {
+			result = (result << 8) | (orig[offset + i] & 0xff);
 		}
 		return result;
 	}
 
 	public static long toULong(byte[] orig, int offset, int len) {
+		if (len <= 0) {
+			return 0;
+		}
 		if (len > 8) {
 			throw new IllegalArgumentException(len + " > 8 for singed long,will overflow");
 		}
 		long result = 0;
 		int[] ints = toUIntArray(orig, offset, len);
 		for (int i = 0; i < len; i++) {
-			result += ((long) ints[i] << ((len - 1 - i) * 8));
+			result |= ((long) ints[i] << ((len - 1 - i) * 8));
 		}
 		return result;
 	}
@@ -96,6 +121,34 @@ public class BytesUtil {
 			result[i] = toUInt(orig[offset + i]);
 		}
 		return result;
+	}
+
+//--------------------------------------------------------------------------
+	public static String toBitString(byte orig, int bitOffset, int bitLen) {
+		StringBuilder sb = new StringBuilder();
+		int set = 0;
+		for (int i = 0; i < bitLen; i++) {
+			set = (orig & (0x80 >> (bitOffset + i)));
+			sb.append(set == 0 ? 0 : 1);
+		}
+		return sb.toString();
+	}
+
+	public static String toBitString(byte[] orig, int offset, int len) {
+		StringBuilder sb = new StringBuilder();
+		int set = 0;
+		for (int i = 0; i < len; i++) {
+			for (int j = 0; j < 8; j++) {
+				set = (orig[offset + i] & (0x80 >> j));
+				sb.append(set == 0 ? 0 : 1);
+			}
+		}
+		return sb.toString();
+	}
+
+	public static String toBitString(byte[] orig, int offset, int len, int bitOffset, int bitLen) {
+		String all = toBitString(orig, offset, len);
+		return all.substring(bitOffset, bitOffset + bitLen);
 	}
 
 //--------------------------------------------------------------------------
