@@ -6,7 +6,7 @@ import org.hxzon.netprotocol.parse.ProtocolBindingList;
 import org.hxzon.netprotocol.parse.ProtocolBitField;
 import org.hxzon.netprotocol.parse.ProtocolField;
 import org.hxzon.netprotocol.parse.ProtocolInt31Field;
-import org.hxzon.netprotocol.payload.NullPayload;
+import org.hxzon.netprotocol.payload.DataPayload;
 
 public class CotpPacket extends Packet {
 	static {
@@ -118,13 +118,11 @@ public class CotpPacket extends Packet {
 		return isLast;
 	}
 
-	public IPacketPayload getPayload() {
+	public IPacketPayload exceptPayload() {
 		if (fetchIsLast().getValue() != LastUnit) {
-			IPacketPayload payload = new NullPayload();
-			payload.setSrcPacket(this);
-			super.setPayload(payload);
+			return new DataPayload();
 		}
-		return super.getPayload();
+		return null;
 	}
 
 	public String getType() {

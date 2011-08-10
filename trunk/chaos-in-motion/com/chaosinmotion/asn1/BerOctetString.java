@@ -117,6 +117,7 @@ public class BerOctetString extends BerNode {
 			super.setOffsetAndLen(stream);
 		} catch (IOException e) {
 			e.printStackTrace();
+			fValue = new byte[0];
 		}
 	}
 
