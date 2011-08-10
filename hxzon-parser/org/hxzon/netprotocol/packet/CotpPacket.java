@@ -1,5 +1,6 @@
 package org.hxzon.netprotocol.packet;
 
+import org.hxzon.netprotocol.common.GeneralPacketPayload;
 import org.hxzon.netprotocol.parse.ProtocolBinding;
 import org.hxzon.netprotocol.parse.ProtocolBindingList;
 import org.hxzon.netprotocol.parse.ProtocolBitField;
@@ -103,15 +104,26 @@ public class CotpPacket extends Packet {
 		return tpduNumber;
 	}
 
+	public static final int LastUnit = 1;
+
 	public ProtocolBitField fetchIsLast() {
 		if (isLast == null) {
 			isLast = new ProtocolBitField("is last unit", "is last unit", 2, 0, 1, this) {
 				public String getValueAsString() {
-					return getValue() == 1 ? "last" : "not last";
+					return getValue() == LastUnit ? "last" : "not last";
 				}
 			};
 		}
 		return isLast;
+	}
+
+	public GeneralPacketPayload getPayload() {
+		if (fetchIsLast().getValue() != LastUnit) {
+			GeneralPacketPayload payload = new NullPayload();
+			payload.setSrcPacket(this);
+			super.setPayload(payload);
+		}
+		return super.getPayload();
 	}
 
 	public String toString() {
