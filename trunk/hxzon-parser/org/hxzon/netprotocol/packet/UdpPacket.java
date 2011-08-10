@@ -20,6 +20,7 @@ public class UdpPacket extends Packet {
 
 		});
 	}
+	public static final int MaxTotalLength = 1472;
 	public static final int HeaderLength = 8;
 	private ProtocolInt31Field sourcePort;
 	private ProtocolInt31Field destPort;
@@ -62,6 +63,7 @@ public class UdpPacket extends Packet {
 		}
 		return totalLen;
 	}
+
 
 	public void setTotalLen(ProtocolInt31Field headerLen) {
 		this.totalLen = headerLen;

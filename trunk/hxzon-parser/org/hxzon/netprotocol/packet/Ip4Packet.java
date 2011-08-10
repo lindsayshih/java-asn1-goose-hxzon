@@ -36,6 +36,7 @@ public class Ip4Packet extends Packet {
 
 		});
 	}
+	public static final int MaxPayloadLength = 1480;
 	private ProtocolInt31Field version;
 	private ProtocolBitField headerLen;
 	private ProtocolInt31Field differentiatedServices;
@@ -136,6 +137,14 @@ public class Ip4Packet extends Packet {
 			sb.append("more fragment,");
 		}
 		return sb.toString();
+	}
+
+	public boolean isDontFragment() {
+		return BitUtil.isSet(fetchFragmentFlags().getValue(), DontFragment);
+	}
+
+	public boolean isMoreFragment() {
+		return BitUtil.isSet(fetchFragmentFlags().getValue(), MoreFragment);
 	}
 
 	public void setFragmentFlags(int fragmentFlags) {
