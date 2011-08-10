@@ -16,6 +16,7 @@ import com.chaosinmotion.asn1.BerSequence;
 import com.chaosinmotion.asn1.Tag;
 
 public class Smv92Asdu extends BerSequence {
+//	private static final Logger logger=LoggerFactory.getLogger(Smv92Asdu.class);
 	public Smv92Asdu() {
 		setName("asdu");
 		setDisplayString("asdu");
@@ -48,8 +49,8 @@ public class Smv92Asdu extends BerSequence {
 //      END
 	public BerNode create(int tag, BerInputStream stream) {
 		switch (tag) {
-		case Tag.UNIVERSAL | 16:
-			return new Smv92Asdu().init(tag, stream);
+//		case Tag.UNIVERSAL | 16:
+//			return new Smv92Asdu().init(tag, stream);
 		case Tag.CONTEXT | 0:
 			return Asn1Utils.createBerVisibleString("svID", "采样值ID", tag, stream);
 		case Tag.CONTEXT | 2:
@@ -59,7 +60,7 @@ public class Smv92Asdu extends BerSequence {
 		case Tag.CONTEXT | 5:
 			return new SmvSynchInteger().init("sample synch", "采样同步", tag, stream);
 		case Tag.CONTEXT | 7:
-			return new Smv92AsduData().init(tag, stream);
+			return new Smv92AsduData().init("seqData","asdu数据集",tag, stream);
 		default:
 			return Asn1Utils.createUnknown(tag, stream);
 		}
@@ -82,8 +83,8 @@ public class Smv92Asdu extends BerSequence {
 
 	public static class Smv92AsduData extends BerOctetString implements FakeBerConstruct {
 		public Smv92AsduData() {
-			setName("asdu data");
-			setDisplayString("asdu数据集");
+//			setName("asdu data");
+//			setDisplayString("asdu数据集");
 		}
 
 		private List<BerNode> fList;
@@ -91,6 +92,7 @@ public class Smv92Asdu extends BerSequence {
 		protected void readValue(BerInputStream stream) {
 			super.readValue(stream);
 			byte[] data = getValue();
+//			logger.debug(BytesUtil.toHexString(data));
 			fList = new ArrayList<BerNode>(data.length / 4);
 			FakeBerNode node;
 			for (int i = 0; i < data.length; i += 8) {

@@ -8,6 +8,7 @@ import org.hxzon.netprotocol.common.IPacketPayload;
 import org.hxzon.netprotocol.parse.ProtocolBindingList;
 import org.hxzon.netprotocol.parse.ProtocolField;
 import org.hxzon.netprotocol.payload.EmptyPayload;
+import org.hxzon.netprotocol.payload.ErrorPayload;
 import org.hxzon.netprotocol.payload.NullPayload;
 import org.hxzon.netprotocol.payload.UnknownPayload;
 import org.hxzon.util.BytesUtil;
@@ -155,14 +156,18 @@ public class Packet implements IPacket {
 		if (miss) {
 			payload = new NullPayload();
 		}
-		if (payload == null) {
-			payload = exceptPayload();
-		}
-		if (payload == null) {
-			payload = findBinding();
-		}
-		if (payload == null) {
-			payload = new UnknownPayload();
+		try {
+			if (payload == null) {
+				payload = exceptPayload();
+			}
+			if (payload == null) {
+				payload = findBinding();
+			}
+			if (payload == null) {
+				payload = new UnknownPayload();
+			}
+		} catch (Exception e) {
+			payload = new ErrorPayload(e.getMessage());
 		}
 		payload.setSrcPacket(this);
 		return payload;
