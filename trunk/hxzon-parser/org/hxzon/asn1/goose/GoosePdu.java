@@ -16,7 +16,7 @@ public class GoosePdu extends BerSequence implements IPacketPayload {
 
 	public GoosePdu() {
 		setName("goosePdu");
-		setDisplayString("Goose Pdu");
+		setDisplayString("goose pdu");
 	}
 
 	//  IECGoosePdu ::= SEQUENCE {

@@ -1,4 +1,4 @@
-package org.hxzon.netprotocol.ui;
+package org.hxzon.ui.util;
 
 import java.util.Collection;
 import java.util.Enumeration;

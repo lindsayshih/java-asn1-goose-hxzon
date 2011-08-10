@@ -41,13 +41,13 @@ public class GooseDataset extends BerSequence {
 		case Tag.CONTEXT | 3:
 			return Asn1Utils.createBerBoolean("boolean", "boolean", tag, stream);
 		case Tag.CONTEXT | 4:
-			return Asn1Utils.createBerOctetString("bit-string", "bit-string", tag, stream);
+			return Asn1Utils.createBerBitString("bit-string", "bit-string", tag, stream);
 		case Tag.CONTEXT | 5:
 			return Asn1Utils.createBerIntegerX("integer", "integer", tag, stream);
 		case Tag.CONTEXT | 6:
 			return Asn1Utils.createBerUnsignedX("unsigned", "unsigned", tag, stream);//unsigned
 		case Tag.CONTEXT | 7:
-			return Asn1Utils.createBerOctetString("floating-point", "floating-point", tag, stream);
+			return Asn1Utils.createFloatPoint("floating-point", "floating-point", tag, stream);
 		case Tag.CONTEXT | 8:
 			return Asn1Utils.createBerReal("real", "real", tag, stream);
 		case Tag.CONTEXT | 9:

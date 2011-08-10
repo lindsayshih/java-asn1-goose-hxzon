@@ -1,4 +1,4 @@
-package org.hxzon.netprotocol.jnetpcap;
+package org.hxzon.jnetpcap;
 
 import org.jnetpcap.PcapHeader;
 import org.jnetpcap.nio.JBuffer;
