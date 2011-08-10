@@ -4,10 +4,10 @@ import org.hxzon.asn1.core.type.base.BerNode;
 import org.hxzon.asn1.goose.GoosePdu;
 import org.hxzon.asn1.goose.GoosePduParser;
 import org.hxzon.netprotocol.common.IPacketPayload;
+import org.hxzon.netprotocol.field.ProtocolField;
+import org.hxzon.netprotocol.field.ProtocolInt31Field;
 import org.hxzon.netprotocol.parse.ProtocolBinding;
 import org.hxzon.netprotocol.parse.ProtocolBindingList;
-import org.hxzon.netprotocol.parse.ProtocolField;
-import org.hxzon.netprotocol.parse.ProtocolInt31Field;
 
 
 public class GoosePacket extends Packet {

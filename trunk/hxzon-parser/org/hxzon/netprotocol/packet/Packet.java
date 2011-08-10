@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.hxzon.netprotocol.common.IPacket;
 import org.hxzon.netprotocol.common.IPacketPayload;
+import org.hxzon.netprotocol.field.ProtocolField;
 import org.hxzon.netprotocol.parse.ProtocolBindingList;
-import org.hxzon.netprotocol.parse.ProtocolField;
 import org.hxzon.netprotocol.payload.EmptyPayload;
 import org.hxzon.netprotocol.payload.ErrorPayload;
 import org.hxzon.netprotocol.payload.NullPayload;

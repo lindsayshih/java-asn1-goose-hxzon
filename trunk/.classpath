@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry excluding="test/hxzon/asn1/Asn1Test.java|test/hxzon/asn1/TestGooseEncoder.java|org/hxzon/asn1/smv/SmvPdu.java" kind="src" path="hxzon-parser"/>
-	<classpathentry kind="src" path="chaos-in-motion"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="I:/lib-java/common-test/junit-4.7.jar"/>
 	<classpathentry kind="lib" path="I:/lib-java/pcap/jnetpcap/jnetpcap-1.3.b3-1.win32/jnetpcap-1.3.b3-1/jnetpcap-1.3.b3-1.jar" sourcepath="I:/lib-java/pcap/jnetpcap/jnetpcap-src-1.3.b3-1/src/java1.5"/>

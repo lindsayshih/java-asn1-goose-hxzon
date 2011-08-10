@@ -14,8 +14,8 @@ import org.hxzon.asn1.core.type.ext.BerChoice;
 import org.hxzon.asn1.core.type.ext.FakeBerConstruct;
 import org.hxzon.netprotocol.common.IPacket;
 import org.hxzon.netprotocol.common.IPacketPayload;
+import org.hxzon.netprotocol.field.ProtocolField;
 import org.hxzon.netprotocol.packet.OsiPresentationPacket;
-import org.hxzon.netprotocol.parse.ProtocolField;
 
 public class PacketTreeNode implements TreeNode {
 	private boolean removeBerChoice = true;
