@@ -16,7 +16,7 @@ public class GoosePacket extends Packet {
 
 			@Override
 			public Packet match(EthernetPacket packet) {
-				if (packet.fetchType().getValue().equalsIgnoreCase("88b8")) {
+				if (packet.fetchType().getValue().equalsIgnoreCase(EthernetType_Goose)) {
 					return new GoosePacket();
 				} else {
 					return null;
@@ -28,7 +28,7 @@ public class GoosePacket extends Packet {
 
 			@Override
 			public Packet match(VlanPacket packet) {
-				if (packet.fetchType().getValue().equalsIgnoreCase("88b8")) {
+				if (packet.fetchType().getValue().equalsIgnoreCase(EthernetType_Goose)) {
 					return new GoosePacket();
 				} else {
 					return null;
@@ -38,6 +38,7 @@ public class GoosePacket extends Packet {
 		});
 	}
 	public static final int HeaderLength = 8;
+	public static final String EthernetType_Goose="88b8";
 	private ProtocolInt31Field appId;
 	private ProtocolInt31Field pduLen;
 	private ProtocolInt31Field reserved1;
