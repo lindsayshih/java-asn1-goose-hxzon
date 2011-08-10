@@ -1,12 +1,13 @@
-package org.hxzon.asn1;
+package org.hxzon.asn1.core.type.ext;
 
 import java.io.IOException;
 
-import com.chaosinmotion.asn1.BerInputStream;
-import com.chaosinmotion.asn1.BerNode;
-import com.chaosinmotion.asn1.BerOutputStream;
-import com.chaosinmotion.asn1.BerParser;
-import com.chaosinmotion.asn1.Tag;
+import org.hxzon.asn1.core.parse.BerInputStream;
+import org.hxzon.asn1.core.parse.BerOutputStream;
+import org.hxzon.asn1.core.parse.BerParser;
+import org.hxzon.asn1.core.parse.Tag;
+import org.hxzon.asn1.core.type.base.BerNode;
+
 
 public class BerChoice extends BerNode implements FakeBerConstruct {
 	private boolean hasTag = false;

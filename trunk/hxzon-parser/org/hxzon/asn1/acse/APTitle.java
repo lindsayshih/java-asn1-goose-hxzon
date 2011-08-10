@@ -1,6 +1,6 @@
 package org.hxzon.asn1.acse;
 
-import com.chaosinmotion.asn1.BerSequence;
+import org.hxzon.asn1.core.type.BerSequence;
 
 public class APTitle extends BerSequence {
 //	--  Application-entity title productions follow (not in alphabetical order).

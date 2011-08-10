@@ -1,6 +1,6 @@
 package org.hxzon.asn1.mms.common;
 
-import com.chaosinmotion.asn1.BerOctetString;
+import org.hxzon.asn1.core.type.BerOctetString;
 
 public class TimeOfDay extends BerOctetString {
 	public TimeOfDay() {

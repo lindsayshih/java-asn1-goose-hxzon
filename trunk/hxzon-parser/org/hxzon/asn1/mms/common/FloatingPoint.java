@@ -3,7 +3,8 @@ package org.hxzon.asn1.mms.common;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
-import com.chaosinmotion.asn1.BerOctetString;
+import org.hxzon.asn1.core.type.BerOctetString;
+
 
 public class FloatingPoint extends BerOctetString {
 	public FloatingPoint() {

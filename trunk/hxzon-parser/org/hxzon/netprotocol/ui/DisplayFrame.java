@@ -16,7 +16,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import org.hxzon.asn1.Asn1Utils;
+import org.hxzon.asn1.core.parse.ext.Asn1Utils;
 import org.hxzon.netprotocol.packet.CotpPacket;
 import org.hxzon.netprotocol.packet.EthernetPacket;
 import org.hxzon.netprotocol.packet.GoosePacket;

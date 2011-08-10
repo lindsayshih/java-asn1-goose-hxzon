@@ -3,12 +3,12 @@ package test.hxzon.asn1;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
-import org.hxzon.asn1.Asn1Utils;
+import org.hxzon.asn1.core.parse.BerInputStream;
+import org.hxzon.asn1.core.parse.ext.Asn1Utils;
+import org.hxzon.asn1.core.type.base.BerNode;
 import org.hxzon.asn1.osipresentation.OsiPresentationParser;
 import org.hxzon.util.BytesUtil;
 
-import com.chaosinmotion.asn1.BerInputStream;
-import com.chaosinmotion.asn1.BerNode;
 
 public class TestOsiPresentationDecoder {
 

@@ -1,8 +1,9 @@
 package org.hxzon.asn1.mms;
 
-import com.chaosinmotion.asn1.BerInputStream;
-import com.chaosinmotion.asn1.BerNode;
-import com.chaosinmotion.asn1.BerParser;
+import org.hxzon.asn1.core.parse.BerInputStream;
+import org.hxzon.asn1.core.parse.BerParser;
+import org.hxzon.asn1.core.type.base.BerNode;
+
 
 public class MmsPduParser extends BerParser {
 //	MMSpdu ::= CHOICE
