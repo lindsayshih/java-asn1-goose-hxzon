@@ -74,31 +74,44 @@ public class BytesUtil {
 //		return result;
 //	}
 
-	public static int toInt(byte[] orig, int offset, int len) {
-		if (len <= 0) {
-			return 0;
-		}
-		if (len > 4) {
-			throw new IllegalArgumentException(len + " > 4 for signed int,will overflow");
-		}
-		int result = orig[offset];
-		for (int i = 1; i < len; i++) {
-			result = (result << 8) | (orig[offset + i] & 0xff);
-		}
-		return result;
-	}
+//	public static int toInt(byte[] orig, int offset, int len) {
+//		if (len <= 0) {
+//			return 0;
+//		}
+//		if (len > 4) {
+//			throw new IllegalArgumentException(len + " > 4 for signed int,will overflow");
+//		}
+//		int result = orig[offset];//fixbug:lost sign
+//		for (int i = 1; i < len; i++) {
+//			result = (result << 8) | (orig[offset + i] & 0xff);
+//		}
+//		return result;
+//	}
 
-	public static long toULong(byte[] orig, int offset, int len) {
+	public static long toSigned(byte[] orig, int offset, int len) {
 		if (len <= 0) {
 			return 0;
 		}
 		if (len > 8) {
 			throw new IllegalArgumentException(len + " > 8 for singed long,will overflow");
 		}
+		long result = orig[offset];//fixbug:lost sign
+		for (int i = 1; i < len; i++) {
+			result = (result << 8) | (orig[offset + i] & 0xff);
+		}
+		return result;
+	}
+	
+	public static long toUnsigned(byte[] orig, int offset, int len) {
+		if (len <= 0) {
+			return 0;
+		}
+		if (len >= 8) {
+			throw new IllegalArgumentException(len + " >= 8 for unsinged long,will overflow");
+		}
 		long result = 0;
-		int[] ints = toUIntArray(orig, offset, len);
 		for (int i = 0; i < len; i++) {
-			result |= ((long) ints[i] << ((len - 1 - i) * 8));
+			result = (result << 8) | (orig[offset + i] & 0xff);
 		}
 		return result;
 	}

@@ -25,8 +25,8 @@ public class Smv92AsduData extends BerOctetString implements FakeBerConstruct {
 		fList = new ArrayList<BerNode>(data.length / 4);
 		FakeBerNode node;
 		for (int i = 0; i < data.length; i += 8) {
-			long value = BytesUtil.toULong(data, i, 4);
-			long quality = BytesUtil.toULong(data, i + 4, 4);
+			long value = BytesUtil.toSigned(data, i, 4);
+			long quality = BytesUtil.toSigned(data, i + 4, 4);
 			node = new Smv92AsduDataItem(value, quality);
 			node.setTagOffset(super.getValueOffset() + i);
 			node.setTotalLen(8);
@@ -40,7 +40,7 @@ public class Smv92AsduData extends BerOctetString implements FakeBerConstruct {
 	public BerNode[] getChildren() {
 		return fList.toArray(new BerNode[fList.size()]);
 	}
-	
+
 	public boolean remove(BerNode o) {
 		return fList.remove(o);
 	}

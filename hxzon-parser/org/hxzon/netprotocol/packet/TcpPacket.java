@@ -71,8 +71,7 @@ public class TcpPacket extends Packet {
 		return sequenceNumber;
 	}
 
-	public void setSequenceNumber(ProtocolInt63Field sequenceNumber) {
-		this.sequenceNumber = sequenceNumber;
+	public void setSequenceNumber(long sequenceNumber) {
 	}
 
 	public ProtocolInt63Field fetchAcknowledgementNumber() {
@@ -82,8 +81,7 @@ public class TcpPacket extends Packet {
 		return acknowledgementNumber;
 	}
 
-	public void setAcknowledgementNumber(ProtocolInt63Field acknowledgementNumber) {
-		this.acknowledgementNumber = acknowledgementNumber;
+	public void setAcknowledgementNumber(long acknowledgementNumber) {
 	}
 
 	public ProtocolBitField fetchHeaderLen() {
