@@ -35,6 +35,14 @@ public class Smv92AsduData extends BerOctetString implements FakeBerConstruct {
 			fList.add(node);
 		}
 	}
+	
+	public void updateDataDisplay(List<String> displays){
+		BerNode[] children = getChildren();
+		int maxIndex = Math.max(displays.size(), children.length);
+		for (int i = 0; i < maxIndex; i++) {
+			children[i].setDisplayString(displays.get(i));
+		}
+	}
 
 	@Override
 	public BerNode[] getChildren() {

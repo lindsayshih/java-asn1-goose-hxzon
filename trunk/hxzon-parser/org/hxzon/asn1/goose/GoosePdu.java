@@ -1,5 +1,7 @@
 package org.hxzon.asn1.goose;
 
+import java.util.List;
+
 import org.hxzon.asn1.Asn1Utils;
 import org.hxzon.netprotocol.common.IPacket;
 import org.hxzon.netprotocol.common.IPacketPayload;
@@ -66,6 +68,15 @@ public class GoosePdu extends BerSequence implements IPacketPayload {
 		default:
 			return Asn1Utils.createUnknown(tag, stream);
 
+		}
+	}
+
+	public void updateGooseDatasetDisplay(List<String> displays) {
+		for (BerNode child : getChildren()) {
+			if (child instanceof GooseDataset) {
+				((GooseDataset) child).updateDatasetDisplay(displays);
+				break;
+			}
 		}
 	}
 
