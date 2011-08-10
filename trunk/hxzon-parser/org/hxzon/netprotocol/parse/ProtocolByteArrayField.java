@@ -7,7 +7,9 @@ public class ProtocolByteArrayField extends ProtocolField {
 		setName(name);
 		setDisplayString(display);
 		setSaveOffsetAndLen(srcPacket, offset, len);
-		value = srcPacket.getByteArray(getOffset(), getLen());
+//		if (isRight()) {
+			value = srcPacket.getByteArray(getOffset(), getLen());
+//		}
 	}
 
 	private byte[] value;

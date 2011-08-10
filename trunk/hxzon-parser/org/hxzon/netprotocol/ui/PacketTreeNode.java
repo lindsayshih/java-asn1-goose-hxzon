@@ -63,7 +63,7 @@ public class PacketTreeNode implements TreeNode {
 		userObject = field;
 		this.len = field.getLen();
 		this.offset = field.getOffset();
-		this.setDisplayString(field.getDisplayString() + ":" + field.getValueAsString());
+		this.setDisplayString(field.getDisplayString() + ":" + field.getValueAsDisplay());
 		children = new ArrayList<PacketTreeNode>(0);
 	}
 

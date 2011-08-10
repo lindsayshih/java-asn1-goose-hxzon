@@ -8,7 +8,9 @@ public class ProtocolInt63Field extends ProtocolField {
 		setName(name);
 		setDisplayString(display);
 		setSaveOffsetAndLen(srcPacket, offset, len);
-		value = srcPacket.getLong(getOffset(), getLen());
+		if (isRight()) {
+			value = srcPacket.getLong(getOffset(), getLen());
+		}
 	}
 
 	private long value;
