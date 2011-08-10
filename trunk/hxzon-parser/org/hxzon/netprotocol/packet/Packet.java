@@ -92,16 +92,8 @@ public class Packet implements GeneralPacket {
 	}
 
 	public GeneralPacketPayload getPayload() {
-		if (srcData.length <= this.offset + this.headerLength) {
-			payload = new NullPayload();
-			payload.setSrcPacket(this);
-		}
 		if (payload == null) {
 			payload = parsePayload();
-		}
-		if (payload == null) {
-			payload = new UnknownPayload();
-			payload.setSrcPacket(this);
 		}
 		return payload;
 	}
@@ -117,7 +109,7 @@ public class Packet implements GeneralPacket {
 		return lastPacket;
 	}
 
-	public void setPayload(Packet payload) {
+	public void setPayload(GeneralPacketPayload payload) {
 		this.payload = payload;
 	}
 
@@ -136,9 +128,19 @@ public class Packet implements GeneralPacket {
 		}
 	}
 
-	public Packet parsePayload() {
-		Packet packet = ProtocolBindingList.findBinding(this);
-		return packet;
+	private GeneralPacketPayload parsePayload() {
+		if (srcData.length <= this.offset + this.headerLength) {
+			payload = new NullPayload();
+			payload.setSrcPacket(this);
+		}
+		if (payload == null) {
+			payload = ProtocolBindingList.findBinding(this);
+		}
+		if (payload == null) {
+			payload = new UnknownPayload();
+			payload.setSrcPacket(this);
+		}
+		return payload;
 	}
 
 	public byte[] getByteArray(int offset, int len) {
@@ -161,10 +163,10 @@ public class Packet implements GeneralPacket {
 
 	public int getIntByBit(int offset, int len, int bitOffset, int bitLen) {
 		try {
-			if (len == 1) {
-				return BytesUtil.toInt(srcData[offset], bitOffset, bitLen);
-			}
-			return BytesUtil.toInt(srcData, offset, len, bitOffset);
+//			if (len == 1) {
+//				return BytesUtil.toInt(srcData[offset], bitOffset, bitLen);
+//			}
+			return BytesUtil.toInt(srcData, offset, len, bitOffset, bitLen);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return 0;
