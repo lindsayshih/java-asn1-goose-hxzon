@@ -50,9 +50,9 @@ public class EventEnrollment extends BerSequence {
 		case Tag.CONTEXT | 6:
 			return new EEDuration().init("duration", "duration", tag, stream);
 		case Tag.CONTEXT | 7:
-			return Asn1Utils.createBerUnsignedInteger("invokeID", "invokeID", tag, stream);
+			return Asn1Utils.createBerUnsigned32("invokeID", "invokeID", tag, stream);
 		case Tag.CONTEXT | 8:
-			return Asn1Utils.createBerUnsignedInteger("remainingAcceptableDelay", "remainingAcceptableDelay", tag, stream);
+			return Asn1Utils.createBerUnsigned32("remainingAcceptableDelay", "remainingAcceptableDelay", tag, stream);
 		default:
 			return Asn1Utils.createUnknown(tag, stream);
 		}

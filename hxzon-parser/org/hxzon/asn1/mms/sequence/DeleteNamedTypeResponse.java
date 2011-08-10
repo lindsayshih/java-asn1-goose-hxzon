@@ -16,9 +16,9 @@ public class DeleteNamedTypeResponse extends BerSequence {
 	public BerNode create(int tag, BerInputStream stream) {
 		switch (tag) {
 		case Tag.CONTEXT | 0:
-			return Asn1Utils.createBerUnsignedInteger("numberMatched", "numberMatched", tag, stream);
+			return Asn1Utils.createBerUnsigned32("numberMatched", "numberMatched", tag, stream);
 		case Tag.CONTEXT | 1:
-			return Asn1Utils.createBerUnsignedInteger("numberDeleted", "numberDeleted", tag, stream);
+			return Asn1Utils.createBerUnsigned32("numberDeleted", "numberDeleted", tag, stream);
 		default:
 			return Asn1Utils.createUnknown(tag, stream);
 		}

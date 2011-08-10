@@ -19,7 +19,7 @@ public class DefineSemaphoreRequest extends BerSequence {
 		case Tag.CONTEXT | 0:
 			return new ObjectName().init("semaphoreName", "semaphoreName", tag, stream);
 		case Tag.CONTEXT | 1:
-			return Asn1Utils.createBerUnsignedInteger("numbersOfTokens", "numbersOfTokens", tag, stream);
+			return Asn1Utils.createBerUnsigned16("numbersOfTokens", "numbersOfTokens", tag, stream);
 		default:
 			return Asn1Utils.createUnknown(tag, stream);
 		}

@@ -53,9 +53,9 @@ public class Smv92Asdu extends BerSequence {
 		case Tag.CONTEXT | 0:
 			return Asn1Utils.createBerVisibleString("svID", "采样值ID", tag, stream);
 		case Tag.CONTEXT | 2:
-			return Asn1Utils.createBerInteger("sample count", "采样计数", tag, stream);
+			return Asn1Utils.createBerInteger16("sample count", "采样计数", tag, stream);
 		case Tag.CONTEXT | 3:
-			return Asn1Utils.createBerInteger("confRef", "配置版本", tag, stream);
+			return Asn1Utils.createBerInteger32("confRef", "配置版本", tag, stream);
 		case Tag.CONTEXT | 5:
 			return new SmvSynchInteger().init("sample synch", "采样同步", tag, stream);
 		case Tag.CONTEXT | 7:

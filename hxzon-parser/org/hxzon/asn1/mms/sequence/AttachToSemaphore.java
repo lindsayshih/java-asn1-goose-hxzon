@@ -31,13 +31,13 @@ public class AttachToSemaphore extends BerSequence {
 		case Tag.CONTEXT | 2:
 			return new Priority().init("priority", "priority", tag, stream);
 		case Tag.CONTEXT | 3:
-			return Asn1Utils.createBerUnsignedInteger("acceptableDelay", "acceptableDelay", tag, stream);
+			return Asn1Utils.createBerUnsigned32("acceptableDelay", "acceptableDelay", tag, stream);
 		case Tag.CONTEXT | 4:
-			return Asn1Utils.createBerUnsignedInteger("controlTimeOut", "controlTimeOut", tag, stream);
+			return Asn1Utils.createBerUnsigned32("controlTimeOut", "controlTimeOut", tag, stream);
 		case Tag.CONTEXT | 5:
 			return Asn1Utils.createBerBoolean("abortOnTimeOut", "abortOnTimeOut", tag, stream);
 		case Tag.CONTEXT | 6:
-			return Asn1Utils.createBerInteger("relinquishIfConnectionLost", "relinquishIfConnectionLost", tag, stream);
+			return Asn1Utils.createBerBoolean("relinquishIfConnectionLost", "relinquishIfConnectionLost", tag, stream);
 		default:
 			return Asn1Utils.createUnknown(tag, stream);
 		}

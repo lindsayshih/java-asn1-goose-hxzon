@@ -55,10 +55,10 @@ public class MmsPdu extends BerChoice {
 			return new RejectPdu().init(tag, stream);
 		case Tag.CONTEXT | 5:
 			//Cancel-RequestPDU ::= Unsigned32	-- originalInvokeID
-			return Asn1Utils.createBerUnsignedInteger("cancel-RequestPDU", "cancel-RequestPDU", tag, stream);
+			return Asn1Utils.createBerUnsigned32("cancel-RequestPDU", "cancel-RequestPDU", tag, stream);
 		case Tag.CONTEXT | 6:
 			//Cancel-ResponsePDU ::= Unsigned32 	-- originalInvokeID
-			return Asn1Utils.createBerUnsignedInteger("cancel-ResponsePDU", "cancel-ResponsePDU", tag, stream);
+			return Asn1Utils.createBerUnsigned32("cancel-ResponsePDU", "cancel-ResponsePDU", tag, stream);
 		case Tag.CONTEXT | 7:
 			return new CancelErrorPdu().init("cancel-ErrorPDU", "cancel-ErrorPDU", tag, stream);
 		case Tag.CONTEXT | 8:

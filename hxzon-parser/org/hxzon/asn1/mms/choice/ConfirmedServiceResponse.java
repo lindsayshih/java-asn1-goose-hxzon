@@ -256,7 +256,7 @@ public class ConfirmedServiceResponse extends BerChoice {
 			return Asn1Utils.createBerNull("defineEventCondition", "defineEventCondition", tag, stream);
 		case Tag.CONTEXT | 48:
 			//DeleteEventCondition-Response ::= Unsigned32	-- Candidates Not Deleted
-			return Asn1Utils.createBerUnsignedInteger("deleteEventCondition", "deleteEventCondition", tag, stream);
+			return Asn1Utils.createBerUnsigned32("deleteEventCondition", "deleteEventCondition", tag, stream);
 		case Tag.CONTEXT | 49:
 			return new GetEventConditionAttributesResponse().init("getEventConditionAttributes", "getEventConditionAttributes", tag, stream);
 		case Tag.CONSTRUCTED | 50:
@@ -272,12 +272,12 @@ public class ConfirmedServiceResponse extends BerChoice {
 			return Asn1Utils.createBerNull("defineEventAction", "defineEventAction", tag, stream);
 		case Tag.CONTEXT | 54:
 			//DeleteEventAction-Response ::= Unsigned32	-- candidates not deleted
-			return Asn1Utils.createBerUnsignedInteger("deleteEventAction", "deleteEventAction", tag, stream);
+			return Asn1Utils.createBerUnsigned32("deleteEventAction", "deleteEventAction", tag, stream);
 		case Tag.CONTEXT | 55:
 			return new GetEventActionAttributesResponse().init("getEventActionAttributes", "getEventActionAttributes", tag, stream);
 		case Tag.CONTEXT | 56:
 			//ReportEventActionStatus-Response ::=  Unsigned32 -- Number of Event Enrollments
-			return Asn1Utils.createBerUnsignedInteger("reportActionStatus", "reportActionStatus", tag, stream);
+			return Asn1Utils.createBerUnsigned32("reportActionStatus", "reportActionStatus", tag, stream);
 		case Tag.CONTEXT | 57:
 			//DefineEventEnrollment-Response ::= NULL
 		case Tag.CONTEXT | 58:
@@ -302,7 +302,7 @@ public class ConfirmedServiceResponse extends BerChoice {
 			return Asn1Utils.createBerNull("writeJournal", "writeJournal", tag, stream);
 		case Tag.CONTEXT | 67:
 			//InitializeJournal-Response ::= Unsigned32	-- entries deleted
-			return Asn1Utils.createBerUnsignedInteger("initializeJournal", "initializeJournal", tag, stream);
+			return Asn1Utils.createBerUnsigned32("initializeJournal", "initializeJournal", tag, stream);
 		case Tag.CONTEXT | 68:
 			return new ReportJournalStatusResponse().init("reportJournalStatus", "reportJournalStatus", tag, stream);
 		case Tag.CONTEXT | 69:

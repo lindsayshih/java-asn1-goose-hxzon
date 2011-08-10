@@ -32,7 +32,7 @@ public class AlarmSummary extends BerSequence {
 		case Tag.CONTEXT | 0:
 			return new ObjectName().init("eventConditionName", "eventConditionName", tag, stream, true);
 		case Tag.CONTEXT | 1:
-			return Asn1Utils.createBerUnsignedInteger("severity", "severity", tag, stream);
+			return Asn1Utils.createBerUnsigned8("severity", "severity", tag, stream);
 		case Tag.CONTEXT | 2:
 			return new ECState().init("currentState", "currentState", tag, stream);
 		case Tag.CONTEXT | 3:

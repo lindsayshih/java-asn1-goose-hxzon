@@ -25,7 +25,7 @@ public class ConfirmedResponsePdu extends BerSequence {
 	public BerNode create(int tag, BerInputStream stream) {
 		switch (tag) {
 		case Tag.UNIVERSAL | Tag.INTEGER:
-			return Asn1Utils.createBerUnsignedInteger("invokeID", "invokeID", tag, stream);
+			return Asn1Utils.createBerUnsigned32("invokeID", "invokeID", tag, stream);
 		case Tag.CONTEXT | 79:
 			return new CSRequestDetail().init(tag, stream, false);
 		default:

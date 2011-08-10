@@ -26,7 +26,7 @@ public class InputRequest extends BerSequence {
 		case Tag.CONTEXT | 2:
 			return Asn1Utils.createBerSequenceOf("listOfPromptData", "listOfPromptData", tag, stream, BerVisibleString.class);
 		case Tag.CONTEXT | 3:
-			return Asn1Utils.createBerUnsignedInteger("inputTimeOut", "inputTimeOut", tag, stream);
+			return Asn1Utils.createBerUnsigned32("inputTimeOut", "inputTimeOut", tag, stream);
 		default:
 			return Asn1Utils.createUnknown(tag, stream);
 		}

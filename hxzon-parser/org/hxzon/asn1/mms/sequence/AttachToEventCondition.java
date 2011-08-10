@@ -28,7 +28,7 @@ public class AttachToEventCondition extends BerSequence {
 		case Tag.CONTEXT | 2:
 			return new Transitions().init("causingTransitions", "causingTransitions", tag, stream);
 		case Tag.CONTEXT | 3:
-			return Asn1Utils.createBerUnsignedInteger("acceptableDelay", "acceptableDelay", tag, stream);
+			return Asn1Utils.createBerUnsigned32("acceptableDelay", "acceptableDelay", tag, stream);
 		default:
 			return Asn1Utils.createUnknown(tag, stream);
 		}

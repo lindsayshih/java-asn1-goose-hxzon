@@ -42,7 +42,7 @@ public class GoosePdu extends BerSequence implements GeneralPacketPayload {
 		case Tag.CONTEXT | 0:
 			return Asn1Utils.createBerVisibleString("gocbRef", "控制块引用", tag, stream);
 		case Tag.CONTEXT | 1:
-			return Asn1Utils.createBerInteger("timeAllowedtoLive", "生存时间", tag, stream);
+			return Asn1Utils.createBerIntegerX("timeAllowedtoLive", "生存时间", tag, stream);
 		case Tag.CONTEXT | 2:
 			return Asn1Utils.createBerVisibleString("datSet", "数据集引用", tag, stream);
 		case Tag.CONTEXT | 3:
@@ -50,17 +50,17 @@ public class GoosePdu extends BerSequence implements GeneralPacketPayload {
 		case Tag.CONTEXT | 4:
 			return Asn1Utils.createBerIecUtcTime("t", "事件时间", tag, stream);
 		case Tag.CONTEXT | 5:
-			return Asn1Utils.createBerInteger("stNum", "状态计数", tag, stream);
+			return Asn1Utils.createBerIntegerX("stNum", "状态计数", tag, stream);
 		case Tag.CONTEXT | 6:
-			return Asn1Utils.createBerInteger("qtNum", "序列计数", tag, stream);
+			return Asn1Utils.createBerIntegerX("qtNum", "序列计数", tag, stream);
 		case Tag.CONTEXT | 7:
 			return Asn1Utils.createBerBoolean("test", "测试", tag, stream);
 		case Tag.CONTEXT | 8:
-			return Asn1Utils.createBerInteger("confRev", "版本", tag, stream);
+			return Asn1Utils.createBerIntegerX("confRev", "版本", tag, stream);
 		case Tag.CONTEXT | 9:
 			return Asn1Utils.createBerBoolean("ndsCom", "ndsCom", tag, stream);
 		case Tag.CONTEXT | 10:
-			return Asn1Utils.createBerInteger("numDatSetEntries", "数据集条目数", tag, stream);
+			return Asn1Utils.createBerIntegerX("numDatSetEntries", "数据集条目数", tag, stream);
 		case Tag.CONTEXT | 11:
 			return new GooseDataset().init("dataset", "数据集", tag, stream);
 		default:

@@ -29,7 +29,7 @@ public class ConfirmedRequestPdu extends BerSequence {
 	public BerNode create(int tag, BerInputStream stream) {
 		switch (tag) {
 		case Tag.UNIVERSAL | Tag.INTEGER:
-			return Asn1Utils.createBerUnsignedInteger("invokeID", "invokeID", tag, stream);
+			return Asn1Utils.createBerUnsigned32("invokeID", "invokeID", tag, stream);
 		case Tag.UNIVERSAL | Tag.SEQUENCE:
 			return Asn1Utils.createBerSequenceOf("seq of modifier", "list of modifier", tag, stream, Modifier.class);
 		case Tag.CONTEXT | 79:

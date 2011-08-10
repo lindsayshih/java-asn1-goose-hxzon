@@ -67,9 +67,9 @@ public class TypeSpecification extends BerChoice {
 			return Asn1Utils.createBerInteger32("bit-string", "bit-string", tag, stream);
 //			return Asn1Utils.createBerBitString("bit-string", "bit-string", tag, stream);
 		case Tag.CONTEXT | 5:
-			return Asn1Utils.createBerUnsignedInteger("integer", "integer", tag, stream);
+			return Asn1Utils.createBerUnsigned8("integer", "integer", tag, stream);
 		case Tag.CONTEXT | 6:
-			return Asn1Utils.createBerUnsignedInteger("unsigned", "unsigned", tag, stream);
+			return Asn1Utils.createBerUnsigned8("unsigned", "unsigned", tag, stream);
 		case Tag.CONTEXT | 9:
 			return Asn1Utils.createBerInteger32("octet-string", "octet-string", tag, stream);
 		case Tag.CONTEXT | 10:
@@ -79,7 +79,7 @@ public class TypeSpecification extends BerChoice {
 		case Tag.CONTEXT | 12:
 			return Asn1Utils.createBerBoolean("binary-time", "binary-time", tag, stream);
 		case Tag.CONTEXT | 13:
-			return Asn1Utils.createBerUnsignedInteger("bcd", "bcd", tag, stream);
+			return Asn1Utils.createBerUnsigned8("bcd", "bcd", tag, stream);
 		case Tag.CONTEXT | 15:
 			return Asn1Utils.createBerNull("objId", "objId", tag, stream);
 		default:
@@ -98,7 +98,7 @@ public class TypeSpecification extends BerChoice {
 			case Tag.CONTEXT | 0:
 				return Asn1Utils.createBerBoolean("packed", "packed", tag, stream);
 			case Tag.CONTEXT | 1:
-				return Asn1Utils.createBerUnsignedInteger("numberOfElements", "numberOfElements", tag, stream);
+				return Asn1Utils.createBerUnsigned32("numberOfElements", "numberOfElements", tag, stream);
 			case Tag.CONTEXT | 2:
 				return new TypeSpecification().init("elementType", "elementType", tag, stream);
 			default:

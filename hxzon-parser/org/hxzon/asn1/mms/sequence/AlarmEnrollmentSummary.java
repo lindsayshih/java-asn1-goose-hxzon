@@ -34,7 +34,7 @@ public class AlarmEnrollmentSummary extends BerSequence {
 		case Tag.CONTEXT | 2:
 			return new ApplicationReference().init("clientApplication", "clientApplication", tag, stream);
 		case Tag.CONTEXT | 3:
-			return Asn1Utils.createBerUnsignedInteger("severity", "severity", tag, stream);
+			return Asn1Utils.createBerUnsigned8("severity", "severity", tag, stream);
 		case Tag.CONTEXT | 4:
 			return new ECState().init("currentState", "currentState", tag, stream);
 		case Tag.CONTEXT | 6:

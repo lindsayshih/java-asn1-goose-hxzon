@@ -28,11 +28,11 @@ public class ReportSemaphoreStatusResponse extends BerSequence {
 		case Tag.CONTEXT | 1:
 			return new ReportSemaphoreStatusResponseClazz().init("class", "class", tag, stream);
 		case Tag.CONTEXT | 2:
-			return Asn1Utils.createBerUnsignedInteger("numberOfTokens", "numberOfTokens", tag, stream);
+			return Asn1Utils.createBerUnsigned16("numberOfTokens", "numberOfTokens", tag, stream);
 		case Tag.CONTEXT | 3:
-			return Asn1Utils.createBerUnsignedInteger("numberOfOwnedTokens", "numberOfOwnedTokens", tag, stream);
+			return Asn1Utils.createBerUnsigned16("numberOfOwnedTokens", "numberOfOwnedTokens", tag, stream);
 		case Tag.CONTEXT | 4:
-			return Asn1Utils.createBerUnsignedInteger("numberOfHungTokens", "numberOfHungTokens", tag, stream);
+			return Asn1Utils.createBerUnsigned16("numberOfHungTokens", "numberOfHungTokens", tag, stream);
 		default:
 			return Asn1Utils.createUnknown(tag, stream);
 		}

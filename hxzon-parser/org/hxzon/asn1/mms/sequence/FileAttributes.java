@@ -15,7 +15,7 @@ public class FileAttributes extends BerSequence {
 	public BerNode create(int tag, BerInputStream stream) {
 		switch (tag) {
 		case Tag.CONTEXT | 0:
-			return Asn1Utils.createBerUnsignedInteger("sizeOfFile", "sizeOfFile", tag, stream);
+			return Asn1Utils.createBerUnsigned32("sizeOfFile", "sizeOfFile", tag, stream);
 		case Tag.CONTEXT | 1:
 			//TODO
 		default:

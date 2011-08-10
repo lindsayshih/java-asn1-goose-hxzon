@@ -19,7 +19,7 @@ public class EventTime extends BerChoice {
 		case Tag.CONTEXT | 0:
 			return new TimeOfDay().init("timeOfDayT", "timeOfDayT", tag, stream);
 		case Tag.CONTEXT | 1:
-			return Asn1Utils.createBerUnsignedInteger("timeSequenceIdentifier", "timeSequenceIdentifier", tag, stream);
+			return Asn1Utils.createBerUnsigned32("timeSequenceIdentifier", "timeSequenceIdentifier", tag, stream);
 		default:
 			return Asn1Utils.createUnknown(tag, stream);
 		}
