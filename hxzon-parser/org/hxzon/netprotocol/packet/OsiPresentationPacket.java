@@ -44,7 +44,7 @@ public class OsiPresentationPacket extends Packet {
 		return null;
 	}
 
-	public String toString() {
+	public String getType() {
 		return "osi presentation";
 	}
 }

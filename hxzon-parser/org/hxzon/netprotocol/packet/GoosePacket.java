@@ -109,7 +109,7 @@ public class GoosePacket extends Packet {
 		return payload;
 	}
 
-	public String toString() {
+	public String getType() {
 		return "goose";
 	}
 }

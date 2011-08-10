@@ -7,6 +7,9 @@ import org.hxzon.netprotocol.common.IPacket;
 import org.hxzon.netprotocol.common.IPacketPayload;
 import org.hxzon.netprotocol.parse.ProtocolBindingList;
 import org.hxzon.netprotocol.parse.ProtocolField;
+import org.hxzon.netprotocol.payload.EmptyPayload;
+import org.hxzon.netprotocol.payload.NullPayload;
+import org.hxzon.netprotocol.payload.UnknownPayload;
 import org.hxzon.util.BytesUtil;
 
 public class Packet implements IPacket {
@@ -17,6 +20,7 @@ public class Packet implements IPacket {
 	private IPacketPayload payload;
 	private IPacket lastPacket;
 	private List<ProtocolField> headerFields;
+	private boolean miss;
 
 	public Packet() {
 	}
@@ -25,8 +29,20 @@ public class Packet implements IPacket {
 		setSrcData(data);
 	}
 
-	public Packet(Packet srcPacket) {
-		setSrcPacket(srcPacket);
+	public IPacket getSrcPacket() {
+		return srcPacket;
+	}
+
+	public void setSrcPacket(IPacket srcPacket) {
+		this.srcPacket = srcPacket;
+		this.srcData = srcPacket.getSrcData();
+		this.offset = srcPacket.getOffset() + srcPacket.getHeaderLength();
+		this.headerLength = this.srcData.length;//for some field fetch before expectHeaderLength
+		this.headerLength = expectHeaderLength();
+		if (this.offset + this.headerLength > srcData.length) {
+			this.headerLength = srcData.length - this.offset;
+			this.miss = true;
+		}
 	}
 
 	public byte[] getSrcData() {
@@ -41,6 +57,7 @@ public class Packet implements IPacket {
 		return BytesUtil.copyBytes(srcData, offset, getTotalLength());
 	}
 
+//-----------------------------------------------
 	public int getLength() {
 		return getTotalLength();
 	}
@@ -65,6 +82,7 @@ public class Packet implements IPacket {
 		return this.srcData.length - getPayloadOffset();
 	}
 
+//-----------------------------------------------
 	protected int expectHeaderLength() {
 		return 0;
 	}
@@ -91,6 +109,19 @@ public class Packet implements IPacket {
 		return new ProtocolField[0];
 	}
 
+//---------------------------------------------
+	public IPacketPayload exceptPayload() {
+		return null;
+	}
+
+	public IPacket findBinding() {
+		return ProtocolBindingList.findBinding(this);
+	}
+
+	public boolean isEmptyPayload() {
+		return false;
+	}
+
 	public IPacketPayload getPayload() {
 		if (payload == null) {
 			payload = parsePayload();
@@ -113,34 +144,33 @@ public class Packet implements IPacket {
 		this.payload = payload;
 	}
 
-	public IPacket getSrcPacket() {
-		return srcPacket;
-	}
-
-	public void setSrcPacket(IPacket srcPacket) {
-		this.srcPacket = srcPacket;
-		this.srcData = srcPacket.getSrcData();
-		this.offset = srcPacket.getOffset() + srcPacket.getHeaderLength();
-		this.headerLength = this.srcData.length;//for some field fetch before expectHeaderLength
-		this.headerLength = expectHeaderLength();
-		if (this.offset + this.headerLength > srcData.length) {
-			this.headerLength = srcData.length - this.offset;
-		}
-	}
-
 	private IPacketPayload parsePayload() {
-		if (srcData.length <= this.offset + this.headerLength) {
+		if (isEmptyPayload()) {
+			payload = new EmptyPayload();
+		}
+		if (miss) {
 			payload = new NullPayload();
-			payload.setSrcPacket(this);
 		}
 		if (payload == null) {
-			payload = ProtocolBindingList.findBinding(this);
+			payload = exceptPayload();
+		}
+		if (payload == null) {
+			payload = findBinding();
 		}
 		if (payload == null) {
 			payload = new UnknownPayload();
-			payload.setSrcPacket(this);
 		}
+		payload.setSrcPacket(this);
 		return payload;
+	}
+
+//------------------------------------------------
+	public String getType() {
+		return "Packet";
+	}
+
+	public String getDisplayString() {
+		return getType() + (miss ? "(miss)" : "");
 	}
 
 	public byte[] getByteArray(int offset, int len) {

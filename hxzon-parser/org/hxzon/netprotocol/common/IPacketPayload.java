@@ -12,4 +12,6 @@ public interface IPacketPayload {
 	public byte[] getData();
 
 	public IPacket getSrcPacket();
+
+	public String getDisplayString();
 }

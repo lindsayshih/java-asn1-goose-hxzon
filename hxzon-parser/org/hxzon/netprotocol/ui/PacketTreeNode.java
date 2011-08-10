@@ -10,9 +10,9 @@ import javax.swing.tree.TreeNode;
 import org.hxzon.asn1.FakeBerConstruct;
 import org.hxzon.netprotocol.common.IPacket;
 import org.hxzon.netprotocol.common.IPacketPayload;
-import org.hxzon.netprotocol.packet.NullPayload;
 import org.hxzon.netprotocol.packet.OsiPresentationPacket;
 import org.hxzon.netprotocol.parse.ProtocolField;
+import org.hxzon.netprotocol.payload.NullPayload;
 
 import com.chaosinmotion.asn1.BerConstruct;
 import com.chaosinmotion.asn1.BerNode;
@@ -42,6 +42,7 @@ public class PacketTreeNode implements TreeNode {
 		if (packet instanceof IPacket) {
 			IPacket gpacket = (IPacket) packet;
 			this.len = gpacket.getHeaderLength();
+			this.setDisplayString(gpacket.getDisplayString());
 			if (gpacket.getSrcPacket() == null) {
 				IPacketPayload payload = gpacket.getPayload();
 				while (payload instanceof IPacket) {

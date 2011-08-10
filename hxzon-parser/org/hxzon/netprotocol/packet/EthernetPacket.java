@@ -59,11 +59,7 @@ public class EthernetPacket extends Packet {
 		return type;
 	}
 
-	public void setType(String type) {
-//		this.type = type;
-	}
-
-	public String toString() {
+	public String getType() {
 		return "ethernet";
 	}
 }
