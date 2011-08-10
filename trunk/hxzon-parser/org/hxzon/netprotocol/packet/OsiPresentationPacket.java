@@ -49,7 +49,7 @@ public class OsiPresentationPacket extends Packet {
 //		return true;
 //	}
 
-	public String getType() {
+	public String getProtocolTypeDesc() {
 		return "osi presentation";
 	}
 }

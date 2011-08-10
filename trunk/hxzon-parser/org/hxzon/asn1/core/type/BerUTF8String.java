@@ -50,7 +50,7 @@ public class BerUTF8String extends BerOctetString {
 		setTypeTag(Tag.UTF8STRING);
 	}
 
-	public String getType() {
+	public String getAsn1TypeDesc() {
 		return "BerUTF8String";
 	}
 

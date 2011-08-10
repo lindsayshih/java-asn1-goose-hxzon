@@ -106,7 +106,7 @@ public class SmvPacket extends Packet {
 		return (IPacketPayload) fetchSmvpdu();
 	}
 
-	public String getType() {
+	public String getProtocolTypeDesc() {
 		return "smv";
 	}
 }

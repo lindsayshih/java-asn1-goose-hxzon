@@ -8,7 +8,7 @@ public class ExceptionBerNode extends FakeBerNode {
 		return null;
 	}
 
-	public String getType() {
+	public String getAsn1TypeDesc() {
 		return null;
 	}
 

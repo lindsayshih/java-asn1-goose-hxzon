@@ -40,7 +40,7 @@ public class BerChoice extends BerNode implements FakeBerConstruct {
 		return this;
 	}
 
-	public String getType() {
+	public String getAsn1TypeDesc() {
 		return "BerChoice";
 	}
 

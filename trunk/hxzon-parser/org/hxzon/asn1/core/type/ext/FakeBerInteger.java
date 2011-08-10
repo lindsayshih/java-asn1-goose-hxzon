@@ -17,7 +17,7 @@ public class FakeBerInteger extends FakeBerNode {
 	}
 
 	@Override
-	public String getType() {
+	public String getAsn1TypeDesc() {
 		return "FakeBerInteger";
 	}
 

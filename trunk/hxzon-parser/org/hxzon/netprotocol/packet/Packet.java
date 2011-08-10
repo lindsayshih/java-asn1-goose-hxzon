@@ -142,7 +142,7 @@ public class Packet implements IPacket {
 	}
 
 	public String getLastPayloadType() {
-		return getLastPacket().getPayload().getType();
+		return getLastPacket().getPayload().getProtocolTypeDesc();
 	}
 
 	public void setPayload(IPacketPayload payload) {
@@ -174,12 +174,12 @@ public class Packet implements IPacket {
 	}
 
 //------------------------------------------------
-	public String getType() {
+	public String getProtocolTypeDesc() {
 		return "Packet";
 	}
 
 	public String getDisplayString() {
-		return getType() + (miss ? "(miss)" : "");
+		return getProtocolTypeDesc() + (miss ? "(miss)" : "");
 	}
 
 	public byte[] getByteArray(int offset, int len) {

@@ -59,7 +59,7 @@ public class BerNumericString extends BerAbstractString {
 		return validateString(str, NUMBER);
 	}
 
-	public String getType() {
+	public String getAsn1TypeDesc() {
 		return "BerNumericString";
 	}
 

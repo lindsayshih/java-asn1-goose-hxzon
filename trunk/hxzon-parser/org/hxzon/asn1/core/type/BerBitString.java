@@ -96,7 +96,7 @@ public class BerBitString extends BerNode {
 	}
 
 	//add by hxzon
-	public String getType() {
+	public String getAsn1TypeDesc() {
 		return "BerBitString";
 	}
 

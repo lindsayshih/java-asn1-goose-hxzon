@@ -85,7 +85,7 @@ public class BerReal extends BerNode {
 		return fValue;
 	}
 
-	public String getType() {
+	public String getAsn1TypeDesc() {
 		return "BerReal";
 	}
 

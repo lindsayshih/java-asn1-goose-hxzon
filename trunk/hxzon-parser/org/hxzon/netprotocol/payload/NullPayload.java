@@ -1,8 +1,8 @@
 package org.hxzon.netprotocol.payload;
 
 public class NullPayload extends DataPayload {
-	public String getType() {
-		return getSrcPacket().getType();
+	public String getProtocolTypeDesc() {
+		return getSrcPacket().getProtocolTypeDesc();
 	}
 
 	public String getDisplayString() {

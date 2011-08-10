@@ -67,7 +67,7 @@ public class TpktPacket extends Packet {
 		this.totalLen = length;
 	}
 
-	public String getType() {
+	public String getProtocolTypeDesc() {
 		return "tpkt";
 	}
 }

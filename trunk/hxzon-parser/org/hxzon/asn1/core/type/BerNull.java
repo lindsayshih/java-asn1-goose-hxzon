@@ -82,7 +82,7 @@ public class BerNull extends BerNode {
 		stream.writeBerLength(0);
 	}
 
-	public String getType() {
+	public String getAsn1TypeDesc() {
 		return "BerNull";
 	}
 

@@ -47,7 +47,7 @@ public class BerObjectDescriptor extends BerOctetString {
 		setTypeTag(Tag.OBJECTDESCRIPTOR);
 	}
 
-	public String getType() {
+	public String getAsn1TypeDesc() {
 		return "BerObjectDescriptor";
 	}
 }

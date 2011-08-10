@@ -11,7 +11,6 @@ import org.hxzon.netprotocol.common.IPacket;
 import org.hxzon.netprotocol.common.IPacketPayload;
 import org.hxzon.util.BytesUtil;
 
-
 public class GoosePdu extends BerSequence implements IPacketPayload {
 
 	public GoosePdu() {
@@ -112,8 +111,8 @@ public class GoosePdu extends BerSequence implements IPacketPayload {
 		this.srcPacket = srcPacket;
 	}
 
-	public String getType() {
-		return "Goose";
+	public String getProtocolTypeDesc() {
+		return getSrcPacket().getProtocolTypeDesc();
 	}
 
 }

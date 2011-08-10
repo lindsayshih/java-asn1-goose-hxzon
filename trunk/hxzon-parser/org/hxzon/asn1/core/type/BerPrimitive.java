@@ -90,7 +90,7 @@ public class BerPrimitive extends BerNode {
 		return fValue;
 	}
 
-	public String getType() {
+	public String getAsn1TypeDesc() {
 		return "BerPrimitive";
 	}
 

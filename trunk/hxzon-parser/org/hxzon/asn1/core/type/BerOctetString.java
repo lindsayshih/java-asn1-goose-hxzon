@@ -92,7 +92,7 @@ public class BerOctetString extends BerNode {
 		return fValue;
 	}
 
-	public String getType() {
+	public String getAsn1TypeDesc() {
 		return "BerOctetString";
 	}
 

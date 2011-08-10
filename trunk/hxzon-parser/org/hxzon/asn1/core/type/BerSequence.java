@@ -64,7 +64,7 @@ public class BerSequence extends BerConstruct {
 //        super(tag, state, parser, stream);
 //    }
 
-	public String getType() {
+	public String getAsn1TypeDesc() {
 		return "BerSequence";
 	}
 

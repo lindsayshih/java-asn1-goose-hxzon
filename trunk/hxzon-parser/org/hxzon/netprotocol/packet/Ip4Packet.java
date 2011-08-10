@@ -221,7 +221,7 @@ public class Ip4Packet extends Packet {
 //		this.destIp = destIp;
 	}
 
-	public String getType() {
+	public String getProtocolTypeDesc() {
 		return "ip4";
 	}
 

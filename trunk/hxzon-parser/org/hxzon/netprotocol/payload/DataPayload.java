@@ -46,7 +46,7 @@ public class DataPayload implements IPacketPayload {
 		return "user data";
 	}
 
-	public String getType() {
+	public String getProtocolTypeDesc() {
 		return "user data";
 	}
 

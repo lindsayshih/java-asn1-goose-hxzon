@@ -125,7 +125,7 @@ public class CotpPacket extends Packet {
 		return null;
 	}
 
-	public String getType() {
+	public String getProtocolTypeDesc() {
 		return "cotp";
 	}
 

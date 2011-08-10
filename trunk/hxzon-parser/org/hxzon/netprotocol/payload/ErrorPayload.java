@@ -11,8 +11,8 @@ public class ErrorPayload extends DataPayload {
 		this.errorMessage = error;
 	}
 
-	public String getType() {
-		return getSrcPacket().getType();
+	public String getProtocolTypeDesc() {
+		return getSrcPacket().getProtocolTypeDesc();
 	}
 
 	public String getDisplayString() {

@@ -73,7 +73,7 @@ public class BerTag extends BerConstruct {
 		super(Tag.NoTag);
 	}
 
-	public String getType() {
+	public String getAsn1TypeDesc() {
 		return "BerTag";
 	}
 

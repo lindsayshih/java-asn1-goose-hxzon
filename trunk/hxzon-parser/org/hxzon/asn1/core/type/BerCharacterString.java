@@ -47,7 +47,7 @@ public class BerCharacterString extends BerOctetString {
 		setTypeTag(Tag.CHARACTERSTRING);
 	}
 
-	public String getType() {
+	public String getAsn1TypeDesc() {
 		return "BerCharacterString";
 	}
 }

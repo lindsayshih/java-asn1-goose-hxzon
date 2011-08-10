@@ -19,7 +19,7 @@ public class OsiSessionPacket extends Packet {
 		return 4;
 	}
 	
-	public String getType(){
+	public String getProtocolTypeDesc(){
 		return "osi session";
 	}
 }

@@ -29,7 +29,7 @@ public abstract class FakeBerNode extends BerNode {
 		// do nothing
 	}
 
-	public String getType() {
+	public String getAsn1TypeDesc() {
 		return "FakeBerNode";
 	}
 

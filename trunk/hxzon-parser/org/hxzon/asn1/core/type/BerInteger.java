@@ -96,7 +96,7 @@ public class BerInteger extends BerNode {
 		this.fValue = value;
 	}
 
-	public String getType() {
+	public String getAsn1TypeDesc() {
 		return "BerInteger";
 	}
 
