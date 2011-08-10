@@ -38,7 +38,7 @@ import org.hxzon.asn1.core.type.ext.BerSequenceOf;
 import org.hxzon.asn1.core.type.ext.FakeBerInteger;
 import org.hxzon.asn1.core.type.ext.FakeBerNode;
 import org.hxzon.asn1.core.type.ext.UnknownBerNode;
-import org.hxzon.asn1.goose.GooseUtcTime;
+import org.hxzon.asn1.core.type.ext.UtcTime;
 import org.hxzon.asn1.mms.common.FloatingPoint;
 
 
@@ -219,7 +219,7 @@ public class Asn1Utils {
 	}
 
 	public static BerNode createBerIecUtcTime(String name, String display, int tag, BerInputStream stream) {
-		return new GooseUtcTime().init(name, display, tag, stream);
+		return new UtcTime().init(name, display, tag, stream);
 	}
 
 	public static BerNode createFakeBerInteger(String name, String display, long value, int offset, int len) {
