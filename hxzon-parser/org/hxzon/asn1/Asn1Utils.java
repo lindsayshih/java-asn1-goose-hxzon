@@ -134,19 +134,19 @@ public class Asn1Utils {
 //	}
 
 	public static BerNode createBerUnsignedX(String name, String display, int tag, BerInputStream stream) {
-		return new BerInteger().init(name, display, tag, stream);
+		return new BerInteger().limitBitLength(64, true).init(name, display, tag, stream);
 	}
 
 	public static BerNode createBerUnsigned8(String name, String display, int tag, BerInputStream stream) {
-		return new BerInteger().init(name, display, tag, stream);
+		return new BerInteger().limitBitLength(8, true).init(name, display, tag, stream);
 	}
 
 	public static BerNode createBerUnsigned16(String name, String display, int tag, BerInputStream stream) {
-		return new BerInteger().init(name, display, tag, stream);
+		return new BerInteger().limitBitLength(16, true).init(name, display, tag, stream);
 	}
 
 	public static BerNode createBerUnsigned32(String name, String display, int tag, BerInputStream stream) {
-		return new BerInteger().init(name, display, tag, stream);
+		return new BerInteger().limitBitLength(32, true).init(name, display, tag, stream);
 	}
 
 //	public static BerNode createBerInteger(String name, String display, int tag, BerInputStream stream) {
@@ -156,11 +156,10 @@ public class Asn1Utils {
 //	public static BerNode createBerInteger(String name, String display, int tag, BerInputStream stream, int bitLen) {
 //		return new BerInteger().limitBitLength(bitLen).init(name, display, tag, stream);
 //	}
-	
-	public static BerNode createBerIntegerX(String name, String display, int tag, BerInputStream stream) {
-		return new BerInteger().init(name, display, tag, stream);
-	}
 
+	public static BerNode createBerIntegerX(String name, String display, int tag, BerInputStream stream) {
+		return new BerInteger().limitBitLength(64).init(name, display, tag, stream);
+	}
 
 	public static BerNode createBerInteger8(String name, String display, int tag, BerInputStream stream) {
 		return new BerInteger().limitBitLength(8).init(name, display, tag, stream);
