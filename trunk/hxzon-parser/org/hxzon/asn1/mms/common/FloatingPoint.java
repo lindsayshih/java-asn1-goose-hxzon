@@ -2,14 +2,24 @@ package org.hxzon.asn1.mms.common;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.text.DecimalFormat;
 
 import org.hxzon.asn1.core.type.BerOctetString;
+import org.hxzon.util.BytesUtil;
 
 
 public class FloatingPoint extends BerOctetString {
+	public static final DecimalFormat decimalFormat = new DecimalFormat();
+	static{
+		decimalFormat.applyPattern("0.000000");
+	}
 	public FloatingPoint() {
 		setName("floatingPoint");
 		setDisplayString("floatingPoint");
+	}
+
+	public byte[] getValue() {
+		return BytesUtil.copyBytes(super.getValue(), 1);
 	}
 
 	public String getValueAsString() {
@@ -18,7 +28,8 @@ public class FloatingPoint extends BerOctetString {
 //        bb.order(ByteOrder.LITTLE_ENDIAN);
 		bb.order(ByteOrder.BIG_ENDIAN);
 		float f = bb.getFloat();
-		return String.valueOf(f);
+		return decimalFormat.format(f);
+//		return String.valueOf(f);
 //		return new BigDecimal(String.valueOf(f)).toPlainString();
 //		return String.valueOf(FloatByteArrayUtil.byteArrayToFloat(getValue()));
 //		return String.valueOf(FloatByteArrayUtil.byteArrayToDouble(getValue()));
