@@ -56,6 +56,10 @@ public class Smv92Asdu extends BerSequence {
 			return new SmvSynchInteger().init("sample synch", "采样同步", tag, stream);
 		case Tag.CONTEXT | 7:
 			return new Smv92AsduData().init("seqData", "asdu数据集", tag, stream);
+		case Tag.CONTEXT | 4:
+			return Asn1Utils.createBerIecUtcTime("refrTm", "刷新时间", tag, stream);
+		case Tag.CONTEXT | 6:
+			return Asn1Utils.createBerIntegerX("sample rate", "采样速率", tag, stream);
 		default:
 			return Asn1Utils.createUnknown(tag, stream);
 		}
