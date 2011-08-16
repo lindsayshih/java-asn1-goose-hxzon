@@ -14,7 +14,7 @@ public class TcpPacket extends Packet {
 
 			@Override
 			public Packet match(Ip4Packet packet) {
-				if (packet.fetchProtocolCode().getValue().equals("06")) {
+				if (packet.fetchProtocolCode().getValue().equals(IPType_Tcp)) {
 					return new TcpPacket();
 				} else {
 					return null;
@@ -23,6 +23,7 @@ public class TcpPacket extends Packet {
 
 		});
 	}
+	private static final String IPType_Tcp = "06";
 	private ProtocolInt31Field sourcePort;
 	private ProtocolInt31Field destPort;
 	private ProtocolInt63Field sequenceNumber;

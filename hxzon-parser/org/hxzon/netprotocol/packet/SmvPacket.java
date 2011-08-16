@@ -8,14 +8,13 @@ import org.hxzon.netprotocol.field.ProtocolInt31Field;
 import org.hxzon.netprotocol.parse.ProtocolBinding;
 import org.hxzon.netprotocol.parse.ProtocolBindingList;
 
-
 public class SmvPacket extends Packet {
 	static {
 		ProtocolBindingList.addBinding(new ProtocolBinding<EthernetPacket>() {
 
 			@Override
 			public Packet match(EthernetPacket packet) {
-				if (packet.fetchType().getValue().equalsIgnoreCase("88ba")) {
+				if (packet.fetchType().getValue().equalsIgnoreCase(EthernetType_Smv)) {
 					return new SmvPacket();
 				} else {
 					return null;
@@ -27,7 +26,7 @@ public class SmvPacket extends Packet {
 
 			@Override
 			public Packet match(VlanPacket packet) {
-				if (packet.fetchType().getValue().equalsIgnoreCase("88ba")) {
+				if (packet.fetchType().getValue().equalsIgnoreCase(EthernetType_Smv)) {
 					return new SmvPacket();
 				} else {
 					return null;
@@ -37,6 +36,7 @@ public class SmvPacket extends Packet {
 		});
 	}
 	public static final int HeaderLength = 8;
+	public static final String EthernetType_Smv = "88ba";
 	private ProtocolInt31Field appId;
 	private ProtocolInt31Field pduLen;
 	private ProtocolInt31Field reserved1;
