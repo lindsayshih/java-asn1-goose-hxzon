@@ -9,7 +9,6 @@ import org.hxzon.netprotocol.field.ProtocolInt31Field;
 import org.hxzon.netprotocol.parse.ProtocolBinding;
 import org.hxzon.netprotocol.parse.ProtocolBindingList;
 
-
 public class GoosePacket extends Packet {
 	static {
 		ProtocolBindingList.addBinding(new ProtocolBinding<EthernetPacket>() {
@@ -38,7 +37,7 @@ public class GoosePacket extends Packet {
 		});
 	}
 	public static final int HeaderLength = 8;
-	public static final String EthernetType_Goose="88b8";
+	public static final String EthernetType_Goose = "88b8";
 	private ProtocolInt31Field appId;
 	private ProtocolInt31Field pduLen;
 	private ProtocolInt31Field reserved1;
