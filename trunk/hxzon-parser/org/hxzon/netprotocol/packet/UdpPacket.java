@@ -22,7 +22,7 @@ public class UdpPacket extends Packet {
 	}
 	public static final int MaxTotalLength = 1472;
 	public static final int HeaderLength = 8;
-	private static final String IPType_Udp = "11";
+	public static final String IPType_Udp = "11";
 	private ProtocolInt31Field sourcePort;
 	private ProtocolInt31Field destPort;
 	private ProtocolInt31Field totalLen;
