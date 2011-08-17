@@ -23,7 +23,7 @@ public class TcpPacket extends Packet {
 
 		});
 	}
-	private static final String IPType_Tcp = "06";
+	public static final String IPType_Tcp = "06";
 	private ProtocolInt31Field sourcePort;
 	private ProtocolInt31Field destPort;
 	private ProtocolInt63Field sequenceNumber;
