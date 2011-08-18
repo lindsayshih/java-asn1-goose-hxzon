@@ -11,7 +11,7 @@ import org.hxzon.util.BytesUtil;
 public class PacketUtils {
 	public static String ethernetType(byte[] data) {
 		String ethernetType = BytesUtil.toHexString(data, 12, 2);
-		if (VlanPacket.EthernetType_vlan.equalsIgnoreCase(ethernetType)) {
+		if (VlanPacket.EthernetType_Vlan.equalsIgnoreCase(ethernetType)) {
 			ethernetType = BytesUtil.toHexString(data, 16, 2);
 		}
 		return ethernetType;
@@ -19,7 +19,7 @@ public class PacketUtils {
 
 	public static int ethernetHeaderLen(byte[] data) {
 		String ethernetType = BytesUtil.toHexString(data, 12, 2);
-		if (VlanPacket.EthernetType_vlan.equalsIgnoreCase(ethernetType)) {
+		if (VlanPacket.EthernetType_Vlan.equalsIgnoreCase(ethernetType)) {
 			return 14 + 4;
 		}
 		return 14;
@@ -43,11 +43,11 @@ public class PacketUtils {
 	}
 
 	public static boolean isTcpPacket(byte[] data) {
-		return TcpPacket.IPType_Tcp.equalsIgnoreCase(ipType(data));
+		return TcpPacket.IpType_Tcp.equalsIgnoreCase(ipType(data));
 	}
 
 	public static boolean isUdpPacket(byte[] data) {
-		return UdpPacket.IPType_Udp.equalsIgnoreCase(ipType(data));
+		return UdpPacket.IpType_Udp.equalsIgnoreCase(ipType(data));
 	}
 
 	public static int tcpHeaderIndex(byte[] data) {
