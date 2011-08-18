@@ -12,7 +12,7 @@ public class VlanPacket extends Packet {
 
 			@Override
 			public Packet match(EthernetPacket packet) {
-				if (packet.fetchType().getValue().equals(EthernetType_vlan)) {
+				if (packet.fetchType().getValue().equals(EthernetType_Vlan)) {
 					return new VlanPacket();
 				}
 				return null;
@@ -21,7 +21,7 @@ public class VlanPacket extends Packet {
 		});
 	}
 	public static final int HeaderLength = 4;
-	public static final String EthernetType_vlan = "8100";
+	public static final String EthernetType_Vlan = "8100";
 
 	private ProtocolBitField priority;
 	private ProtocolBitField cfi;
@@ -33,7 +33,7 @@ public class VlanPacket extends Packet {
 	}
 
 	protected ProtocolField[] expectHeaderFields() {
-		return new ProtocolField[] { fetchPriority(), fetchCfi(), fetchValnId(), fetchType() };
+		return new ProtocolField[] { fetchPriority(), fetchCfi(), fetchVlanId(), fetchType() };
 	}
 
 	public ProtocolStringField fetchType() {
@@ -61,7 +61,7 @@ public class VlanPacket extends Packet {
 		return cfi;
 	}
 
-	public ProtocolBitField fetchValnId() {
+	public ProtocolBitField fetchVlanId() {
 		if (valnId == null) {
 			valnId = new ProtocolBitField("vlan id", "VLAN ID", 0, 4, 12, this);
 		}

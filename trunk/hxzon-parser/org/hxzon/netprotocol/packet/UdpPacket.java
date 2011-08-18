@@ -11,7 +11,7 @@ public class UdpPacket extends Packet {
 
 			@Override
 			public Packet match(Ip4Packet packet) {
-				if (packet.fetchProtocolCode().getValue().equals(IPType_Udp)) {
+				if (packet.fetchProtocolCode().getValue().equals(IpType_Udp)) {
 					return new UdpPacket();
 				} else {
 					return null;
@@ -22,7 +22,7 @@ public class UdpPacket extends Packet {
 	}
 	public static final int MaxTotalLength = 1472;
 	public static final int HeaderLength = 8;
-	public static final String IPType_Udp = "11";
+	public static final String IpType_Udp = "11";
 	private ProtocolInt31Field sourcePort;
 	private ProtocolInt31Field destPort;
 	private ProtocolInt31Field totalLen;
