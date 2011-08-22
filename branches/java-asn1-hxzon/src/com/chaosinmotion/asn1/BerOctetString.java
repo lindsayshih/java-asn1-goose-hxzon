@@ -45,69 +45,60 @@ import java.io.IOException;
  * set do not specify a character set. Generally strings are transmitted as
  * octet strings using UTF-8 encoding.
  */
-public class BerOctetString extends BerNode
-{
-    private byte[] fValue;
+public class BerOctetString extends BerNode {
+	private byte[] fValue;
 
-    /**
-     * Construct a new boolean object with the specified tag
-     * @param tag
-     * @param value
-     */
-    public BerOctetString(int tag, byte[] value)
-    {
-        super(tag);
-        fValue = value;
-    }
-    
-    /**
-     * Construct a boolean of type BOOLEAN
-     * @param value
-     */
-    public BerOctetString(byte[] value)
-    {
-        this(Tag.OCTETSTRING,value);
-    }
-    
-    /**
-     * Construct a boolean from the input stream
-     * @param tag
-     * @param stream
-     * @throws IOException
-     */
-    public BerOctetString(int tag, BerInputStream stream) throws IOException
-    {
-        super(tag);
-        
-        fValue = stream.readOctetString(0 == (tag & Tag.CONSTRUCTED));
-    }
+	/**
+	 * Construct a new boolean object with the specified tag
+	 * @param tag
+	 * @param value
+	 */
+	public BerOctetString(int tag, byte[] value) {
+		super(tag);
+		fValue = value;
+	}
 
-    /**
-     * Write this BER element to the output stream
-     * Comment
-     * @param stream
-     * @throws IOException
-     * @see com.chaosinmotion.asn1.BerNode#writeElement(com.chaosinmotion.asn1.BerOutputStream)
-     */
-    public void writeElement(BerOutputStream stream) throws IOException
-    {
-        stream.writeBerTag(getTag() | (stream.isComplexOctetString(fValue.length) ? Tag.CONSTRUCTED : 0));
-        stream.writeOctetString(fValue,0,fValue.length);
-    }
+	/**
+	 * Construct a boolean of type BOOLEAN
+	 * @param value
+	 */
+	public BerOctetString(byte[] value) {
+		this(Tag.OCTETSTRING, value);
+	}
 
-    /**
-     * Return the value of this boolean object
-     * @return
-     */
-    public byte[] getValue()
-    {
-        return fValue;
-    }
+	/**
+	 * Construct a boolean from the input stream
+	 * @param tag
+	 * @param stream
+	 * @throws IOException
+	 */
+	public BerOctetString(int tag, BerInputStream stream) throws IOException {
+		super(tag);
 
-    public String toString()
-    {
-        return "BerOctetString(" + Tag.toString(getTag()) + ")=" + fValue;
-    }
+		fValue = stream.readOctetString(0 == (tag & Tag.CONSTRUCTED));
+	}
+
+	/**
+	 * Write this BER element to the output stream
+	 * Comment
+	 * @param stream
+	 * @throws IOException
+	 * @see com.chaosinmotion.asn1.BerNode#writeElement(com.chaosinmotion.asn1.BerOutputStream)
+	 */
+	public void writeElement(BerOutputStream stream) throws IOException {
+		stream.writeBerTag(getTag() | (stream.isComplexOctetString(fValue.length) ? Tag.CONSTRUCTED : 0));
+		stream.writeOctetString(fValue, 0, fValue.length);
+	}
+
+	/**
+	 * Return the value of this boolean object
+	 * @return
+	 */
+	public byte[] getValue() {
+		return fValue;
+	}
+
+	public String toString() {
+		return "BerOctetString(" + Tag.toString(getTag()) + ")=" + fValue;
+	}
 }
-
-

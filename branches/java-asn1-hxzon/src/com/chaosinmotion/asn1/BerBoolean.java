@@ -42,69 +42,60 @@ import java.io.IOException;
 /**
  * Represents a boolean in the BER stream
  */
-public class BerBoolean extends BerNode
-{
-    private boolean fValue;
+public class BerBoolean extends BerNode {
+	private boolean fValue;
 
-    /**
-     * Construct a new boolean object with the specified tag
-     * @param tag
-     * @param value
-     */
-    public BerBoolean(int tag, boolean value)
-    {
-        super(tag);
-        fValue = value;
-    }
-    
-    /**
-     * Construct a boolean of type BOOLEAN
-     * @param value
-     */
-    public BerBoolean(boolean value)
-    {
-        this(Tag.BOOLEAN,value);
-    }
-    
-    /**
-     * Construct a boolean from the input stream
-     * @param tag
-     * @param stream
-     * @throws IOException
-     */
-    public BerBoolean(int tag, BerInputStream stream) throws IOException
-    {
-        super(tag);
-        
-        fValue = stream.readBoolean();
-    }
+	/**
+	 * Construct a new boolean object with the specified tag
+	 * @param tag
+	 * @param value
+	 */
+	public BerBoolean(int tag, boolean value) {
+		super(tag);
+		fValue = value;
+	}
 
-    /**
-     * Write this BER element to the output stream
-     * Comment
-     * @param stream
-     * @throws IOException
-     * @see com.chaosinmotion.asn1.BerNode#writeElement(com.chaosinmotion.asn1.BerOutputStream)
-     */
-    public void writeElement(BerOutputStream stream) throws IOException
-    {
-        stream.writeBerTag(getTag());
-        stream.writeBoolean(fValue);
-    }
+	/**
+	 * Construct a boolean of type BOOLEAN
+	 * @param value
+	 */
+	public BerBoolean(boolean value) {
+		this(Tag.BOOLEAN, value);
+	}
 
-    /**
-     * Return the value of this boolean object
-     * @return
-     */
-    public boolean getValue()
-    {
-        return fValue;
-    }
+	/**
+	 * Construct a boolean from the input stream
+	 * @param tag
+	 * @param stream
+	 * @throws IOException
+	 */
+	public BerBoolean(int tag, BerInputStream stream) throws IOException {
+		super(tag);
 
-    public String toString()
-    {
-        return "BerBoolean(" + Tag.toString(getTag()) + ")=" + fValue;
-    }
+		fValue = stream.readBoolean();
+	}
+
+	/**
+	 * Write this BER element to the output stream
+	 * Comment
+	 * @param stream
+	 * @throws IOException
+	 * @see com.chaosinmotion.asn1.BerNode#writeElement(com.chaosinmotion.asn1.BerOutputStream)
+	 */
+	public void writeElement(BerOutputStream stream) throws IOException {
+		stream.writeBerTag(getTag());
+		stream.writeBoolean(fValue);
+	}
+
+	/**
+	 * Return the value of this boolean object
+	 * @return
+	 */
+	public boolean getValue() {
+		return fValue;
+	}
+
+	public String toString() {
+		return "BerBoolean(" + Tag.toString(getTag()) + ")=" + fValue;
+	}
 }
-
-

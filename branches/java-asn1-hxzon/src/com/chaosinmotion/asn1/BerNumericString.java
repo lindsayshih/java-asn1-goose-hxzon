@@ -43,31 +43,26 @@ import java.io.IOException;
  * Numeric string. A numeric string is a sequence of characters that consist
  * only of 0-9
  */
-public class BerNumericString extends BerAbstractString
-{
-    public BerNumericString(int tag, String value) throws AsnEncodingException
-    {
-        super(tag, value);
-        if (!validate(value)) throw new AsnEncodingException("Illegal numeric value");
-    }
+public class BerNumericString extends BerAbstractString {
+	public BerNumericString(int tag, String value) throws AsnEncodingException {
+		super(tag, value);
+		if (!validate(value))
+			throw new AsnEncodingException("Illegal numeric value");
+	}
 
-    public BerNumericString(int tag, BerInputStream stream) throws IOException
-    {
-        super(tag, stream);
-    }
-    
-    public BerNumericString(String value) throws AsnEncodingException
-    {
-        this(Tag.NUMERICSTRING,value);
-    }
-    
-    public static final boolean validate(String str)
-    {
-        return validateString(str,NUMBER);
-    }
+	public BerNumericString(int tag, BerInputStream stream) throws IOException {
+		super(tag, stream);
+	}
 
-    public String toString()
-    {
-        return "BerNumericString(" + Tag.toString(getTag()) + ")=" + getValue();
-    }
+	public BerNumericString(String value) throws AsnEncodingException {
+		this(Tag.NUMERICSTRING, value);
+	}
+
+	public static final boolean validate(String str) {
+		return validateString(str, NUMBER);
+	}
+
+	public String toString() {
+		return "BerNumericString(" + Tag.toString(getTag()) + ")=" + getValue();
+	}
 }

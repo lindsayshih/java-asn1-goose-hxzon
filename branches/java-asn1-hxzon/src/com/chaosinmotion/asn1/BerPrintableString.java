@@ -41,31 +41,26 @@ import java.io.IOException;
 /**
  * Represents a printable string type
  */
-public class BerPrintableString extends BerAbstractString
-{
-    public BerPrintableString(int tag, String value) throws AsnEncodingException
-    {
-        super(tag, value);
-        if (!validate(value)) throw new AsnEncodingException("Illegal printable string");
-    }
+public class BerPrintableString extends BerAbstractString {
+	public BerPrintableString(int tag, String value) throws AsnEncodingException {
+		super(tag, value);
+		if (!validate(value))
+			throw new AsnEncodingException("Illegal printable string");
+	}
 
-    public BerPrintableString(int tag, BerInputStream stream) throws IOException
-    {
-        super(tag, stream);
-    }
-    
-    public BerPrintableString(String value) throws AsnEncodingException
-    {
-        this(Tag.PRINTABLESTRING,value);
-    }
-    
-    public static final boolean validate(String str)
-    {
-        return validateString(str,ASCII | NUMBER | MINUS | PUNCT);
-    }
+	public BerPrintableString(int tag, BerInputStream stream) throws IOException {
+		super(tag, stream);
+	}
 
-    public String toString()
-    {
-        return "BerPrintableString(" + Tag.toString(getTag()) + ")=" + getValue();
-    }
+	public BerPrintableString(String value) throws AsnEncodingException {
+		this(Tag.PRINTABLESTRING, value);
+	}
+
+	public static final boolean validate(String str) {
+		return validateString(str, ASCII | NUMBER | MINUS | PUNCT);
+	}
+
+	public String toString() {
+		return "BerPrintableString(" + Tag.toString(getTag()) + ")=" + getValue();
+	}
 }

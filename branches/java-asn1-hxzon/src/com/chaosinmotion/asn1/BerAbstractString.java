@@ -45,101 +45,100 @@ import java.io.IOException;
  * syntax--they basically use 7-bit character encoding--it is safe to use the
  * Java String syntax to represent the strings.
  */
-abstract class BerAbstractString extends BerNode
-{
-    private String fValue;
-    
-    protected static final int  ASCII = 0x0001;     // A-Z a-z
-    protected static final int  NUMBER = 0x0002;    // 0-9
-    protected static final int  HEXASCII = 0x0004;  // A-F a-f
-    protected static final int  MINUS = 0x0008;     // -
-    protected static final int  PUNCT = 0x0010;     // ' ( ) + , - . / : ? sp
+abstract class BerAbstractString extends BerNode {
+	private String fValue;
 
-    /**
-     * Construct a new boolean object with the specified tag
-     * @param tag
-     * @param value
-     */
-    public BerAbstractString(int tag, String value)
-    {
-        super(tag);
-        fValue = value;
-    }
-    
-    /**
-     * Construct a boolean from the input stream
-     * @param tag
-     * @param stream
-     * @throws IOException
-     */
-    public BerAbstractString(int tag, BerInputStream stream) throws IOException
-    {
-        super(tag);
-        
-        fValue = new String(stream.readOctetString(0 == (tag & Tag.CONSTRUCTED)),"UTF-8");
-    }
+	protected static final int ASCII = 0x0001; // A-Z a-z
+	protected static final int NUMBER = 0x0002; // 0-9
+	protected static final int HEXASCII = 0x0004; // A-F a-f
+	protected static final int MINUS = 0x0008; // -
+	protected static final int PUNCT = 0x0010; // ' ( ) + , - . / : ? sp
 
-    /**
-     * Write this BER element to the output stream
-     * Comment
-     * @param stream
-     * @throws IOException
-     * @see com.chaosinmotion.asn1.BerNode#writeElement(com.chaosinmotion.asn1.BerOutputStream)
-     */
-    public void writeElement(BerOutputStream stream) throws IOException
-    {
-        byte[] b = fValue.getBytes("UTF-8");
-        stream.writeBerTag(getTag() | (stream.isComplexOctetString(b.length) ? Tag.CONSTRUCTED : 0));
-        stream.writeOctetString(b,0,b.length);
-    }
+	/**
+	 * Construct a new boolean object with the specified tag
+	 * @param tag
+	 * @param value
+	 */
+	public BerAbstractString(int tag, String value) {
+		super(tag);
+		fValue = value;
+	}
 
-    /**
-     * Return the value of this boolean object
-     * @return
-     */
-    public String getValue()
-    {
-        return fValue;
-    }
-    
-    private static boolean isValidChar(char c, int charSet)
-    {
-        if (0 != (charSet & ASCII)) {
-            if ((c >= 'A') && (c <= 'Z')) return true;
-            if ((c >= 'a') && (c <= 'z')) return true;
-        }
-        if (0 != (charSet & NUMBER)) {
-            if ((c >= '0') && (c <= '9')) return true;
-        }
-        if (0 != (charSet & HEXASCII)) {
-            if ((c >= 'A') && (c <= 'F')) return true;
-            if ((c >= 'a') && (c <= 'f')) return true;
-        }
-        if (0 != (charSet & MINUS)) {
-            if (c == '-') return true;
-        }
-        if (0 != (charSet & PUNCT)) {
-            if ("'()+,./:? ".indexOf(c) != -1) return true;
-        }
-        return false;
-    }
-    
-    /**
-     * Validate the string against the character sets specified.
-     * @param str
-     * @param charSet Character set constants defined above
-     * @return
-     */
-    protected static boolean validateString(String str, int charSet)
-    {
-        int len = str.length();
-        int i;
-        
-        for (i = 0; i < len; ++i) {
-            if (!isValidChar(str.charAt(i),charSet)) return false;
-        }
-        return true;
-    }
+	/**
+	 * Construct a boolean from the input stream
+	 * @param tag
+	 * @param stream
+	 * @throws IOException
+	 */
+	public BerAbstractString(int tag, BerInputStream stream) throws IOException {
+		super(tag);
+
+		fValue = new String(stream.readOctetString(0 == (tag & Tag.CONSTRUCTED)), "UTF-8");
+	}
+
+	/**
+	 * Write this BER element to the output stream
+	 * Comment
+	 * @param stream
+	 * @throws IOException
+	 * @see com.chaosinmotion.asn1.BerNode#writeElement(com.chaosinmotion.asn1.BerOutputStream)
+	 */
+	public void writeElement(BerOutputStream stream) throws IOException {
+		byte[] b = fValue.getBytes("UTF-8");
+		stream.writeBerTag(getTag() | (stream.isComplexOctetString(b.length) ? Tag.CONSTRUCTED : 0));
+		stream.writeOctetString(b, 0, b.length);
+	}
+
+	/**
+	 * Return the value of this boolean object
+	 * @return
+	 */
+	public String getValue() {
+		return fValue;
+	}
+
+	private static boolean isValidChar(char c, int charSet) {
+		if (0 != (charSet & ASCII)) {
+			if ((c >= 'A') && (c <= 'Z'))
+				return true;
+			if ((c >= 'a') && (c <= 'z'))
+				return true;
+		}
+		if (0 != (charSet & NUMBER)) {
+			if ((c >= '0') && (c <= '9'))
+				return true;
+		}
+		if (0 != (charSet & HEXASCII)) {
+			if ((c >= 'A') && (c <= 'F'))
+				return true;
+			if ((c >= 'a') && (c <= 'f'))
+				return true;
+		}
+		if (0 != (charSet & MINUS)) {
+			if (c == '-')
+				return true;
+		}
+		if (0 != (charSet & PUNCT)) {
+			if ("'()+,./:? ".indexOf(c) != -1)
+				return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Validate the string against the character sets specified.
+	 * @param str
+	 * @param charSet Character set constants defined above
+	 * @return
+	 */
+	protected static boolean validateString(String str, int charSet) {
+		int len = str.length();
+		int i;
+
+		for (i = 0; i < len; ++i) {
+			if (!isValidChar(str.charAt(i), charSet))
+				return false;
+		}
+		return true;
+	}
 }
-
-

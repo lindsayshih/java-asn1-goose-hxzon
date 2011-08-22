@@ -46,69 +46,60 @@ import java.io.IOException;
  * TODO: Add a parser to convert to and from an OID string, a dotted-notation 
  * string representing an OID.
  */
-public class BerRelativeOID extends BerNode
-{
-    private long[] fValue;
+public class BerRelativeOID extends BerNode {
+	private long[] fValue;
 
-    /**
-     * Construct a new boolean object with the specified tag
-     * @param tag
-     * @param value
-     */
-    public BerRelativeOID(int tag, long[] value)
-    {
-        super(tag);
-        fValue = value;
-    }
-    
-    /**
-     * Construct a boolean of type BOOLEAN
-     * @param value
-     */
-    public BerRelativeOID(long[] value)
-    {
-        this(Tag.RELATIVEOID,value);
-    }
-    
-    /**
-     * Construct a boolean from the input stream
-     * @param tag
-     * @param stream
-     * @throws IOException
-     */
-    public BerRelativeOID(int tag, BerInputStream stream) throws IOException
-    {
-        super(tag);
-        
-        fValue = stream.readRelativeOID();
-    }
+	/**
+	 * Construct a new boolean object with the specified tag
+	 * @param tag
+	 * @param value
+	 */
+	public BerRelativeOID(int tag, long[] value) {
+		super(tag);
+		fValue = value;
+	}
 
-    /**
-     * Write this BER element to the output stream
-     * Comment
-     * @param stream
-     * @throws IOException
-     * @see com.chaosinmotion.asn1.BerNode#writeElement(com.chaosinmotion.asn1.BerOutputStream)
-     */
-    public void writeElement(BerOutputStream stream) throws IOException
-    {
-        stream.writeBerTag(getTag());
-        stream.writeRelativeOID(fValue);
-    }
+	/**
+	 * Construct a boolean of type BOOLEAN
+	 * @param value
+	 */
+	public BerRelativeOID(long[] value) {
+		this(Tag.RELATIVEOID, value);
+	}
 
-    /**
-     * Return the value of this boolean object
-     * @return
-     */
-    public long[] getValue()
-    {
-        return fValue;
-    }
+	/**
+	 * Construct a boolean from the input stream
+	 * @param tag
+	 * @param stream
+	 * @throws IOException
+	 */
+	public BerRelativeOID(int tag, BerInputStream stream) throws IOException {
+		super(tag);
 
-    public String toString()
-    {
-        return "BerRelativeOID(" + Tag.toString(getTag()) + ")=" + fValue;
-    }
+		fValue = stream.readRelativeOID();
+	}
+
+	/**
+	 * Write this BER element to the output stream
+	 * Comment
+	 * @param stream
+	 * @throws IOException
+	 * @see com.chaosinmotion.asn1.BerNode#writeElement(com.chaosinmotion.asn1.BerOutputStream)
+	 */
+	public void writeElement(BerOutputStream stream) throws IOException {
+		stream.writeBerTag(getTag());
+		stream.writeRelativeOID(fValue);
+	}
+
+	/**
+	 * Return the value of this boolean object
+	 * @return
+	 */
+	public long[] getValue() {
+		return fValue;
+	}
+
+	public String toString() {
+		return "BerRelativeOID(" + Tag.toString(getTag()) + ")=" + fValue;
+	}
 }
-
-

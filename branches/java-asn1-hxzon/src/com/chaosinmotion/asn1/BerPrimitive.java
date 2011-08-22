@@ -43,62 +43,54 @@ import java.io.IOException;
  * The BER Primitive object represents a properly formatted BER object which
  * is unknown, but well formed.
  */
-public class BerPrimitive extends BerNode
-{
-    private byte[] fData;
+public class BerPrimitive extends BerNode {
+	private byte[] fData;
 
-    /**
-     * Construct a new primitive object
-     * @param tag
-     * @param data
-     */
-    public BerPrimitive(int tag, byte[] data)
-    {
-        super(tag);
-        fData = data;
-    }
-    
-    /**
-     * Construct a new primitive object by reading it in from the input stream
-     * @param tag
-     * @param stream
-     * @throws IOException
-     */
-    public BerPrimitive(int tag, BerInputStream stream) throws IOException
-    {
-        super(tag);
-        
-        fData = new byte[stream.readBerLength()];
-        stream.read(fData);
-    }
-    
-    /**
-     * Write the element out to the output stream
-     * @param stream
-     * @throws IOException 
-     * @see com.chaosinmotion.asn1.BerNode#writeElement(com.chaosinmotion.asn1.BerOutputStream)
-     */
+	/**
+	 * Construct a new primitive object
+	 * @param tag
+	 * @param data
+	 */
+	public BerPrimitive(int tag, byte[] data) {
+		super(tag);
+		fData = data;
+	}
 
-    public void writeElement(BerOutputStream stream) throws IOException
-    {
-        stream.writeBerTag(getTag());
-        stream.writeBerLength(fData.length);
-        stream.write(fData);
-    }
-    
-    /**
-     * Return the data representation of this primitive
-     * @return
-     */
-    public byte[] getData()
-    {
-        return fData;
-    }
+	/**
+	 * Construct a new primitive object by reading it in from the input stream
+	 * @param tag
+	 * @param stream
+	 * @throws IOException
+	 */
+	public BerPrimitive(int tag, BerInputStream stream) throws IOException {
+		super(tag);
 
-    public String toString()
-    {
-        return "BerPrimitive(" + Tag.toString(getTag()) + ")=" + fData;
-    }
+		fData = new byte[stream.readBerLength()];
+		stream.read(fData);
+	}
+
+	/**
+	 * Write the element out to the output stream
+	 * @param stream
+	 * @throws IOException 
+	 * @see com.chaosinmotion.asn1.BerNode#writeElement(com.chaosinmotion.asn1.BerOutputStream)
+	 */
+
+	public void writeElement(BerOutputStream stream) throws IOException {
+		stream.writeBerTag(getTag());
+		stream.writeBerLength(fData.length);
+		stream.write(fData);
+	}
+
+	/**
+	 * Return the data representation of this primitive
+	 * @return
+	 */
+	public byte[] getData() {
+		return fData;
+	}
+
+	public String toString() {
+		return "BerPrimitive(" + Tag.toString(getTag()) + ")=" + fData;
+	}
 }
-
-

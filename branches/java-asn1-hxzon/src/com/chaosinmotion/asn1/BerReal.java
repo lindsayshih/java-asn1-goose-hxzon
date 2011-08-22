@@ -41,70 +41,61 @@ import java.io.IOException;
 /**
  * Represents a floating point value in the BER stream
  */
-public class BerReal extends BerNode
-{
-    private double fValue;
+public class BerReal extends BerNode {
+	private double fValue;
 
-    /**
-     * Construct a new boolean object with the specified tag
-     * @param tag
-     * @param value
-     */
-    public BerReal(int tag, double value)
-    {
-        super(tag);
-        fValue = value;
-    }
-    
-    /**
-     * Construct a boolean of type BOOLEAN
-     * @param value
-     */
-    public BerReal(double value)
-    {
-        this(Tag.REAL,value);
-    }
-    
-    /**
-     * Construct a boolean from the input stream
-     * @param tag
-     * @param stream
-     * @throws IOException
-     */
-    public BerReal(int tag, BerInputStream stream) throws IOException
-    {
-        super(tag);
-        
-        fValue = stream.readReal();
-    }
+	/**
+	 * Construct a new boolean object with the specified tag
+	 * @param tag
+	 * @param value
+	 */
+	public BerReal(int tag, double value) {
+		super(tag);
+		fValue = value;
+	}
 
-    /**
-     * Write this BER element to the output stream
-     * Comment
-     * @param stream
-     * @throws IOException
-     * @see com.chaosinmotion.asn1.BerNode#writeElement(com.chaosinmotion.asn1.BerOutputStream)
-     */
-    public void writeElement(BerOutputStream stream) throws IOException
-    {
-        stream.writeBerTag(getTag());
-        stream.writeReal(fValue);
-    }
+	/**
+	 * Construct a boolean of type BOOLEAN
+	 * @param value
+	 */
+	public BerReal(double value) {
+		this(Tag.REAL, value);
+	}
 
-    /**
-     * Return the value of this boolean object
-     * @return
-     */
-    public double getValue()
-    {
-        return fValue;
-    }
-    
-    public String toString()
-    {
-        return "BerReal(" + Tag.toString(getTag()) + ")=" + fValue;
-    }
+	/**
+	 * Construct a boolean from the input stream
+	 * @param tag
+	 * @param stream
+	 * @throws IOException
+	 */
+	public BerReal(int tag, BerInputStream stream) throws IOException {
+		super(tag);
+
+		fValue = stream.readReal();
+	}
+
+	/**
+	 * Write this BER element to the output stream
+	 * Comment
+	 * @param stream
+	 * @throws IOException
+	 * @see com.chaosinmotion.asn1.BerNode#writeElement(com.chaosinmotion.asn1.BerOutputStream)
+	 */
+	public void writeElement(BerOutputStream stream) throws IOException {
+		stream.writeBerTag(getTag());
+		stream.writeReal(fValue);
+	}
+
+	/**
+	 * Return the value of this boolean object
+	 * @return
+	 */
+	public double getValue() {
+		return fValue;
+	}
+
+	public String toString() {
+		return "BerReal(" + Tag.toString(getTag()) + ")=" + fValue;
+	}
 
 }
-
-

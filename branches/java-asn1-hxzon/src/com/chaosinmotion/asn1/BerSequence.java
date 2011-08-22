@@ -41,42 +41,35 @@ import java.io.IOException;
 /**
  * A sequence is an ordered collection of objects in a Ber object
  */
-public class BerSequence extends BerConstruct
-{
-    /**
-     * Construct a new BerSequence with the specified tag
-     * @param tag
-     */
-    public BerSequence(int tag)
-    {
-        super(tag);
-    }
-    
-    /**
-     * Construct a new BerSequence with the default set type
-     */
-    public BerSequence()
-    {
-        this(Tag.SEQUENCE);
-    }
+public class BerSequence extends BerConstruct {
+	/**
+	 * Construct a new BerSequence with the specified tag
+	 * @param tag
+	 */
+	public BerSequence(int tag) {
+		super(tag);
+	}
 
-    /**
-     * Construt a new BerSequence from the input stream
-     * @param tag The tag used to define this element
-     * @param state The current read-state we're in
-     * @param parser The parser that is being used to parse this ASN.1 stream
-     * @param stream The ASN.1 stream being parsed
-     * @throws IOException
-     */
-    public BerSequence(int tag, int state, BerParser parser, BerInputStream stream) throws IOException
-    {
-        super(tag, state, parser, stream);
-    }
-    
-    public String toString()
-    {
-        return toLabeledString("BerSequence");
-    }
+	/**
+	 * Construct a new BerSequence with the default set type
+	 */
+	public BerSequence() {
+		this(Tag.SEQUENCE);
+	}
+
+	/**
+	 * Construt a new BerSequence from the input stream
+	 * @param tag The tag used to define this element
+	 * @param state The current read-state we're in
+	 * @param parser The parser that is being used to parse this ASN.1 stream
+	 * @param stream The ASN.1 stream being parsed
+	 * @throws IOException
+	 */
+	public BerSequence(int tag, int state, BerParser parser, BerInputStream stream) throws IOException {
+		super(tag, state, parser, stream);
+	}
+
+	public String toString() {
+		return toLabeledString("BerSequence");
+	}
 }
-
-
