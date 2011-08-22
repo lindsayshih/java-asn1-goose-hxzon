@@ -37,25 +37,17 @@
 
 package com.chaosinmotion.asn1;
 
-import java.io.IOException;
 
 /**
  * Represents the enumerated type.
  */
 public class BerEnumerated extends BerInteger {
-	/**
-	 * Enumerated type constructor; this builds the default enumerated type
-	 * @param value
-	 */
-	public BerEnumerated(long value) {
-		super(Tag.ENUMERATED, value);
-	}
+//    public BerEnumerated(int tag, BerInputStream stream) throws IOException
+//    {
+//        super(tag, stream);
+//    }
 
-	public BerEnumerated(int tag, BerInputStream stream) throws IOException {
-		super(tag, stream);
-	}
-
-	public BerEnumerated(int tag, long value) {
-		super(tag, value);
+	public BerEnumerated() {
+		setTypeTag(Tag.ENUMERATED);
 	}
 }

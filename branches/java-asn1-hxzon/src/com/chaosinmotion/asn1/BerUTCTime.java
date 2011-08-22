@@ -42,51 +42,49 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
+import org.hxzon.util.BytesUtil;
+
 /**
  * Represents a UTC time object.
  */
 public class BerUTCTime extends BerNode {
 	private static SimpleDateFormat gFormat;
-	private Date fDate;
+	private Date fValue;
+	//add by hxzon
+	private String origValue;
 
-	public BerUTCTime(int tag, Date date) {
-		super(tag);
-
-		fDate = date;
-	}
-
-	public BerUTCTime(Date date) {
-		this(Tag.UTCTIME, date);
-	}
-
-	/**
-	 * Construct a boolean from the input stream
-	 * @param tag
-	 * @param stream
-	 * @throws IOException
-	 */
-	public BerUTCTime(int tag, BerInputStream stream) throws IOException {
-		super(tag);
-
-		fDate = parseDate(new String(stream.readOctetString(0 == (tag & Tag.CONSTRUCTED)), "UTF-8"));
+//    /**
+//     * Construct a boolean from the input stream
+//     * @param tag
+//     * @param stream
+//     * @throws IOException
+//     */
+//    public BerUTCTime(int tag, BerInputStream stream) throws IOException
+//    {
+//        super(tag);
+//        
+//        fDate = parseDate(new String(stream.readOctetString(0 == (tag & Tag.CONSTRUCTED)),"UTF-8"));
+//    }
+	public BerUTCTime() {
+		super(Tag.UTCTIME);
 	}
 
 	/**
 	 * Write the BER element to the stream
 	 * @param stream
 	 * @throws IOException
-	 * @see com.chaosinmotion.asn1.BerNode#writeElement(com.chaosinmotion.asn1.BerOutputStream)
+	 * @see org.hxzon.asn1.core.type.base.BerNode#writeElement(org.hxzon.asn1.core.parse.BerOutputStream)
 	 */
 	public void writeElement(BerOutputStream stream) throws IOException {
-		String date = formatDate(fDate);
+		String date = formatDate(fValue);
 
 		byte[] b = date.getBytes("UTF-8");
 		stream.writeBerTag(getTag() | (stream.isComplexOctetString(b.length) ? Tag.CONSTRUCTED : 0));
 		stream.writeOctetString(b, 0, b.length);
 	}
 
-	public Date getDate() {
-		return fDate;
+	public Date getValue() {
+		return fValue;
 	}
 
 	private static void initFormat() {
@@ -119,7 +117,23 @@ public class BerUTCTime extends BerNode {
 		}
 	}
 
-	public String toString() {
-		return "BerUTCTime(" + Tag.toString(getTag()) + ")=" + fDate;
+	public String getAsn1TypeDesc() {
+		return "BerUTCTime";
+	}
+
+	//add by hxzon
+	protected void readValue(BerInputStream stream) {
+		try {
+			origValue = BytesUtil.toUTF8String(stream.readOctetString(0 == (getTag() & Tag.CONSTRUCTED)));
+			fValue = parseDate(origValue);
+			super.setOffsetAndLen(stream);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	//add by hxzon
+	public String getValueAsString() {
+		return formatDate(getValue());
 	}
 }

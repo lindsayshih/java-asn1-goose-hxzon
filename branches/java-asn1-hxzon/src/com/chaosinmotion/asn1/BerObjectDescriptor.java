@@ -36,26 +36,17 @@
 
 package com.chaosinmotion.asn1;
 
-import java.io.IOException;
 
 /**
  * Represents an object descriptor string, which is (as far as I'm concerned) an arbitrary
  * array of 8-bit bytes
  */
 public class BerObjectDescriptor extends BerOctetString {
-	public BerObjectDescriptor(int tag, byte[] value) {
-		super(tag, value);
+	public BerObjectDescriptor() {
+		setTypeTag(Tag.OBJECTDESCRIPTOR);
 	}
 
-	public BerObjectDescriptor(byte[] value) {
-		this(Tag.OBJECTDESCRIPTOR, value);
-	}
-
-	public BerObjectDescriptor(int tag, BerInputStream stream) throws IOException {
-		super(tag, stream);
-	}
-
-	public String toString() {
-		return "BerObjectDescriptor(" + Tag.toString(getTag()) + ")=" + getValue();
+	public String getAsn1TypeDesc() {
+		return "BerObjectDescriptor";
 	}
 }

@@ -36,26 +36,17 @@
 
 package com.chaosinmotion.asn1;
 
-import java.io.IOException;
 
 /**
  * Represents a universal string string, which is (as far as I'm concerned) an arbitrary
  * array of 8-bit bytes
  */
 public class BerBMPString extends BerOctetString {
-	public BerBMPString(int tag, byte[] value) {
-		super(tag, value);
+	public BerBMPString() {
+		setTypeTag(Tag.BMPSTRING);
 	}
 
-	public BerBMPString(byte[] value) {
-		this(Tag.BMPSTRING, value);
-	}
-
-	public BerBMPString(int tag, BerInputStream stream) throws IOException {
-		super(tag, stream);
-	}
-
-	public String toString() {
-		return "BerBMPString(" + Tag.toString(getTag()) + ")=" + getValue();
+	public String getAsn1TypeDesc() {
+		return "BerBMPString";
 	}
 }

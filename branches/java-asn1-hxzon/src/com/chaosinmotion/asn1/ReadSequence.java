@@ -35,12 +35,15 @@ package com.chaosinmotion.asn1;
 
 import java.io.IOException;
 
+import org.hxzon.util.DebugUtil;
+
 /**
  *  This is a wrapper class that supports reading in a sequence. This is called
  *  prior to reading the length object, and uses the length object to determine
  *  when it's time to stop reading objects.
  */
-class ReadSequence {
+public class ReadSequence {
+	private String display;
 	private BerInputStream fInputStream;
 	private long fStart;
 	private int fLength;
@@ -50,12 +53,14 @@ class ReadSequence {
 	 * Creates a new sequence tracking wrapper.
 	 * @param stream
 	 */
-	public ReadSequence(BerInputStream stream) throws IOException {
+	public ReadSequence(String display, BerInputStream stream) throws IOException {
+		this.display = display;
 		fInputStream = stream;
 		fLength = fInputStream.readBerLength();
 		fStart = fInputStream.getReadBytes();
 
 		fEOF = (fLength == 0);
+		DebugUtil.trace("read sequence " + display + ", start:" + fStart + ",len:" + fLength);
 	}
 
 	/**
@@ -65,21 +70,25 @@ class ReadSequence {
 	 * @throws IOException
 	 */
 	public int readBerTag() throws IOException {
-		if (fEOF)
+		if (fEOF) {
 			return Tag.EOFTYPE;
+		}
 
 		if (fLength != -1) {
-			if (fStart + fLength <= fInputStream.getReadBytes()) {
+//			if (fStart + fLength <= fInputStream.getReadBytes()) {
+			//change by hxzon//FIXME
+			if (fStart + fLength == fInputStream.getReadBytes()) {
 				fEOF = true;
-				return 0;
+				return Tag.EOFTYPE;
 			}
 		}
 
 		int tag = fInputStream.readBerTag();
 		if (tag == Tag.EOFTYPE) {
-			if (0 != fInputStream.readBerLength()) {
-				throw new AsnEncodingException("EOF tag must be zero length");
-			}
+			//remove by hxzon//FIXME
+//			if (0 != fInputStream.readBerLength()) {
+//				throw new AsnEncodingException("EOF tag must be zero length");
+//			}
 			fEOF = true;
 
 			if (fLength != -1) {

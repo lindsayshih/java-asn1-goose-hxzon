@@ -44,6 +44,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.BitSet;
 
+import org.hxzon.asn1.core.type.ext.BitStringPresentation;
+
 /**
  * The input stream reader provides primitives for reading some fundamental objects
  * from a BER input stream
@@ -70,8 +72,10 @@ public class BerInputStream extends LengthInputStream {
 	 */
 	private byte readByte() throws IOException {
 		int b = read();
-		if (b == -1)
+		if (b == -1) {
 			throw new EOFException();
+		}
+		totalLen++;//add by hxzon
 		return (byte) b;
 	}
 
@@ -81,10 +85,18 @@ public class BerInputStream extends LengthInputStream {
 	 * @throws IOException
 	 */
 	public int readBerTag() throws IOException {
+		tagOffset += totalLen;//hxzon
+		totalLen = 0;//hxzon
 		byte h, x;
 		int type;
 
-		h = readByte();
+		//change by hxzon
+		try {
+			h = readByte();
+		} catch (EOFException e) {
+			//add by hxzon//FIXME
+			return Tag.EOFTYPE;
+		}
 		type = h & 0x1F;
 		if (type == 0x1F) {
 			/* Multi-byte type */
@@ -94,8 +106,12 @@ public class BerInputStream extends LengthInputStream {
 				type = (type << 7) | (0x7F & x);
 			} while (0 != (0x80 & x));
 		}
-
-		return Tag.convertTag(0x03 & (h >> 6), type, (0 != (h & 0x20)));
+		//add by hxzon,after read tag
+		lenOffset = tagOffset + totalLen;
+		//change by hxzon,by Fatih Batuk
+//        return Tag.convertTag(0x03 & (h >> 6), type, (0 != (h & 0x20)));
+		int hold = Tag.convertTag(0x03 & (h >> 6), type, (0 != (h & 0x20)));
+		return (hold & Tag.UNCONSTRUCTED_MASK);
 	}
 
 	/**
@@ -108,18 +124,27 @@ public class BerInputStream extends LengthInputStream {
 		int length;
 
 		h = readByte();
-		if (0 == (0x80 & h))
+		if (0 == (0x80 & h)) {
+			//add by hxzon,after read length
+			valueOffset = tagOffset + totalLen;
+			valueLen = h;
 			return h; // definite short form
-
+		}
 		h &= 0x7F; // definite long form; pull data
-		if (h == 0)
+		if (h == 0) {
+			//add by hxzon,after read length
+			valueOffset = tagOffset + totalLen;
+			valueLen = -1;
 			return -1; // indefinite long form
-
+		}
 		length = 0;
 		while (h-- > 0) {
 			x = readByte();
 			length = (length << 8) | (0x00FF & x);
 		}
+		//add by hxzon,after read length
+		valueOffset = tagOffset + totalLen;
+		valueLen = length;
 		return length;
 	}
 
@@ -440,11 +465,67 @@ public class BerInputStream extends LengthInputStream {
 			 * The current tag is compound. Read all of the components
 			 */
 
-			ReadSequence rseq = new ReadSequence(this);
+			ReadSequence rseq = new ReadSequence("read bit string", this);
 
 			int tag;
 			while (0 != (tag = rseq.readBerTag())) {
 				start = readBerBitString(set, start, 0 == (tag & Tag.CONSTRUCTED));
+			}
+		}
+
+		return start;
+	}
+
+	private int readBerBitString2(BitStringPresentation set, int start, boolean primitive) throws IOException {
+		int length;
+		byte bitPadLen;
+		byte bitByte;
+		int i, j;
+
+		if (primitive) {
+			/*
+			 * The current tag is primitive, which means what follows is the
+			 * array of bits
+			 */
+
+			length = readBerLength();
+			if (length < 0) {
+				throw new AsnEncodingException("Ill formed bit stream");
+			}
+			//add by hxzon for when len=1//FIXME is it right when len=1 means no pad?
+			if (length != 1) {
+				bitPadLen = readByte();
+				--length;
+			} else {
+				bitPadLen = 0;
+			}
+			//add by hxzon
+			set.init(bitPadLen, length);
+			//end add
+			for (i = 1; i < length; ++i) {
+				bitByte = readByte();
+				for (j = 0; j < 8; ++j) {
+					if (0 != (bitByte & (0x80 >> j)))
+						set.getValue().set(start);
+					++start;
+				}
+			}
+			bitByte = readByte();
+			for (j = 0; j < 8 - bitPadLen; ++j) {
+				if (0 != (bitByte & (0x80 >> j)))
+					set.getValue().set(start);
+				++start;
+			}
+		} else {
+			/*
+			 * The current tag is compound. Read all of the components
+			 */
+
+			ReadSequence rseq = new ReadSequence("read bit string2", this);
+
+			int tag;
+			while (0 != (tag = rseq.readBerTag())) {
+				start = readBerBitString2(set, start, 0 == (tag & Tag.CONSTRUCTED));
 			}
 		}
 
@@ -461,6 +542,12 @@ public class BerInputStream extends LengthInputStream {
 	public BitSet readBitString(boolean primitive) throws IOException {
 		BitSet set = new BitSet();
 		readBerBitString(set, 0, primitive);
+		return set;
+	}
+
+	public BitStringPresentation readBitString2(boolean primitive) throws IOException {
+		BitStringPresentation set = new BitStringPresentation();
+		readBerBitString2(set, 0, primitive);
 		return set;
 	}
 
@@ -517,7 +604,7 @@ public class BerInputStream extends LengthInputStream {
 			 * This is a compound string. Read each of the components
 			 * as strings inside of me, recursing for each
 			 */
-			ReadSequence rseq = new ReadSequence(this);
+			ReadSequence rseq = new ReadSequence("read octet string", this);
 			int tag;
 
 			while (0 != (tag = rseq.readBerTag())) {
@@ -536,6 +623,61 @@ public class BerInputStream extends LengthInputStream {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		readOctetString(baos, primitive);
 		baos.close();
-		return baos.toByteArray();
+		byte[] result = baos.toByteArray();
+		//add by hxzon
+		if (primitive) {
+			totalLen += result.length;
+//			logger.trace("read octet string:total len:"+totalLen);
+		}
+		//end add
+		return result;
+	}
+
+	//-----------------------------------------
+	//add by hxzon for offset and len
+	private int tagOffset = 0;
+	private int lenOffset = 0;
+	private int valueOffset = 0;
+	private int valueLen = 0;
+	private int totalLen = 0;
+
+	public int getTagOffset() {
+		return tagOffset;
+	}
+
+	public void setTagOffset(int offset) {
+		this.tagOffset = offset;
+	}
+
+	public int getTotalLen() {
+		return totalLen;
+	}
+
+	public void setTotalLen(int len) {
+		this.totalLen = len;
+	}
+
+	public int getLenOffset() {
+		return lenOffset;
+	}
+
+	public void setLenOffset(int lenOffset) {
+		this.lenOffset = lenOffset;
+	}
+
+	public int getValueOffset() {
+		return valueOffset;
+	}
+
+	public void setValueOffset(int valueOffset) {
+		this.valueOffset = valueOffset;
+	}
+
+	public int getValueLen() {
+		return valueLen;
+	}
+
+	public void setValueLen(int valueLen) {
+		this.valueLen = valueLen;
 	}
 }

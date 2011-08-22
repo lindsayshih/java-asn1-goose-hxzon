@@ -36,25 +36,20 @@
 
 package com.chaosinmotion.asn1;
 
-import java.io.IOException;
 
 /**
  * Represents the BER Visible String character set, which is the subset of ASCII
  * minus the control characters.
  */
 public class BerVisibleString extends BerAbstractString {
-	public BerVisibleString(int tag, String value) throws AsnEncodingException {
-		super(tag, value);
-		if (!validate(value))
-			throw new AsnEncodingException("Illegal IA5 string");
-	}
+//    public BerVisibleString(int tag, String value) throws AsnEncodingException
+//    {
+//        super(tag, value);
+//        if (!validate(value)) throw new AsnEncodingException("Illegal IA5 string");
+//    }
 
-	public BerVisibleString(int tag, BerInputStream stream) throws IOException {
-		super(tag, stream);
-	}
-
-	public BerVisibleString(String value) throws AsnEncodingException {
-		this(Tag.VISIBLESTRING, value);
+	public BerVisibleString() {
+		super(Tag.VISIBLESTRING);
 	}
 
 	public static final boolean validate(String str) {
@@ -67,7 +62,8 @@ public class BerVisibleString extends BerAbstractString {
 		return true;
 	}
 
-	public String toString() {
-		return "BerVisibleString(" + Tag.toString(getTag()) + ")=" + getValue();
+	public String getAsn1TypeDesc() {
+		return "BerVisibleString";
 	}
+
 }

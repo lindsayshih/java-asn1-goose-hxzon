@@ -36,7 +36,7 @@
 
 package com.chaosinmotion.asn1;
 
-import java.io.IOException;
+
 
 /**
  * A BerTag can either be marked as implicit or explicit. If it is marked as
@@ -46,31 +46,37 @@ import java.io.IOException;
  * just one object, the value that was tagged.
  */
 public class BerTag extends BerConstruct {
-	/**
-	 * Construct a new BerSequence with the specified tag
-	 * @param tag
-	 */
-	public BerTag(int tag) {
-		super(tag);
+//    /**
+//     * Construct a new BerSequence with the specified tag
+//     * @param tag
+//     */
+//    public BerTag(int tag)
+//    {
+//        super(tag);
+//    }
+//    
+//    /**
+//     * Construt a new BerSequence from the input stream
+//     * @param tag The tag used to define this element
+//     * @param state The current read-state we're in
+//     * @param parser The parser that is being used to parse this ASN.1 stream
+//     * @param stream The ASN.1 stream being parsed
+//     * @throws IOException
+//     */
+//    public BerTag(int tag, int state, BerParser parser, BerInputStream stream) throws IOException
+//    {
+//        super(tag, state, parser, stream);
+//    }
+	public BerTag() {
+		super(Tag.NoTag);
 	}
 
-	/**
-	 * Construt a new BerSequence from the input stream
-	 * @param tag The tag used to define this element
-	 * @param state The current read-state we're in
-	 * @param parser The parser that is being used to parse this ASN.1 stream
-	 * @param stream The ASN.1 stream being parsed
-	 * @throws IOException
-	 */
-	public BerTag(int tag, int state, BerParser parser, BerInputStream stream) throws IOException {
-		super(tag, state, parser, stream);
-	}
-
-	public String toString() {
-		return toLabeledString("BerTag");
+	public String getAsn1TypeDesc() {
+		return "BerTag";
 	}
 
 	public BerNode get() {
 		return get(0);
 	}
+
 }

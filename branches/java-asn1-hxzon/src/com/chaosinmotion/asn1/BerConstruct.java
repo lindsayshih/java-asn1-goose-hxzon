@@ -42,36 +42,42 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import org.hxzon.asn1.core.parse.ext.Asn1Utils;
+import org.hxzon.asn1.core.type.ext.IBerConstruct;
+import org.hxzon.util.DebugUtil;
+
+
 /**
  * Represents a constructed object. A constructed object is a collection of other
  * BerNode objects.
  */
-public abstract class BerConstruct extends BerNode {
-	private ArrayList fList;
+public abstract class BerConstruct extends BerNode implements IBerConstruct {
+	private ArrayList<BerNode> fList;
 
-	protected BerConstruct(int tag) {
-		super(tag);
+	protected BerConstruct(int typeTag) {
+		super(typeTag);
 
-		fList = new ArrayList();
+		fList = new ArrayList<BerNode>();
 	}
 
-	/**
-	 * Read the construct into memory from the input stream
-	 * @param tag The tag used to define this element
-	 * @param state The current read-state we're in
-	 * @param parser The parser that is being used to parse this ASN.1 stream
-	 * @param stream The ASN.1 stream being parsed
-	 * @throws IOException 
-	 */
-	public BerConstruct(int tag, int state, BerParser parser, BerInputStream stream) throws IOException {
-		this(tag);
-
-		int readTag;
-		ReadSequence seq = new ReadSequence(stream);
-		while (0 != (readTag = seq.readBerTag())) {
-			fList.add(parser.read(readTag, state, stream));
-		}
-	}
+//    /**
+//     * Read the construct into memory from the input stream
+//     * @param tag The tag used to define this element
+//     * @param state The current read-state we're in
+//     * @param parser The parser that is being used to parse this ASN.1 stream
+//     * @param stream The ASN.1 stream being parsed
+//     * @throws IOException 
+//     */
+//    public BerConstruct(int tag, int state, BerParser parser, BerInputStream stream) throws IOException
+//    {
+//        this(tag);
+//        
+//        int readTag;
+//        ReadSequence seq = new ReadSequence(stream);
+//        while (0 != (readTag = seq.readBerTag())) {
+//            fList.add(parser.read(readTag, state, stream));
+//        }
+//    }
 
 	/**
 	 * Write the element out. This will use either a definite length (BER/DER)
@@ -79,10 +85,10 @@ public abstract class BerConstruct extends BerNode {
 	 * output format specified in the BerOutputStream object.
 	 * @param stream
 	 * @throws IOException 
-	 * @see com.chaosinmotion.asn1.BerNode#writeElement(com.chaosinmotion.asn1.BerOutputStream)
+	 * @see org.hxzon.asn1.core.type.base.BerNode#writeElement(org.hxzon.asn1.core.parse.BerOutputStream)
 	 */
 	public void writeElement(BerOutputStream stream) throws IOException {
-		Iterator it;
+		Iterator<BerNode> it;
 
 		stream.writeBerTag(getTag() | Tag.CONSTRUCTED);
 
@@ -94,7 +100,7 @@ public abstract class BerConstruct extends BerNode {
 			stream.writeBerLength(-1);
 			it = fList.iterator();
 			while (it.hasNext()) {
-				BerNode node = (BerNode) it.next();
+				BerNode node = it.next();
 				node.writeElement(stream);
 			}
 			stream.writeBerTag(Tag.EOFTYPE);
@@ -108,7 +114,7 @@ public abstract class BerConstruct extends BerNode {
 			BerOutputStream tmp = new BerOutputStream(baos, stream.getEncodingMethod());
 			it = fList.iterator();
 			while (it.hasNext()) {
-				BerNode node = (BerNode) it.next();
+				BerNode node = it.next();
 				node.writeElement(tmp);
 			}
 			tmp.close();
@@ -142,7 +148,7 @@ public abstract class BerConstruct extends BerNode {
 	 * @return
 	 */
 	public BerNode get(int index) {
-		return (BerNode) fList.get(index);
+		return fList.get(index);
 	}
 
 	/**
@@ -157,7 +163,7 @@ public abstract class BerConstruct extends BerNode {
 	 * Return an iterator that iterates through the contents of this object
 	 * @return
 	 */
-	public Iterator iterator() {
+	public Iterator<BerNode> iterator() {
 		return fList.iterator();
 	}
 
@@ -182,24 +188,92 @@ public abstract class BerConstruct extends BerNode {
 	 * Return the contents of this object as an array
 	 * @return
 	 */
-	public BerNode[] toArray() {
-		return (BerNode[]) fList.toArray(new BerNode[fList.size()]);
+	public BerNode[] getChildren() {
+		return fList.toArray(new BerNode[fList.size()]);
 	}
 
-	public String toLabeledString(String name) {
-		StringBuffer buffer = new StringBuffer();
-
-		buffer.append(name).append("(").append(Tag.toString(getTag())).append(")=[");
-		Iterator it = fList.iterator();
+	public String toString() {
+		StringBuffer sb = new StringBuffer();
+		sb.append(getAsn1TypeDesc()).append(",").append(Tag.toString(getTag())).append(fList.size()).append(" items,").append("offset=").append(getTagOffset()).append(",len=").append(getTotalLen());
+		sb.append("\n{");
+		Iterator<BerNode> it = fList.iterator();
 		while (it.hasNext()) {
-			buffer.append('\n');
-			buffer.append(it.next().toString());
-			if (it.hasNext()) {
-				buffer.append(';');
-			}
+			sb.append(it.next().toString()).append("\n");
 		}
-		buffer.append(']');
-
-		return buffer.toString();
+		sb.append("}");
+		return sb.toString();
 	}
+
+	//add by hxzon
+	protected void readValue(BerInputStream stream) {
+		try {
+			int readTag;
+			ReadSequence seq = new ReadSequence(this.getDisplayString(), stream);
+			//add by hxzon:after read len
+			super.setOffsetAndLen(stream);
+			readTag = seq.readBerTag();
+			while (Tag.EOFTYPE != readTag) {
+				BerNode cnode = create(readTag, stream);
+				DebugUtil.trace("create " + cnode.getDisplayString() + "," + cnode.getTagDisplay() + ",tag offset:" + cnode.getTagOffset() + ",len:" + cnode.getTotalLen());
+/** always add choice?
+				//if child is a choice ,and no tag ,and global set don't add choice node
+				if (cnode instanceof BerChoice && !((BerChoice) cnode).hasTag() && Asn1Utils.isNotAddChoiceNode()) {
+					cnode.setParent(this);
+					cnode = ((BerChoice) cnode).getLastRealNode();
+				}
+				**/
+				cnode.setParent(this);
+				fList.add(cnode);
+				readTag = seq.readBerTag();
+			}
+//			logger.trace("stream tag offset:"+stream.getTagOffset()+","+super.getDisplayString()+" tag offset:"+super.getTagOffset()
+//					+", stream total len:"+stream.getTotalLen());
+			super.setTotalLen(stream.getTagOffset() - super.getTagOffset() + stream.getTotalLen());
+//			logger.trace("construct:" + super.getDisplayString() + ",tag offset" + super.getTagOffset() + ",total len:" + super.getTotalLen());
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public BerNode create(int tag, BerInputStream stream) {
+		return Asn1Utils.createUnknown(tag, stream);
+	}
+
+	//add by hxzon
+	public String getValueAsString() {
+//		StringBuilder sb = new StringBuilder();
+//		Iterator<BerNode> it = fList.iterator();
+//		while (it.hasNext()) {
+//			sb.append('\n');
+//			sb.append(it.next().getValueAsString());
+//			sb.append(';');
+//		}
+//		return sb.toString();
+		return "";
+	}
+
+	//add by hxzon
+	//use parser state
+//	public BerConstruct init(String name, String name2, int tag, BerInputStream stream, int state, BerParser parser) {
+//		setTag(tag);
+//		setName(name);
+//		setDisplayString(name2);
+//		readValue(stream, state, parser);
+//		return this;
+//	}
+
+//	public void readValue(BerInputStream stream, int state, BerParser parser) {
+//		try {
+//			int readTag;
+//			ReadSequence seq = new ReadSequence(stream);
+//			//add by hxzon:after read len
+//			super.setOffsetAndLen(stream);
+//			while (0 != (readTag = seq.readBerTag())) {
+//				fList.add(parser.create(readTag, stream, state));
+//			}
+//			super.setTotalLen(stream.getTagOffset() - super.getTagOffset() + stream.getTotalLen());
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//	}
 }

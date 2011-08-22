@@ -39,58 +39,70 @@ package com.chaosinmotion.asn1;
 
 import java.io.IOException;
 
+import org.hxzon.util.BytesUtil;
+
 /**
  * The BER Primitive object represents a properly formatted BER object which
  * is unknown, but well formed.
  */
 public class BerPrimitive extends BerNode {
-	private byte[] fData;
+	private byte[] fValue;
 
-	/**
-	 * Construct a new primitive object
-	 * @param tag
-	 * @param data
-	 */
-	public BerPrimitive(int tag, byte[] data) {
-		super(tag);
-		fData = data;
-	}
-
-	/**
-	 * Construct a new primitive object by reading it in from the input stream
-	 * @param tag
-	 * @param stream
-	 * @throws IOException
-	 */
-	public BerPrimitive(int tag, BerInputStream stream) throws IOException {
-		super(tag);
-
-		fData = new byte[stream.readBerLength()];
-		stream.read(fData);
+//    /**
+//     * Construct a new primitive object by reading it in from the input stream
+//     * @param tag
+//     * @param stream
+//     * @throws IOException
+//     */
+//    public BerPrimitive(int tag, BerInputStream stream) throws IOException
+//    {
+//        super(tag);
+//        
+//        fData = new byte[stream.readBerLength()];
+//        stream.read(fData);
+//    }
+	public BerPrimitive() {
+		super(Tag.NoTag);
 	}
 
 	/**
 	 * Write the element out to the output stream
 	 * @param stream
 	 * @throws IOException 
-	 * @see com.chaosinmotion.asn1.BerNode#writeElement(com.chaosinmotion.asn1.BerOutputStream)
+	 * @see org.hxzon.asn1.core.type.base.BerNode#writeElement(org.hxzon.asn1.core.parse.BerOutputStream)
 	 */
 
 	public void writeElement(BerOutputStream stream) throws IOException {
 		stream.writeBerTag(getTag());
-		stream.writeBerLength(fData.length);
-		stream.write(fData);
+		stream.writeBerLength(fValue.length);
+		stream.write(fValue);
 	}
 
 	/**
 	 * Return the data representation of this primitive
 	 * @return
 	 */
-	public byte[] getData() {
-		return fData;
+	public byte[] getValue() {
+		return fValue;
 	}
 
-	public String toString() {
-		return "BerPrimitive(" + Tag.toString(getTag()) + ")=" + fData;
+	public String getAsn1TypeDesc() {
+		return "BerPrimitive";
+	}
+
+	//add by hxzon
+	protected void readValue(BerInputStream stream) {
+		try {
+			fValue = new byte[stream.readBerLength()];
+			stream.read(fValue);
+			super.setOffsetAndLen(stream);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	//add by hxzon
+	public String getValueAsString() {
+		return BytesUtil.toDisplayHexString(getValue());
 	}
 }

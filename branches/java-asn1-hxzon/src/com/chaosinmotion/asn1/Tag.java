@@ -37,6 +37,11 @@ package com.chaosinmotion.asn1;
  * declarations that allow us to declare a Ber tag object
  */
 public class Tag {
+	//add by hxzon
+	public static final int IMPLICIT = 0;
+	public static final int EXPLICIT = 1;
+	public static final int UNCONSTRUCTED_MASK = 0xDFFFFFFF;
+	//end add
 	/*
 	 * Standard asn.1 class tpes
 	 */
@@ -89,6 +94,9 @@ public class Tag {
 	public static final int CHARACTERSTRING = 0x1D; // ### (string type)
 	public static final int BMPSTRING = 0x1E; // ### (string type)
 	public static final int TYPEMASK = 0x1FFFFFFF;
+	//add by hxzon
+	public static final int TAGNUMBER_MASK = TYPEMASK;
+	public static final int NoTag = 999999999;
 
 	/**
 	 * Internal routine used by my parser. This takes as a class ID the actual
@@ -113,19 +121,23 @@ public class Tag {
 		StringBuffer buffer = new StringBuffer();
 
 		buffer.append('[');
-		switch (tag & CLASSMASK) {
-		case UNIVERSAL:
-			buffer.append("Universal ");
-			break;
-		case APPLICATION:
-			buffer.append("Application ");
-			break;
-		case CONTEXT:
-			buffer.append("Context ");
-			break;
-		case PRIVATE:
-			buffer.append("Private ");
-			break;
+		if (tag == NoTag) {
+			buffer.append("No Tag ");
+		} else {
+			switch (tag & CLASSMASK) {
+			case UNIVERSAL:
+				buffer.append("Universal ");
+				break;
+			case APPLICATION:
+				buffer.append("Application ");
+				break;
+			case CONTEXT:
+				buffer.append("Context ");
+				break;
+			case PRIVATE:
+				buffer.append("Private ");
+				break;
+			}
 		}
 		buffer.append(TYPEMASK & tag);
 		if (0 != (tag & CONSTRUCTED))
