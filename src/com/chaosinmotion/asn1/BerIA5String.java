@@ -37,24 +37,24 @@
 
 package com.chaosinmotion.asn1;
 
-import java.io.IOException;
 
 /**
  * Represents a 7-bit ASCII (IA5) string
  */
 public class BerIA5String extends BerAbstractString {
-	public BerIA5String(int tag, String value) throws AsnEncodingException {
-		super(tag, value);
-		if (!validate(value))
-			throw new AsnEncodingException("Illegal IA5 string");
-	}
+//    public BerIA5String(int tag, String value) throws AsnEncodingException
+//    {
+//        super(tag, value);
+//        if (!validate(value)) throw new AsnEncodingException("Illegal IA5 string");
+//    }
+//
+//    public BerIA5String(int tag, BerInputStream stream) throws IOException
+//    {
+//        super(tag, stream);
+//    }
 
-	public BerIA5String(int tag, BerInputStream stream) throws IOException {
-		super(tag, stream);
-	}
-
-	public BerIA5String(String value) throws AsnEncodingException {
-		this(Tag.IA5STRING, value);
+	public BerIA5String() {
+		super(Tag.IA5STRING);
 	}
 
 	public static final boolean validate(String str) {
@@ -67,7 +67,8 @@ public class BerIA5String extends BerAbstractString {
 		return true;
 	}
 
-	public String toString() {
-		return "BerIA5String(" + Tag.toString(getTag()) + ")=" + getValue();
+	public String getAsn1TypeDesc() {
+		return "BerIA5String";
 	}
+
 }

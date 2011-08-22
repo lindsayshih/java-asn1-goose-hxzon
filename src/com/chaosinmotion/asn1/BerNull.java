@@ -39,26 +39,16 @@ package com.chaosinmotion.asn1;
 
 import java.io.IOException;
 
+import org.hxzon.util.DebugUtil;
+
 /**
  * Represents a null object. This object represents a 'null', which is distinct
  * from no data.
  */
 public class BerNull extends BerNode {
-	/**
-	 * Construct a new boolean object with the specified tag
-	 * @param tag
-	 * @param value
-	 */
-	public BerNull(int tag) {
-		super(tag);
-	}
 
-	/**
-	 * Construct a boolean of type BOOLEAN
-	 * @param value
-	 */
 	public BerNull() {
-		this(Tag.NULL);
+		super(Tag.NULL);
 	}
 
 	/**
@@ -67,27 +57,44 @@ public class BerNull extends BerNode {
 	 * @param stream
 	 * @throws IOException
 	 */
-	public BerNull(int tag, BerInputStream stream) throws IOException {
-		super(tag);
-
-		int len = stream.readBerLength();
-		if (len != 0)
-			throw new AsnEncodingException("Illegal null object");
-	}
+//    public BerNull(int tag, BerInputStream stream) throws IOException
+//    {
+//        super(tag);
+//        
+//        int len = stream.readBerLength();
+//        if (len != 0) throw new AsnEncodingException("Illegal null object");
+//    }
 
 	/**
 	 * Write this BER element to the output stream
 	 * Comment
 	 * @param stream
 	 * @throws IOException
-	 * @see com.chaosinmotion.asn1.BerNode#writeElement(com.chaosinmotion.asn1.BerOutputStream)
+	 * @see org.hxzon.asn1.core.type.base.BerNode#writeElement(org.hxzon.asn1.core.parse.BerOutputStream)
 	 */
 	public void writeElement(BerOutputStream stream) throws IOException {
 		stream.writeBerTag(getTag());
 		stream.writeBerLength(0);
 	}
 
-	public String toString() {
-		return "BerNull(" + Tag.toString(getTag()) + ")";
+	public String getAsn1TypeDesc() {
+		return "BerNull";
+	}
+
+	//add by hxzon
+	protected void readValue(BerInputStream stream) {
+		try {
+			int len = stream.readBerLength();
+			if (len != 0)
+				throw new AsnEncodingException("Illegal null object");
+			super.setOffsetAndLen(stream);
+		} catch (IOException e) {
+			DebugUtil.error("BerNull read value error", e);
+		}
+	}
+
+	//add by hxzon
+	public String getValueAsString() {
+		return "null";
 	}
 }

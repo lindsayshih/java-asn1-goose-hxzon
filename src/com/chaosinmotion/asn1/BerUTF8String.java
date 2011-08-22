@@ -36,35 +36,22 @@
 
 package com.chaosinmotion.asn1;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import org.hxzon.util.BytesUtil;
 
 /**
  * Represents a UTF8 String string, which is (as far as I'm concerned) an arbitrary
  * array of 8-bit bytes
  */
 public class BerUTF8String extends BerOctetString {
-	public BerUTF8String(int tag, byte[] value) {
-		super(tag, value);
+	public BerUTF8String() {
+		setTypeTag(Tag.UTF8STRING);
 	}
 
-	public BerUTF8String(byte[] value) {
-		this(Tag.UTF8STRING, value);
+	public String getAsn1TypeDesc() {
+		return "BerUTF8String";
 	}
 
-	public BerUTF8String(int tag, BerInputStream stream) throws IOException {
-		super(tag, stream);
-	}
-
-	public String toString() {
-		return "BerUTF8String(" + Tag.toString(getTag()) + ")=" + getValue();
-	}
-
-	public String getStringValue() {
-		try {
-			return new String(getValue(), "UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			return ""; // should always be supported
-		}
+	public String getValueAsString() {
+		return BytesUtil.toUTF8String(getValue());
 	}
 }

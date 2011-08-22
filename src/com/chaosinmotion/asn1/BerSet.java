@@ -36,37 +36,31 @@
 
 package com.chaosinmotion.asn1;
 
-import java.io.IOException;
 
 public class BerSet extends BerConstruct {
-	/**
-	 * Construct a new BerSet with the specified tag
-	 * @param tag
-	 */
-	public BerSet(int tag) {
-		super(tag);
-	}
 
 	/**
 	 * Construct a new BerSet with the default set type
 	 */
 	public BerSet() {
-		this(Tag.SET);
+		super(Tag.SET);
 	}
 
-	/**
-	 * Construt a new BerSet from the input stream
-	 * @param tag The tag used to define this element
-	 * @param state The current read-state we're in
-	 * @param parser The parser that is being used to parse this ASN.1 stream
-	 * @param stream The ASN.1 stream being parsed
-	 * @throws IOException
-	 */
-	public BerSet(int tag, int state, BerParser parser, BerInputStream stream) throws IOException {
-		super(tag, state, parser, stream);
+//    /**
+//     * Construt a new BerSet from the input stream
+//     * @param tag The tag used to define this element
+//     * @param state The current read-state we're in
+//     * @param parser The parser that is being used to parse this ASN.1 stream
+//     * @param stream The ASN.1 stream being parsed
+//     * @throws IOException
+//     */
+//    public BerSet(int tag, int state, BerParser parser, BerInputStream stream) throws IOException
+//    {
+//        super(tag, state, parser, stream);
+//    }
+
+	public String getAsn1TypeDesc() {
+		return "BerSet";
 	}
 
-	public String toString() {
-		return toLabeledString("BerSet");
-	}
 }

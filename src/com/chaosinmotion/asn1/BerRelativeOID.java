@@ -49,34 +49,20 @@ import java.io.IOException;
 public class BerRelativeOID extends BerNode {
 	private long[] fValue;
 
-	/**
-	 * Construct a new boolean object with the specified tag
-	 * @param tag
-	 * @param value
-	 */
-	public BerRelativeOID(int tag, long[] value) {
-		super(tag);
-		fValue = value;
-	}
-
-	/**
-	 * Construct a boolean of type BOOLEAN
-	 * @param value
-	 */
-	public BerRelativeOID(long[] value) {
-		this(Tag.RELATIVEOID, value);
-	}
-
-	/**
-	 * Construct a boolean from the input stream
-	 * @param tag
-	 * @param stream
-	 * @throws IOException
-	 */
-	public BerRelativeOID(int tag, BerInputStream stream) throws IOException {
-		super(tag);
-
-		fValue = stream.readRelativeOID();
+//    /**
+//     * Construct a boolean from the input stream
+//     * @param tag
+//     * @param stream
+//     * @throws IOException
+//     */
+//    public BerRelativeOID(int tag, BerInputStream stream) throws IOException
+//    {
+//        super(tag);
+//        
+//        fValue = stream.readRelativeOID();
+//    }
+	public BerRelativeOID() {
+		super(Tag.RELATIVEOID);
 	}
 
 	/**
@@ -84,7 +70,7 @@ public class BerRelativeOID extends BerNode {
 	 * Comment
 	 * @param stream
 	 * @throws IOException
-	 * @see com.chaosinmotion.asn1.BerNode#writeElement(com.chaosinmotion.asn1.BerOutputStream)
+	 * @see org.hxzon.asn1.core.type.base.BerNode#writeElement(org.hxzon.asn1.core.parse.BerOutputStream)
 	 */
 	public void writeElement(BerOutputStream stream) throws IOException {
 		stream.writeBerTag(getTag());
@@ -99,7 +85,24 @@ public class BerRelativeOID extends BerNode {
 		return fValue;
 	}
 
-	public String toString() {
-		return "BerRelativeOID(" + Tag.toString(getTag()) + ")=" + fValue;
+	public String getAsn1TypeDesc() {
+		return "BerRelativeOID";
 	}
+
+	@Override
+	protected void readValue(BerInputStream stream) {
+		try {
+			fValue = stream.readRelativeOID();
+			super.setOffsetAndLen(stream);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	@Override
+	public String getValueAsString() {
+		return "" + getValue();
+	}
+
 }

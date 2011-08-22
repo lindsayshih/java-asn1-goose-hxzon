@@ -49,34 +49,20 @@ import java.io.IOException;
 public class BerOID extends BerNode {
 	private long[] fValue;
 
-	/**
-	 * Construct a new boolean object with the specified tag
-	 * @param tag
-	 * @param value
-	 */
-	public BerOID(int tag, long[] value) {
-		super(tag);
-		fValue = value;
-	}
-
-	/**
-	 * Construct a boolean of type BOOLEAN
-	 * @param value
-	 */
-	public BerOID(long[] value) {
-		this(Tag.OBJECTID, value);
-	}
-
-	/**
-	 * Construct a boolean from the input stream
-	 * @param tag
-	 * @param stream
-	 * @throws IOException
-	 */
-	public BerOID(int tag, BerInputStream stream) throws IOException {
-		super(tag);
-
-		fValue = stream.readOID();
+//    /**
+//     * Construct a boolean from the input stream
+//     * @param tag
+//     * @param stream
+//     * @throws IOException
+//     */
+//    public BerOID(int tag, BerInputStream stream) throws IOException
+//    {
+//        super(tag);
+//        
+//        fValue = stream.readOID();
+//    }
+	public BerOID() {
+		super(Tag.OBJECTID);
 	}
 
 	/**
@@ -84,7 +70,7 @@ public class BerOID extends BerNode {
 	 * Comment
 	 * @param stream
 	 * @throws IOException
-	 * @see com.chaosinmotion.asn1.BerNode#writeElement(com.chaosinmotion.asn1.BerOutputStream)
+	 * @see org.hxzon.asn1.core.type.base.BerNode#writeElement(org.hxzon.asn1.core.parse.BerOutputStream)
 	 */
 	public void writeElement(BerOutputStream stream) throws IOException {
 		stream.writeBerTag(getTag());
@@ -99,7 +85,23 @@ public class BerOID extends BerNode {
 		return fValue;
 	}
 
-	public String toString() {
-		return "BerOID(" + Tag.toString(getTag()) + ")=" + fValue;
+	public String getAsn1TypeDesc() {
+		return "BerOID";
 	}
+
+	//add by hxzon
+	protected void readValue(BerInputStream stream) {
+		try {
+			fValue = stream.readOID();
+			super.setOffsetAndLen(stream);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	//add by hxzon
+	public String getValueAsString() {
+		return String.valueOf(getValue());
+	}
+
 }

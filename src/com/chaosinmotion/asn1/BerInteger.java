@@ -39,40 +39,28 @@ package com.chaosinmotion.asn1;
 
 import java.io.IOException;
 
+import org.hxzon.util.DebugUtil;
+
 /**
  * Represents an integer in the BER stream
  */
 public class BerInteger extends BerNode {
 	private long fValue;
 
-	/**
-	 * Construct a new boolean object with the specified tag
-	 * @param tag
-	 * @param value
-	 */
-	public BerInteger(int tag, long value) {
-		super(tag);
-		fValue = value;
-	}
-
-	/**
-	 * Construct a boolean of type BOOLEAN
-	 * @param value
-	 */
-	public BerInteger(long value) {
-		this(Tag.INTEGER, value);
-	}
-
-	/**
-	 * Construct a boolean from the input stream
-	 * @param tag
-	 * @param stream
-	 * @throws IOException
-	 */
-	public BerInteger(int tag, BerInputStream stream) throws IOException {
-		super(tag);
-
-		fValue = stream.readInteger();
+//    /**
+//     * Construct a boolean from the input stream
+//     * @param tag
+//     * @param stream
+//     * @throws IOException
+//     */
+//    public BerInteger(int tag, BerInputStream stream) throws IOException
+//    {
+//        super(tag);
+//        
+//        fValue = stream.readInteger();
+//    }
+	public BerInteger() {
+		super(Tag.INTEGER);
 	}
 
 	/**
@@ -80,7 +68,7 @@ public class BerInteger extends BerNode {
 	 * Comment
 	 * @param stream
 	 * @throws IOException
-	 * @see com.chaosinmotion.asn1.BerNode#writeElement(com.chaosinmotion.asn1.BerOutputStream)
+	 * @see org.hxzon.asn1.core.type.base.BerNode#writeElement(org.hxzon.asn1.core.parse.BerOutputStream)
 	 */
 	public void writeElement(BerOutputStream stream) throws IOException {
 		stream.writeBerTag(getTag());
@@ -95,7 +83,47 @@ public class BerInteger extends BerNode {
 		return fValue;
 	}
 
-	public String toString() {
-		return "BerInteger(" + Tag.toString(getTag()) + ")=" + fValue;
+	public void setValue(long value) {
+//		long max = ((2 << bitLen) - 1);
+//		long max = (2 << bitLen);
+//		if (value > max) {
+//			value = value - max;
+//		}
+		this.fValue = value;
+	}
+
+	public String getAsn1TypeDesc() {
+		return "BerInteger";
+	}
+
+	private boolean unsigned = false;
+	private int bitLen = 64;
+
+	public BerInteger limitBitLength(int bitLen, boolean unsigned) {
+		this.bitLen = bitLen;
+		this.unsigned = unsigned;
+		if (bitLen < 32) {
+			DebugUtil.debug("bitLen:" + bitLen);
+		}
+		return this;
+	}
+
+	public BerInteger limitBitLength(int bitLen) {
+		return limitBitLength(bitLen, false);
+	}
+
+	//add by hxzon
+	protected void readValue(BerInputStream stream) {
+		try {
+			setValue(stream.readInteger());
+			super.setOffsetAndLen(stream);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	//add by hxzon
+	public String getValueAsString() {
+		return String.valueOf(getValue()) + "[len=" + bitLen + (unsigned ? ",unsigned]" : ",signed]");
 	}
 }

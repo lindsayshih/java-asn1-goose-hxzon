@@ -39,6 +39,10 @@ package com.chaosinmotion.asn1;
 
 import java.io.IOException;
 
+import org.hxzon.util.BytesUtil;
+import org.hxzon.util.DebugUtil;
+
+
 /**
  * Represents an octet string, or a string made up of 8-bit characters. No encoding
  * is imposed here, as in general most printable strings in the ASN-1 encoding
@@ -48,34 +52,20 @@ import java.io.IOException;
 public class BerOctetString extends BerNode {
 	private byte[] fValue;
 
-	/**
-	 * Construct a new boolean object with the specified tag
-	 * @param tag
-	 * @param value
-	 */
-	public BerOctetString(int tag, byte[] value) {
-		super(tag);
-		fValue = value;
-	}
-
-	/**
-	 * Construct a boolean of type BOOLEAN
-	 * @param value
-	 */
-	public BerOctetString(byte[] value) {
-		this(Tag.OCTETSTRING, value);
-	}
-
-	/**
-	 * Construct a boolean from the input stream
-	 * @param tag
-	 * @param stream
-	 * @throws IOException
-	 */
-	public BerOctetString(int tag, BerInputStream stream) throws IOException {
-		super(tag);
-
-		fValue = stream.readOctetString(0 == (tag & Tag.CONSTRUCTED));
+//    /**
+//     * Construct a boolean from the input stream
+//     * @param tag
+//     * @param stream
+//     * @throws IOException
+//     */
+//    public BerOctetString(int tag, BerInputStream stream) throws IOException
+//    {
+//        super(tag);
+//        
+//        fValue = stream.readOctetString(0 == (tag & Tag.CONSTRUCTED));
+//    }
+	public BerOctetString() {
+		super(Tag.OCTETSTRING);
 	}
 
 	/**
@@ -83,7 +73,7 @@ public class BerOctetString extends BerNode {
 	 * Comment
 	 * @param stream
 	 * @throws IOException
-	 * @see com.chaosinmotion.asn1.BerNode#writeElement(com.chaosinmotion.asn1.BerOutputStream)
+	 * @see org.hxzon.asn1.core.type.base.BerNode#writeElement(org.hxzon.asn1.core.parse.BerOutputStream)
 	 */
 	public void writeElement(BerOutputStream stream) throws IOException {
 		stream.writeBerTag(getTag() | (stream.isComplexOctetString(fValue.length) ? Tag.CONSTRUCTED : 0));
@@ -98,7 +88,23 @@ public class BerOctetString extends BerNode {
 		return fValue;
 	}
 
-	public String toString() {
-		return "BerOctetString(" + Tag.toString(getTag()) + ")=" + fValue;
+	public String getAsn1TypeDesc() {
+		return "BerOctetString";
+	}
+
+	//add by hxzon
+	protected void readValue(BerInputStream stream) {
+		try {
+			fValue = stream.readOctetString(0 == (getTag() & Tag.CONSTRUCTED));
+			super.setOffsetAndLen(stream);
+		} catch (IOException e) {
+			DebugUtil.error("read value error", e);
+			fValue = new byte[0];
+		}
+	}
+
+	//add by hxzon
+	public String getValueAsString() {
+		return BytesUtil.toHexString(getValue());
 	}
 }

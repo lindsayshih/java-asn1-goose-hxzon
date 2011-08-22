@@ -39,13 +39,15 @@ package com.chaosinmotion.asn1;
 
 import java.io.IOException;
 
+import org.hxzon.util.BytesUtil;
+
 /**
  * Represents an abstract string. This is the base of the limited syntax strings
  * that are part of the BER encoding standard. Because strings are limited in
  * syntax--they basically use 7-bit character encoding--it is safe to use the
  * Java String syntax to represent the strings.
  */
-abstract class BerAbstractString extends BerNode {
+public abstract class BerAbstractString extends BerNode {
 	private String fValue;
 
 	protected static final int ASCII = 0x0001; // A-Z a-z
@@ -54,26 +56,8 @@ abstract class BerAbstractString extends BerNode {
 	protected static final int MINUS = 0x0008; // -
 	protected static final int PUNCT = 0x0010; // ' ( ) + , - . / : ? sp
 
-	/**
-	 * Construct a new boolean object with the specified tag
-	 * @param tag
-	 * @param value
-	 */
-	public BerAbstractString(int tag, String value) {
-		super(tag);
-		fValue = value;
-	}
-
-	/**
-	 * Construct a boolean from the input stream
-	 * @param tag
-	 * @param stream
-	 * @throws IOException
-	 */
-	public BerAbstractString(int tag, BerInputStream stream) throws IOException {
-		super(tag);
-
-		fValue = new String(stream.readOctetString(0 == (tag & Tag.CONSTRUCTED)), "UTF-8");
+	public BerAbstractString(int typeTag) {
+		super(typeTag);
 	}
 
 	/**
@@ -81,7 +65,7 @@ abstract class BerAbstractString extends BerNode {
 	 * Comment
 	 * @param stream
 	 * @throws IOException
-	 * @see com.chaosinmotion.asn1.BerNode#writeElement(com.chaosinmotion.asn1.BerOutputStream)
+	 * @see org.hxzon.asn1.core.type.base.BerNode#writeElement(org.hxzon.asn1.core.parse.BerOutputStream)
 	 */
 	public void writeElement(BerOutputStream stream) throws IOException {
 		byte[] b = fValue.getBytes("UTF-8");
@@ -95,6 +79,10 @@ abstract class BerAbstractString extends BerNode {
 	 */
 	public String getValue() {
 		return fValue;
+	}
+
+	public void setValue(String fValue) {
+		this.fValue = fValue;
 	}
 
 	private static boolean isValidChar(char c, int charSet) {
@@ -140,5 +128,20 @@ abstract class BerAbstractString extends BerNode {
 				return false;
 		}
 		return true;
+	}
+
+	//add by hxzon
+	protected void readValue(BerInputStream stream) {
+		try {
+			fValue = BytesUtil.toUTF8String(stream.readOctetString(0 == (getTag() & Tag.CONSTRUCTED)));
+			super.setOffsetAndLen(stream);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	//add by hxzon
+	public String getValueAsString() {
+		return getValue();
 	}
 }

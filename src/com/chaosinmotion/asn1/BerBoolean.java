@@ -39,40 +39,27 @@ package com.chaosinmotion.asn1;
 
 import java.io.IOException;
 
+
 /**
  * Represents a boolean in the BER stream
  */
 public class BerBoolean extends BerNode {
 	private boolean fValue;
 
-	/**
-	 * Construct a new boolean object with the specified tag
-	 * @param tag
-	 * @param value
-	 */
-	public BerBoolean(int tag, boolean value) {
-		super(tag);
-		fValue = value;
-	}
-
-	/**
-	 * Construct a boolean of type BOOLEAN
-	 * @param value
-	 */
-	public BerBoolean(boolean value) {
-		this(Tag.BOOLEAN, value);
-	}
-
-	/**
-	 * Construct a boolean from the input stream
-	 * @param tag
-	 * @param stream
-	 * @throws IOException
-	 */
-	public BerBoolean(int tag, BerInputStream stream) throws IOException {
-		super(tag);
-
-		fValue = stream.readBoolean();
+//    /**
+//     * Construct a boolean from the input stream
+//     * @param tag
+//     * @param stream
+//     * @throws IOException
+//     */
+//    public BerBoolean(int tag, BerInputStream stream) throws IOException
+//    {
+//        super(tag);
+//        
+//        fValue = stream.readBoolean();
+//    }
+	public BerBoolean() {
+		super(Tag.BOOLEAN);
 	}
 
 	/**
@@ -80,7 +67,7 @@ public class BerBoolean extends BerNode {
 	 * Comment
 	 * @param stream
 	 * @throws IOException
-	 * @see com.chaosinmotion.asn1.BerNode#writeElement(com.chaosinmotion.asn1.BerOutputStream)
+	 * @see org.hxzon.asn1.core.type.base.BerNode#writeElement(org.hxzon.asn1.core.parse.BerOutputStream)
 	 */
 	public void writeElement(BerOutputStream stream) throws IOException {
 		stream.writeBerTag(getTag());
@@ -95,7 +82,22 @@ public class BerBoolean extends BerNode {
 		return fValue;
 	}
 
-	public String toString() {
-		return "BerBoolean(" + Tag.toString(getTag()) + ")=" + fValue;
+	public String getAsn1TypeDesc() {
+		return "BerBoolean";
+	}
+
+	//add by hxzon
+	public String getValueAsString() {
+		return String.valueOf(getValue());
+	}
+
+	//add by hxzon
+	protected void readValue(BerInputStream stream) {
+		try {
+			fValue = stream.readBoolean();
+			super.setOffsetAndLen(stream);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
