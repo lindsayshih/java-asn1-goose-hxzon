@@ -37,7 +37,6 @@
 
 package com.chaosinmotion.asn1;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 /**
@@ -47,140 +46,69 @@ import java.io.IOException;
  * TODO: Add a parser to convert to and from an OID string, a dotted-notation 
  * string representing an OID.
  */
-public class BerOID extends BerNode {
-	private long[] fValue;
+public class BerOID extends BerNode
+{
+    private long[] fValue;
 
-	/**
-	 * This constructor is added by Fatih Batuk
-	 * Costructs empty BerOID
-	 * @author Fatih Batuk
-	 */
-	public BerOID() {
-		super(Tag.OBJECTID);
-	}
+    /**
+     * Construct a new boolean object with the specified tag
+     * @param tag
+     * @param value
+     */
+    public BerOID(int tag, long[] value)
+    {
+        super(tag);
+        fValue = value;
+    }
+    
+    /**
+     * Construct a boolean of type BOOLEAN
+     * @param value
+     */
+    public BerOID(long[] value)
+    {
+        this(Tag.OBJECTID,value);
+    }
+    
+    /**
+     * Construct a boolean from the input stream
+     * @param tag
+     * @param stream
+     * @throws IOException
+     */
+    public BerOID(int tag, BerInputStream stream) throws IOException
+    {
+        super(tag);
+        
+        fValue = stream.readOID();
+    }
 
-//    /**
-//     * Construct a new boolean object with the specified tag
-//     * @param tag
-//     * @param value
-//     */
-//    public BerOID(int tag, long[] value)
-//    {
-//        super(tag);
-//        fValue = value;
-//    }
-//    
-//    /**
-//     * Construct a boolean of type BOOLEAN
-//     * @param value
-//     */
-//    public BerOID(long[] value)
-//    {
-//        this(Tag.OBJECTID,value);
-//    }
-//    
-//    /**
-//     * Construct a boolean from the input stream
-//     * @param tag
-//     * @param stream
-//     * @throws IOException
-//     */
-//    public BerOID(int tag, BerInputStream stream) throws IOException
-//    {
-//        super(tag);
-//        
-//        fValue = stream.readOID();
-//    }
+    /**
+     * Write this BER element to the output stream
+     * Comment
+     * @param stream
+     * @throws IOException
+     * @see com.chaosinmotion.asn1.BerNode#writeElement(com.chaosinmotion.asn1.BerOutputStream)
+     */
+    public void writeElement(BerOutputStream stream) throws IOException
+    {
+        stream.writeBerTag(getTag());
+        stream.writeOID(fValue);
+    }
 
-	protected void readValue(BerInputStream stream) {
-		try {
-			fValue = stream.readOID();
-			super.setOffsetAndLen(stream);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+    /**
+     * Return the value of this boolean object
+     * @return
+     */
+    public long[] getValue()
+    {
+        return fValue;
+    }
 
-	/**
-	 * Write this BER element to the output stream
-	 * Comment
-	 * @param stream
-	 * @throws IOException
-	 * @see com.chaosinmotion.asn1.BerNode#writeElement(com.chaosinmotion.asn1.BerOutputStream)
-	 */
-	public void writeElement(BerOutputStream stream) throws IOException {
-		if (!isInitialized) { //added by Fatih Batuk
-			throw new AsnEncodingException("\n >> OBJECT ID is uninitialized(empty) and will not be encoded ! (If exists)OID name is : " + getName());
-		}
-
-		/*
-		 * Added by Fatih Batuk
-		 * for explicitly encoding :
-		 */
-		if (getTaggingMethod() == Tag.EXPLICIT) {
-
-			stream.writeBerTag(getTag() | Tag.CONSTRUCTED);
-
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
-			//stream.getEncodingMethod() returns the encoding method : BER, DER or CER
-			BerOutputStream tmp = new BerOutputStream(baos, stream.getEncodingMethod());
-
-			tmp.writeBerTag(Tag.OBJECTID);
-			tmp.writeOID(fValue);
-
-			tmp.close();
-			baos.close();
-
-			byte[] data = baos.toByteArray();
-			stream.writeBerLength(data.length);
-			stream.write(data);
-		} else {
-			stream.writeBerTag(getTag());
-			stream.writeOID(fValue);
-		}
-	}
-
-	/**
-	 * Return the value of this boolean object
-	 * @return
-	 */
-	public long[] getValue() {
-		return fValue;
-	}
-
-	/**
-	 * added by Fatih Batuk
-	 * Sets the value of this object
-	 * @author Fatih Batuk
-	 */
-	public void setValue(long[] parameter) {
-		fValue = parameter;
-		isInitialized = true;
-	}
-
-	public String getType() {
-		return "BerOID";
-	}
-
-	/**
-	 * Added by Fatih Batuk to decode the object..
-	 * @author Fatih Batuk
-	 */
-	public void readElement(BerInputStream in) throws IOException {
-
-		if (getTaggingMethod() == Tag.EXPLICIT) {
-			ReadSequence readSeq = new ReadSequence(in);
-			if (0 != (readSeq.readBerTag())) {
-				setValue(in.readOID());
-			}
-		} else {
-			setValue(in.readOID());
-		}
-	}
-
-	//add by hxzon
-	public String getValueAsString() {
-		return String.valueOf(getValue());
-	}
+    public String toString()
+    {
+        return "BerOID(" + Tag.toString(getTag()) + ")=" + fValue;
+    }
 }
+
+

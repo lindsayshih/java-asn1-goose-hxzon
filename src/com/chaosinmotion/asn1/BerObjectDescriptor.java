@@ -1,10 +1,9 @@
-/*  BerBoolean.java
+/*  BerObjectDescriptor.java
  *
- *  Created on Jun 2, 2006 by William Edward Woody
+ *  Created on August 14, 2008 by William Edward Woody
  */
-
 /*
- * Copyright 2007 William Woody, All Rights Reserved.
+ * Copyright 2007, 2008 William Woody, All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, 
  * are permitted provided that the following conditions are met:
@@ -40,60 +39,29 @@ package com.chaosinmotion.asn1;
 import java.io.IOException;
 
 /**
- * Represents a null object. This object represents a 'null', which is distinct
- * from no data.
+ * Represents an object descriptor string, which is (as far as I'm concerned) an arbitrary
+ * array of 8-bit bytes
  */
-public class BerNull extends BerNode
+public class BerObjectDescriptor extends BerOctetString
 {
-    /**
-     * Construct a new boolean object with the specified tag
-     * @param tag
-     * @param value
-     */
-    public BerNull(int tag)
+    public BerObjectDescriptor(int tag, byte[] value)
     {
-        super(tag);
-    }
-    
-    /**
-     * Construct a boolean of type BOOLEAN
-     * @param value
-     */
-    public BerNull()
-    {
-        this(Tag.NULL);
-    }
-    
-    /**
-     * Construct a boolean from the input stream
-     * @param tag
-     * @param stream
-     * @throws IOException
-     */
-    public BerNull(int tag, BerInputStream stream) throws IOException
-    {
-        super(tag);
-        
-        int len = stream.readBerLength();
-        if (len != 0) throw new AsnEncodingException("Illegal null object");
+        super(tag, value);
     }
 
-    /**
-     * Write this BER element to the output stream
-     * Comment
-     * @param stream
-     * @throws IOException
-     * @see com.chaosinmotion.asn1.BerNode#writeElement(com.chaosinmotion.asn1.BerOutputStream)
-     */
-    public void writeElement(BerOutputStream stream) throws IOException
+    public BerObjectDescriptor(byte[] value)
     {
-        stream.writeBerTag(getTag());
-        stream.writeBerLength(0);
+        this(Tag.OBJECTDESCRIPTOR,value);
+    }
+
+    public BerObjectDescriptor(int tag, BerInputStream stream) throws IOException
+    {
+        super(tag, stream);
     }
 
     public String toString()
     {
-        return "BerNull(" + Tag.toString(getTag()) + ")";
+        return "BerObjectDescriptor(" + Tag.toString(getTag()) + ")=" + getValue();
     }
 }
 

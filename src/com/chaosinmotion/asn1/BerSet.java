@@ -38,72 +38,42 @@ package com.chaosinmotion.asn1;
 
 import java.io.IOException;
 
-public class BerSet extends BerConstruct {
-//    /**
-//     * Construct a new BerSet with the specified tag
-//     * @param tag
-//     */
-//    public BerSet(int tag)
-//    {
-//        super(tag);
-//    }
+public class BerSet extends BerConstruct
+{
+    /**
+     * Construct a new BerSet with the specified tag
+     * @param tag
+     */
+    public BerSet(int tag)
+    {
+        super(tag);
+    }
+    
+    /**
+     * Construct a new BerSet with the default set type
+     */
+    public BerSet()
+    {
+        this(Tag.SET);
+    }
 
-	/**
-	 * Construct a new BerSet with the default set type
-	 */
-	public BerSet() {
-		super(Tag.SET);
-	}
-
-//    /**
-//     * Construt a new BerSet from the input stream
-//     * @param tag The tag used to define this element
-//     * @param state The current read-state we're in
-//     * @param parser The parser that is being used to parse this ASN.1 stream
-//     * @param stream The ASN.1 stream being parsed
-//     * @throws IOException
-//     */
-//    public BerSet(int tag, int state, BerParser parser, BerInputStream stream) throws IOException
-//    {
-//        super(tag, state, parser, stream);
-//    }
-//    
-//    /**
-//     * added by Fatih Batuk (state variable is deleted)
-//     */
-//    public BerSet(int tag, BerParser parser, BerInputStream stream) throws IOException
-//    {
-//        super(tag, parser, stream);
-//    }
-//    
-//    /**
-//     * 
-//     * Added by Fatih Batuk
-//     * @param tag
-//     * @param state
-//     * @param parser
-//     * @param stream
-//     * @param seq
-//     * @throws IOException
-//     * @author Fatih Batuk
-//     */
-//    public BerSet(int tag, AutoParser parser, BerInputStream stream, BerSet set) throws IOException
-//    {
-//        super(tag,parser, stream, set);
-//    }
-//    
-//    public BerSet(int tag, AutoParser parser, BerInputStream stream, SetOf set) throws IOException
-//    {
-//        super(tag,parser, stream, set);
-//    }
-
-	public String getType() {
-		return "BerSet";
-	}
-
-//  Added by Fatih Batuk
-	//This method is not necessary in this level. 
-	//We also override it here because we do not want to set asn.1 library's class as abstract.
-	public void readElement(BerInputStream in) throws IOException {
-	}
+    /**
+     * Construt a new BerSet from the input stream
+     * @param tag The tag used to define this element
+     * @param state The current read-state we're in
+     * @param parser The parser that is being used to parse this ASN.1 stream
+     * @param stream The ASN.1 stream being parsed
+     * @throws IOException
+     */
+    public BerSet(int tag, int state, BerParser parser, BerInputStream stream) throws IOException
+    {
+        super(tag, state, parser, stream);
+    }
+    
+    public String toString()
+    {
+        return toLabeledString("BerSet");
+    }
 }
+
+

@@ -37,7 +37,6 @@
 
 package com.chaosinmotion.asn1;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 /**
@@ -57,48 +56,27 @@ abstract class BerAbstractString extends BerNode
     protected static final int  PUNCT = 0x0010;     // ' ( ) + , - . / : ? sp
 
     /**
-     * This constructor is added by Fatih Batuk
-     * Costructs empty asn.1 string
-     * @author Fatih Batuk
+     * Construct a new boolean object with the specified tag
+     * @param tag
+     * @param value
      */
-    public BerAbstractString(int tag)	
-    { 
-    	super(tag);
+    public BerAbstractString(int tag, String value)
+    {
+        super(tag);
+        fValue = value;
     }
-//    
-//    /**
-//     * Construct a new boolean object with the specified tag
-//     * @param tag
-//     * @param value
-//     */
-//    public BerAbstractString(int tag, String value)
-//    {
-//        super(tag);
-//        fValue = value;
-//    }
-//    
-//    /**
-//     * Construct a boolean from the input stream
-//     * @param tag
-//     * @param stream
-//     * @throws IOException
-//     */
-//    public BerAbstractString(int tag, BerInputStream stream) throws IOException
-//    {
-//        super(tag);
-//        
-//        fValue = new String(stream.readOctetString(0 == (tag & Tag.CONSTRUCTED)),"UTF-8");
-//      //add by hxzon
-//        super.setOffsetAndLen(stream);
-//    }
     
-    protected void readValue(BerInputStream stream){
-    	try {
-    		fValue = new String(stream.readOctetString(0 == (getTag() & Tag.CONSTRUCTED)),"UTF-8");
-			super.setOffsetAndLen(stream);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+    /**
+     * Construct a boolean from the input stream
+     * @param tag
+     * @param stream
+     * @throws IOException
+     */
+    public BerAbstractString(int tag, BerInputStream stream) throws IOException
+    {
+        super(tag);
+        
+        fValue = new String(stream.readOctetString(0 == (tag & Tag.CONSTRUCTED)),"UTF-8");
     }
 
     /**
@@ -110,44 +88,9 @@ abstract class BerAbstractString extends BerNode
      */
     public void writeElement(BerOutputStream stream) throws IOException
     {
-    	if ( ! isInitialized ) {	//added by Fatih Batuk
-    		throw new AsnEncodingException("\n >> This object is uninitialized(empty) and will not be encoded ! (If exists)asn.1 object name is : " + getName());
-    	}
-    	
-    	/*
-    	 * Added by Fatih Batuk
-    	 * for explicitly encoding :
-    	 */
-    	if (getTaggingMethod() == Tag.EXPLICIT) {	
-
-    		 stream.writeBerTag(getTag() | Tag.CONSTRUCTED);
-    		 
-    		 ByteArrayOutputStream baos = new ByteArrayOutputStream();
-    		 
-    		 //stream.getEncodingMethod() returns the encoding method : BER, DER or CER
-             BerOutputStream tmp = new BerOutputStream(baos,stream.getEncodingMethod());
-             
-             byte[] bb = fValue.getBytes("UTF-8");
-             if (this instanceof BerIA5String)
-            	 tmp.writeBerTag(Tag.IA5STRING | (stream.isComplexOctetString(bb.length) ? Tag.CONSTRUCTED : 0)); 
-             else if (this instanceof BerPrintableString)
-            	 tmp.writeBerTag(Tag.PRINTABLESTRING | (stream.isComplexOctetString(bb.length) ? Tag.CONSTRUCTED : 0)); 
-             else 
-            	 throw new AsnFatalException("\n >> In explicitly encoding of asn.1 string object the type is not recognizable!");
-     		 tmp.writeOctetString(bb,0,bb.length);
-             
-             tmp.close();
-             baos.close();
-             
-             byte[] data = baos.toByteArray();
-             stream.writeBerLength(data.length);
-             stream.write(data);       
-    	}
-    	else {
-    		byte[] b = fValue.getBytes("UTF-8");
-    		stream.writeBerTag(getTag() | (stream.isComplexOctetString(b.length) ? Tag.CONSTRUCTED : 0));
-    		stream.writeOctetString(b,0,b.length);
-    	}
+        byte[] b = fValue.getBytes("UTF-8");
+        stream.writeBerTag(getTag() | (stream.isComplexOctetString(b.length) ? Tag.CONSTRUCTED : 0));
+        stream.writeOctetString(b,0,b.length);
     }
 
     /**
@@ -157,17 +100,6 @@ abstract class BerAbstractString extends BerNode
     public String getValue()
     {
         return fValue;
-    }
-    
-    /**
-     * This method is added by Fatih Batuk
-     * Sets the value of this object
-     * @author Fatih Batuk
-     */
-    public void setValue(String parameter)
-    {
-        fValue = parameter;
-        isInitialized = true;
     }
     
     private static boolean isValidChar(char c, int charSet)
@@ -207,11 +139,6 @@ abstract class BerAbstractString extends BerNode
             if (!isValidChar(str.charAt(i),charSet)) return false;
         }
         return true;
-    }
-    
-  //add by hxzon
-    public String getValueAsString(){
-    	return getValue();
     }
 }
 

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry excluding="test/hxzon/asn1/Asn1Test.java|test/hxzon/asn1/TestGooseEncoder.java|org/hxzon/asn1/smv/SmvPdu.java" kind="src" path="hxzon-parser"/>
-	<classpathentry kind="src" path="org.hxzon"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="lib/jnetpcap-1.3.b3-1.jar"/>
+	<classpathentry kind="src" path="test"/>
+	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

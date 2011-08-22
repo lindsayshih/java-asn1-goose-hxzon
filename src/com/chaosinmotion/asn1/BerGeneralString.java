@@ -42,81 +42,66 @@ import java.io.IOException;
 /**
  * Represents a generic UTF8 encoded string
  */
-public class BerGeneralString extends BerNode {
-	private String fValue;
+public class BerGeneralString extends BerNode
+{
+    private String fValue;
 
-//    /**
-//     * Construct a new boolean object with the specified tag
-//     * @param tag
-//     * @param value
-//     */
-//    public BerGeneralString(int tag, String value)
-//    {
-//        super(tag);
-//        fValue = value;
-//    }
-//    
-//    public BerGeneralString(String value)
-//    {
-//        this(Tag.GENERALSTRING, value);
-//    }
-//    
-//    /**
-//     * Construct a boolean from the input stream
-//     * @param tag
-//     * @param stream
-//     * @throws IOException
-//     */
-//    public BerGeneralString(int tag, BerInputStream stream) throws IOException
-//    {
-//        super(tag);
-//        
-//        fValue = new String(stream.readOctetString(0 == (tag & Tag.CONSTRUCTED)),"UTF-8");
-//    }
-	public BerGeneralString() {
-		super(Tag.GENERALSTRING);
-	}
+    /**
+     * Construct a new boolean object with the specified tag
+     * @param tag
+     * @param value
+     */
+    public BerGeneralString(int tag, String value)
+    {
+        super(tag);
+        fValue = value;
+    }
+    
+    public BerGeneralString(String value)
+    {
+        this(Tag.GENERALSTRING, value);
+    }
+    
+    /**
+     * Construct a boolean from the input stream
+     * @param tag
+     * @param stream
+     * @throws IOException
+     */
+    public BerGeneralString(int tag, BerInputStream stream) throws IOException
+    {
+        super(tag);
+        
+        fValue = new String(stream.readOctetString(0 == (tag & Tag.CONSTRUCTED)),"UTF-8");
+    }
 
-	protected void readValue(BerInputStream stream) {
-		try {
-			fValue = new String(stream.readOctetString(0 == (getTag() & Tag.CONSTRUCTED)), "UTF-8");
-			super.setOffsetAndLen(stream);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+    /**
+     * Write this BER element to the output stream
+     * Comment
+     * @param stream
+     * @throws IOException
+     * @see com.chaosinmotion.asn1.BerNode#writeElement(com.chaosinmotion.asn1.BerOutputStream)
+     */
+    public void writeElement(BerOutputStream stream) throws IOException
+    {
+        byte[] b = fValue.getBytes("UTF-8");
+        stream.writeBerTag(getTag() | (stream.isComplexOctetString(b.length) ? Tag.CONSTRUCTED : 0));
+        stream.writeOctetString(b,0,b.length);
+    }
 
-	/**
-	 * Write this BER element to the output stream
-	 * Comment
-	 * @param stream
-	 * @throws IOException
-	 * @see com.chaosinmotion.asn1.BerNode#writeElement(com.chaosinmotion.asn1.BerOutputStream)
-	 */
-	public void writeElement(BerOutputStream stream) throws IOException {
-		byte[] b = fValue.getBytes("UTF-8");
-		stream.writeBerTag(getTag() | (stream.isComplexOctetString(b.length) ? Tag.CONSTRUCTED : 0));
-		stream.writeOctetString(b, 0, b.length);
-	}
+    /**
+     * Return the value of this boolean object
+     * @return
+     */
+    public String getValue()
+    {
+        return fValue;
+    }
 
-	public void readElement(BerInputStream in) throws IOException {
-
-	}
-
-	/**
-	 * Return the value of this boolean object
-	 * @return
-	 */
-	public String getValue() {
-		return fValue;
-	}
-
-	public String getType() {
-		return "BerGeneralString";
-	}
-
-	//add by hxzon
-	public String getValueAsString() {
-		return getValue();
-	}
+    public String toString()
+    {
+        return "BerGeneralString(" + Tag.toString(getTag()) + ")=" + fValue;
+    }
 }
+
+

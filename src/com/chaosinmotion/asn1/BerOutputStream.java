@@ -533,6 +533,38 @@ public class BerOutputStream extends FilterOutputStream
         }
         return i;
     }
+    
+    private void writeOIDElement(long v) throws IOException
+    {
+        int len = getOIDElementLength(v);
+        
+        for (int j = len-1; j > 0; --j) {
+            long m = 0x0080 | (0x007F & (v >> (j * 7)));
+            out.write((int)m);
+        }
+        out.write((int)(0x007F & v));
+    }
+    
+    /**
+     * Write the relative OID without a tag header
+     * @param value
+     * @throws IOException
+     */
+    public void writeRelativeOID(long[] value) throws IOException
+    {
+        int len;
+        int i;
+        
+        len = 0;
+        for (i = 0; i < value.length; ++i) {
+            len += getOIDElementLength(value[i]);
+        }
+        writeBerLength(len);
+        
+        for (i = 0; i < value.length; ++i) {
+            writeOIDElement(value[i]);
+        }
+    }
 
     /**
      * Write the specified OID, without a tag header
@@ -543,7 +575,7 @@ public class BerOutputStream extends FilterOutputStream
     public void writeOID(long[] value) throws IOException
     {
         int len;
-        int i,j;
+        int i;
         
         /*
          * Write the header
@@ -567,14 +599,7 @@ public class BerOutputStream extends FilterOutputStream
         out.write(0x00FF & i);
         
         for (i = 2; i < value.length; ++i) {
-            long v = value[i];
-            len = getOIDElementLength(v);
-            
-            for (j = len-1; j > 0; --j) {
-                long m = 0x0080 | (0x007F & (v >> (j * 7)));
-                out.write((int)m);
-            }
-            out.write((int)(0x007F & v));
+            writeOIDElement(value[i]);
         }
     }
     

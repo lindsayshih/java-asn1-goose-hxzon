@@ -1,8 +1,7 @@
-/*  BerBoolean.java
+/*  BerEmbeddedPDV.java
  *
- *  Created on Jun 2, 2006 by William Edward Woody
+ *  Created on August 14, 2006 by William Edward Woody
  */
-
 /*
  * Copyright 2007 William Woody, All Rights Reserved.
  *
@@ -40,60 +39,44 @@ package com.chaosinmotion.asn1;
 import java.io.IOException;
 
 /**
- * Represents a null object. This object represents a 'null', which is distinct
- * from no data.
+ * An embedded PDV type as defined in RFC 3641. This is encoded the same way as a
+ * sequence, which to me is a construct, so we encode this as a construct object.
  */
-public class BerNull extends BerNode
+public class BerEmbeddedPDV extends BerConstruct
 {
     /**
-     * Construct a new boolean object with the specified tag
+     * Construct a new BerSequence with the specified tag
      * @param tag
-     * @param value
      */
-    public BerNull(int tag)
+    public BerEmbeddedPDV(int tag)
     {
         super(tag);
     }
     
     /**
-     * Construct a boolean of type BOOLEAN
-     * @param value
+     * Construct a new BerSequence with the default set type
      */
-    public BerNull()
+    public BerEmbeddedPDV()
     {
-        this(Tag.NULL);
+        this(Tag.EMBEDDEDPDV);
+    }
+
+    /**
+     * Construt a new BerSequence from the input stream
+     * @param tag The tag used to define this element
+     * @param state The current read-state we're in
+     * @param parser The parser that is being used to parse this ASN.1 stream
+     * @param stream The ASN.1 stream being parsed
+     * @throws IOException
+     */
+    public BerEmbeddedPDV(int tag, int state, BerParser parser, BerInputStream stream) throws IOException
+    {
+        super(tag, state, parser, stream);
     }
     
-    /**
-     * Construct a boolean from the input stream
-     * @param tag
-     * @param stream
-     * @throws IOException
-     */
-    public BerNull(int tag, BerInputStream stream) throws IOException
-    {
-        super(tag);
-        
-        int len = stream.readBerLength();
-        if (len != 0) throw new AsnEncodingException("Illegal null object");
-    }
-
-    /**
-     * Write this BER element to the output stream
-     * Comment
-     * @param stream
-     * @throws IOException
-     * @see com.chaosinmotion.asn1.BerNode#writeElement(com.chaosinmotion.asn1.BerOutputStream)
-     */
-    public void writeElement(BerOutputStream stream) throws IOException
-    {
-        stream.writeBerTag(getTag());
-        stream.writeBerLength(0);
-    }
-
     public String toString()
     {
-        return "BerNull(" + Tag.toString(getTag()) + ")";
+        return toLabeledString("EMBEDDED-PDV");
     }
 }
 

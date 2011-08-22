@@ -42,42 +42,36 @@ import java.io.IOException;
  * Represents the BER Visible String character set, which is the subset of ASCII
  * minus the control characters.
  */
-public class BerVisibleString extends BerAbstractString {
-	public BerVisibleString() {
-		super(Tag.VISIBLESTRING);
-	}
+public class BerVisibleString extends BerAbstractString
+{
+    public BerVisibleString(int tag, String value) throws AsnEncodingException
+    {
+        super(tag, value);
+        if (!validate(value)) throw new AsnEncodingException("Illegal IA5 string");
+    }
 
-//	public BerVisibleString(int tag, String value) throws AsnEncodingException {
-//		super(tag, value);
-//		if (!validate(value))
-//			throw new AsnEncodingException("Illegal IA5 string");
-//	}
-//
-//	public BerVisibleString(int tag, BerInputStream stream) throws IOException {
-//		super(tag, stream);
-//	}
-//
-//	public BerVisibleString(String value) throws AsnEncodingException {
-//		this(Tag.VISIBLESTRING, value);
-//	}
+    public BerVisibleString(int tag, BerInputStream stream) throws IOException
+    {
+        super(tag, stream);
+    }
+    
+    public BerVisibleString(String value) throws AsnEncodingException
+    {
+        this(Tag.VISIBLESTRING,value);
+    }
+    
+    public static final boolean validate(String str)
+    {
+        int i,len = str.length();
+        for (i = 0; i < len; ++i) {
+            char c = str.charAt(i);
+            if ((c < 32) || (c > 126)) return false;
+        }
+        return true;
+    }
 
-	public static final boolean validate(String str) {
-		int i, len = str.length();
-		for (i = 0; i < len; ++i) {
-			char c = str.charAt(i);
-			if ((c < 32) || (c > 126))
-				return false;
-		}
-		return true;
-	}
-
-	public String getType() {
-		return "BerVisibleString";
-	}
-
-//  Added by Fatih Batuk
-	//This method is not necessary in this level. 
-	//We also override it here because we do not want to set asn.1 library's class as abstract.
-	public void readElement(BerInputStream in) throws IOException {
-	}
+    public String toString()
+    {
+        return "BerVisibleString(" + Tag.toString(getTag()) + ")=" + getValue();
+    }
 }

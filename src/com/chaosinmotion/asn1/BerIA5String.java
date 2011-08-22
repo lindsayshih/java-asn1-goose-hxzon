@@ -42,63 +42,36 @@ import java.io.IOException;
 /**
  * Represents a 7-bit ASCII (IA5) string
  */
-public class BerIA5String extends BerAbstractString {
+public class BerIA5String extends BerAbstractString
+{
+    public BerIA5String(int tag, String value) throws AsnEncodingException
+    {
+        super(tag, value);
+        if (!validate(value)) throw new AsnEncodingException("Illegal IA5 string");
+    }
 
-	/**
-	 * added by Fatih Batuk
-	 * Costructs empty BerIA5String
-	 * @author Fatih Batuk
-	 */
-	public BerIA5String() {
-		super(Tag.IA5STRING);
-	}
+    public BerIA5String(int tag, BerInputStream stream) throws IOException
+    {
+        super(tag, stream);
+    }
+    
+    public BerIA5String(String value) throws AsnEncodingException
+    {
+        this(Tag.IA5STRING,value);
+    }
+    
+    public static final boolean validate(String str)
+    {
+        int i,len = str.length();
+        for (i = 0; i < len; ++i) {
+            char c = str.charAt(i);
+            if ((c < 0) || (c > 127)) return false;
+        }
+        return true;
+    }
 
-//    public BerIA5String(int tag, String value) throws AsnEncodingException
-//    {
-//        super(tag, value);
-//        if (!validate(value)) throw new AsnEncodingException("Illegal IA5 string");
-//    }
-//
-//    public BerIA5String(int tag, BerInputStream stream) throws IOException
-//    {
-//        super(tag, stream);
-//    }
-//    
-//    public BerIA5String(String value) throws AsnEncodingException
-//    {
-//        this(Tag.IA5STRING,value);
-//    }
-
-	public static final boolean validate(String str) {
-		int i, len = str.length();
-		for (i = 0; i < len; ++i) {
-			char c = str.charAt(i);
-			if ((c < 0) || (c > 127))
-				return false;
-		}
-		return true;
-	}
-
-	public String getType() {
-		return "BerIA5String";
-	}
-
-	/**
-	 * Added by Fatih Batuk to decode the object..
-	 * Note that : the input of the setValue() method below 
-	 * 				is exactly copied from the constructor of the asn.1 library
-	 * @author Fatih Batuk
-	 */
-	public void readElement(BerInputStream in) throws IOException {
-
-		if (getTaggingMethod() == Tag.EXPLICIT) {
-			ReadSequence readSeq = new ReadSequence(in);
-			if (0 != (readSeq.readBerTag())) {
-				setValue(new String(in.readOctetString(0 == (getTag() & Tag.CONSTRUCTED)), "UTF-8"));
-			}
-		} else {
-			setValue(new String(in.readOctetString(0 == (getTag() & Tag.CONSTRUCTED)), "UTF-8"));
-		}
-
-	}
+    public String toString()
+    {
+        return "BerIA5String(" + Tag.toString(getTag()) + ")=" + getValue();
+    }
 }

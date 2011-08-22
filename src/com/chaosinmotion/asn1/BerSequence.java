@@ -41,79 +41,42 @@ import java.io.IOException;
 /**
  * A sequence is an ordered collection of objects in a Ber object
  */
-public class BerSequence extends BerConstruct {
-//    /**
-//     * Construct a new BerSequence with the specified tag
-//     * @param tag
-//     */
-//    public BerSequence(int tag)
-//    {
-//        super(tag);
-//    }
+public class BerSequence extends BerConstruct
+{
+    /**
+     * Construct a new BerSequence with the specified tag
+     * @param tag
+     */
+    public BerSequence(int tag)
+    {
+        super(tag);
+    }
+    
+    /**
+     * Construct a new BerSequence with the default set type
+     */
+    public BerSequence()
+    {
+        this(Tag.SEQUENCE);
+    }
 
-	/**
-	 * Construct a new BerSequence with the default set type
-	 */
-	public BerSequence() {
-		super(Tag.SEQUENCE);
-	}
-
-//    /**
-//     * Construt a new BerSequence from the input stream
-//     * @param tag The tag used to define this element
-//     * @param state The current read-state we're in
-//     * @param parser The parser that is being used to parse this ASN.1 stream
-//     * @param stream The ASN.1 stream being parsed
-//     * @throws IOException
-//     */
-//    public BerSequence(int tag, int state, BerParser parser, BerInputStream stream) throws IOException
-//    {
-//        super(tag, state, parser, stream);
-//    }
-//
-//    /**
-//     * added by Fatih Batuk (state variable is deleted)
-//     */
-//    public BerSequence(int tag, BerParser parser, BerInputStream stream) throws IOException
-//    {
-//        super(tag, parser, stream);
-//    }
-
-//    /**
-//     * 
-//     * Added by Fatih Batuk
-//     * @param tag
-//     * @param state
-//     * @param parser
-//     * @param stream
-//     * @param seq
-//     * @throws IOException
-//     * @author Fatih Batuk
-//     */
-//    public BerSequence(int tag, AutoParser parser, BerInputStream stream, BerSequence seq) throws IOException
-//    {
-//        super(tag,parser, stream, seq);
-//    }
-//    /**
-//     * Added by Fatih Batuk to decode a SequenceOf object
-//     * @param tag
-//     * @param parser
-//     * @param stream
-//     * @param seq
-//     * @throws IOException
-//     */
-//    public BerSequence(int tag, AutoParser parser, BerInputStream stream, SequenceOf seq) throws IOException
-//    {
-//        super(tag,parser, stream, seq);
-//    }
-
-	public String getType() {
-		return "BerSequence";
-	}
-
-//  Added by Fatih Batuk
-	//This method is not necessary in this level. 
-	//We also override it here because we do not want to set asn.1 library's class as abstract.
-	public void readElement(BerInputStream in) throws IOException {
-	}
+    /**
+     * Construt a new BerSequence from the input stream
+     * @param tag The tag used to define this element
+     * @param state The current read-state we're in
+     * @param parser The parser that is being used to parse this ASN.1 stream
+     * @param stream The ASN.1 stream being parsed
+     * @throws IOException
+     */
+    public BerSequence(int tag, int state, BerParser parser, BerInputStream stream) throws IOException
+    {
+        super(tag, state, parser, stream);
+    }
+    
+    public String toString()
+    {
+        return toLabeledString("BerSequence");
+    }
 }
+
+

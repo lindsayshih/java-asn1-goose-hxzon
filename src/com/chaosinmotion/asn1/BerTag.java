@@ -45,40 +45,39 @@ import java.io.IOException;
  * the specific tag value. Thus, this is a constructed object that must contain
  * just one object, the value that was tagged.
  */
-public class BerTag extends BerConstruct {
-	/**
-	 * Construct a new BerSequence with the specified tag
-	 * @param tag
-	 */
-	public BerTag(int tag) {
-		super(tag);
-	}
-
-//    /**
-//     * Construt a new BerSequence from the input stream
-//     * @param tag The tag used to define this element
-//     * @param state The current read-state we're in
-//     * @param parser The parser that is being used to parse this ASN.1 stream
-//     * @param stream The ASN.1 stream being parsed
-//     * @throws IOException
-//     */
-//    public BerTag(int tag, int state, BerParser parser, BerInputStream stream) throws IOException
-//    {
-//        super(tag, state, parser, stream);
-//    }
-
-	public String getType() {
-		return "BerTag";
-	}
-
-	public BerNode get() {
-		return get(0);
-	}
-
-//  Added by Fatih Batuk
-	//This method is not necessary in this level. 
-	//We also override it here because we do not want to set asn.1 library's class as abstract.
-	public void readElement(BerInputStream in) throws IOException {
-	}
-
+public class BerTag extends BerConstruct
+{
+    /**
+     * Construct a new BerSequence with the specified tag
+     * @param tag
+     */
+    public BerTag(int tag)
+    {
+        super(tag);
+    }
+    
+    /**
+     * Construt a new BerSequence from the input stream
+     * @param tag The tag used to define this element
+     * @param state The current read-state we're in
+     * @param parser The parser that is being used to parse this ASN.1 stream
+     * @param stream The ASN.1 stream being parsed
+     * @throws IOException
+     */
+    public BerTag(int tag, int state, BerParser parser, BerInputStream stream) throws IOException
+    {
+        super(tag, state, parser, stream);
+    }
+    
+    public String toString()
+    {
+        return toLabeledString("BerTag");
+    }
+    
+    public BerNode get()
+    {
+        return get(0);
+    }
 }
+
+

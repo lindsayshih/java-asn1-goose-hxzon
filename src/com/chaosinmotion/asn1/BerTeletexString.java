@@ -36,31 +36,33 @@
 
 package com.chaosinmotion.asn1;
 
+import java.io.IOException;
 
 /**
  * Represents a Teletex string, which is (as far as I'm concerned) an arbitrary
  * array of 8-bit bytes
  */
-public class BerTeletexString extends BerOctetString {
-//    public BerTeletexString(int tag, byte[] value)
-//    {
-//        super(tag, value);
-//    }
-//
-//    public BerTeletexString(byte[] value)
-//    {
-//        this(Tag.TELETEXSTRING,value);
-//    }
-//
-//    public BerTeletexString(int tag, BerInputStream stream) throws IOException
-//    {
-//        super(tag, stream);
-//    }
-	public BerTeletexString() {
-		setTag(Tag.TELETEXSTRING);
-	}
+public class BerTeletexString extends BerOctetString
+{
+    public BerTeletexString(int tag, byte[] value)
+    {
+        super(tag, value);
+    }
 
-	public String getType() {
-		return "BerTeletexString";
-	}
+    public BerTeletexString(byte[] value)
+    {
+        this(Tag.TELETEXSTRING,value);
+    }
+
+    public BerTeletexString(int tag, BerInputStream stream) throws IOException
+    {
+        super(tag, stream);
+    }
+
+    public String toString()
+    {
+        return "BerTeletexString(" + Tag.toString(getTag()) + ")=" + getValue();
+    }
 }
+
+

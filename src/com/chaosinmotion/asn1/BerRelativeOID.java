@@ -1,6 +1,6 @@
-/*  BerBoolean.java
+/*  BerRelativeOID.java
  *
- *  Created on Jun 2, 2006 by William Edward Woody
+ *  Created on August 14, 2008 by William Edward Woody
  */
 
 /*
@@ -40,28 +40,34 @@ package com.chaosinmotion.asn1;
 import java.io.IOException;
 
 /**
- * Represents a null object. This object represents a 'null', which is distinct
- * from no data.
+ * Represents an object identifier in the BER stream. An object identifier is a
+ * sequence of integers which represent an OID.
+ * 
+ * TODO: Add a parser to convert to and from an OID string, a dotted-notation 
+ * string representing an OID.
  */
-public class BerNull extends BerNode
+public class BerRelativeOID extends BerNode
 {
+    private long[] fValue;
+
     /**
      * Construct a new boolean object with the specified tag
      * @param tag
      * @param value
      */
-    public BerNull(int tag)
+    public BerRelativeOID(int tag, long[] value)
     {
         super(tag);
+        fValue = value;
     }
     
     /**
      * Construct a boolean of type BOOLEAN
      * @param value
      */
-    public BerNull()
+    public BerRelativeOID(long[] value)
     {
-        this(Tag.NULL);
+        this(Tag.RELATIVEOID,value);
     }
     
     /**
@@ -70,12 +76,11 @@ public class BerNull extends BerNode
      * @param stream
      * @throws IOException
      */
-    public BerNull(int tag, BerInputStream stream) throws IOException
+    public BerRelativeOID(int tag, BerInputStream stream) throws IOException
     {
         super(tag);
         
-        int len = stream.readBerLength();
-        if (len != 0) throw new AsnEncodingException("Illegal null object");
+        fValue = stream.readRelativeOID();
     }
 
     /**
@@ -88,12 +93,21 @@ public class BerNull extends BerNode
     public void writeElement(BerOutputStream stream) throws IOException
     {
         stream.writeBerTag(getTag());
-        stream.writeBerLength(0);
+        stream.writeRelativeOID(fValue);
+    }
+
+    /**
+     * Return the value of this boolean object
+     * @return
+     */
+    public long[] getValue()
+    {
+        return fValue;
     }
 
     public String toString()
     {
-        return "BerNull(" + Tag.toString(getTag()) + ")";
+        return "BerRelativeOID(" + Tag.toString(getTag()) + ")=" + fValue;
     }
 }
 

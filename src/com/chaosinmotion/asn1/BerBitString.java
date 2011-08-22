@@ -37,153 +37,75 @@
 
 package com.chaosinmotion.asn1;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.BitSet;
 
 /**
  * Represents a bit string, or a bit set, in the BER stream
  */
-public class BerBitString extends BerNode {
-	private BitSet fValue;
+public class BerBitString extends BerNode
+{
+    private BitSet fValue;
 
-	/**
-	 * This constructor is added by Fatih Batuk
-	 * Costructs empty BerBitSTring
-	 * @author Fatih Batuk
-	 */
-	public BerBitString() {
-		super(Tag.BITSTRING);
-	}
+    /**
+     * Construct a new boolean object with the specified tag
+     * @param tag
+     * @param value
+     */
+    public BerBitString(int tag, BitSet value)
+    {
+        super(tag);
+        fValue = value;
+    }
+    
+    /**
+     * Construct a boolean of type BOOLEAN
+     * @param value
+     */
+    public BerBitString(BitSet value)
+    {
+        this(Tag.BITSTRING,value);
+    }
+    
+    /**
+     * Construct a boolean from the input stream
+     * @param tag
+     * @param stream
+     * @throws IOException
+     */
+    public BerBitString(int tag, BerInputStream stream) throws IOException
+    {
+        super(tag);
+        
+        fValue = stream.readBitString(0 == (tag & Tag.CONSTRUCTED));
+    }
 
-//    /**
-//     * Construct a new boolean object with the specified tag
-//     * @param tag
-//     * @param value
-//     */
-//    public BerBitString(int tag, BitSet value)
-//    {
-//        super(tag);
-//        fValue = value;
-//    }
-//    
-//    /**
-//     * Construct a boolean of type BOOLEAN
-//     * @param value
-//     */
-//    public BerBitString(BitSet value)
-//    {
-//        this(Tag.BITSTRING,value);
-//    }
-//    
-//    /**
-//     * Construct a boolean from the input stream
-//     * @param tag
-//     * @param stream
-//     * @throws IOException
-//     */
-//    public BerBitString(int tag, BerInputStream stream) throws IOException
-//    {
-//        super(tag);
-//        
-//        fValue = stream.readBitString(0 == (tag & Tag.CONSTRUCTED));
-//        //add by hxzon
-//        super.setOffsetAndLen(stream);
-//    }
+    /**
+     * Write this BER element to the output stream
+     * Comment
+     * @param stream
+     * @throws IOException
+     * @see com.chaosinmotion.asn1.BerNode#writeElement(com.chaosinmotion.asn1.BerOutputStream)
+     */
+    public void writeElement(BerOutputStream stream) throws IOException
+    {
+        stream.writeBerTag(getTag() | (stream.isComplexBitString(fValue) ? Tag.CONSTRUCTED : 0));
+        stream.writeBitString(fValue);
+    }
 
-	//add by hxzon
-	protected void readValue(BerInputStream stream) {
-		try {
-			fValue = stream.readBitString(0 == (getTag() & Tag.CONSTRUCTED));
-			super.setOffsetAndLen(stream);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+    /**
+     * Return the value of this boolean object
+     * @return
+     */
+    public BitSet getValue()
+    {
+        return fValue;
+    }
 
-	/**
-	 * Write this BER element to the output stream
-	 * Comment
-	 * @param stream
-	 * @throws IOException
-	 * @see com.chaosinmotion.asn1.BerNode#writeElement(com.chaosinmotion.asn1.BerOutputStream)
-	 */
-	public void writeElement(BerOutputStream stream) throws IOException {
-		if (!isInitialized) { //added by Fatih Batuk
-			throw new AsnEncodingException("\n >> BIT STRING is uninitialized(empty) and will not be encoded ! (If exists)B�tString name is : " + getName());
-		}
-
-		/*
-		 * Added by Fatih Batuk
-		 * for explicitly encoding :
-		 */
-		if (getTaggingMethod() == Tag.EXPLICIT) {
-
-			stream.writeBerTag(getTag() | Tag.CONSTRUCTED);
-
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
-			//stream.getEncodingMethod() returns the encoding method : BER, DER or CER
-			BerOutputStream tmp = new BerOutputStream(baos, stream.getEncodingMethod());
-
-			tmp.writeBerTag(Tag.BITSTRING | (stream.isComplexBitString(fValue) ? Tag.CONSTRUCTED : 0));
-			tmp.writeBitString(fValue);
-
-			tmp.close();
-			baos.close();
-
-			byte[] data = baos.toByteArray();
-			stream.writeBerLength(data.length);
-			stream.write(data);
-		}
-
-		stream.writeBerTag(getTag() | (stream.isComplexBitString(fValue) ? Tag.CONSTRUCTED : 0));
-		stream.writeBitString(fValue);
-	}
-
-	/**
-	 * Return the value of this boolean object
-	 * @return
-	 */
-	public BitSet getValue() {
-		return fValue;
-	}
-
-	/**
-	 * This method is added by Fatih Batuk
-	 * Sets the value of this object
-	 * @author Fatih Batuk
-	 */
-	public void setValue(BitSet parameter) {
-		fValue = parameter;
-		isInitialized = true;
-	}
-
-	public String getType() {
-		return "BerBitString";
-	}
-
-	/**
-	 * Added by Fatih Batuk to decode the object..
-	 * Note that : the input for the setValue() method below 
-	 * 				is exactly copied from the constructor of the asn.1 library
-	 * @author Fatih Batuk
-	 */
-	public void readElement(BerInputStream in) throws IOException {
-
-		if (getTaggingMethod() == Tag.EXPLICIT) {
-			ReadSequence readSeq = new ReadSequence(in);
-			if (0 != (readSeq.readBerTag())) {
-				setValue(in.readBitString(0 == (getTag() & Tag.CONSTRUCTED)));
-			}
-		} else {
-			setValue(in.readBitString(0 == (getTag() & Tag.CONSTRUCTED)));
-		}
-
-	}
-
-	//add by hxzon
-	public String getValueAsString() {
-		return "" + getValue();
-	}
+    public String toString()
+    {
+        return "BerBitString(" + Tag.toString(getTag()) + ")=" + fValue.toString();
+    }
 }
+
+

@@ -40,7 +40,7 @@ import java.io.IOException;
  *  prior to reading the length object, and uses the length object to determine
  *  when it's time to stop reading objects.
  */
-public class ReadSequence		// changed to public view by Fatih Batuk
+class ReadSequence
 {
     private BerInputStream		fInputStream;
     private long					fStart;

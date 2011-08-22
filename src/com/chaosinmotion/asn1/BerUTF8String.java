@@ -1,10 +1,9 @@
-/*  BerBoolean.java
+/*  BerUTF8String.java
  *
- *  Created on Jun 2, 2006 by William Edward Woody
+ *  Created on August 14, 2008 by William Edward Woody
  */
-
 /*
- * Copyright 2007 William Woody, All Rights Reserved.
+ * Copyright 2007, 2008 William Woody, All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, 
  * are permitted provided that the following conditions are met:
@@ -38,62 +37,42 @@
 package com.chaosinmotion.asn1;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 /**
- * Represents a null object. This object represents a 'null', which is distinct
- * from no data.
+ * Represents a UTF8 String string, which is (as far as I'm concerned) an arbitrary
+ * array of 8-bit bytes
  */
-public class BerNull extends BerNode
+public class BerUTF8String extends BerOctetString
 {
-    /**
-     * Construct a new boolean object with the specified tag
-     * @param tag
-     * @param value
-     */
-    public BerNull(int tag)
+    public BerUTF8String(int tag, byte[] value)
     {
-        super(tag);
-    }
-    
-    /**
-     * Construct a boolean of type BOOLEAN
-     * @param value
-     */
-    public BerNull()
-    {
-        this(Tag.NULL);
-    }
-    
-    /**
-     * Construct a boolean from the input stream
-     * @param tag
-     * @param stream
-     * @throws IOException
-     */
-    public BerNull(int tag, BerInputStream stream) throws IOException
-    {
-        super(tag);
-        
-        int len = stream.readBerLength();
-        if (len != 0) throw new AsnEncodingException("Illegal null object");
+        super(tag, value);
     }
 
-    /**
-     * Write this BER element to the output stream
-     * Comment
-     * @param stream
-     * @throws IOException
-     * @see com.chaosinmotion.asn1.BerNode#writeElement(com.chaosinmotion.asn1.BerOutputStream)
-     */
-    public void writeElement(BerOutputStream stream) throws IOException
+    public BerUTF8String(byte[] value)
     {
-        stream.writeBerTag(getTag());
-        stream.writeBerLength(0);
+        this(Tag.UTF8STRING,value);
+    }
+
+    public BerUTF8String(int tag, BerInputStream stream) throws IOException
+    {
+        super(tag, stream);
     }
 
     public String toString()
     {
-        return "BerNull(" + Tag.toString(getTag()) + ")";
+        return "BerUTF8String(" + Tag.toString(getTag()) + ")=" + getValue();
+    }
+    
+    public String getStringValue()
+    {
+        try {
+            return new String(getValue(),"UTF-8");
+        }
+        catch (UnsupportedEncodingException e) {
+            return "";      // should always be supported
+        }
     }
 }
 

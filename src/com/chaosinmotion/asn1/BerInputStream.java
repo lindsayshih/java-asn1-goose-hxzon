@@ -75,7 +75,6 @@ public class BerInputStream extends LengthInputStream
     {
         int b = read();
         if (b == -1) throw new EOFException();
-        totalLen++;//hxzon
         return (byte)b;
     }
 
@@ -86,10 +85,9 @@ public class BerInputStream extends LengthInputStream
      */
     public int readBerTag() throws IOException
     {
-    	tagOffset+=totalLen;//hxzon
-    	totalLen=0;
         byte h,x;
         int type;
+        
         h = readByte();
         type = h & 0x1F;
         if (type == 0x1F) {
@@ -100,25 +98,8 @@ public class BerInputStream extends LengthInputStream
                 type = (type << 7) | (0x7F & x);
             } while (0 != (0x80 & x));
         }
-        //add by hxzon,after read tag
-        lenOffset=tagOffset+totalLen;
-      //modified by Fatih Batuk
-        int hold = Tag.convertTag(0x03 & (h >> 6), type, (0 != (h & 0x20))); 
         
-        /*
-       	 * Here we are masking tag value with our UNCONSTRUCTED_MASK constant to gain the original  
-       	 * tag value for EXPLICITLY encoded primitives and constructed objects(Sequence/Set).
-       	 * The tag values of other primitives are not affected by this masking operation.
-       	 * And there is some constraint that if you tagged a data type in your asn.1 protocol like 
-       	 * [ <tagNumber> ] (which is CONTEXT class tagging) or
-       	 * [PRIVATE <tagNumber>] or [APPLICATION <tagNumber>] 
-       	 * the 'tagNumber' value should be in the range 0 to 127 (i.e. -1 < tagNumber < 128)
-       	 * This constraint is not related with this masking. This is related 
-       	 * with the design of this asn.1 library
-       	 * 
-       	 * -- Fatih Batuk
-       	 */
-        return (hold & Tag.UNCONSTRUCTED_MASK);
+        return Tag.convertTag(0x03 & (h >> 6), type, (0 != (h & 0x20)));
     }
     
     /**
@@ -132,29 +113,16 @@ public class BerInputStream extends LengthInputStream
         int length;
         
         h = readByte();
-        if (0 == (0x80 & h)) {
-        	//add by hxzon,after read length
-        	 valueOffset=tagOffset+totalLen;
-        	 valueLen=h;
-        	return h;  // definite short form
-        }
+        if (0 == (0x80 & h)) return h;  // definite short form
         
         h &= 0x7F;                      // definite long form; pull data
-        if (h == 0) {
-        	//add by hxzon,after read length
-       	 valueOffset=tagOffset+totalLen;
-       	 valueLen=-1;
-        	return -1;          // indefinite long form
-        }
+        if (h == 0) return -1;          // indefinite long form
         
         length = 0;
         while (h-- > 0) {
             x = readByte();
             length = (length << 8) | (0x00FF & x);
         }
-        //add by hxzon,after read length
-        valueOffset=tagOffset+totalLen;
-        valueLen=length;
         return length;
     }
     
@@ -342,7 +310,7 @@ public class BerInputStream extends LengthInputStream
         read(bstr);
         
         /*
-         * Calclate the OID length
+         * Calculate the OID length
          */
         length = 2;
         for (i = 1; i < bstr.length; ++i) {
@@ -360,6 +328,52 @@ public class BerInputStream extends LengthInputStream
         v = 0;
         length = 2;
         for (i = 1; i < bstr.length; ++i) {
+            v = v * 128 + 0x007F & bstr[i];
+            if (bstr[i] >= 0) {
+                value[length++] = v;
+                v = 0;
+            }
+        }
+        
+        /*
+         * Return the OID as an object
+         */
+        return value;
+    }
+    
+    /**
+     * Read a relative object identifier. This assumes the length is unread
+     * @return
+     * @throws IOException
+     */
+    public long[] readRelativeOID() throws IOException
+    {
+        long[] value;
+        int length;
+        int i;
+        int v;
+        
+        length = readBerLength();
+        
+        if (length == -1) throw new AsnEncodingException("Expected primitive type");
+        byte[] bstr = new byte[length];
+        read(bstr);
+        
+        /*
+         * Calculate the relative OID length
+         */
+        length = 0;
+        for (i = 0; i < bstr.length; ++i) {
+            if (bstr[i] >= 0) ++length;
+        }
+        value = new long[length];
+
+        /*
+         * Parse the OID
+         */
+        v = 0;
+        length = 0;
+        for (i = 0; i < bstr.length; ++i) {
             v = v * 128 + 0x007F & bstr[i];
             if (bstr[i] >= 0) {
                 value[length++] = v;
@@ -512,66 +526,6 @@ public class BerInputStream extends LengthInputStream
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         readOctetString(baos,primitive);
         baos.close();
-        //add by hxzon
-        if(primitive){
-        	totalLen+=baos.toByteArray().length;
-        }
         return baos.toByteArray();
     }
-
-    //add by hxzon for offset and len
-    private int tagOffset=0;
-    private int lenOffset=0;
-    private int valueOffset=0;
-    private int valueLen=0;
-    private int totalLen=0;
-	public int getTagOffset() {
-		return tagOffset;
-	}
-
-
-	public void setTagOffset(int offset) {
-		this.tagOffset = offset;
-	}
-
-
-	public int getTotalLen() {
-		return totalLen;
-	}
-
-
-	public void setTotalLen(int len) {
-		this.totalLen = len;
-	}
-
-
-	public int getLenOffset() {
-		return lenOffset;
-	}
-
-
-	public void setLenOffset(int lenOffset) {
-		this.lenOffset = lenOffset;
-	}
-
-
-	public int getValueOffset() {
-		return valueOffset;
-	}
-
-
-	public void setValueOffset(int valueOffset) {
-		this.valueOffset = valueOffset;
-	}
-
-
-	public int getValueLen() {
-		return valueLen;
-	}
-
-
-	public void setValueLen(int valueLen) {
-		this.valueLen = valueLen;
-	}
-	
 }

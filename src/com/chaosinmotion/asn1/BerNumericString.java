@@ -43,37 +43,31 @@ import java.io.IOException;
  * Numeric string. A numeric string is a sequence of characters that consist
  * only of 0-9
  */
-public class BerNumericString extends BerAbstractString {
-//    public BerNumericString(int tag, String value) throws AsnEncodingException
-//    {
-//        super(tag, value);
-//        if (!validate(value)) throw new AsnEncodingException("Illegal numeric value");
-//    }
-//
-//    public BerNumericString(int tag, BerInputStream stream) throws IOException
-//    {
-//        super(tag, stream);
-//    }
-//    
-//    public BerNumericString(String value) throws AsnEncodingException
-//    {
-//        this(Tag.NUMERICSTRING,value);
-//    }
-	public BerNumericString() {
-		super(Tag.NUMERICSTRING);
-	}
+public class BerNumericString extends BerAbstractString
+{
+    public BerNumericString(int tag, String value) throws AsnEncodingException
+    {
+        super(tag, value);
+        if (!validate(value)) throw new AsnEncodingException("Illegal numeric value");
+    }
 
-	public static final boolean validate(String str) {
-		return validateString(str, NUMBER);
-	}
+    public BerNumericString(int tag, BerInputStream stream) throws IOException
+    {
+        super(tag, stream);
+    }
+    
+    public BerNumericString(String value) throws AsnEncodingException
+    {
+        this(Tag.NUMERICSTRING,value);
+    }
+    
+    public static final boolean validate(String str)
+    {
+        return validateString(str,NUMBER);
+    }
 
-	public String getType() {
-		return "BerNumericString";
-	}
-
-//  Added by Fatih Batuk
-	//This method is not necessary in this level. 
-	//We also override it here because we do not want to set asn.1 library's class as abstract.
-	public void readElement(BerInputStream in) throws IOException {
-	}
+    public String toString()
+    {
+        return "BerNumericString(" + Tag.toString(getTag()) + ")=" + getValue();
+    }
 }
