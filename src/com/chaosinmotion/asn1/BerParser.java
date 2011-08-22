@@ -65,147 +65,141 @@ import java.io.IOException;
  * object to be constructed is a complex type, such as an embedded tag, set
  * or sequence.
  */
-public abstract class BerParser
-{
-    /**
-     * This is the start state in my parsing state machine.
-     */
-    
-    protected static final int START = 0;
-    
-    /**
-     * This reads the contents associated with a tag. If this is a primitive
-     * object (a string or integer or real), this simply reads and constructs
-     * the object. If this is a complex object or a custom tag, the create
-     * method is called.
-     * @param tag
-     * @param stream
-     * @return
-     */
-    BerNode read(int tag, int state, BerInputStream stream) throws IOException
-    {
-        switch (tag) {
-            case Tag.EOFTYPE:
-                int len = stream.readBerLength();
-                if (len != 0) throw new AsnEncodingException("Illegal EOF tag");
-                return null;
-            case Tag.BOOLEAN:
-                return new BerBoolean(tag,stream);
-            case Tag.INTEGER:
-                return new BerInteger(tag,stream);
-            case Tag.BITSTRING:
-            case Tag.BITSTRING | Tag.CONSTRUCTED:
-                return new BerBitString(tag,stream);
-            case Tag.OCTETSTRING:
-            case Tag.OCTETSTRING | Tag.CONSTRUCTED:
-                return new BerOctetString(tag,stream);
-            case Tag.NULL:
-                return new BerNull(tag,stream);
-            case Tag.OBJECTID:
-                return new BerOID(tag,stream);
-            case Tag.OBJECTDESCRIPTOR:
-            case Tag.OBJECTDESCRIPTOR | Tag.CONSTRUCTED:
-                return new BerObjectDescriptor(tag,stream);
-            case Tag.UTF8STRING:
-            case Tag.UTF8STRING | Tag.CONSTRUCTED:
-                return new BerUTF8String(tag,stream);
-            case Tag.RELATIVEOID:
-                return new BerRelativeOID(tag,stream);
-            case Tag.REAL:
-                return new BerReal(tag,stream);
-            case Tag.ENUMERATED:
-                return new BerEnumerated(tag,stream);
-            case Tag.NUMERICSTRING:
-            case Tag.NUMERICSTRING | Tag.CONSTRUCTED:
-                return new BerNumericString(tag,stream);
-            case Tag.PRINTABLESTRING:
-            case Tag.PRINTABLESTRING | Tag.CONSTRUCTED:
-                return new BerPrintableString(tag,stream);
-            case Tag.TELETEXSTRING:
-            case Tag.TELETEXSTRING | Tag.CONSTRUCTED:
-                return new BerTeletexString(tag,stream);
-            case Tag.VIDEOTEXTSTRING:
-            case Tag.VIDEOTEXTSTRING | Tag.CONSTRUCTED:
-                return new BerVideoTextString(tag,stream);
-            case Tag.GRAPHICSTRING:
-            case Tag.GRAPHICSTRING | Tag.CONSTRUCTED:
-                return new BerGraphicsString(tag,stream);
-            case Tag.IA5STRING:
-            case Tag.IA5STRING | Tag.CONSTRUCTED:
-                return new BerIA5String(tag,stream);
-            case Tag.VISIBLESTRING:
-            case Tag.VISIBLESTRING | Tag.CONSTRUCTED:
-                return new BerVisibleString(tag,stream);
-            case Tag.GENERALSTRING:
-            case Tag.GENERALSTRING | Tag.CONSTRUCTED:
-                return new BerGeneralString(tag,stream);
-            case Tag.UTCTIME:
-            case Tag.UTCTIME | Tag.CONSTRUCTED:
-                return new BerUTCTime(tag,stream);
-            case Tag.GENERALTIME:
-            case Tag.GENERALTIME | Tag.CONSTRUCTED:
-                return new BerGeneralTime(tag,stream);
-            case Tag.UNIVERSALSTRING:
-            case Tag.UNIVERSALSTRING | Tag.CONSTRUCTED:
-                return new BerUniversalString(tag,stream);
-            case Tag.CHARACTERSTRING:
-            case Tag.CHARACTERSTRING | Tag.CONSTRUCTED:
-                return new BerCharacterString(tag,stream);
-            case Tag.BMPSTRING:
-            case Tag.BMPSTRING | Tag.CONSTRUCTED:
-                return new BerBMPString(tag,stream);
-            default:
-                return create(tag,state,stream);
-        }
-    }
+public abstract class BerParser {
+	/**
+	 * This is the start state in my parsing state machine.
+	 */
 
-    /**
-     * This method must be overridden by a custom parser which takes the provided
-     * tag identifier, determines based on the current parser state the appropriate
-     * object to construct, and constructs that object. The method createUniversal
-     * exists in order to simplify the parser; if the tag type is a universal type,
-     * the universal tag may be called.
-     * @param tag The tag used to define this element
-     * @param state The current read-state we're in
-     * @param stream The ASN.1 stream being parsed
-     * @throws IOException If a problem occurs during parsing. Note that your
-     * method may decide to throw an AsnEncodingException if it believes the
-     * tag is illegal given the current state.
-     * @return
-     */
-    public abstract BerNode create(int tag, int state, BerInputStream stream) throws IOException;
-    
-    
-    /**
-     * The readPacket method is called by any code looking to parse an incoming
-     * BER packet, such as a request packet. This starts the internal state of
-     * this custom parser, and builds the appropriate node object, returning it.
-     * On the end of file, this returns null.
-     * @param stream
-     * @return
-     * @throws IOException
-     */
-    public BerNode readPacket(BerInputStream stream) throws IOException
-    {
-        int tag;
-        
-        /*
-         * Attempt to read a tag. If we get an EOF while reading the tag, then
-         * return null; assume the packet stream was closed.
-         */
-        try {
-            tag = stream.readBerTag();
-        }
-        catch (EOFException err) {
-            return null;
-        }
-        
-        /*
-         * Now start my state, read the node and finish up.
-         */
-        
-        return read(tag,START,stream);
-    }
+	protected static final int START = 0;
+
+	/**
+	 * This reads the contents associated with a tag. If this is a primitive
+	 * object (a string or integer or real), this simply reads and constructs
+	 * the object. If this is a complex object or a custom tag, the create
+	 * method is called.
+	 * @param tag
+	 * @param stream
+	 * @return
+	 */
+	BerNode read(int tag, int state, BerInputStream stream) throws IOException {
+		switch (tag) {
+		case Tag.EOFTYPE:
+			int len = stream.readBerLength();
+			if (len != 0)
+				throw new AsnEncodingException("Illegal EOF tag");
+			return null;
+		case Tag.BOOLEAN:
+			return new BerBoolean(tag, stream);
+		case Tag.INTEGER:
+			return new BerInteger(tag, stream);
+		case Tag.BITSTRING:
+		case Tag.BITSTRING | Tag.CONSTRUCTED:
+			return new BerBitString(tag, stream);
+		case Tag.OCTETSTRING:
+		case Tag.OCTETSTRING | Tag.CONSTRUCTED:
+			return new BerOctetString(tag, stream);
+		case Tag.NULL:
+			return new BerNull(tag, stream);
+		case Tag.OBJECTID:
+			return new BerOID(tag, stream);
+		case Tag.OBJECTDESCRIPTOR:
+		case Tag.OBJECTDESCRIPTOR | Tag.CONSTRUCTED:
+			return new BerObjectDescriptor(tag, stream);
+		case Tag.UTF8STRING:
+		case Tag.UTF8STRING | Tag.CONSTRUCTED:
+			return new BerUTF8String(tag, stream);
+		case Tag.RELATIVEOID:
+			return new BerRelativeOID(tag, stream);
+		case Tag.REAL:
+			return new BerReal(tag, stream);
+		case Tag.ENUMERATED:
+			return new BerEnumerated(tag, stream);
+		case Tag.NUMERICSTRING:
+		case Tag.NUMERICSTRING | Tag.CONSTRUCTED:
+			return new BerNumericString(tag, stream);
+		case Tag.PRINTABLESTRING:
+		case Tag.PRINTABLESTRING | Tag.CONSTRUCTED:
+			return new BerPrintableString(tag, stream);
+		case Tag.TELETEXSTRING:
+		case Tag.TELETEXSTRING | Tag.CONSTRUCTED:
+			return new BerTeletexString(tag, stream);
+		case Tag.VIDEOTEXTSTRING:
+		case Tag.VIDEOTEXTSTRING | Tag.CONSTRUCTED:
+			return new BerVideoTextString(tag, stream);
+		case Tag.GRAPHICSTRING:
+		case Tag.GRAPHICSTRING | Tag.CONSTRUCTED:
+			return new BerGraphicsString(tag, stream);
+		case Tag.IA5STRING:
+		case Tag.IA5STRING | Tag.CONSTRUCTED:
+			return new BerIA5String(tag, stream);
+		case Tag.VISIBLESTRING:
+		case Tag.VISIBLESTRING | Tag.CONSTRUCTED:
+			return new BerVisibleString(tag, stream);
+		case Tag.GENERALSTRING:
+		case Tag.GENERALSTRING | Tag.CONSTRUCTED:
+			return new BerGeneralString(tag, stream);
+		case Tag.UTCTIME:
+		case Tag.UTCTIME | Tag.CONSTRUCTED:
+			return new BerUTCTime(tag, stream);
+		case Tag.GENERALTIME:
+		case Tag.GENERALTIME | Tag.CONSTRUCTED:
+			return new BerGeneralTime(tag, stream);
+		case Tag.UNIVERSALSTRING:
+		case Tag.UNIVERSALSTRING | Tag.CONSTRUCTED:
+			return new BerUniversalString(tag, stream);
+		case Tag.CHARACTERSTRING:
+		case Tag.CHARACTERSTRING | Tag.CONSTRUCTED:
+			return new BerCharacterString(tag, stream);
+		case Tag.BMPSTRING:
+		case Tag.BMPSTRING | Tag.CONSTRUCTED:
+			return new BerBMPString(tag, stream);
+		default:
+			return create(tag, state, stream);
+		}
+	}
+
+	/**
+	 * This method must be overridden by a custom parser which takes the provided
+	 * tag identifier, determines based on the current parser state the appropriate
+	 * object to construct, and constructs that object. The method createUniversal
+	 * exists in order to simplify the parser; if the tag type is a universal type,
+	 * the universal tag may be called.
+	 * @param tag The tag used to define this element
+	 * @param state The current read-state we're in
+	 * @param stream The ASN.1 stream being parsed
+	 * @throws IOException If a problem occurs during parsing. Note that your
+	 * method may decide to throw an AsnEncodingException if it believes the
+	 * tag is illegal given the current state.
+	 * @return
+	 */
+	public abstract BerNode create(int tag, int state, BerInputStream stream) throws IOException;
+
+	/**
+	 * The readPacket method is called by any code looking to parse an incoming
+	 * BER packet, such as a request packet. This starts the internal state of
+	 * this custom parser, and builds the appropriate node object, returning it.
+	 * On the end of file, this returns null.
+	 * @param stream
+	 * @return
+	 * @throws IOException
+	 */
+	public BerNode readPacket(BerInputStream stream) throws IOException {
+		int tag;
+
+		/*
+		 * Attempt to read a tag. If we get an EOF while reading the tag, then
+		 * return null; assume the packet stream was closed.
+		 */
+		try {
+			tag = stream.readBerTag();
+		} catch (EOFException err) {
+			return null;
+		}
+
+		/*
+		 * Now start my state, read the node and finish up.
+		 */
+
+		return read(tag, START, stream);
+	}
 }
-
-

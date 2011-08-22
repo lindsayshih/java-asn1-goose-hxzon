@@ -45,109 +45,96 @@ import java.util.Date;
 /**
  * Represents a UTC time object.
  */
-public class BerGeneralTime extends BerNode
-{
-    private static  SimpleDateFormat    gFormat;
-    private Date    fDate;
+public class BerGeneralTime extends BerNode {
+	private static SimpleDateFormat gFormat;
+	private Date fDate;
 
-    public BerGeneralTime(int tag, Date date)
-    {
-        super(tag);
-        
-        fDate = date;
-    }
-    
-    public BerGeneralTime(Date date)
-    {
-        this(Tag.GENERALTIME,date);
-    }
+	public BerGeneralTime(int tag, Date date) {
+		super(tag);
 
-    /**
-     * Construct a boolean from the input stream
-     * @param tag
-     * @param stream
-     * @throws IOException
-     */
-    public BerGeneralTime(int tag, BerInputStream stream) throws IOException
-    {
-        super(tag);
-        
-        fDate = parseDate(new String(stream.readOctetString(0 == (tag & Tag.CONSTRUCTED)),"UTF-8"));
-    }
+		fDate = date;
+	}
 
-    /**
-     * Write the BER element to the stream
-     * @param stream
-     * @throws IOException
-     * @see com.chaosinmotion.asn1.BerNode#writeElement(com.chaosinmotion.asn1.BerOutputStream)
-     */
-    public void writeElement(BerOutputStream stream) throws IOException
-    {
-        String date = formatDate(fDate);
-        
-        byte[] b = date.getBytes("UTF-8");
-        stream.writeBerTag(getTag() | (stream.isComplexOctetString(b.length) ? Tag.CONSTRUCTED : 0));
-        stream.writeOctetString(b,0,b.length);
-    }
+	public BerGeneralTime(Date date) {
+		this(Tag.GENERALTIME, date);
+	}
 
-    public Date getDate()
-    {
-        return fDate;
-    }
-    
-    private static void initFormat()
-    {
-        if (gFormat == null) {
-            gFormat = new SimpleDateFormat("yyyyMMddHHmmss.SSS");
-        }
-    }
-    
-    private static String formatDate(Date date)
-    {
-        initFormat();
-        
-        synchronized(gFormat) {
-            String str = gFormat.format(date);
-            
-            /*
-             * Trim the end of str until we either hit a '.' or a non zero value
-             */
-            for (;;) {
-                if (str.endsWith("0")) {
-                    str = str.substring(0,str.length()-1);
-                } else if (str.endsWith(".")) {
-                    str = str.substring(0,str.length()-1);
-                    break;
-                } else {
-                    break;
-                }
-            }
-            
-            return str + "Z";
-        }
-    }
-    
-    private static Date parseDate(String date) throws AsnEncodingException
-    {
-        initFormat();
-        
-        synchronized(gFormat) {
-            if (date.endsWith("Z")) {
-                date = date.substring(0,date.length()-1);
-            }
-            try {
-                return gFormat.parse(date);
-            }
-            catch (ParseException e) {
-                throw new AsnEncodingException("Illegal formatted date read from input stream");
-            }
-        }
-    }
+	/**
+	 * Construct a boolean from the input stream
+	 * @param tag
+	 * @param stream
+	 * @throws IOException
+	 */
+	public BerGeneralTime(int tag, BerInputStream stream) throws IOException {
+		super(tag);
 
-    public String toString()
-    {
-        return "BerGeneralTime(" + Tag.toString(getTag()) + ")=" + fDate;
-    }
+		fDate = parseDate(new String(stream.readOctetString(0 == (tag & Tag.CONSTRUCTED)), "UTF-8"));
+	}
+
+	/**
+	 * Write the BER element to the stream
+	 * @param stream
+	 * @throws IOException
+	 * @see com.chaosinmotion.asn1.BerNode#writeElement(com.chaosinmotion.asn1.BerOutputStream)
+	 */
+	public void writeElement(BerOutputStream stream) throws IOException {
+		String date = formatDate(fDate);
+
+		byte[] b = date.getBytes("UTF-8");
+		stream.writeBerTag(getTag() | (stream.isComplexOctetString(b.length) ? Tag.CONSTRUCTED : 0));
+		stream.writeOctetString(b, 0, b.length);
+	}
+
+	public Date getDate() {
+		return fDate;
+	}
+
+	private static void initFormat() {
+		if (gFormat == null) {
+			gFormat = new SimpleDateFormat("yyyyMMddHHmmss.SSS");
+		}
+	}
+
+	private static String formatDate(Date date) {
+		initFormat();
+
+		synchronized (gFormat) {
+			String str = gFormat.format(date);
+
+			/*
+			 * Trim the end of str until we either hit a '.' or a non zero value
+			 */
+			for (;;) {
+				if (str.endsWith("0")) {
+					str = str.substring(0, str.length() - 1);
+				} else if (str.endsWith(".")) {
+					str = str.substring(0, str.length() - 1);
+					break;
+				} else {
+					break;
+				}
+			}
+
+			return str + "Z";
+		}
+	}
+
+	private static Date parseDate(String date) throws AsnEncodingException {
+		initFormat();
+
+		synchronized (gFormat) {
+			if (date.endsWith("Z")) {
+				date = date.substring(0, date.length() - 1);
+			}
+			try {
+				return gFormat.parse(date);
+			} catch (ParseException e) {
+				throw new AsnEncodingException("Illegal formatted date read from input stream");
+			}
+		}
+	}
+
+	public String toString() {
+		return "BerGeneralTime(" + Tag.toString(getTag()) + ")=" + fDate;
+	}
 }
-
-

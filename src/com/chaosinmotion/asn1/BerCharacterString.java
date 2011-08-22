@@ -42,27 +42,20 @@ import java.io.IOException;
  * Represents a universal string string, which is (as far as I'm concerned) an arbitrary
  * array of 8-bit bytes
  */
-public class BerCharacterString extends BerOctetString
-{
-    public BerCharacterString(int tag, byte[] value)
-    {
-        super(tag, value);
-    }
+public class BerCharacterString extends BerOctetString {
+	public BerCharacterString(int tag, byte[] value) {
+		super(tag, value);
+	}
 
-    public BerCharacterString(byte[] value)
-    {
-        this(Tag.CHARACTERSTRING,value);
-    }
+	public BerCharacterString(byte[] value) {
+		this(Tag.CHARACTERSTRING, value);
+	}
 
-    public BerCharacterString(int tag, BerInputStream stream) throws IOException
-    {
-        super(tag, stream);
-    }
+	public BerCharacterString(int tag, BerInputStream stream) throws IOException {
+		super(tag, stream);
+	}
 
-    public String toString()
-    {
-        return "BerCharacterString(" + Tag.toString(getTag()) + ")=" + getValue();
-    }
+	public String toString() {
+		return "BerCharacterString(" + Tag.toString(getTag()) + ")=" + getValue();
+	}
 }
-
-

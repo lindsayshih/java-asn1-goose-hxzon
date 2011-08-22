@@ -39,47 +39,42 @@ package com.chaosinmotion.asn1;
 
 import java.io.IOException;
 
-
 /**
  * Each BER object within an ASN.1 stream descends from the BerNode. This contains
  * code for writing the contents of this node
  */
-public abstract class BerNode
-{
-    private int fTag;
-    
-    protected BerNode(int tag)
-    {
-        fTag = tag;
-    }
-    
-    /**
-     * Get the tag representing this object
-     * @return
-     */
-    public int getTag()
-    {
-        return fTag;
-    }
-    
-    /**
-     * Change the tag of this object to the specified value
-     * @param tag
-     */
-    public void setTag(int tag)
-    {
-        fTag = tag;
-    }
-    
-    /**
-     * Handle writing the contents of this node to the output stream provided
-     * @param stream
-     * @throws IOException 
-     */
-    public abstract void writeElement(BerOutputStream stream) throws IOException;
-    
-    /**
-     * String representation
-     */
-    public abstract String toString();
+public abstract class BerNode {
+	private int fTag;
+
+	protected BerNode(int tag) {
+		fTag = tag;
+	}
+
+	/**
+	 * Get the tag representing this object
+	 * @return
+	 */
+	public int getTag() {
+		return fTag;
+	}
+
+	/**
+	 * Change the tag of this object to the specified value
+	 * @param tag
+	 */
+	public void setTag(int tag) {
+		fTag = tag;
+	}
+
+	/**
+	 * Handle writing the contents of this node to the output stream provided
+	 * @param stream
+	 * @throws IOException 
+	 */
+	public abstract void writeElement(BerOutputStream stream) throws IOException;
+
+	/**
+	 * String representation
+	 */
+	public abstract String toString();
 }

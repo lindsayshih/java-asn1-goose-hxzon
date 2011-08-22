@@ -43,58 +43,51 @@ import java.io.IOException;
  * Represents a null object. This object represents a 'null', which is distinct
  * from no data.
  */
-public class BerNull extends BerNode
-{
-    /**
-     * Construct a new boolean object with the specified tag
-     * @param tag
-     * @param value
-     */
-    public BerNull(int tag)
-    {
-        super(tag);
-    }
-    
-    /**
-     * Construct a boolean of type BOOLEAN
-     * @param value
-     */
-    public BerNull()
-    {
-        this(Tag.NULL);
-    }
-    
-    /**
-     * Construct a boolean from the input stream
-     * @param tag
-     * @param stream
-     * @throws IOException
-     */
-    public BerNull(int tag, BerInputStream stream) throws IOException
-    {
-        super(tag);
-        
-        int len = stream.readBerLength();
-        if (len != 0) throw new AsnEncodingException("Illegal null object");
-    }
+public class BerNull extends BerNode {
+	/**
+	 * Construct a new boolean object with the specified tag
+	 * @param tag
+	 * @param value
+	 */
+	public BerNull(int tag) {
+		super(tag);
+	}
 
-    /**
-     * Write this BER element to the output stream
-     * Comment
-     * @param stream
-     * @throws IOException
-     * @see com.chaosinmotion.asn1.BerNode#writeElement(com.chaosinmotion.asn1.BerOutputStream)
-     */
-    public void writeElement(BerOutputStream stream) throws IOException
-    {
-        stream.writeBerTag(getTag());
-        stream.writeBerLength(0);
-    }
+	/**
+	 * Construct a boolean of type BOOLEAN
+	 * @param value
+	 */
+	public BerNull() {
+		this(Tag.NULL);
+	}
 
-    public String toString()
-    {
-        return "BerNull(" + Tag.toString(getTag()) + ")";
-    }
+	/**
+	 * Construct a boolean from the input stream
+	 * @param tag
+	 * @param stream
+	 * @throws IOException
+	 */
+	public BerNull(int tag, BerInputStream stream) throws IOException {
+		super(tag);
+
+		int len = stream.readBerLength();
+		if (len != 0)
+			throw new AsnEncodingException("Illegal null object");
+	}
+
+	/**
+	 * Write this BER element to the output stream
+	 * Comment
+	 * @param stream
+	 * @throws IOException
+	 * @see com.chaosinmotion.asn1.BerNode#writeElement(com.chaosinmotion.asn1.BerOutputStream)
+	 */
+	public void writeElement(BerOutputStream stream) throws IOException {
+		stream.writeBerTag(getTag());
+		stream.writeBerLength(0);
+	}
+
+	public String toString() {
+		return "BerNull(" + Tag.toString(getTag()) + ")";
+	}
 }
-
-

@@ -42,36 +42,32 @@ import java.io.IOException;
 /**
  * Represents a 7-bit ASCII (IA5) string
  */
-public class BerIA5String extends BerAbstractString
-{
-    public BerIA5String(int tag, String value) throws AsnEncodingException
-    {
-        super(tag, value);
-        if (!validate(value)) throw new AsnEncodingException("Illegal IA5 string");
-    }
+public class BerIA5String extends BerAbstractString {
+	public BerIA5String(int tag, String value) throws AsnEncodingException {
+		super(tag, value);
+		if (!validate(value))
+			throw new AsnEncodingException("Illegal IA5 string");
+	}
 
-    public BerIA5String(int tag, BerInputStream stream) throws IOException
-    {
-        super(tag, stream);
-    }
-    
-    public BerIA5String(String value) throws AsnEncodingException
-    {
-        this(Tag.IA5STRING,value);
-    }
-    
-    public static final boolean validate(String str)
-    {
-        int i,len = str.length();
-        for (i = 0; i < len; ++i) {
-            char c = str.charAt(i);
-            if ((c < 0) || (c > 127)) return false;
-        }
-        return true;
-    }
+	public BerIA5String(int tag, BerInputStream stream) throws IOException {
+		super(tag, stream);
+	}
 
-    public String toString()
-    {
-        return "BerIA5String(" + Tag.toString(getTag()) + ")=" + getValue();
-    }
+	public BerIA5String(String value) throws AsnEncodingException {
+		this(Tag.IA5STRING, value);
+	}
+
+	public static final boolean validate(String str) {
+		int i, len = str.length();
+		for (i = 0; i < len; ++i) {
+			char c = str.charAt(i);
+			if ((c < 0) || (c > 127))
+				return false;
+		}
+		return true;
+	}
+
+	public String toString() {
+		return "BerIA5String(" + Tag.toString(getTag()) + ")=" + getValue();
+	}
 }

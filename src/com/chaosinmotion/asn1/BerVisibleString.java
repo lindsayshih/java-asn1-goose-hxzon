@@ -42,36 +42,32 @@ import java.io.IOException;
  * Represents the BER Visible String character set, which is the subset of ASCII
  * minus the control characters.
  */
-public class BerVisibleString extends BerAbstractString
-{
-    public BerVisibleString(int tag, String value) throws AsnEncodingException
-    {
-        super(tag, value);
-        if (!validate(value)) throw new AsnEncodingException("Illegal IA5 string");
-    }
+public class BerVisibleString extends BerAbstractString {
+	public BerVisibleString(int tag, String value) throws AsnEncodingException {
+		super(tag, value);
+		if (!validate(value))
+			throw new AsnEncodingException("Illegal IA5 string");
+	}
 
-    public BerVisibleString(int tag, BerInputStream stream) throws IOException
-    {
-        super(tag, stream);
-    }
-    
-    public BerVisibleString(String value) throws AsnEncodingException
-    {
-        this(Tag.VISIBLESTRING,value);
-    }
-    
-    public static final boolean validate(String str)
-    {
-        int i,len = str.length();
-        for (i = 0; i < len; ++i) {
-            char c = str.charAt(i);
-            if ((c < 32) || (c > 126)) return false;
-        }
-        return true;
-    }
+	public BerVisibleString(int tag, BerInputStream stream) throws IOException {
+		super(tag, stream);
+	}
 
-    public String toString()
-    {
-        return "BerVisibleString(" + Tag.toString(getTag()) + ")=" + getValue();
-    }
+	public BerVisibleString(String value) throws AsnEncodingException {
+		this(Tag.VISIBLESTRING, value);
+	}
+
+	public static final boolean validate(String str) {
+		int i, len = str.length();
+		for (i = 0; i < len; ++i) {
+			char c = str.charAt(i);
+			if ((c < 32) || (c > 126))
+				return false;
+		}
+		return true;
+	}
+
+	public String toString() {
+		return "BerVisibleString(" + Tag.toString(getTag()) + ")=" + getValue();
+	}
 }

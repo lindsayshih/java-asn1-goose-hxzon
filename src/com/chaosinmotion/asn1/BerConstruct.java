@@ -46,175 +46,160 @@ import java.util.Iterator;
  * Represents a constructed object. A constructed object is a collection of other
  * BerNode objects.
  */
-public abstract class BerConstruct extends BerNode
-{
-    private ArrayList   fList;
+public abstract class BerConstruct extends BerNode {
+	private ArrayList fList;
 
-    protected BerConstruct(int tag)
-    {
-        super(tag);
-        
-        fList = new ArrayList();
-    }
-    
-    /**
-     * Read the construct into memory from the input stream
-     * @param tag The tag used to define this element
-     * @param state The current read-state we're in
-     * @param parser The parser that is being used to parse this ASN.1 stream
-     * @param stream The ASN.1 stream being parsed
-     * @throws IOException 
-     */
-    public BerConstruct(int tag, int state, BerParser parser, BerInputStream stream) throws IOException
-    {
-        this(tag);
-        
-        int readTag;
-        ReadSequence seq = new ReadSequence(stream);
-        while (0 != (readTag = seq.readBerTag())) {
-            fList.add(parser.read(readTag, state, stream));
-        }
-    }
+	protected BerConstruct(int tag) {
+		super(tag);
 
-    /**
-     * Write the element out. This will use either a definite length (BER/DER)
-     * or an indefinite length (CER) encoding mechanism depending on the
-     * output format specified in the BerOutputStream object.
-     * @param stream
-     * @throws IOException 
-     * @see com.chaosinmotion.asn1.BerNode#writeElement(com.chaosinmotion.asn1.BerOutputStream)
-     */
-    public void writeElement(BerOutputStream stream) throws IOException
-    {
-        Iterator it;
-        
-        stream.writeBerTag(getTag() | Tag.CONSTRUCTED);
-        
-        if (stream.getEncodingMethod() == BerOutputStream.ENCODING_CER) {
-            /*
-             * Write this as an indefinite length
-             */
-            
-            stream.writeBerLength(-1);
-            it = fList.iterator();
-            while (it.hasNext()) {
-                BerNode node = (BerNode)it.next();
-                node.writeElement(stream);
-            }
-            stream.writeBerTag(Tag.EOFTYPE);
-            stream.writeBerLength(0);
-        } else {
-            /*
-             * Write as definite length
-             */
-            
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            BerOutputStream tmp = new BerOutputStream(baos,stream.getEncodingMethod());
-            it = fList.iterator();
-            while (it.hasNext()) {
-                BerNode node = (BerNode)it.next();
-                node.writeElement(tmp);
-            }
-            tmp.close();
-            baos.close();
-            
-            byte[] data = baos.toByteArray();
-            stream.writeBerLength(data.length);
-            stream.write(data);
-        }
-    }
+		fList = new ArrayList();
+	}
 
-    /**
-     * Add a BerNode object to this object
-     * @param o
-     * @return
-     */
-    public boolean add(BerNode o)
-    {
-        return fList.add(o);
-    }
+	/**
+	 * Read the construct into memory from the input stream
+	 * @param tag The tag used to define this element
+	 * @param state The current read-state we're in
+	 * @param parser The parser that is being used to parse this ASN.1 stream
+	 * @param stream The ASN.1 stream being parsed
+	 * @throws IOException 
+	 */
+	public BerConstruct(int tag, int state, BerParser parser, BerInputStream stream) throws IOException {
+		this(tag);
 
-    /**
-     * Clear this constructed object
-     */
-    public void clear()
-    {
-        fList.clear();
-    }
+		int readTag;
+		ReadSequence seq = new ReadSequence(stream);
+		while (0 != (readTag = seq.readBerTag())) {
+			fList.add(parser.read(readTag, state, stream));
+		}
+	}
 
-    /**
-     * Get the node entry by index
-     * @param index
-     * @return
-     */
-    public BerNode get(int index)
-    {
-        return (BerNode)fList.get(index);
-    }
+	/**
+	 * Write the element out. This will use either a definite length (BER/DER)
+	 * or an indefinite length (CER) encoding mechanism depending on the
+	 * output format specified in the BerOutputStream object.
+	 * @param stream
+	 * @throws IOException 
+	 * @see com.chaosinmotion.asn1.BerNode#writeElement(com.chaosinmotion.asn1.BerOutputStream)
+	 */
+	public void writeElement(BerOutputStream stream) throws IOException {
+		Iterator it;
 
-    /**
-     * Returns true if this is empty
-     * @return
-     */
-    public boolean isEmpty()
-    {
-        return fList.isEmpty();
-    }
+		stream.writeBerTag(getTag() | Tag.CONSTRUCTED);
 
-    /**
-     * Return an iterator that iterates through the contents of this object
-     * @return
-     */
-    public Iterator iterator()
-    {
-        return fList.iterator();
-    }
+		if (stream.getEncodingMethod() == BerOutputStream.ENCODING_CER) {
+			/*
+			 * Write this as an indefinite length
+			 */
 
-    /**
-     * Remove the specified node
-     * @param o The node to remove
-     * @return
-     */
-    public boolean remove(BerNode o)
-    {
-        return fList.remove(o);
-    }
+			stream.writeBerLength(-1);
+			it = fList.iterator();
+			while (it.hasNext()) {
+				BerNode node = (BerNode) it.next();
+				node.writeElement(stream);
+			}
+			stream.writeBerTag(Tag.EOFTYPE);
+			stream.writeBerLength(0);
+		} else {
+			/*
+			 * Write as definite length
+			 */
 
-    /**
-     * Return the number of elements in this object
-     * @return
-     */
-    public int size()
-    {
-        return fList.size();
-    }
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			BerOutputStream tmp = new BerOutputStream(baos, stream.getEncodingMethod());
+			it = fList.iterator();
+			while (it.hasNext()) {
+				BerNode node = (BerNode) it.next();
+				node.writeElement(tmp);
+			}
+			tmp.close();
+			baos.close();
 
-    /**
-     * Return the contents of this object as an array
-     * @return
-     */
-    public BerNode[] toArray()
-    {
-        return (BerNode[])fList.toArray(new BerNode[fList.size()]);
-    }
-    
-    public String toLabeledString(String name)
-    {
-        StringBuffer buffer = new StringBuffer();
-        
-        buffer.append(name).append("(").append(Tag.toString(getTag())).append(")=[");
-        Iterator it = fList.iterator();
-        while (it.hasNext()) {
-            buffer.append('\n');
-            buffer.append(it.next().toString());
-            if (it.hasNext()) {
-                buffer.append(';');
-            }
-        }
-        buffer.append(']');
-        
-        return buffer.toString();
-    }
+			byte[] data = baos.toByteArray();
+			stream.writeBerLength(data.length);
+			stream.write(data);
+		}
+	}
+
+	/**
+	 * Add a BerNode object to this object
+	 * @param o
+	 * @return
+	 */
+	public boolean add(BerNode o) {
+		return fList.add(o);
+	}
+
+	/**
+	 * Clear this constructed object
+	 */
+	public void clear() {
+		fList.clear();
+	}
+
+	/**
+	 * Get the node entry by index
+	 * @param index
+	 * @return
+	 */
+	public BerNode get(int index) {
+		return (BerNode) fList.get(index);
+	}
+
+	/**
+	 * Returns true if this is empty
+	 * @return
+	 */
+	public boolean isEmpty() {
+		return fList.isEmpty();
+	}
+
+	/**
+	 * Return an iterator that iterates through the contents of this object
+	 * @return
+	 */
+	public Iterator iterator() {
+		return fList.iterator();
+	}
+
+	/**
+	 * Remove the specified node
+	 * @param o The node to remove
+	 * @return
+	 */
+	public boolean remove(BerNode o) {
+		return fList.remove(o);
+	}
+
+	/**
+	 * Return the number of elements in this object
+	 * @return
+	 */
+	public int size() {
+		return fList.size();
+	}
+
+	/**
+	 * Return the contents of this object as an array
+	 * @return
+	 */
+	public BerNode[] toArray() {
+		return (BerNode[]) fList.toArray(new BerNode[fList.size()]);
+	}
+
+	public String toLabeledString(String name) {
+		StringBuffer buffer = new StringBuffer();
+
+		buffer.append(name).append("(").append(Tag.toString(getTag())).append(")=[");
+		Iterator it = fList.iterator();
+		while (it.hasNext()) {
+			buffer.append('\n');
+			buffer.append(it.next().toString());
+			if (it.hasNext()) {
+				buffer.append(';');
+			}
+		}
+		buffer.append(']');
+
+		return buffer.toString();
+	}
 }
-
-

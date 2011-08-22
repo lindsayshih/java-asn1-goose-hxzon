@@ -40,61 +40,58 @@ import java.io.IOException;
  *  prior to reading the length object, and uses the length object to determine
  *  when it's time to stop reading objects.
  */
-class ReadSequence
-{
-    private BerInputStream		fInputStream;
-    private long					fStart;
-    private int					fLength;
-    private boolean				fEOF;
-    
-    /**
-     * Creates a new sequence tracking wrapper.
-     * @param stream
-     */
-    public ReadSequence(BerInputStream stream) throws IOException
-    {
-        fInputStream = stream;
-        fLength = fInputStream.readBerLength();
-        fStart = fInputStream.getReadBytes();
-        
-        fEOF = (fLength == 0);
-    }
-    
-    /**
-     * Read the next tag in this encapsulated sequence. Returns null if we
-     * have reached the end of the sequence of tags.
-     * @return
-     * @throws IOException
-     */
-    public int readBerTag() throws IOException
-    {
-        if (fEOF) return Tag.EOFTYPE;
-        
-        if (fLength != -1) {
-            if (fStart + fLength <= fInputStream.getReadBytes()) {
-                fEOF = true;
-                return 0;
-            }
-        }
-        
-        int tag = fInputStream.readBerTag();
-        if (tag == Tag.EOFTYPE) {
-            if (0 != fInputStream.readBerLength()) {
-                throw new AsnEncodingException("EOF tag must be zero length");
-            }
-            fEOF = true;
-            
-            if (fLength != -1) {
-                /* EOF marker early? Skip rest of container */
-                long remain = fInputStream.getReadBytes() - (fStart + fLength);
-                if (remain > 0) fInputStream.skip(remain);
-            }
-            
-            return Tag.EOFTYPE;
-        }
-        
-        return tag;
-    }
+class ReadSequence {
+	private BerInputStream fInputStream;
+	private long fStart;
+	private int fLength;
+	private boolean fEOF;
+
+	/**
+	 * Creates a new sequence tracking wrapper.
+	 * @param stream
+	 */
+	public ReadSequence(BerInputStream stream) throws IOException {
+		fInputStream = stream;
+		fLength = fInputStream.readBerLength();
+		fStart = fInputStream.getReadBytes();
+
+		fEOF = (fLength == 0);
+	}
+
+	/**
+	 * Read the next tag in this encapsulated sequence. Returns null if we
+	 * have reached the end of the sequence of tags.
+	 * @return
+	 * @throws IOException
+	 */
+	public int readBerTag() throws IOException {
+		if (fEOF)
+			return Tag.EOFTYPE;
+
+		if (fLength != -1) {
+			if (fStart + fLength <= fInputStream.getReadBytes()) {
+				fEOF = true;
+				return 0;
+			}
+		}
+
+		int tag = fInputStream.readBerTag();
+		if (tag == Tag.EOFTYPE) {
+			if (0 != fInputStream.readBerLength()) {
+				throw new AsnEncodingException("EOF tag must be zero length");
+			}
+			fEOF = true;
+
+			if (fLength != -1) {
+				/* EOF marker early? Skip rest of container */
+				long remain = fInputStream.getReadBytes() - (fStart + fLength);
+				if (remain > 0)
+					fInputStream.skip(remain);
+			}
+
+			return Tag.EOFTYPE;
+		}
+
+		return tag;
+	}
 }
-
-

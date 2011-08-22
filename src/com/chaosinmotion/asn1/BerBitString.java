@@ -43,69 +43,60 @@ import java.util.BitSet;
 /**
  * Represents a bit string, or a bit set, in the BER stream
  */
-public class BerBitString extends BerNode
-{
-    private BitSet fValue;
+public class BerBitString extends BerNode {
+	private BitSet fValue;
 
-    /**
-     * Construct a new boolean object with the specified tag
-     * @param tag
-     * @param value
-     */
-    public BerBitString(int tag, BitSet value)
-    {
-        super(tag);
-        fValue = value;
-    }
-    
-    /**
-     * Construct a boolean of type BOOLEAN
-     * @param value
-     */
-    public BerBitString(BitSet value)
-    {
-        this(Tag.BITSTRING,value);
-    }
-    
-    /**
-     * Construct a boolean from the input stream
-     * @param tag
-     * @param stream
-     * @throws IOException
-     */
-    public BerBitString(int tag, BerInputStream stream) throws IOException
-    {
-        super(tag);
-        
-        fValue = stream.readBitString(0 == (tag & Tag.CONSTRUCTED));
-    }
+	/**
+	 * Construct a new boolean object with the specified tag
+	 * @param tag
+	 * @param value
+	 */
+	public BerBitString(int tag, BitSet value) {
+		super(tag);
+		fValue = value;
+	}
 
-    /**
-     * Write this BER element to the output stream
-     * Comment
-     * @param stream
-     * @throws IOException
-     * @see com.chaosinmotion.asn1.BerNode#writeElement(com.chaosinmotion.asn1.BerOutputStream)
-     */
-    public void writeElement(BerOutputStream stream) throws IOException
-    {
-        stream.writeBerTag(getTag() | (stream.isComplexBitString(fValue) ? Tag.CONSTRUCTED : 0));
-        stream.writeBitString(fValue);
-    }
+	/**
+	 * Construct a boolean of type BOOLEAN
+	 * @param value
+	 */
+	public BerBitString(BitSet value) {
+		this(Tag.BITSTRING, value);
+	}
 
-    /**
-     * Return the value of this boolean object
-     * @return
-     */
-    public BitSet getValue()
-    {
-        return fValue;
-    }
+	/**
+	 * Construct a boolean from the input stream
+	 * @param tag
+	 * @param stream
+	 * @throws IOException
+	 */
+	public BerBitString(int tag, BerInputStream stream) throws IOException {
+		super(tag);
 
-    public String toString()
-    {
-        return "BerBitString(" + Tag.toString(getTag()) + ")=" + fValue.toString();
-    }
+		fValue = stream.readBitString(0 == (tag & Tag.CONSTRUCTED));
+	}
+
+	/**
+	 * Write this BER element to the output stream
+	 * Comment
+	 * @param stream
+	 * @throws IOException
+	 * @see com.chaosinmotion.asn1.BerNode#writeElement(com.chaosinmotion.asn1.BerOutputStream)
+	 */
+	public void writeElement(BerOutputStream stream) throws IOException {
+		stream.writeBerTag(getTag() | (stream.isComplexBitString(fValue) ? Tag.CONSTRUCTED : 0));
+		stream.writeBitString(fValue);
+	}
+
+	/**
+	 * Return the value of this boolean object
+	 * @return
+	 */
+	public BitSet getValue() {
+		return fValue;
+	}
+
+	public String toString() {
+		return "BerBitString(" + Tag.toString(getTag()) + ")=" + fValue.toString();
+	}
 }
-
-
