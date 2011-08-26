@@ -64,7 +64,8 @@ public class DisplayFrame2 extends JFrame {
 					prefs.put("openFile", filePath);
 					PcapHandler handler = new PcapHandler();
 					handler.addListener(new PacketHandlerListener(DisplayFrame2.this));
-					handler.readFile(filePath);
+					handler.addFile(filePath);
+					handler.run();
 				}
 			}
 
