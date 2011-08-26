@@ -1,10 +1,11 @@
 package org.hxzon.netprotocol.ui;
 
 import org.hxzon.netprotocol.packet.Packet;
+import org.hxzon.pcap.PcapFile;
 import org.hxzon.pcap.PcapPacket;
-import org.hxzon.pcap.PcapPacketListener;
+import org.hxzon.pcap.PcapHandlerListener;
 
-public class PacketHandlerListener implements PcapPacketListener {
+public class PacketHandlerListener implements PcapHandlerListener {
 	private DisplayFrame2 display;
 	private int i = 0;
 
@@ -15,11 +16,23 @@ public class PacketHandlerListener implements PcapPacketListener {
 	}
 
 	@Override
-	public void addPcapPacket(PcapPacket pcapPacket) {
+	public void addPcapPacket(PcapPacket pcapPacket, PcapFile ownerFile) {
 		i++;
 		Packet packet = new Packet();
 		packet.setSrcData(pcapPacket.getPacketData());
 		display.getPacketsTable().addPacket(packet);
+	}
+
+	public void startPcapFile(PcapFile pcapFile) {
+
+	}
+
+	public void endPcapFile(PcapFile pcapFile) {
+
+	}
+
+	public void endAll() {
+
 	}
 
 }
