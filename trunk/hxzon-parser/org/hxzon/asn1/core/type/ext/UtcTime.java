@@ -1,5 +1,6 @@
 package org.hxzon.asn1.core.type.ext;
 
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -12,6 +13,7 @@ public class UtcTime extends BerOctetString {
     private static final DecimalFormat decimalFormat = new DecimalFormat();
     private static final String numberPattern = "0.000000";
     static {
+        decimalFormat.setRoundingMode(RoundingMode.DOWN);
         decimalFormat.applyPattern(numberPattern);
     }
 
