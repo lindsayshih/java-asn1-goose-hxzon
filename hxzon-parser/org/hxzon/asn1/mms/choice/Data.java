@@ -8,7 +8,6 @@ import org.hxzon.asn1.core.type.ext.BerChoice;
 import org.hxzon.asn1.core.type.ext.UtcTime;
 import org.hxzon.asn1.mms.common.FloatingPoint;
 import org.hxzon.asn1.mms.common.MMSString;
-import org.hxzon.asn1.mms.common.TimeOfDay;
 
 
 public class Data extends BerChoice {
@@ -62,7 +61,7 @@ public class Data extends BerChoice {
 		case Tag.CONTEXT | 10:
 			return Asn1Utils.createBerVisibleString("visible-string", "visible-string", tag, stream);
 		case Tag.CONTEXT | 12:
-			return new TimeOfDay().init("binary-time", "binary-time", tag, stream);
+			return Asn1Utils.createBerIecTimeOfDay("binary-time", "binary-time", tag, stream);
 		case Tag.CONTEXT | 13:
 			return Asn1Utils.createBerIntegerX("bcd", "bcd", tag, stream);
 		case Tag.CONTEXT | 14:

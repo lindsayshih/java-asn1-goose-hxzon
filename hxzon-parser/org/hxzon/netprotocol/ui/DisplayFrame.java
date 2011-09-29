@@ -50,6 +50,7 @@ public class DisplayFrame extends JFrame {
 	private PacketDisplay packetDisplay;
 
 	public DisplayFrame() {
+	    super("java-asn1-goose parser");
 		JPanel toolBar = new JPanel();
 		Action openFile = new AbstractAction("打开文件") {
 

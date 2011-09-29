@@ -7,8 +7,8 @@ import org.hxzon.asn1.core.type.BerSequence;
 import org.hxzon.asn1.core.type.BerVisibleString;
 import org.hxzon.asn1.core.type.base.BerNode;
 import org.hxzon.asn1.core.type.ext.BerChoice;
+import org.hxzon.asn1.core.type.ext.TimeOfDay;
 import org.hxzon.asn1.mms.choice.ObjectName;
-import org.hxzon.asn1.mms.common.TimeOfDay;
 
 
 public class ReadJournalRequest extends BerSequence {
@@ -53,7 +53,7 @@ public class ReadJournalRequest extends BerSequence {
 		public BerNode create(int tag, BerInputStream stream) {
 			switch (tag) {
 			case Tag.CONTEXT | 0:
-				return new TimeOfDay().init("startingTime", "startingTime", tag, stream);
+				return Asn1Utils.createBerIecTimeOfDay("startingTime", "startingTime", tag, stream);
 			case Tag.CONTEXT | 1:
 				return Asn1Utils.createBerOctetString("startingEntry", "startingEntry", tag, stream);
 			default:
@@ -66,7 +66,7 @@ public class ReadJournalRequest extends BerSequence {
 		public BerNode create(int tag, BerInputStream stream) {
 			switch (tag) {
 			case Tag.CONTEXT | 0:
-				return new TimeOfDay().init("endingTime", "endingTime", tag, stream);
+				return Asn1Utils.createBerIecTimeOfDay("endingTime", "endingTime", tag, stream);
 			case Tag.CONTEXT | 1:
 				return Asn1Utils.createBerInteger32("numberOfEntries", "numberOfEntries", tag, stream);
 			default:
@@ -79,7 +79,7 @@ public class ReadJournalRequest extends BerSequence {
 		public BerNode create(int tag, BerInputStream stream) {
 			switch (tag) {
 			case Tag.CONTEXT | 0:
-				return new TimeOfDay().init("timeSpecification", "timeSpecification", tag, stream);
+				return Asn1Utils.createBerIecTimeOfDay("timeSpecification", "timeSpecification", tag, stream);
 			case Tag.CONTEXT | 1:
 				return Asn1Utils.createBerOctetString("entrySpecification", "entrySpecification", tag, stream);
 			default:

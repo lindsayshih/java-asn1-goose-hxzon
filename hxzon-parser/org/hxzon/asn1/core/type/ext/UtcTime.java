@@ -10,14 +10,11 @@ import org.hxzon.util.BytesUtil;
 public class UtcTime extends BerOctetString {
 	private static final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd,hh:mm:ss");
 	private static final DecimalFormat decimalFormat = new DecimalFormat();
-	private static final String numberPattern = "000000";
+	private static final String numberPattern = "0.000000";
 	static {
 		decimalFormat.applyPattern(numberPattern);
 	}
 
-//	public GooseUtcTime(int tag, BerInputStream stream) throws IOException {
-//		super(tag, stream);
-//	}
 
 	//前4个字节是从1970年1月1日0时0分0秒开始的秒数，紧跟的3个字节是秒的小数部分，最后一个字节是时间品质和精度。
 	//秒值=0x49 56 dc 03 = 1230429187s；
@@ -27,14 +24,11 @@ public class UtcTime extends BerOctetString {
 	//参见：61850-7-2：5.5.3.7.2，61850-7-2：5.5.3.7.3，61850-8-1：8.1.3.6。
 	public String getValueAsString() {
 		String str = BytesUtil.toHexString(getValue());
-		long secends = Long.parseLong(str.substring(0, 8), 16);
+		long seconds = Long.parseLong(str.substring(0, 8), 16);
 		long millis = Long.parseLong(str.substring(8, 14), 16);
-		millis = millis / (2 ^ 24);
-		Date date = new Date(secends * 1000 + millis / (2 ^ 24));
-//		Date date = new Date(secends * 1000 + millis / 1000);
-//		Date date = new Date(secends * 1000);
-//		return format.format(date) + "," + str.substring(14);
-		return format.format(date) + "." + decimalFormat.format(millis) + "," + str.substring(14);
-//		return format.format(date) + "." + millis / (2 ^ 24) + "," + str.substring(14);
+		double millisD = millis / Math.pow(2 , 24);
+//		Date date = new Date(seconds * 1000 + millisD * 1000);
+		Date date = new Date(seconds * 1000);
+		return format.format(date) + decimalFormat.format(millisD).substring(1) + "," + str.substring(14);
 	}
 }
