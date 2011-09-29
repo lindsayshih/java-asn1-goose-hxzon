@@ -88,11 +88,9 @@ public class BerInteger extends BerNode {
     }
 
     public void setValue(long value) {
-//		long max = ((2 << bitLen) - 1);
-//		long max = (2 << bitLen);
-//		if (value > max) {
-//			value = value - max;
-//		}
+        if (unsigned && value < 0) {
+            value = value + 2 ^ 64;
+        }
         this.fValue = value;
     }
 
