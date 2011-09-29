@@ -46,7 +46,7 @@ public class Smv92Pdu extends BerSequence implements IPacketPayload {
     public BerNode create(int tag, BerInputStream stream) {
         switch (tag) {
         case Tag.CONTEXT | 0:
-            return Asn1Utils.createBerInteger16("number of asdu", "asdu条目数", tag, stream);
+            return Asn1Utils.createBerUnsigned16("number of asdu", "asdu条目数", tag, stream);
         case Tag.CONTEXT | 2:
             return Asn1Utils.createBerSequenceOf("seq of asdu", "asdu集", tag, stream, Smv92Asdu.class);
         default:

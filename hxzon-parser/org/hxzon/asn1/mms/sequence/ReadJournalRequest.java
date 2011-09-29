@@ -66,7 +66,7 @@ public class ReadJournalRequest extends BerSequence {
             case Tag.CONTEXT | 0:
                 return Asn1Utils.createBerIecTimeOfDay("endingTime", "endingTime", tag, stream);
             case Tag.CONTEXT | 1:
-                return Asn1Utils.createBerInteger32("numberOfEntries", "numberOfEntries", tag, stream);
+                return Asn1Utils.createBerUnsigned32("numberOfEntries", "numberOfEntries", tag, stream);
             default:
                 return Asn1Utils.createUnknown(tag, stream);
             }
