@@ -8,7 +8,6 @@ import org.hxzon.asn1.core.type.base.BerNode;
 import org.hxzon.asn1.mms.choice.Modifier;
 import org.hxzon.asn1.mms.choice.ObjectName;
 
-
 public class DefineEventActionRequest extends BerSequence {
 //	DefineEventAction-Request ::= SEQUENCE
 //	{
@@ -18,15 +17,15 @@ public class DefineEventActionRequest extends BerSequence {
 //--	confirmed-Service-Request	[2] DefineEventAction-ConfirmedServiceRequest
 //
 //	}
-	public BerNode create(int tag, BerInputStream stream) {
-		switch (tag) {
-		case Tag.CONTEXT | 0:
-			return new ObjectName().init("eventActionName", "eventActionName", tag, stream);
-		case Tag.CONTEXT | 1:
-			return Asn1Utils.createBerSequenceOf("listOfModifier", "listOfModifier", tag, stream, Modifier.class);
-		default:
-			return Asn1Utils.createUnknown(tag, stream);
-		}
-	}
+    public BerNode create(int tag, BerInputStream stream) {
+        switch (tag) {
+        case Tag.CONTEXT | 0:
+            return new ObjectName().init("eventActionName", "eventActionName", tag, stream);
+        case Tag.CONTEXT | 1:
+            return Asn1Utils.createBerSequenceOf("listOfModifier", "listOfModifier", tag, stream, Modifier.class);
+        default:
+            return Asn1Utils.createUnknown(tag, stream);
+        }
+    }
 
 }

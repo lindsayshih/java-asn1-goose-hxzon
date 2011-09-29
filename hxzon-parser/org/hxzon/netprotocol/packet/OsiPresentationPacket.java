@@ -7,49 +7,48 @@ import org.hxzon.netprotocol.common.IPacketPayload;
 import org.hxzon.netprotocol.parse.ProtocolBinding;
 import org.hxzon.netprotocol.parse.ProtocolBindingList;
 
-
 public class OsiPresentationPacket extends Packet {
-	static {
-		ProtocolBindingList.addBinding(new ProtocolBinding<OsiSessionPacket>() {
+    static {
+        ProtocolBindingList.addBinding(new ProtocolBinding<OsiSessionPacket>() {
 
-			@Override
-			public Packet match(OsiSessionPacket packet) {
-				return new OsiPresentationPacket();
-			}
+            @Override
+            public Packet match(OsiSessionPacket packet) {
+                return new OsiPresentationPacket();
+            }
 
-		});
-	}
+        });
+    }
 
-	protected int expectHeaderLength() {
+    protected int expectHeaderLength() {
 //		return getSrcData().length - getOffset();
-		return 0;
-	}
+        return 0;
+    }
 
-	private BerNode pres;
+    private BerNode pres;
 
-	public IPacketPayload exceptPayload() {
-		return (IPacketPayload) fetchOsiPresentation();
-	}
+    public IPacketPayload exceptPayload() {
+        return (IPacketPayload) fetchOsiPresentation();
+    }
 
-	public BerNode[] getUserData() {
-		if (pres instanceof OsiPresentation) {
-			return ((OsiPresentation) pres).getUserData();
-		}
-		return null;
-	}
+    public BerNode[] getUserData() {
+        if (pres instanceof OsiPresentation) {
+            return ((OsiPresentation) pres).getUserData();
+        }
+        return null;
+    }
 
-	public BerNode fetchOsiPresentation() {
-		if (pres == null) {
-			pres = OsiPresentationParser.parser.parsePresentation(getSrcData(), getOffset());
-		}
-		return pres;
-	}
+    public BerNode fetchOsiPresentation() {
+        if (pres == null) {
+            pres = OsiPresentationParser.parser.parsePresentation(getSrcData(), getOffset());
+        }
+        return pres;
+    }
 
 //	public boolean isEmptyPayload() {
 //		return true;
 //	}
 
-	public String getProtocolTypeDesc() {
-		return "osi presentation";
-	}
+    public String getProtocolTypeDesc() {
+        return "osi presentation";
+    }
 }

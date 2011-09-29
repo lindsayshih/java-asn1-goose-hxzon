@@ -50,22 +50,22 @@ public class BerVisibleString extends BerAbstractString {
 //        if (!validate(value)) throw new AsnEncodingException("Illegal IA5 string");
 //    }
 
-	public BerVisibleString() {
-		super(Tag.VISIBLESTRING);
-	}
+    public BerVisibleString() {
+        super(Tag.VISIBLESTRING);
+    }
 
-	public static final boolean validate(String str) {
-		int i, len = str.length();
-		for (i = 0; i < len; ++i) {
-			char c = str.charAt(i);
-			if ((c < 32) || (c > 126))
-				return false;
-		}
-		return true;
-	}
+    public static final boolean validate(String str) {
+        int i, len = str.length();
+        for (i = 0; i < len; ++i) {
+            char c = str.charAt(i);
+            if ((c < 32) || (c > 126))
+                return false;
+        }
+        return true;
+    }
 
-	public String getAsn1TypeDesc() {
-		return "BerVisibleString";
-	}
+    public String getAsn1TypeDesc() {
+        return "BerVisibleString";
+    }
 
 }

@@ -39,7 +39,6 @@ package org.hxzon.asn1.core.parse;
 import org.hxzon.asn1.core.type.base.BerConstruct;
 import org.hxzon.asn1.core.type.base.BerNode;
 
-
 /**
  * A BerTag can either be marked as implicit or explicit. If it is marked as
  * implicit, the tag value is specified when constructing the primitive or
@@ -69,16 +68,16 @@ public class BerTag extends BerConstruct {
 //    {
 //        super(tag, state, parser, stream);
 //    }
-	public BerTag() {
-		super(Tag.NoTag);
-	}
+    public BerTag() {
+        super(Tag.NoTag);
+    }
 
-	public String getAsn1TypeDesc() {
-		return "BerTag";
-	}
+    public String getAsn1TypeDesc() {
+        return "BerTag";
+    }
 
-	public BerNode get() {
-		return get(0);
-	}
+    public BerNode get() {
+        return get(0);
+    }
 
 }

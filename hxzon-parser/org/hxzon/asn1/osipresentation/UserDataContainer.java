@@ -4,5 +4,5 @@ import org.hxzon.asn1.core.type.base.BerNode;
 
 public interface UserDataContainer {
 
-	BerNode[] getUserData();
+    BerNode[] getUserData();
 }

@@ -14,6 +14,7 @@ public class HDynamicUtilTreeNode extends DefaultMutableTreeNode {
     protected Object childValue;
     /** Have the children been loaded yet? */
     protected boolean loadedChildren;
+
     public HDynamicUtilTreeNode(Object value, Object children) {
         super(value);
         loadedChildren = false;
@@ -48,6 +49,7 @@ public class HDynamicUtilTreeNode extends DefaultMutableTreeNode {
             setAllowsChildren(false);
         }
     }
+
     public static void createChildren(DefaultMutableTreeNode parent, Object children) {
         if (children instanceof Collection) {
             for (Object o : (Collection) children)
@@ -86,23 +88,28 @@ public class HDynamicUtilTreeNode extends DefaultMutableTreeNode {
             }
         }
     }
+
     protected void loadChildren() {
         loadedChildren = true;
         createChildren(this, childValue);
     }
+
     public boolean isLeaf() {
         return !getAllowsChildren();
     }
+
     public int getChildCount() {
         if (!loadedChildren)
             loadChildren();
         return super.getChildCount();
     }
+
     public TreeNode getChildAt(int index) {
         if (!loadedChildren)
             loadChildren();
         return super.getChildAt(index);
     }
+
     public Enumeration children() {
         if (!loadedChildren)
             loadChildren();

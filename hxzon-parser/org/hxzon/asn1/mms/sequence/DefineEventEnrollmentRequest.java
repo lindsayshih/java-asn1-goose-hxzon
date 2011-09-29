@@ -9,7 +9,6 @@ import org.hxzon.asn1.mms.choice.ObjectName;
 import org.hxzon.asn1.mms.common.AlarmAckRule;
 import org.hxzon.asn1.mms.common.Transitions;
 
-
 public class DefineEventEnrollmentRequest extends BerSequence {
 //	DefineEventEnrollment-Request ::= SEQUENCE
 //	{
@@ -20,23 +19,23 @@ public class DefineEventEnrollmentRequest extends BerSequence {
 //	eventActionName			[4] ObjectName OPTIONAL,
 //	clientApplication		[5] ApplicationReference OPTIONAL
 //	}
-	public BerNode create(int tag, BerInputStream stream) {
-		switch (tag) {
-		case Tag.CONTEXT | 0:
-			return new ObjectName().init("eventEnrollmentName", "eventEnrollmentName", tag, stream);
-		case Tag.CONTEXT | 1:
-			return new ObjectName().init("eventConditionName", "eventConditionName", tag, stream);
-		case Tag.CONTEXT | 2:
-			return new Transitions().init("eventConditionTransition", "eventConditionTransition", tag, stream);
-		case Tag.CONTEXT | 3:
-			return new AlarmAckRule().init("alarmAcknowledgementRule", "alarmAcknowledgementRule", tag, stream);
-		case Tag.CONTEXT | 4:
-			return new ObjectName().init("eventActionName", "eventActionName", tag, stream);
-		case Tag.CONTEXT | 5:
-			return new ApplicationReference().init("clientApplication", "clientApplication", tag, stream);
-		default:
-			return Asn1Utils.createUnknown(tag, stream);
-		}
-	}
+    public BerNode create(int tag, BerInputStream stream) {
+        switch (tag) {
+        case Tag.CONTEXT | 0:
+            return new ObjectName().init("eventEnrollmentName", "eventEnrollmentName", tag, stream);
+        case Tag.CONTEXT | 1:
+            return new ObjectName().init("eventConditionName", "eventConditionName", tag, stream);
+        case Tag.CONTEXT | 2:
+            return new Transitions().init("eventConditionTransition", "eventConditionTransition", tag, stream);
+        case Tag.CONTEXT | 3:
+            return new AlarmAckRule().init("alarmAcknowledgementRule", "alarmAcknowledgementRule", tag, stream);
+        case Tag.CONTEXT | 4:
+            return new ObjectName().init("eventActionName", "eventActionName", tag, stream);
+        case Tag.CONTEXT | 5:
+            return new ApplicationReference().init("clientApplication", "clientApplication", tag, stream);
+        default:
+            return Asn1Utils.createUnknown(tag, stream);
+        }
+    }
 
 }

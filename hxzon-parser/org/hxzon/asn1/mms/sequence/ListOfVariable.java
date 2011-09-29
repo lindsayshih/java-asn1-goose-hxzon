@@ -6,11 +6,10 @@ import org.hxzon.asn1.core.type.BerSequence;
 import org.hxzon.asn1.core.type.base.BerNode;
 import org.hxzon.asn1.mms.choice.VariableSpecification;
 
-
 public class ListOfVariable extends BerSequence {
-	public ListOfVariable() {
-		setName("listOfVariable");
-	}
+    public ListOfVariable() {
+        setName("listOfVariable");
+    }
 
 //	GetNamedVariableListAttributes-Response ::= SEQUENCE
 //	{
@@ -21,13 +20,13 @@ public class ListOfVariable extends BerSequence {
 ////		alternateAccess			[5] IMPLICIT AlternateAccess OPTIONAL
 ////		}
 //	}
-	public BerNode create(int tag, BerInputStream stream) {
-		switch (tag) {
-		case Tag.CONTEXT | 5:
-			return new AlternateAccess().init(tag, stream);
-		default:
-			return new VariableSpecification().init(tag, stream, false);
-		}
-	}
+    public BerNode create(int tag, BerInputStream stream) {
+        switch (tag) {
+        case Tag.CONTEXT | 5:
+            return new AlternateAccess().init(tag, stream);
+        default:
+            return new VariableSpecification().init(tag, stream, false);
+        }
+    }
 
 }

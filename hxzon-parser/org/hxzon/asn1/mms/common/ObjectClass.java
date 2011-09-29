@@ -32,34 +32,34 @@ public class ObjectClass extends BerInteger {
 //	continueAfter 	[2] IMPLICIT Identifier OPTIONAL
 //	}
 
-	public String getValueAsString() {
-		switch ((int) getValue()) {
-		case 0:
-			return "nammedVariable";
-		case 1:
-			return "scatteredAccess";
-		case 2:
-			return "namedVariableList";
-		case 3:
-			return "namedType";
-		case 4:
-			return "semaphore";
-		case 5:
-			return "eventCondition";
-		case 6:
-			return "eventAction";
-		case 7:
-			return "eventEnrollment";
-		case 8:
-			return "journal";
-		case 9:
-			return "domain";
-		case 10:
-			return "programInvocation";
-		case 11:
-			return "operatorStation";
-		default:
-			return "unknown";
-		}
-	}
+    public String getValueAsString() {
+        switch ((int) getValue()) {
+        case 0:
+            return "nammedVariable";
+        case 1:
+            return "scatteredAccess";
+        case 2:
+            return "namedVariableList";
+        case 3:
+            return "namedType";
+        case 4:
+            return "semaphore";
+        case 5:
+            return "eventCondition";
+        case 6:
+            return "eventAction";
+        case 7:
+            return "eventEnrollment";
+        case 8:
+            return "journal";
+        case 9:
+            return "domain";
+        case 10:
+            return "programInvocation";
+        case 11:
+            return "operatorStation";
+        default:
+            return "unknown";
+        }
+    }
 }

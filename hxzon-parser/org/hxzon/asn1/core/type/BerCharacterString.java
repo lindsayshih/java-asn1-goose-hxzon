@@ -43,11 +43,11 @@ import org.hxzon.asn1.core.parse.Tag;
  * array of 8-bit bytes
  */
 public class BerCharacterString extends BerOctetString {
-	public BerCharacterString() {
-		setTypeTag(Tag.CHARACTERSTRING);
-	}
+    public BerCharacterString() {
+        setTypeTag(Tag.CHARACTERSTRING);
+    }
 
-	public String getAsn1TypeDesc() {
-		return "BerCharacterString";
-	}
+    public String getAsn1TypeDesc() {
+        return "BerCharacterString";
+    }
 }

@@ -9,10 +9,9 @@ import org.hxzon.asn1.core.type.base.BerNode;
 import org.hxzon.asn1.smv.SmvPduParser;
 import org.hxzon.util.BytesUtil;
 
-
 public class TestSmvDecoder {
 
-	//MU9-2 smv10.pkt-1
+    //MU9-2 smv10.pkt-1
 //	0000   01 0c cd 04 00 00 00 50 c2 4f 90 af 88 ba 40 00  .......P.O....@.
 //	0010   00 68 00 00 00 00 60 5e 80 01 01 a2 59 30 57 80  .h....`^....Y0W.
 //	0020   06 4d 55 30 34 30 31 82 02 00 00 83 04 00 00 00  .MU0401.........
@@ -24,10 +23,10 @@ public class TestSmvDecoder {
 //60=application 0
 //80=context 0
 
-	public static String smv1 = "60 5e 80 01 01 a2 59 30 57 80"//
-			+ "06 4d 55 30 34 30 31 82 02 00 00 83 04 00 00 00" + "01 85 01 01 87 40 00 06 6e d5 00 00 00 00 00 02"
-			+ "6c d1 00 00 00 00 ff f7 24 59 00 00 00 00 00 00"
-			+ "00 00 00 00 00 00 00 6b 37 44 00 00 00 00 00 28" + "6a fd 00 00 00 00 ff 6c 5d bf 00 00 00 00 00 00" + "00 00 00 00 00 00                              ";
+    public static String smv1 = "60 5e 80 01 01 a2 59 30 57 80"//
+            + "06 4d 55 30 34 30 31 82 02 00 00 83 04 00 00 00" + "01 85 01 01 87 40 00 06 6e d5 00 00 00 00 00 02"
+            + "6c d1 00 00 00 00 ff f7 24 59 00 00 00 00 00 00"
+            + "00 00 00 00 00 00 00 6b 37 44 00 00 00 00 00 28" + "6a fd 00 00 00 00 ff 6c 5d bf 00 00 00 00 00 00" + "00 00 00 00 00 00                              ";
 //number of ASDUs: 1
 //svID: MU0401
 //sample count: 0
@@ -79,38 +78,38 @@ public class TestSmvDecoder {
 //0280   00 00 00 ff ff c1 2b 00 00 00 00 00 00 13 da 00  ......+.........
 //0290   00 00 00 00 00 13 da 00 00 00 00                 ...........
 
-	public static String smv2 = "60 82 02 7d 80 01" + "05 a2 82 02 76 30 7c 80 0b 64 6f 6e 67 66 61 6e" + "67 73 6d 76 82 02 08 20 83 04 00 00 00 01 85 01"
-			+ "00 87 60 00 00 00 00 00 00 00 00 00 00 03 53 00" + "00 00 00 ff ff fc ad 00 00 00 00 00 00 00 00 00" + "00 00 00 00 00 00 00 00 00 00 00 00 00 03 53 00"
-			+ "00 00 00 ff ff fc ad 00 00 00 00 00 00 00 00 00" + "00 00 00 00 00 37 a1 00 00 00 00 ff ff c8 5f 00" + "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00"
-			+ "00 00 00 30 7c 80 0b 64 6f 6e 67 66 61 6e 67 73" + "6d 76 82 02 08 21 83 04 00 00 00 01 85 01 00 87" + "60 00 00 00 4d 00 00 00 00 00 00 03 29 00 00 00"
-			+ "00 ff ff fc 8a 00 00 00 00 00 00 00 4d 00 00 00" + "00 00 00 00 4d 00 00 00 00 00 00 03 29 00 00 00" + "00 ff ff fc 8a 00 00 00 00 00 00 05 0a 00 00 00"
-			+ "00 00 00 34 f0 00 00 00 00 ff ff c6 06 00 00 00" + "00 00 00 05 0a 00 00 00 00 00 00 05 0a 00 00 00" + "00 30 7c 80 0b 64 6f 6e 67 66 61 6e 67 73 6d 76"
-			+ "82 02 08 22 83 04 00 00 00 01 85 01 00 87 60 00" + "00 00 9a 00 00 00 00 00 00 02 fb 00 00 00 00 ff" + "ff fc 6b 00 00 00 00 00 00 00 9a 00 00 00 00 00"
-			+ "00 00 9a 00 00 00 00 00 00 02 fb 00 00 00 00 ff" + "ff fc 6b 00 00 00 00 00 00 0a 0c 00 00 00 00 00" + "00 31 ec 00 00 00 00 ff ff c4 08 00 00 00 00 00"
-			+ "00 0a 0c 00 00 00 00 00 00 0a 0c 00 00 00 00 30" + "7c 80 0b 64 6f 6e 67 66 61 6e 67 73 6d 76 82 02" + "08 23 83 04 00 00 00 01 85 01 00 87 60 00 00 00"
-			+ "e5 00 00 00 00 00 00 02 c8 00 00 00 00 ff ff fc" + "52 00 00 00 00 00 00 00 e5 00 00 00 00 00 00 00" + "e5 00 00 00 00 00 00 02 c8 00 00 00 00 ff ff fc"
-			+ "52 00 00 00 00 00 00 0e ff 00 00 00 00 00 00 2e" + "98 00 00 00 00 ff ff c2 69 00 00 00 00 00 00 0e" + "ff 00 00 00 00 00 00 0e ff 00 00 00 00 30 7c 80"
-			+ "0b 64 6f 6e 67 66 61 6e 67 73 6d 76 82 02 08 24" + "83 04 00 00 00 01 85 01 00 87 60 00 00 01 2f 00" + "00 00 00 00 00 02 91 00 00 00 00 ff ff fc 3f 00"
-			+ "00 00 00 00 00 01 2f 00 00 00 00 00 00 01 2f 00" + "00 00 00 00 00 02 91 00 00 00 00 ff ff fc 3f 00" + "00 00 00 00 00 13 da 00 00 00 00 00 00 2a fb 00"
-			+ "00 00 00 ff ff c1 2b 00 00 00 00 00 00 13 da 00" + "00 00 00 00 00 13 da 00 00 00 00               ";
+    public static String smv2 = "60 82 02 7d 80 01" + "05 a2 82 02 76 30 7c 80 0b 64 6f 6e 67 66 61 6e" + "67 73 6d 76 82 02 08 20 83 04 00 00 00 01 85 01"
+            + "00 87 60 00 00 00 00 00 00 00 00 00 00 03 53 00" + "00 00 00 ff ff fc ad 00 00 00 00 00 00 00 00 00" + "00 00 00 00 00 00 00 00 00 00 00 00 00 03 53 00"
+            + "00 00 00 ff ff fc ad 00 00 00 00 00 00 00 00 00" + "00 00 00 00 00 37 a1 00 00 00 00 ff ff c8 5f 00" + "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00"
+            + "00 00 00 30 7c 80 0b 64 6f 6e 67 66 61 6e 67 73" + "6d 76 82 02 08 21 83 04 00 00 00 01 85 01 00 87" + "60 00 00 00 4d 00 00 00 00 00 00 03 29 00 00 00"
+            + "00 ff ff fc 8a 00 00 00 00 00 00 00 4d 00 00 00" + "00 00 00 00 4d 00 00 00 00 00 00 03 29 00 00 00" + "00 ff ff fc 8a 00 00 00 00 00 00 05 0a 00 00 00"
+            + "00 00 00 34 f0 00 00 00 00 ff ff c6 06 00 00 00" + "00 00 00 05 0a 00 00 00 00 00 00 05 0a 00 00 00" + "00 30 7c 80 0b 64 6f 6e 67 66 61 6e 67 73 6d 76"
+            + "82 02 08 22 83 04 00 00 00 01 85 01 00 87 60 00" + "00 00 9a 00 00 00 00 00 00 02 fb 00 00 00 00 ff" + "ff fc 6b 00 00 00 00 00 00 00 9a 00 00 00 00 00"
+            + "00 00 9a 00 00 00 00 00 00 02 fb 00 00 00 00 ff" + "ff fc 6b 00 00 00 00 00 00 0a 0c 00 00 00 00 00" + "00 31 ec 00 00 00 00 ff ff c4 08 00 00 00 00 00"
+            + "00 0a 0c 00 00 00 00 00 00 0a 0c 00 00 00 00 30" + "7c 80 0b 64 6f 6e 67 66 61 6e 67 73 6d 76 82 02" + "08 23 83 04 00 00 00 01 85 01 00 87 60 00 00 00"
+            + "e5 00 00 00 00 00 00 02 c8 00 00 00 00 ff ff fc" + "52 00 00 00 00 00 00 00 e5 00 00 00 00 00 00 00" + "e5 00 00 00 00 00 00 02 c8 00 00 00 00 ff ff fc"
+            + "52 00 00 00 00 00 00 0e ff 00 00 00 00 00 00 2e" + "98 00 00 00 00 ff ff c2 69 00 00 00 00 00 00 0e" + "ff 00 00 00 00 00 00 0e ff 00 00 00 00 30 7c 80"
+            + "0b 64 6f 6e 67 66 61 6e 67 73 6d 76 82 02 08 24" + "83 04 00 00 00 01 85 01 00 87 60 00 00 01 2f 00" + "00 00 00 00 00 02 91 00 00 00 00 ff ff fc 3f 00"
+            + "00 00 00 00 00 01 2f 00 00 00 00 00 00 01 2f 00" + "00 00 00 00 00 02 91 00 00 00 00 ff ff fc 3f 00" + "00 00 00 00 00 13 da 00 00 00 00 00 00 2a fb 00"
+            + "00 00 00 ff ff c1 2b 00 00 00 00 00 00 13 da 00" + "00 00 00 00 00 13 da 00 00 00 00               ";
 
 //number of asdu:5
 //svId:dongfangsmv
 //sample count:2080
 //confRef:1
 //sample synch:0
-	public static void main(String[] args) throws IOException {
-		byte[] data = BytesUtil.fromHexString(smv2);
-		String reverse = BytesUtil.toHexString(data);
-		System.out.println(reverse);
-		ByteArrayInputStream inStream = new ByteArrayInputStream(data);
-		BerInputStream in = new BerInputStream(inStream);
+    public static void main(String[] args) throws IOException {
+        byte[] data = BytesUtil.fromHexString(smv2);
+        String reverse = BytesUtil.toHexString(data);
+        System.out.println(reverse);
+        ByteArrayInputStream inStream = new ByteArrayInputStream(data);
+        BerInputStream in = new BerInputStream(inStream);
 
-		SmvPduParser parser = SmvPduParser.parser;
-		BerNode node;
-		while (null != (node = parser.readPacket(in))) {
-			System.out.println(Asn1Utils.printBerNode(node));
-		}
-	}
+        SmvPduParser parser = SmvPduParser.parser;
+        BerNode node;
+        while (null != (node = parser.readPacket(in))) {
+            System.out.println(Asn1Utils.printBerNode(node));
+        }
+    }
 
 }

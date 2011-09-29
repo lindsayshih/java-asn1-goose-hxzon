@@ -9,7 +9,6 @@ import org.hxzon.asn1.core.type.base.BerNode;
 import org.hxzon.asn1.mms.MmsPduParser;
 import org.hxzon.util.BytesUtil;
 
-
 public class TestMmsDecoder {
 
     //mms gooseandmms.pkt-45
@@ -25,13 +24,10 @@ public class TestMmsDecoder {
 //	0090   05 08 40 be 66 66 91 08 47 c2 7c 6e 17 4f c3 0a  ..@.ff..G.|n.O..
 //	00a0   84 02 02 40 84 02 02 40                          ...@...@
 
-public static String mms1="a3 5c a0 5a a1 05"//a0 5e 
-+"80 03 52 50 54 a0 51 8a 19 46 37 31 34 4c 44 30"
-+"2f 4c 4c 4e 30 24 72 63 62 4d 65 61 73 46 6c 74"
-+"30 31 84 03 06 51 00 86 01 71 89 08 00 06 10 ae"
-+"00 00 00 00 84 09 04 00 00 00 00 00 00 14 00 87"
-+"05 08 40 be 66 66 91 08 47 c2 7c 6e 17 4f c3 0a"
-+"84 02 02 40 84 02 02 40                        ";
+    public static String mms1 = "a3 5c a0 5a a1 05"//a0 5e 
+            + "80 03 52 50 54 a0 51 8a 19 46 37 31 34 4c 44 30" + "2f 4c 4c 4e 30 24 72 63 62 4d 65 61 73 46 6c 74"
+            + "30 31 84 03 06 51 00 86 01 71 89 08 00 06 10 ae"
+            + "00 00 00 00 84 09 04 00 00 00 00 00 00 14 00 87" + "05 08 40 be 66 66 91 08 47 c2 7c 6e 17 4f c3 0a" + "84 02 02 40 84 02 02 40                        ";
 
 //unconfirmed 3
 //informationReport{
@@ -55,8 +51,8 @@ public static String mms1="a3 5c a0 5a a1 05"//a0 5e
 //0030   ff 99 91 a1 00 00 03 00 00 25 02 f0 80 01 00 01  .........%......
 //0040   00 61 18 30 16 02 01 03 a0 11 a0 0f 02 02 01 5d  .a.0...........]
 //0050   a1 09 a0 03 80 01 09 a1 02 80 00                 ...........
-public static String mms2="a0 0f 02 02 01 5d"
-+"a1 09 a0 03 80 01 09 a1 02 80 00               ";
+    public static String mms2 = "a0 0f 02 02 01 5d" + "a1 09 a0 03 80 01 09 a1 02 80 00               ";
+
 //Conf Request (0)
 //GetNameList (1)
 //InvokeID: InvokeID:  349
@@ -66,13 +62,13 @@ public static String mms2="a0 0f 02 02 01 5d"
 //}
 
     public static void main(String[] args) throws IOException {
-        byte[] data=BytesUtil.fromHexString(mms1);
-        String reverse=BytesUtil.toHexString(data);
+        byte[] data = BytesUtil.fromHexString(mms1);
+        String reverse = BytesUtil.toHexString(data);
         System.out.println(reverse);
         ByteArrayInputStream inStream = new ByteArrayInputStream(data);
         BerInputStream in = new BerInputStream(inStream);
-        
-        MmsPduParser parser=new MmsPduParser();
+
+        MmsPduParser parser = new MmsPduParser();
         BerNode node;
         while (null != (node = parser.readPacket(in))) {
             System.out.println(Asn1Utils.printBerNode(node));

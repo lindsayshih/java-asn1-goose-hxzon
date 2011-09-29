@@ -6,7 +6,6 @@ import org.hxzon.asn1.core.parse.ext.Asn1Utils;
 import org.hxzon.asn1.core.type.BerSequence;
 import org.hxzon.asn1.core.type.base.BerNode;
 
-
 public class GetAlarmEnrollmentSummaryResponse extends BerSequence {
 //	GetAlarmEnrollmentSummary-Response ::= SEQUENCE
 //	{
@@ -14,14 +13,14 @@ public class GetAlarmEnrollmentSummaryResponse extends BerSequence {
 //	moreFollows			[1] IMPLICIT BOOLEAN DEFAULT FALSE
 //	}
 
-	public BerNode create(int tag, BerInputStream stream) {
-		switch (tag) {
-		case Tag.CONTEXT | 0:
-			return Asn1Utils.createBerSequenceOf("listOfAlarmEnrollmentSummary", "listOfAlarmEnrollmentSummary", tag, stream, AlarmEnrollmentSummary.class);
-		case Tag.CONTEXT | 1:
-			return Asn1Utils.createBerBoolean("moreFollows", "moreFollows", tag, stream);
-		default:
-			return Asn1Utils.createUnknown(tag, stream);
-		}
-	}
+    public BerNode create(int tag, BerInputStream stream) {
+        switch (tag) {
+        case Tag.CONTEXT | 0:
+            return Asn1Utils.createBerSequenceOf("listOfAlarmEnrollmentSummary", "listOfAlarmEnrollmentSummary", tag, stream, AlarmEnrollmentSummary.class);
+        case Tag.CONTEXT | 1:
+            return Asn1Utils.createBerBoolean("moreFollows", "moreFollows", tag, stream);
+        default:
+            return Asn1Utils.createUnknown(tag, stream);
+        }
+    }
 }

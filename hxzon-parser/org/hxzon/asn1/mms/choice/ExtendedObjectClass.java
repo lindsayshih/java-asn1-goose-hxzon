@@ -7,13 +7,12 @@ import org.hxzon.asn1.core.type.base.BerNode;
 import org.hxzon.asn1.core.type.ext.BerChoice;
 import org.hxzon.asn1.mms.common.ObjectClass;
 
-
 public class ExtendedObjectClass extends BerChoice {
 
-	public ExtendedObjectClass() {
-		setName("extended object class");
-		setDisplayString("extended object class");
-	}
+    public ExtendedObjectClass() {
+        setName("extended object class");
+        setDisplayString("extended object class");
+    }
 
 //	GetNameList-Request ::= SEQUENCE
 //	{
@@ -43,7 +42,7 @@ public class ExtendedObjectClass extends BerChoice {
 //		},
 //	continueAfter 	[2] IMPLICIT Identifier OPTIONAL
 //	}
-	
+
 //	Rename-Request ::= SEQUENCE 
 //	{
 //	extendedObjectClass	[0] CHOICE {
@@ -68,12 +67,12 @@ public class ExtendedObjectClass extends BerChoice {
 //	newIdentifier		[2] IMPLICIT Identifier
 //      	}
 
-	public BerNode create(int tag, BerInputStream stream) {
-		switch (tag) {
-		case Tag.CONTEXT | 0:
-			return new ObjectClass().init("object class","object class", tag, stream);
-		default:
-			return Asn1Utils.createUnknown(tag, stream);
-		}
-	}
+    public BerNode create(int tag, BerInputStream stream) {
+        switch (tag) {
+        case Tag.CONTEXT | 0:
+            return new ObjectClass().init("object class", "object class", tag, stream);
+        default:
+            return Asn1Utils.createUnknown(tag, stream);
+        }
+    }
 }

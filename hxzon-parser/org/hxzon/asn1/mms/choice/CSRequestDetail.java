@@ -5,13 +5,12 @@ import org.hxzon.asn1.core.parse.ext.Asn1Utils;
 import org.hxzon.asn1.core.type.base.BerNode;
 import org.hxzon.asn1.core.type.ext.BerChoice;
 
-
 public class CSRequestDetail extends BerChoice {
 
-	public CSRequestDetail() {
-		setName("cs-request-detail");
-		setDisplayString("cs-request-detail");
-	}
+    public CSRequestDetail() {
+        setName("cs-request-detail");
+        setDisplayString("cs-request-detail");
+    }
 
 //	CS-Request-Detail ::= CHOICE {
 //		-- see ISO 9506-2
@@ -19,10 +18,10 @@ public class CSRequestDetail extends BerChoice {
 //		-- XXX fix me later
 //				foo INTEGER
 //			}
-	public BerNode create(int tag, BerInputStream stream) {
-		switch (tag) {
-		default:
-			return Asn1Utils.createUnknown(tag, stream);
-		}
-	}
+    public BerNode create(int tag, BerInputStream stream) {
+        switch (tag) {
+        default:
+            return Asn1Utils.createUnknown(tag, stream);
+        }
+    }
 }

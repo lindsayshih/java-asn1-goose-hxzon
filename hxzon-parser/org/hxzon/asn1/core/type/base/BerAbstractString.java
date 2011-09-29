@@ -51,100 +51,100 @@ import org.hxzon.util.BytesUtil;
  * Java String syntax to represent the strings.
  */
 public abstract class BerAbstractString extends BerNode {
-	private String fValue;
+    private String fValue;
 
-	protected static final int ASCII = 0x0001; // A-Z a-z
-	protected static final int NUMBER = 0x0002; // 0-9
-	protected static final int HEXASCII = 0x0004; // A-F a-f
-	protected static final int MINUS = 0x0008; // -
-	protected static final int PUNCT = 0x0010; // ' ( ) + , - . / : ? sp
+    protected static final int ASCII = 0x0001; // A-Z a-z
+    protected static final int NUMBER = 0x0002; // 0-9
+    protected static final int HEXASCII = 0x0004; // A-F a-f
+    protected static final int MINUS = 0x0008; // -
+    protected static final int PUNCT = 0x0010; // ' ( ) + , - . / : ? sp
 
-	public BerAbstractString(int typeTag) {
-		super(typeTag);
-	}
+    public BerAbstractString(int typeTag) {
+        super(typeTag);
+    }
 
-	/**
-	 * Write this BER element to the output stream
-	 * Comment
-	 * @param stream
-	 * @throws IOException
-	 * @see org.hxzon.asn1.core.type.base.BerNode#writeElement(org.hxzon.asn1.core.parse.BerOutputStream)
-	 */
-	public void writeElement(BerOutputStream stream) throws IOException {
-		byte[] b = fValue.getBytes("UTF-8");
-		stream.writeBerTag(getTag() | (stream.isComplexOctetString(b.length) ? Tag.CONSTRUCTED : 0));
-		stream.writeOctetString(b, 0, b.length);
-	}
+    /**
+     * Write this BER element to the output stream
+     * Comment
+     * @param stream
+     * @throws IOException
+     * @see org.hxzon.asn1.core.type.base.BerNode#writeElement(org.hxzon.asn1.core.parse.BerOutputStream)
+     */
+    public void writeElement(BerOutputStream stream) throws IOException {
+        byte[] b = fValue.getBytes("UTF-8");
+        stream.writeBerTag(getTag() | (stream.isComplexOctetString(b.length) ? Tag.CONSTRUCTED : 0));
+        stream.writeOctetString(b, 0, b.length);
+    }
 
-	/**
-	 * Return the value of this boolean object
-	 * @return
-	 */
-	public String getValue() {
-		return fValue;
-	}
+    /**
+     * Return the value of this boolean object
+     * @return
+     */
+    public String getValue() {
+        return fValue;
+    }
 
-	public void setValue(String fValue) {
-		this.fValue = fValue;
-	}
+    public void setValue(String fValue) {
+        this.fValue = fValue;
+    }
 
-	private static boolean isValidChar(char c, int charSet) {
-		if (0 != (charSet & ASCII)) {
-			if ((c >= 'A') && (c <= 'Z'))
-				return true;
-			if ((c >= 'a') && (c <= 'z'))
-				return true;
-		}
-		if (0 != (charSet & NUMBER)) {
-			if ((c >= '0') && (c <= '9'))
-				return true;
-		}
-		if (0 != (charSet & HEXASCII)) {
-			if ((c >= 'A') && (c <= 'F'))
-				return true;
-			if ((c >= 'a') && (c <= 'f'))
-				return true;
-		}
-		if (0 != (charSet & MINUS)) {
-			if (c == '-')
-				return true;
-		}
-		if (0 != (charSet & PUNCT)) {
-			if ("'()+,./:? ".indexOf(c) != -1)
-				return true;
-		}
-		return false;
-	}
+    private static boolean isValidChar(char c, int charSet) {
+        if (0 != (charSet & ASCII)) {
+            if ((c >= 'A') && (c <= 'Z'))
+                return true;
+            if ((c >= 'a') && (c <= 'z'))
+                return true;
+        }
+        if (0 != (charSet & NUMBER)) {
+            if ((c >= '0') && (c <= '9'))
+                return true;
+        }
+        if (0 != (charSet & HEXASCII)) {
+            if ((c >= 'A') && (c <= 'F'))
+                return true;
+            if ((c >= 'a') && (c <= 'f'))
+                return true;
+        }
+        if (0 != (charSet & MINUS)) {
+            if (c == '-')
+                return true;
+        }
+        if (0 != (charSet & PUNCT)) {
+            if ("'()+,./:? ".indexOf(c) != -1)
+                return true;
+        }
+        return false;
+    }
 
-	/**
-	 * Validate the string against the character sets specified.
-	 * @param str
-	 * @param charSet Character set constants defined above
-	 * @return
-	 */
-	protected static boolean validateString(String str, int charSet) {
-		int len = str.length();
-		int i;
+    /**
+     * Validate the string against the character sets specified.
+     * @param str
+     * @param charSet Character set constants defined above
+     * @return
+     */
+    protected static boolean validateString(String str, int charSet) {
+        int len = str.length();
+        int i;
 
-		for (i = 0; i < len; ++i) {
-			if (!isValidChar(str.charAt(i), charSet))
-				return false;
-		}
-		return true;
-	}
+        for (i = 0; i < len; ++i) {
+            if (!isValidChar(str.charAt(i), charSet))
+                return false;
+        }
+        return true;
+    }
 
-	//add by hxzon
-	protected void readValue(BerInputStream stream) {
-		try {
-			fValue = BytesUtil.toUTF8String(stream.readOctetString(0 == (getTag() & Tag.CONSTRUCTED)));
-			super.setOffsetAndLen(stream);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+    //add by hxzon
+    protected void readValue(BerInputStream stream) {
+        try {
+            fValue = BytesUtil.toUTF8String(stream.readOctetString(0 == (getTag() & Tag.CONSTRUCTED)));
+            super.setOffsetAndLen(stream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-	//add by hxzon
-	public String getValueAsString() {
-		return getValue();
-	}
+    //add by hxzon
+    public String getValueAsString() {
+        return getValue();
+    }
 }

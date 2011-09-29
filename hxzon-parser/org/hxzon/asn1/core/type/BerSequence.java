@@ -44,12 +44,12 @@ import org.hxzon.asn1.core.type.base.BerConstruct;
  */
 public class BerSequence extends BerConstruct {
 
-	/**
-	 * Construct a new BerSequence with the default set type
-	 */
-	public BerSequence() {
-		super(Tag.SEQUENCE);
-	}
+    /**
+     * Construct a new BerSequence with the default set type
+     */
+    public BerSequence() {
+        super(Tag.SEQUENCE);
+    }
 
 //    /**
 //     * Construt a new BerSequence from the input stream
@@ -64,8 +64,8 @@ public class BerSequence extends BerConstruct {
 //        super(tag, state, parser, stream);
 //    }
 
-	public String getAsn1TypeDesc() {
-		return "BerSequence";
-	}
+    public String getAsn1TypeDesc() {
+        return "BerSequence";
+    }
 
 }

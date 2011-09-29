@@ -44,12 +44,11 @@ import org.hxzon.asn1.core.parse.BerOutputStream;
 import org.hxzon.asn1.core.parse.Tag;
 import org.hxzon.asn1.core.type.base.BerNode;
 
-
 /**
  * Represents a boolean in the BER stream
  */
 public class BerBoolean extends BerNode {
-	private boolean fValue;
+    private boolean fValue;
 
 //    /**
 //     * Construct a boolean from the input stream
@@ -63,46 +62,46 @@ public class BerBoolean extends BerNode {
 //        
 //        fValue = stream.readBoolean();
 //    }
-	public BerBoolean() {
-		super(Tag.BOOLEAN);
-	}
+    public BerBoolean() {
+        super(Tag.BOOLEAN);
+    }
 
-	/**
-	 * Write this BER element to the output stream
-	 * Comment
-	 * @param stream
-	 * @throws IOException
-	 * @see org.hxzon.asn1.core.type.base.BerNode#writeElement(org.hxzon.asn1.core.parse.BerOutputStream)
-	 */
-	public void writeElement(BerOutputStream stream) throws IOException {
-		stream.writeBerTag(getTag());
-		stream.writeBoolean(fValue);
-	}
+    /**
+     * Write this BER element to the output stream
+     * Comment
+     * @param stream
+     * @throws IOException
+     * @see org.hxzon.asn1.core.type.base.BerNode#writeElement(org.hxzon.asn1.core.parse.BerOutputStream)
+     */
+    public void writeElement(BerOutputStream stream) throws IOException {
+        stream.writeBerTag(getTag());
+        stream.writeBoolean(fValue);
+    }
 
-	/**
-	 * Return the value of this boolean object
-	 * @return
-	 */
-	public boolean getValue() {
-		return fValue;
-	}
+    /**
+     * Return the value of this boolean object
+     * @return
+     */
+    public boolean getValue() {
+        return fValue;
+    }
 
-	public String getAsn1TypeDesc() {
-		return "BerBoolean";
-	}
+    public String getAsn1TypeDesc() {
+        return "BerBoolean";
+    }
 
-	//add by hxzon
-	public String getValueAsString() {
-		return String.valueOf(getValue());
-	}
+    //add by hxzon
+    public String getValueAsString() {
+        return String.valueOf(getValue());
+    }
 
-	//add by hxzon
-	protected void readValue(BerInputStream stream) {
-		try {
-			fValue = stream.readBoolean();
-			super.setOffsetAndLen(stream);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+    //add by hxzon
+    protected void readValue(BerInputStream stream) {
+        try {
+            fValue = stream.readBoolean();
+            super.setOffsetAndLen(stream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

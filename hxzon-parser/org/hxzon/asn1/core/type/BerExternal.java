@@ -45,9 +45,9 @@ import org.hxzon.asn1.core.type.base.BerConstruct;
  */
 public class BerExternal extends BerConstruct {
 
-	public BerExternal() {
-		super(Tag.EXTERNAL);
-	}
+    public BerExternal() {
+        super(Tag.EXTERNAL);
+    }
 
 //    /**
 //     * Construt a new BerSequence from the input stream
@@ -62,8 +62,8 @@ public class BerExternal extends BerConstruct {
 //        super(tag, state, parser, stream);
 //    }
 
-	public String getAsn1TypeDesc() {
-		return "EXTERNAL";
-	}
+    public String getAsn1TypeDesc() {
+        return "EXTERNAL";
+    }
 
 }

@@ -52,7 +52,7 @@ import org.hxzon.asn1.core.type.base.BerNode;
  * string representing an OID.
  */
 public class BerRelativeOID extends BerNode {
-	private long[] fValue;
+    private long[] fValue;
 
 //    /**
 //     * Construct a boolean from the input stream
@@ -66,48 +66,48 @@ public class BerRelativeOID extends BerNode {
 //        
 //        fValue = stream.readRelativeOID();
 //    }
-	public BerRelativeOID() {
-		super(Tag.RELATIVEOID);
-	}
+    public BerRelativeOID() {
+        super(Tag.RELATIVEOID);
+    }
 
-	/**
-	 * Write this BER element to the output stream
-	 * Comment
-	 * @param stream
-	 * @throws IOException
-	 * @see org.hxzon.asn1.core.type.base.BerNode#writeElement(org.hxzon.asn1.core.parse.BerOutputStream)
-	 */
-	public void writeElement(BerOutputStream stream) throws IOException {
-		stream.writeBerTag(getTag());
-		stream.writeRelativeOID(fValue);
-	}
+    /**
+     * Write this BER element to the output stream
+     * Comment
+     * @param stream
+     * @throws IOException
+     * @see org.hxzon.asn1.core.type.base.BerNode#writeElement(org.hxzon.asn1.core.parse.BerOutputStream)
+     */
+    public void writeElement(BerOutputStream stream) throws IOException {
+        stream.writeBerTag(getTag());
+        stream.writeRelativeOID(fValue);
+    }
 
-	/**
-	 * Return the value of this boolean object
-	 * @return
-	 */
-	public long[] getValue() {
-		return fValue;
-	}
+    /**
+     * Return the value of this boolean object
+     * @return
+     */
+    public long[] getValue() {
+        return fValue;
+    }
 
-	public String getAsn1TypeDesc() {
-		return "BerRelativeOID";
-	}
+    public String getAsn1TypeDesc() {
+        return "BerRelativeOID";
+    }
 
-	@Override
-	protected void readValue(BerInputStream stream) {
-		try {
-			fValue = stream.readRelativeOID();
-			super.setOffsetAndLen(stream);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+    @Override
+    protected void readValue(BerInputStream stream) {
+        try {
+            fValue = stream.readRelativeOID();
+            super.setOffsetAndLen(stream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-	}
+    }
 
-	@Override
-	public String getValueAsString() {
-		return "" + getValue();
-	}
+    @Override
+    public String getValueAsString() {
+        return "" + getValue();
+    }
 
 }

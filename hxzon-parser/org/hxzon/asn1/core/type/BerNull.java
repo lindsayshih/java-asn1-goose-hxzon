@@ -52,16 +52,16 @@ import org.hxzon.util.DebugUtil;
  */
 public class BerNull extends BerNode {
 
-	public BerNull() {
-		super(Tag.NULL);
-	}
+    public BerNull() {
+        super(Tag.NULL);
+    }
 
-	/**
-	 * Construct a boolean from the input stream
-	 * @param tag
-	 * @param stream
-	 * @throws IOException
-	 */
+    /**
+     * Construct a boolean from the input stream
+     * @param tag
+     * @param stream
+     * @throws IOException
+     */
 //    public BerNull(int tag, BerInputStream stream) throws IOException
 //    {
 //        super(tag);
@@ -70,36 +70,36 @@ public class BerNull extends BerNode {
 //        if (len != 0) throw new AsnEncodingException("Illegal null object");
 //    }
 
-	/**
-	 * Write this BER element to the output stream
-	 * Comment
-	 * @param stream
-	 * @throws IOException
-	 * @see org.hxzon.asn1.core.type.base.BerNode#writeElement(org.hxzon.asn1.core.parse.BerOutputStream)
-	 */
-	public void writeElement(BerOutputStream stream) throws IOException {
-		stream.writeBerTag(getTag());
-		stream.writeBerLength(0);
-	}
+    /**
+     * Write this BER element to the output stream
+     * Comment
+     * @param stream
+     * @throws IOException
+     * @see org.hxzon.asn1.core.type.base.BerNode#writeElement(org.hxzon.asn1.core.parse.BerOutputStream)
+     */
+    public void writeElement(BerOutputStream stream) throws IOException {
+        stream.writeBerTag(getTag());
+        stream.writeBerLength(0);
+    }
 
-	public String getAsn1TypeDesc() {
-		return "BerNull";
-	}
+    public String getAsn1TypeDesc() {
+        return "BerNull";
+    }
 
-	//add by hxzon
-	protected void readValue(BerInputStream stream) {
-		try {
-			int len = stream.readBerLength();
-			if (len != 0)
-				throw new AsnEncodingException("Illegal null object");
-			super.setOffsetAndLen(stream);
-		} catch (IOException e) {
-			DebugUtil.error("BerNull read value error", e);
-		}
-	}
+    //add by hxzon
+    protected void readValue(BerInputStream stream) {
+        try {
+            int len = stream.readBerLength();
+            if (len != 0)
+                throw new AsnEncodingException("Illegal null object");
+            super.setOffsetAndLen(stream);
+        } catch (IOException e) {
+            DebugUtil.error("BerNull read value error", e);
+        }
+    }
 
-	//add by hxzon
-	public String getValueAsString() {
-		return "null";
-	}
+    //add by hxzon
+    public String getValueAsString() {
+        return "null";
+    }
 }

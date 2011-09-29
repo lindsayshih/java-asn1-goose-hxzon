@@ -45,13 +45,12 @@ import org.hxzon.asn1.core.parse.Tag;
 import org.hxzon.asn1.core.type.base.BerNode;
 import org.hxzon.asn1.core.type.ext.BitStringPresentation;
 
-
 /**
  * Represents a bit string, or a bit set, in the BER stream
  */
 public class BerBitString extends BerNode {
 //	private BitSet fValue;
-	private BitStringPresentation fValue;
+    private BitStringPresentation fValue;
 
 //    /**
 //     * Construct a boolean from the input stream
@@ -65,55 +64,55 @@ public class BerBitString extends BerNode {
 //        
 //        fValue = stream.readBitString(0 == (tag & Tag.CONSTRUCTED));
 //    }
-	public BerBitString() {
-		super(Tag.BITSTRING);
-	}
+    public BerBitString() {
+        super(Tag.BITSTRING);
+    }
 
-	/**
-	 * Write this BER element to the output stream
-	 * Comment
-	 * @param stream
-	 * @throws IOException
-	 * @see org.hxzon.asn1.core.type.base.BerNode#writeElement(org.hxzon.asn1.core.parse.BerOutputStream)
-	 */
-	public void writeElement(BerOutputStream stream) throws IOException {
+    /**
+     * Write this BER element to the output stream
+     * Comment
+     * @param stream
+     * @throws IOException
+     * @see org.hxzon.asn1.core.type.base.BerNode#writeElement(org.hxzon.asn1.core.parse.BerOutputStream)
+     */
+    public void writeElement(BerOutputStream stream) throws IOException {
 //		stream.writeBerTag(getTag() | (stream.isComplexBitString(fValue) ? Tag.CONSTRUCTED : 0));
 //		stream.writeBitString(fValue);
-		//change by hxzon
-		stream.writeBerTag(getTag() | (stream.isComplexBitString(fValue.getValue()) ? Tag.CONSTRUCTED : 0));
-		stream.writeBitString(fValue.getValue());
-	}
+        //change by hxzon
+        stream.writeBerTag(getTag() | (stream.isComplexBitString(fValue.getValue()) ? Tag.CONSTRUCTED : 0));
+        stream.writeBitString(fValue.getValue());
+    }
 
-	/**
-	 * Return the value of this boolean object
-	 * @return
-	 */
+    /**
+     * Return the value of this boolean object
+     * @return
+     */
 //	public BitSet getValue() {
 //		return fValue;
 //	}
-	public BitStringPresentation getValue() {
-		return fValue;
-	}
+    public BitStringPresentation getValue() {
+        return fValue;
+    }
 
-	//add by hxzon
-	public String getAsn1TypeDesc() {
-		return "BerBitString";
-	}
+    //add by hxzon
+    public String getAsn1TypeDesc() {
+        return "BerBitString";
+    }
 
-	//add by hxzon
-	protected void readValue(BerInputStream stream) {
-		try {
+    //add by hxzon
+    protected void readValue(BerInputStream stream) {
+        try {
 //			fValue = stream.readBitString(0 == (getTag() & Tag.CONSTRUCTED));
-			//change by hxzon
-			fValue = stream.readBitString2(0 == (getTag() & Tag.CONSTRUCTED));
-			super.setOffsetAndLen(stream);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+            //change by hxzon
+            fValue = stream.readBitString2(0 == (getTag() & Tag.CONSTRUCTED));
+            super.setOffsetAndLen(stream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-	//add by hxzon
-	public String getValueAsString() {
-		return getValue().getBitString();
-	}
+    //add by hxzon
+    public String getValueAsString() {
+        return getValue().getBitString();
+    }
 }

@@ -44,11 +44,11 @@ import org.hxzon.asn1.core.parse.Tag;
  * array of 8-bit bytes
  */
 public class BerGraphicsString extends BerOctetString {
-	public BerGraphicsString() {
-		setTypeTag(Tag.GRAPHICSTRING);
-	}
+    public BerGraphicsString() {
+        setTypeTag(Tag.GRAPHICSTRING);
+    }
 
-	public String getAsn1TypeDesc() {
-		return "BerGraphicsString";
-	}
+    public String getAsn1TypeDesc() {
+        return "BerGraphicsString";
+    }
 }

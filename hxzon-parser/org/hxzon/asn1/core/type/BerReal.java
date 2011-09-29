@@ -47,7 +47,7 @@ import org.hxzon.asn1.core.type.base.BerNode;
  * Represents a floating point value in the BER stream
  */
 public class BerReal extends BerNode {
-	private double fValue;
+    private double fValue;
 
 //    /**
 //     * Construct a boolean from the input stream
@@ -61,46 +61,46 @@ public class BerReal extends BerNode {
 //        
 //        fValue = stream.readReal();
 //    }
-	public BerReal() {
-		super(Tag.REAL);
-	}
+    public BerReal() {
+        super(Tag.REAL);
+    }
 
-	/**
-	 * Write this BER element to the output stream
-	 * Comment
-	 * @param stream
-	 * @throws IOException
-	 * @see org.hxzon.asn1.core.type.base.BerNode#writeElement(org.hxzon.asn1.core.parse.BerOutputStream)
-	 */
-	public void writeElement(BerOutputStream stream) throws IOException {
-		stream.writeBerTag(getTag());
-		stream.writeReal(fValue);
-	}
+    /**
+     * Write this BER element to the output stream
+     * Comment
+     * @param stream
+     * @throws IOException
+     * @see org.hxzon.asn1.core.type.base.BerNode#writeElement(org.hxzon.asn1.core.parse.BerOutputStream)
+     */
+    public void writeElement(BerOutputStream stream) throws IOException {
+        stream.writeBerTag(getTag());
+        stream.writeReal(fValue);
+    }
 
-	/**
-	 * Return the value of this boolean object
-	 * @return
-	 */
-	public double getValue() {
-		return fValue;
-	}
+    /**
+     * Return the value of this boolean object
+     * @return
+     */
+    public double getValue() {
+        return fValue;
+    }
 
-	public String getAsn1TypeDesc() {
-		return "BerReal";
-	}
+    public String getAsn1TypeDesc() {
+        return "BerReal";
+    }
 
-	//add by hxzon
-	protected void readValue(BerInputStream stream) {
-		try {
-			fValue = stream.readReal();
-			super.setOffsetAndLen(stream);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+    //add by hxzon
+    protected void readValue(BerInputStream stream) {
+        try {
+            fValue = stream.readReal();
+            super.setOffsetAndLen(stream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-	//add by hxzon
-	public String getValueAsString() {
-		return String.valueOf(getValue());
-	}
+    //add by hxzon
+    public String getValueAsString() {
+        return String.valueOf(getValue());
+    }
 }

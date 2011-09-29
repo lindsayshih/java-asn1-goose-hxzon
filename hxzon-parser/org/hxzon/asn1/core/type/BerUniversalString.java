@@ -43,11 +43,11 @@ import org.hxzon.asn1.core.parse.Tag;
  * array of 8-bit bytes
  */
 public class BerUniversalString extends BerOctetString {
-	public BerUniversalString() {
-		setTypeTag(Tag.UNIVERSALSTRING);
-	}
+    public BerUniversalString() {
+        setTypeTag(Tag.UNIVERSALSTRING);
+    }
 
-	public String getAsn1TypeDesc() {
-		return "BerUniversalString";
-	}
+    public String getAsn1TypeDesc() {
+        return "BerUniversalString";
+    }
 }

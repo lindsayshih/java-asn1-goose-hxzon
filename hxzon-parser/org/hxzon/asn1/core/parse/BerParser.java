@@ -67,14 +67,13 @@ import org.hxzon.asn1.core.type.base.BerNode;
  * object to be constructed is a complex type, such as an embedded tag, set
  * or sequence.
  */
-public abstract class BerParser
-{
+public abstract class BerParser {
     /**
      * This is the start state in my parsing state machine.
      */
     //change by hxzon,name change to State_Start
     protected static final int State_Start = 0;
-    
+
 //    /**
 //     * This reads the contents associated with a tag. If this is a primitive
 //     * object (a string or integer or real), this simply reads and constructs
@@ -177,8 +176,7 @@ public abstract class BerParser
      */
     //change by hxzon,state be the last argument and not throw IOException
     public abstract BerNode create(int tag, BerInputStream stream, int state);
-    
-    
+
     /**
      * The readPacket method is called by any code looking to parse an incoming
      * BER packet, such as a request packet. This starts the internal state of
@@ -188,28 +186,24 @@ public abstract class BerParser
      * @return
      * @throws IOException
      */
-    public BerNode readPacket(BerInputStream stream) throws IOException
-    {
+    public BerNode readPacket(BerInputStream stream) throws IOException {
         int tag;
-        
+
         /*
          * Attempt to read a tag. If we get an EOF while reading the tag, then
          * return null; assume the packet stream was closed.
          */
         try {
             tag = stream.readBerTag();
-        }
-        catch (EOFException err) {
+        } catch (EOFException err) {
             return null;
         }
-        
+
         /*
          * Now start my state, read the node and finish up.
          */
         //change by hxzon
 //        return read(tag,START,stream);
-        return create(tag,stream,State_Start);
+        return create(tag, stream, State_Start);
     }
 }
-
-

@@ -43,17 +43,12 @@ package org.hxzon.asn1.core.parse;
  * received was so out of bounds that there is nothing to do here but shut down
  * the input stream and terminate.
  */
-public class AsnFatalException extends AsnEncodingException
-{
-    public AsnFatalException()
-    {
+public class AsnFatalException extends AsnEncodingException {
+    public AsnFatalException() {
         super();
     }
 
-    public AsnFatalException(String message)
-    {
+    public AsnFatalException(String message) {
         super(message);
     }
 }
-
-

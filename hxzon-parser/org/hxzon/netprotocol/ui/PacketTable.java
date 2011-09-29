@@ -10,77 +10,75 @@ import org.hxzon.netprotocol.packet.Packet;
 
 public class PacketTable extends JTable {
 
-	public PacketTable() {
-		super(new PacketTableModel());
+    public PacketTable() {
+        super(new PacketTableModel());
 //		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		
-		
-	}
 
-	public void addPacket(Packet packet) {
-		this.getModel().addPacket(packet);
-	}
+    }
 
-	public void addPackets(List<Packet> packets) {
-		this.getModel().addPackets(packets);
-	}
+    public void addPacket(Packet packet) {
+        this.getModel().addPacket(packet);
+    }
 
-	public void clearPackets() {
-		this.getModel().clearPackets();
-	}
+    public void addPackets(List<Packet> packets) {
+        this.getModel().addPackets(packets);
+    }
 
-	public PacketTableModel getModel() {
-		return (PacketTableModel) super.getModel();
-	}
+    public void clearPackets() {
+        this.getModel().clearPackets();
+    }
 
-	public static class PacketTableModel extends AbstractTableModel {
-		private final List<Packet> packets = new ArrayList<Packet>();
+    public PacketTableModel getModel() {
+        return (PacketTableModel) super.getModel();
+    }
 
-		public PacketTableModel() {
-		}
+    public static class PacketTableModel extends AbstractTableModel {
+        private final List<Packet> packets = new ArrayList<Packet>();
 
-		@Override
-		public int getColumnCount() {
-			return 2;
-		}
+        public PacketTableModel() {
+        }
 
-		@Override
-		public int getRowCount() {
-			return packets.size();
-		}
+        @Override
+        public int getColumnCount() {
+            return 2;
+        }
 
-		@Override
-		public Object getValueAt(int rowIndex, int columnIndex) {
-			switch (columnIndex) {
-			case 0:
-				return rowIndex + 1;
-			case 1:
-				return packets.get(rowIndex).getLastPayloadType();
-			default:
-				return null;
-			}
-		}
+        @Override
+        public int getRowCount() {
+            return packets.size();
+        }
 
-		public Packet getPacket(int i) {
-			return packets.get(i);
-		}
+        @Override
+        public Object getValueAt(int rowIndex, int columnIndex) {
+            switch (columnIndex) {
+            case 0:
+                return rowIndex + 1;
+            case 1:
+                return packets.get(rowIndex).getLastPayloadType();
+            default:
+                return null;
+            }
+        }
 
-		public void addPacket(Packet packet) {
-			this.packets.add(packet);
-			this.fireTableDataChanged();
-		}
+        public Packet getPacket(int i) {
+            return packets.get(i);
+        }
 
-		public void addPackets(List<Packet> packets) {
-			this.packets.addAll(packets);
-			this.fireTableDataChanged();
-		}
+        public void addPacket(Packet packet) {
+            this.packets.add(packet);
+            this.fireTableDataChanged();
+        }
 
-		public void clearPackets() {
-			this.packets.clear();
-			this.fireTableDataChanged();
-		}
+        public void addPackets(List<Packet> packets) {
+            this.packets.addAll(packets);
+            this.fireTableDataChanged();
+        }
 
-	}
+        public void clearPackets() {
+            this.packets.clear();
+            this.fireTableDataChanged();
+        }
 
-	
+    }
+
 }

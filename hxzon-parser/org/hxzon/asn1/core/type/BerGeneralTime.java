@@ -53,10 +53,10 @@ import org.hxzon.util.BytesUtil;
  * Represents a UTC time object.
  */
 public class BerGeneralTime extends BerNode {
-	private static SimpleDateFormat gFormat;
-	private Date fValue;
-	//add by hxzon
-	private String origValue;
+    private static SimpleDateFormat gFormat;
+    private Date fValue;
+    //add by hxzon
+    private String origValue;
 
 //    /**
 //     * Construct a boolean from the input stream
@@ -70,90 +70,90 @@ public class BerGeneralTime extends BerNode {
 //        
 //        fDate = parseDate(new String(stream.readOctetString(0 == (tag & Tag.CONSTRUCTED)),"UTF-8"));
 //    }
-	public BerGeneralTime() {
-		super(Tag.GENERALTIME);
-	}
+    public BerGeneralTime() {
+        super(Tag.GENERALTIME);
+    }
 
-	/**
-	 * Write the BER element to the stream
-	 * @param stream
-	 * @throws IOException
-	 * @see org.hxzon.asn1.core.type.base.BerNode#writeElement(org.hxzon.asn1.core.parse.BerOutputStream)
-	 */
-	public void writeElement(BerOutputStream stream) throws IOException {
-		String date = formatDate(fValue);
+    /**
+     * Write the BER element to the stream
+     * @param stream
+     * @throws IOException
+     * @see org.hxzon.asn1.core.type.base.BerNode#writeElement(org.hxzon.asn1.core.parse.BerOutputStream)
+     */
+    public void writeElement(BerOutputStream stream) throws IOException {
+        String date = formatDate(fValue);
 
-		byte[] b = date.getBytes("UTF-8");
-		stream.writeBerTag(getTag() | (stream.isComplexOctetString(b.length) ? Tag.CONSTRUCTED : 0));
-		stream.writeOctetString(b, 0, b.length);
-	}
+        byte[] b = date.getBytes("UTF-8");
+        stream.writeBerTag(getTag() | (stream.isComplexOctetString(b.length) ? Tag.CONSTRUCTED : 0));
+        stream.writeOctetString(b, 0, b.length);
+    }
 
-	public Date getDate() {
-		return fValue;
-	}
+    public Date getDate() {
+        return fValue;
+    }
 
-	private static void initFormat() {
-		if (gFormat == null) {
-			gFormat = new SimpleDateFormat("yyyyMMddHHmmss.SSS");
-		}
-	}
+    private static void initFormat() {
+        if (gFormat == null) {
+            gFormat = new SimpleDateFormat("yyyyMMddHHmmss.SSS");
+        }
+    }
 
-	private static String formatDate(Date date) {
-		initFormat();
+    private static String formatDate(Date date) {
+        initFormat();
 
-		synchronized (gFormat) {
-			String str = gFormat.format(date);
+        synchronized (gFormat) {
+            String str = gFormat.format(date);
 
-			/*
-			 * Trim the end of str until we either hit a '.' or a non zero value
-			 */
-			for (;;) {
-				if (str.endsWith("0")) {
-					str = str.substring(0, str.length() - 1);
-				} else if (str.endsWith(".")) {
-					str = str.substring(0, str.length() - 1);
-					break;
-				} else {
-					break;
-				}
-			}
+            /*
+             * Trim the end of str until we either hit a '.' or a non zero value
+             */
+            for (;;) {
+                if (str.endsWith("0")) {
+                    str = str.substring(0, str.length() - 1);
+                } else if (str.endsWith(".")) {
+                    str = str.substring(0, str.length() - 1);
+                    break;
+                } else {
+                    break;
+                }
+            }
 
-			return str + "Z";
-		}
-	}
+            return str + "Z";
+        }
+    }
 
-	private static Date parseDate(String date) throws AsnEncodingException {
-		initFormat();
+    private static Date parseDate(String date) throws AsnEncodingException {
+        initFormat();
 
-		synchronized (gFormat) {
-			if (date.endsWith("Z")) {
-				date = date.substring(0, date.length() - 1);
-			}
-			try {
-				return gFormat.parse(date);
-			} catch (ParseException e) {
-				throw new AsnEncodingException("Illegal formatted date read from input stream");
-			}
-		}
-	}
+        synchronized (gFormat) {
+            if (date.endsWith("Z")) {
+                date = date.substring(0, date.length() - 1);
+            }
+            try {
+                return gFormat.parse(date);
+            } catch (ParseException e) {
+                throw new AsnEncodingException("Illegal formatted date read from input stream");
+            }
+        }
+    }
 
-	public String getAsn1TypeDesc() {
-		return "BerGeneralTime";
-	}
+    public String getAsn1TypeDesc() {
+        return "BerGeneralTime";
+    }
 
-	//add by hxzon
-	protected void readValue(BerInputStream stream) {
-		try {
-			origValue = BytesUtil.toUTF8String(stream.readOctetString(0 == (getTag() & Tag.CONSTRUCTED)));
-			fValue = parseDate(origValue);
-			super.setOffsetAndLen(stream);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+    //add by hxzon
+    protected void readValue(BerInputStream stream) {
+        try {
+            origValue = BytesUtil.toUTF8String(stream.readOctetString(0 == (getTag() & Tag.CONSTRUCTED)));
+            fValue = parseDate(origValue);
+            super.setOffsetAndLen(stream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-	//add by hxzon
-	public String getValueAsString() {
-		return formatDate(getDate());
-	}
+    //add by hxzon
+    public String getValueAsString() {
+        return formatDate(getDate());
+    }
 }

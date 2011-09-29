@@ -1,19 +1,19 @@
 package org.hxzon.netprotocol.common;
 
 public interface IPacketPayload {
-	public int getOffset();
+    public int getOffset();
 
-	public int getLength();
+    public int getLength();
 
-	public void setSrcPacket(IPacket srcPacket);
+    public void setSrcPacket(IPacket srcPacket);
 
-	public byte[] getSrcData();
+    public byte[] getSrcData();
 
-	public byte[] getData();
+    public byte[] getData();
 
-	public IPacket getSrcPacket();
+    public IPacket getSrcPacket();
 
-	public String getDisplayString();
-	
-	public String getProtocolTypeDesc();
+    public String getDisplayString();
+
+    public String getProtocolTypeDesc();
 }

@@ -49,7 +49,7 @@ import org.hxzon.util.DebugUtil;
  * Represents an integer in the BER stream
  */
 public class BerInteger extends BerNode {
-	private long fValue;
+    private long fValue;
 
 //    /**
 //     * Construct a boolean from the input stream
@@ -63,71 +63,71 @@ public class BerInteger extends BerNode {
 //        
 //        fValue = stream.readInteger();
 //    }
-	public BerInteger() {
-		super(Tag.INTEGER);
-	}
+    public BerInteger() {
+        super(Tag.INTEGER);
+    }
 
-	/**
-	 * Write this BER element to the output stream
-	 * Comment
-	 * @param stream
-	 * @throws IOException
-	 * @see org.hxzon.asn1.core.type.base.BerNode#writeElement(org.hxzon.asn1.core.parse.BerOutputStream)
-	 */
-	public void writeElement(BerOutputStream stream) throws IOException {
-		stream.writeBerTag(getTag());
-		stream.writeInteger(fValue);
-	}
+    /**
+     * Write this BER element to the output stream
+     * Comment
+     * @param stream
+     * @throws IOException
+     * @see org.hxzon.asn1.core.type.base.BerNode#writeElement(org.hxzon.asn1.core.parse.BerOutputStream)
+     */
+    public void writeElement(BerOutputStream stream) throws IOException {
+        stream.writeBerTag(getTag());
+        stream.writeInteger(fValue);
+    }
 
-	/**
-	 * Return the value of this boolean object
-	 * @return
-	 */
-	public long getValue() {
-		return fValue;
-	}
+    /**
+     * Return the value of this boolean object
+     * @return
+     */
+    public long getValue() {
+        return fValue;
+    }
 
-	public void setValue(long value) {
+    public void setValue(long value) {
 //		long max = ((2 << bitLen) - 1);
 //		long max = (2 << bitLen);
 //		if (value > max) {
 //			value = value - max;
 //		}
-		this.fValue = value;
-	}
+        this.fValue = value;
+    }
 
-	public String getAsn1TypeDesc() {
-		return "BerInteger";
-	}
+    public String getAsn1TypeDesc() {
+        return "BerInteger";
+    }
 
-	private boolean unsigned = false;
-	private int bitLen = 64;
+    private boolean unsigned = false;
+    private int bitLen = 64;
 
-	public BerInteger limitBitLength(int bitLen, boolean unsigned) {
-		this.bitLen = bitLen;
-		this.unsigned = unsigned;
-		if (bitLen < 32) {
-			DebugUtil.debug("bitLen:" + bitLen);
-		}
-		return this;
-	}
+    public BerInteger limitBitLength(int bitLen, boolean unsigned) {
+        this.bitLen = bitLen;
+        this.unsigned = unsigned;
+        if (bitLen < 32) {
+            DebugUtil.debug("bitLen:" + bitLen);
+        }
+        return this;
+    }
 
-	public BerInteger limitBitLength(int bitLen) {
-		return limitBitLength(bitLen, false);
-	}
+    public BerInteger limitBitLength(int bitLen) {
+        return limitBitLength(bitLen, false);
+    }
 
-	//add by hxzon
-	protected void readValue(BerInputStream stream) {
-		try {
-			setValue(stream.readInteger());
-			super.setOffsetAndLen(stream);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+    //add by hxzon
+    protected void readValue(BerInputStream stream) {
+        try {
+            setValue(stream.readInteger());
+            super.setOffsetAndLen(stream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-	//add by hxzon
-	public String getValueAsString() {
-		return String.valueOf(getValue()) + "[len=" + bitLen + (unsigned ? ",unsigned]" : ",signed]");
-	}
+    //add by hxzon
+    public String getValueAsString() {
+        return String.valueOf(getValue()) + "[len=" + bitLen + (unsigned ? ",unsigned]" : ",signed]");
+    }
 }

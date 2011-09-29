@@ -15,13 +15,12 @@ import org.hxzon.asn1.mms.sequence.RejectPdu;
 import org.hxzon.asn1.mms.sequence.ServiceError;
 import org.hxzon.asn1.mms.sequence.UnconfirmedPdu;
 
-
 public class MmsPdu extends BerChoice {
 
-	public MmsPdu() {
-		setName("MMS");
-		setDisplayString("MMS");
-	}
+    public MmsPdu() {
+        setName("MMS");
+        setDisplayString("MMS");
+    }
 
 //	MMSpdu ::= CHOICE
 //	{
@@ -40,46 +39,46 @@ public class MmsPdu extends BerChoice {
 //	conclude-ResponsePDU	[12] 	IMPLICIT Conclude-ResponsePDU,
 //	conclude-ErrorPDU		[13] 	IMPLICIT Conclude-ErrorPDU
 //	}
-	@Override
-	public BerNode create(int tag, BerInputStream stream) {
-		switch (tag) {
-		case Tag.CONTEXT | 0:
-			return new ConfirmedRequestPdu().init(tag, stream);
-		case Tag.CONTEXT | 1:
-			return new ConfirmedResponsePdu().init(tag, stream);
-		case Tag.CONTEXT | 2:
-			return new ConfirmedErrorPdu().init(tag, stream);
-		case Tag.CONTEXT | 3:
-			return new UnconfirmedPdu().init(tag, stream);
-		case Tag.CONTEXT | 4:
-			return new RejectPdu().init(tag, stream);
-		case Tag.CONTEXT | 5:
-			//Cancel-RequestPDU ::= Unsigned32	-- originalInvokeID
-			return Asn1Utils.createBerUnsigned32("cancel-RequestPDU", "cancel-RequestPDU", tag, stream);
-		case Tag.CONTEXT | 6:
-			//Cancel-ResponsePDU ::= Unsigned32 	-- originalInvokeID
-			return Asn1Utils.createBerUnsigned32("cancel-ResponsePDU", "cancel-ResponsePDU", tag, stream);
-		case Tag.CONTEXT | 7:
-			return new CancelErrorPdu().init("cancel-ErrorPDU", "cancel-ErrorPDU", tag, stream);
-		case Tag.CONTEXT | 8:
-			return new InitiateRequestPdu().init(tag, stream);
-		case Tag.CONTEXT | 9:
-			return new InitiateResponsePdu().init(tag, stream);
-		case Tag.CONTEXT | 10:
-			//Initiate-ErrorPDU ::= ServiceError
-			return new ServiceError().init("initiate-ErrorPDU", "initiate-ErrorPDU", tag, stream);
-		case Tag.CONTEXT | 11:
-			//Conclude-RequestPDU ::= NULL
-			return Asn1Utils.createBerNull("conclude-RequestPDU", "conclude-RequestPDU", tag, stream);
-		case Tag.CONTEXT | 12:
-			//Conclude-ResponsePDU ::= NULL
-			return Asn1Utils.createBerNull("conclude-ResponsePDU", "conclude-ResponsePDU", tag, stream);
-		case Tag.CONTEXT | 13:
-			//Conclude-ErrorPDU ::= ServiceError
-			return new ServiceError().init("conclude-ErrorPDU", "conclude-ErrorPDU", tag, stream);
-		default:
-			return Asn1Utils.createUnknown(tag, stream);
-		}
-	}
+    @Override
+    public BerNode create(int tag, BerInputStream stream) {
+        switch (tag) {
+        case Tag.CONTEXT | 0:
+            return new ConfirmedRequestPdu().init(tag, stream);
+        case Tag.CONTEXT | 1:
+            return new ConfirmedResponsePdu().init(tag, stream);
+        case Tag.CONTEXT | 2:
+            return new ConfirmedErrorPdu().init(tag, stream);
+        case Tag.CONTEXT | 3:
+            return new UnconfirmedPdu().init(tag, stream);
+        case Tag.CONTEXT | 4:
+            return new RejectPdu().init(tag, stream);
+        case Tag.CONTEXT | 5:
+            //Cancel-RequestPDU ::= Unsigned32	-- originalInvokeID
+            return Asn1Utils.createBerUnsigned32("cancel-RequestPDU", "cancel-RequestPDU", tag, stream);
+        case Tag.CONTEXT | 6:
+            //Cancel-ResponsePDU ::= Unsigned32 	-- originalInvokeID
+            return Asn1Utils.createBerUnsigned32("cancel-ResponsePDU", "cancel-ResponsePDU", tag, stream);
+        case Tag.CONTEXT | 7:
+            return new CancelErrorPdu().init("cancel-ErrorPDU", "cancel-ErrorPDU", tag, stream);
+        case Tag.CONTEXT | 8:
+            return new InitiateRequestPdu().init(tag, stream);
+        case Tag.CONTEXT | 9:
+            return new InitiateResponsePdu().init(tag, stream);
+        case Tag.CONTEXT | 10:
+            //Initiate-ErrorPDU ::= ServiceError
+            return new ServiceError().init("initiate-ErrorPDU", "initiate-ErrorPDU", tag, stream);
+        case Tag.CONTEXT | 11:
+            //Conclude-RequestPDU ::= NULL
+            return Asn1Utils.createBerNull("conclude-RequestPDU", "conclude-RequestPDU", tag, stream);
+        case Tag.CONTEXT | 12:
+            //Conclude-ResponsePDU ::= NULL
+            return Asn1Utils.createBerNull("conclude-ResponsePDU", "conclude-ResponsePDU", tag, stream);
+        case Tag.CONTEXT | 13:
+            //Conclude-ErrorPDU ::= ServiceError
+            return new ServiceError().init("conclude-ErrorPDU", "conclude-ErrorPDU", tag, stream);
+        default:
+            return Asn1Utils.createUnknown(tag, stream);
+        }
+    }
 
 }

@@ -45,12 +45,12 @@ import org.hxzon.asn1.core.type.base.BerConstruct;
  */
 public class BerEmbeddedPDV extends BerConstruct {
 
-	/**
-	 * Construct a new BerSequence with the default set type
-	 */
-	public BerEmbeddedPDV() {
-		super(Tag.EMBEDDEDPDV);
-	}
+    /**
+     * Construct a new BerSequence with the default set type
+     */
+    public BerEmbeddedPDV() {
+        super(Tag.EMBEDDEDPDV);
+    }
 
 //    /**
 //     * Construt a new BerSequence from the input stream
@@ -65,8 +65,8 @@ public class BerEmbeddedPDV extends BerConstruct {
 //        super(tag, state, parser, stream);
 //    }
 
-	public String getAsn1TypeDesc() {
-		return "EMBEDDED-PDV";
-	}
+    public String getAsn1TypeDesc() {
+        return "EMBEDDED-PDV";
+    }
 
 }

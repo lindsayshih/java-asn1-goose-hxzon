@@ -7,9 +7,7 @@ import org.hxzon.asn1.core.type.BerSequence;
 import org.hxzon.asn1.core.type.BerVisibleString;
 import org.hxzon.asn1.core.type.base.BerNode;
 import org.hxzon.asn1.core.type.ext.BerChoice;
-import org.hxzon.asn1.core.type.ext.TimeOfDay;
 import org.hxzon.asn1.mms.choice.ObjectName;
-
 
 public class ReadJournalRequest extends BerSequence {
 //	ReadJournal-Request ::= SEQUENCE
@@ -32,60 +30,60 @@ public class ReadJournalRequest extends BerSequence {
 //		entrySpecification		[1] IMPLICIT OCTET STRING
 //		}
 //	}
-	public BerNode create(int tag, BerInputStream stream) {
-		switch (tag) {
-		case Tag.CONTEXT | 0:
-			return new ObjectName().init("journalName", "journalName", tag, stream);
-		case Tag.CONTEXT | 1:
-			return new RangeStartSpecification().init("rangeStartSpecification", "rangeStartSpecification", tag, stream, true);
-		case Tag.CONTEXT | 2:
-			return new RangeStopSpecification().init("rangeStopSpecification", "rangeStopSpecification", tag, stream, true);
-		case Tag.CONTEXT | 4:
-			return Asn1Utils.createBerSequenceOf("listOfVariables", "listOfVariables", tag, stream, BerVisibleString.class);
-		case Tag.CONTEXT | 5:
-			return new EntryToStartAfter().init("entryToStartAfter", "entryToStartAfter", tag, stream);
-		default:
-			return Asn1Utils.createUnknown(tag, stream);
-		}
-	}
+    public BerNode create(int tag, BerInputStream stream) {
+        switch (tag) {
+        case Tag.CONTEXT | 0:
+            return new ObjectName().init("journalName", "journalName", tag, stream);
+        case Tag.CONTEXT | 1:
+            return new RangeStartSpecification().init("rangeStartSpecification", "rangeStartSpecification", tag, stream, true);
+        case Tag.CONTEXT | 2:
+            return new RangeStopSpecification().init("rangeStopSpecification", "rangeStopSpecification", tag, stream, true);
+        case Tag.CONTEXT | 4:
+            return Asn1Utils.createBerSequenceOf("listOfVariables", "listOfVariables", tag, stream, BerVisibleString.class);
+        case Tag.CONTEXT | 5:
+            return new EntryToStartAfter().init("entryToStartAfter", "entryToStartAfter", tag, stream);
+        default:
+            return Asn1Utils.createUnknown(tag, stream);
+        }
+    }
 
-	public static class RangeStartSpecification extends BerChoice {
-		public BerNode create(int tag, BerInputStream stream) {
-			switch (tag) {
-			case Tag.CONTEXT | 0:
-				return Asn1Utils.createBerIecTimeOfDay("startingTime", "startingTime", tag, stream);
-			case Tag.CONTEXT | 1:
-				return Asn1Utils.createBerOctetString("startingEntry", "startingEntry", tag, stream);
-			default:
-				return Asn1Utils.createUnknown(tag, stream);
-			}
-		}
-	}
+    public static class RangeStartSpecification extends BerChoice {
+        public BerNode create(int tag, BerInputStream stream) {
+            switch (tag) {
+            case Tag.CONTEXT | 0:
+                return Asn1Utils.createBerIecTimeOfDay("startingTime", "startingTime", tag, stream);
+            case Tag.CONTEXT | 1:
+                return Asn1Utils.createBerOctetString("startingEntry", "startingEntry", tag, stream);
+            default:
+                return Asn1Utils.createUnknown(tag, stream);
+            }
+        }
+    }
 
-	public static class RangeStopSpecification extends BerChoice {
-		public BerNode create(int tag, BerInputStream stream) {
-			switch (tag) {
-			case Tag.CONTEXT | 0:
-				return Asn1Utils.createBerIecTimeOfDay("endingTime", "endingTime", tag, stream);
-			case Tag.CONTEXT | 1:
-				return Asn1Utils.createBerInteger32("numberOfEntries", "numberOfEntries", tag, stream);
-			default:
-				return Asn1Utils.createUnknown(tag, stream);
-			}
-		}
-	}
+    public static class RangeStopSpecification extends BerChoice {
+        public BerNode create(int tag, BerInputStream stream) {
+            switch (tag) {
+            case Tag.CONTEXT | 0:
+                return Asn1Utils.createBerIecTimeOfDay("endingTime", "endingTime", tag, stream);
+            case Tag.CONTEXT | 1:
+                return Asn1Utils.createBerInteger32("numberOfEntries", "numberOfEntries", tag, stream);
+            default:
+                return Asn1Utils.createUnknown(tag, stream);
+            }
+        }
+    }
 
-	public static class EntryToStartAfter extends BerSequence {
-		public BerNode create(int tag, BerInputStream stream) {
-			switch (tag) {
-			case Tag.CONTEXT | 0:
-				return Asn1Utils.createBerIecTimeOfDay("timeSpecification", "timeSpecification", tag, stream);
-			case Tag.CONTEXT | 1:
-				return Asn1Utils.createBerOctetString("entrySpecification", "entrySpecification", tag, stream);
-			default:
-				return Asn1Utils.createUnknown(tag, stream);
-			}
-		}
-	}
+    public static class EntryToStartAfter extends BerSequence {
+        public BerNode create(int tag, BerInputStream stream) {
+            switch (tag) {
+            case Tag.CONTEXT | 0:
+                return Asn1Utils.createBerIecTimeOfDay("timeSpecification", "timeSpecification", tag, stream);
+            case Tag.CONTEXT | 1:
+                return Asn1Utils.createBerOctetString("entrySpecification", "entrySpecification", tag, stream);
+            default:
+                return Asn1Utils.createUnknown(tag, stream);
+            }
+        }
+    }
 
 }

@@ -8,7 +8,6 @@ import org.hxzon.asn1.core.type.base.BerNode;
 import org.hxzon.asn1.mms.choice.EventTime;
 import org.hxzon.asn1.mms.common.ECState;
 
-
 public class ReportEventConditionStatusResponse extends BerSequence {
 //	ReportEventConditionStatus-Response ::= SEQUENCE
 //	{
@@ -18,21 +17,21 @@ public class ReportEventConditionStatusResponse extends BerSequence {
 //	timeOfLastTransitionToActive	[3] EventTime OPTIONAL,
 //	timeOfLastTransitionToIdle	[4] EventTime OPTIONAL
 //	}
-	public BerNode create(int tag, BerInputStream stream) {
-		switch (tag) {
-		case Tag.CONTEXT | 0:
-			return new ECState().init("currentState", "currentState", tag, stream);
-		case Tag.CONTEXT | 1:
-			return Asn1Utils.createBerUnsigned32("numberOfEventEnrollments", "numberOfEventEnrollments", tag, stream);
-		case Tag.CONTEXT | 2:
-			return Asn1Utils.createBerBoolean("enabled", "enabled", tag, stream);
-		case Tag.CONTEXT | 3:
-			return new EventTime().init("timeOfLastTransitionToActive", "timeOfLastTransitionToActive", tag, stream);
-		case Tag.CONTEXT | 4:
-			return new EventTime().init("timeOfLastTransitionToIdle", "timeOfLastTransitionToIdle", tag, stream);
-		default:
-			return Asn1Utils.createUnknown(tag, stream);
-		}
-	}
+    public BerNode create(int tag, BerInputStream stream) {
+        switch (tag) {
+        case Tag.CONTEXT | 0:
+            return new ECState().init("currentState", "currentState", tag, stream);
+        case Tag.CONTEXT | 1:
+            return Asn1Utils.createBerUnsigned32("numberOfEventEnrollments", "numberOfEventEnrollments", tag, stream);
+        case Tag.CONTEXT | 2:
+            return Asn1Utils.createBerBoolean("enabled", "enabled", tag, stream);
+        case Tag.CONTEXT | 3:
+            return new EventTime().init("timeOfLastTransitionToActive", "timeOfLastTransitionToActive", tag, stream);
+        case Tag.CONTEXT | 4:
+            return new EventTime().init("timeOfLastTransitionToIdle", "timeOfLastTransitionToIdle", tag, stream);
+        default:
+            return Asn1Utils.createUnknown(tag, stream);
+        }
+    }
 
 }

@@ -8,7 +8,6 @@ import org.hxzon.asn1.core.type.BerSequence;
 import org.hxzon.asn1.core.type.base.BerNode;
 import org.hxzon.asn1.mms.choice.ObjectName;
 
-
 public class ReportSemaphoreEntryStatusRequest extends BerSequence {
 //	ReportSemaphoreEntryStatus-Request ::=SEQUENCE
 //	{
@@ -21,21 +20,21 @@ public class ReportSemaphoreEntryStatusRequest extends BerSequence {
 //		} ,
 //	entryIdToStartAfter	[2] IMPLICIT OCTET STRING OPTIONAL
 //	}
-	public BerNode create(int tag, BerInputStream stream) {
-		switch (tag) {
-		case Tag.CONTEXT | 0:
-			return new ObjectName().init("semaphoreName", "semaphoreName", tag, stream);
-		case Tag.CONTEXT | 1:
-			return new State().init("state", "state", tag, stream);
-		case Tag.CONTEXT | 2:
-			return Asn1Utils.createBerOctetString("entryIdToStartAfter", "entryIdToStartAfter", tag, stream);
-		default:
-			return Asn1Utils.createUnknown(tag, stream);
-		}
-	}
+    public BerNode create(int tag, BerInputStream stream) {
+        switch (tag) {
+        case Tag.CONTEXT | 0:
+            return new ObjectName().init("semaphoreName", "semaphoreName", tag, stream);
+        case Tag.CONTEXT | 1:
+            return new State().init("state", "state", tag, stream);
+        case Tag.CONTEXT | 2:
+            return Asn1Utils.createBerOctetString("entryIdToStartAfter", "entryIdToStartAfter", tag, stream);
+        default:
+            return Asn1Utils.createUnknown(tag, stream);
+        }
+    }
 
-	public static class State extends BerInteger {
+    public static class State extends BerInteger {
 
-	}
+    }
 
 }

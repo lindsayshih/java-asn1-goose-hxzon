@@ -2,7 +2,7 @@ package org.hxzon.asn1.mms.common;
 
 import org.hxzon.asn1.core.type.BerBitString;
 
-public class Transitions extends BerBitString{
+public class Transitions extends BerBitString {
 //	Transitions ::= BIT STRING
 //	{
 //	idle-to-disabled	(0),

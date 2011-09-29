@@ -1,11 +1,11 @@
 package org.hxzon.netprotocol.payload;
 
 public class UnknownPayload extends DataPayload {
-	public String getProtocolTypeDesc() {
-		return getSrcPacket().getProtocolTypeDesc() + "(unknow payload)";
-	}
+    public String getProtocolTypeDesc() {
+        return getSrcPacket().getProtocolTypeDesc() + "(unknow payload)";
+    }
 
-	public String getDisplayString() {
-		return "unknow";
-	}
+    public String getDisplayString() {
+        return "unknow";
+    }
 }

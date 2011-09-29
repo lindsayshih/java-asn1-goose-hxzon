@@ -8,11 +8,10 @@ import org.hxzon.asn1.mms.choice.ObjectName;
 import org.hxzon.asn1.mms.choice.VariableSpecification;
 import org.hxzon.asn1.mms.common.DataAccessError;
 
-
 public class AlternateAccess extends BerSequence {
-	public AlternateAccess() {
-		setName("alternate access");
-	}
+    public AlternateAccess() {
+        setName("alternate access");
+    }
 
 //	AlternateAccess ::= SEQUENCE OF CHOICE
 //	{
@@ -54,14 +53,14 @@ public class AlternateAccess extends BerSequence {
 //   }
 
 //	Identifier ::= VisibleString
-	public BerNode create(int tag, BerInputStream stream) {
-		switch (tag) {
-		case Tag.CONTEXT | 0:
-			return new DataAccessError().init(tag, stream);
-		case Tag.CONTEXT | 1:
-			return new ObjectName().init(tag, stream,true);//, true
-		default:
-			return new VariableSpecification().init(tag, stream);//, false
-		}
-	}
+    public BerNode create(int tag, BerInputStream stream) {
+        switch (tag) {
+        case Tag.CONTEXT | 0:
+            return new DataAccessError().init(tag, stream);
+        case Tag.CONTEXT | 1:
+            return new ObjectName().init(tag, stream, true);//, true
+        default:
+            return new VariableSpecification().init(tag, stream);//, false
+        }
+    }
 }

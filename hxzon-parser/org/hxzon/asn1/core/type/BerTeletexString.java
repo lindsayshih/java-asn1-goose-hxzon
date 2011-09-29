@@ -43,11 +43,11 @@ import org.hxzon.asn1.core.parse.Tag;
  * array of 8-bit bytes
  */
 public class BerTeletexString extends BerOctetString {
-	public BerTeletexString() {
-		setTag(Tag.TELETEXSTRING);
-	}
+    public BerTeletexString() {
+        setTag(Tag.TELETEXSTRING);
+    }
 
-	public String getAsn1TypeDesc() {
-		return "BerTeletexString";
-	}
+    public String getAsn1TypeDesc() {
+        return "BerTeletexString";
+    }
 }

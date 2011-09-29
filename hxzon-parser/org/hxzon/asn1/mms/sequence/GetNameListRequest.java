@@ -9,12 +9,11 @@ import org.hxzon.asn1.mms.choice.ExtendedObjectClass;
 import org.hxzon.asn1.mms.choice.ObjectScope;
 import org.hxzon.asn1.mms.common.Identifier;
 
-
 public class GetNameListRequest extends BerSequence {
-	public GetNameListRequest() {
-		setName("get name list request");
-		setDisplayString("get name list request");
-	}
+    public GetNameListRequest() {
+        setName("get name list request");
+        setDisplayString("get name list request");
+    }
 
 //	GetNameList-Request ::= SEQUENCE
 //	{
@@ -45,18 +44,18 @@ public class GetNameListRequest extends BerSequence {
 //	continueAfter 	[2] IMPLICIT Identifier OPTIONAL
 //	}
 
-	@Override
-	public BerNode create(int tag, BerInputStream stream) {
-		switch (tag) {
-		case Tag.CONTEXT | 0:
-			return new ExtendedObjectClass().init(tag, stream, true);
-		case Tag.CONTEXT | 1:
-			return new ObjectScope().init(tag, stream, true);
-		case Tag.CONTEXT | 2:
-			return new Identifier().init("continue after", tag, stream);
-		default:
-			return Asn1Utils.createUnknown(tag, stream);
-		}
-	}
+    @Override
+    public BerNode create(int tag, BerInputStream stream) {
+        switch (tag) {
+        case Tag.CONTEXT | 0:
+            return new ExtendedObjectClass().init(tag, stream, true);
+        case Tag.CONTEXT | 1:
+            return new ObjectScope().init(tag, stream, true);
+        case Tag.CONTEXT | 2:
+            return new Identifier().init("continue after", tag, stream);
+        default:
+            return Asn1Utils.createUnknown(tag, stream);
+        }
+    }
 
 }

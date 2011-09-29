@@ -38,15 +38,12 @@ import java.io.IOException;
  * The ASN.1 Encoding Exception object gets thrown when there is a
  * problem with the input or output encoding process.
  */
-public class AsnEncodingException extends IOException
-{
-	public AsnEncodingException()
-	{
-		super();
-	}
+public class AsnEncodingException extends IOException {
+    public AsnEncodingException() {
+        super();
+    }
 
-	public AsnEncodingException(String message)
-	{
-		super(message);
-	}
+    public AsnEncodingException(String message) {
+        super(message);
+    }
 }

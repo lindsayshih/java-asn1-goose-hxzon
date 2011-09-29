@@ -52,7 +52,7 @@ import org.hxzon.asn1.core.type.base.BerNode;
  * string representing an OID.
  */
 public class BerOID extends BerNode {
-	private long[] fValue;
+    private long[] fValue;
 
 //    /**
 //     * Construct a boolean from the input stream
@@ -66,47 +66,47 @@ public class BerOID extends BerNode {
 //        
 //        fValue = stream.readOID();
 //    }
-	public BerOID() {
-		super(Tag.OBJECTID);
-	}
+    public BerOID() {
+        super(Tag.OBJECTID);
+    }
 
-	/**
-	 * Write this BER element to the output stream
-	 * Comment
-	 * @param stream
-	 * @throws IOException
-	 * @see org.hxzon.asn1.core.type.base.BerNode#writeElement(org.hxzon.asn1.core.parse.BerOutputStream)
-	 */
-	public void writeElement(BerOutputStream stream) throws IOException {
-		stream.writeBerTag(getTag());
-		stream.writeOID(fValue);
-	}
+    /**
+     * Write this BER element to the output stream
+     * Comment
+     * @param stream
+     * @throws IOException
+     * @see org.hxzon.asn1.core.type.base.BerNode#writeElement(org.hxzon.asn1.core.parse.BerOutputStream)
+     */
+    public void writeElement(BerOutputStream stream) throws IOException {
+        stream.writeBerTag(getTag());
+        stream.writeOID(fValue);
+    }
 
-	/**
-	 * Return the value of this boolean object
-	 * @return
-	 */
-	public long[] getValue() {
-		return fValue;
-	}
+    /**
+     * Return the value of this boolean object
+     * @return
+     */
+    public long[] getValue() {
+        return fValue;
+    }
 
-	public String getAsn1TypeDesc() {
-		return "BerOID";
-	}
+    public String getAsn1TypeDesc() {
+        return "BerOID";
+    }
 
-	//add by hxzon
-	protected void readValue(BerInputStream stream) {
-		try {
-			fValue = stream.readOID();
-			super.setOffsetAndLen(stream);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+    //add by hxzon
+    protected void readValue(BerInputStream stream) {
+        try {
+            fValue = stream.readOID();
+            super.setOffsetAndLen(stream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-	//add by hxzon
-	public String getValueAsString() {
-		return String.valueOf(getValue());
-	}
+    //add by hxzon
+    public String getValueAsString() {
+        return String.valueOf(getValue());
+    }
 
 }
