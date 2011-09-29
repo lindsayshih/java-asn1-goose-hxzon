@@ -55,7 +55,7 @@ public class GooseDataset extends BerSequence {
 		case Tag.CONTEXT | 10:
 			return Asn1Utils.createBerVisibleString("visible-string", "visible-string", tag, stream);
 		case Tag.CONTEXT | 12:
-			return Asn1Utils.createBerIecUtcTime("binary-time", "binary-time", tag, stream);
+			return Asn1Utils.createBerIecTimeOfDay("binary-time", "binary-time", tag, stream);
 		case Tag.CONTEXT | 13:
 			return Asn1Utils.createBerIntegerX("bcd", "bcd", tag, stream);
 		case Tag.CONTEXT | 14:

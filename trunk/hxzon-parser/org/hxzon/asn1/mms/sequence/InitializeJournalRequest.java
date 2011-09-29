@@ -5,8 +5,8 @@ import org.hxzon.asn1.core.parse.Tag;
 import org.hxzon.asn1.core.parse.ext.Asn1Utils;
 import org.hxzon.asn1.core.type.BerSequence;
 import org.hxzon.asn1.core.type.base.BerNode;
+import org.hxzon.asn1.core.type.ext.TimeOfDay;
 import org.hxzon.asn1.mms.choice.ObjectName;
-import org.hxzon.asn1.mms.common.TimeOfDay;
 
 
 public class InitializeJournalRequest extends BerSequence {
@@ -34,7 +34,7 @@ public class InitializeJournalRequest extends BerSequence {
 		public BerNode create(int tag, BerInputStream stream) {
 			switch (tag) {
 			case Tag.CONTEXT | 0:
-				return new TimeOfDay().init("limitingTime", "limitingTime", tag, stream);
+				return Asn1Utils.createBerIecTimeOfDay("limitingTime", "limitingTime", tag, stream);
 			case Tag.CONTEXT | 1:
 				return Asn1Utils.createBerOctetString("limitingEntry", "limitingEntry", tag, stream);
 			default:
