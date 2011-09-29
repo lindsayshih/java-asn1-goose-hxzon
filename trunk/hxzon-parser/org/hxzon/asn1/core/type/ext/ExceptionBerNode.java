@@ -2,19 +2,19 @@ package org.hxzon.asn1.core.type.ext;
 
 public class ExceptionBerNode extends FakeBerNode {
 
-	@Override
-	public String getValueAsString() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public String getValueAsString() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	public String getAsn1TypeDesc() {
-		return null;
-	}
+    public String getAsn1TypeDesc() {
+        return null;
+    }
 
-	public ExceptionBerNode deepCopy() {
-		ExceptionBerNode node = new ExceptionBerNode();
-		return node;
-	}
+    public ExceptionBerNode deepCopy() {
+        ExceptionBerNode node = new ExceptionBerNode();
+        return node;
+    }
 
 }

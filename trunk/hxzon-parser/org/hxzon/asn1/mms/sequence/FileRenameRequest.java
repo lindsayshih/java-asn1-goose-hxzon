@@ -7,21 +7,20 @@ import org.hxzon.asn1.core.type.BerSequence;
 import org.hxzon.asn1.core.type.base.BerNode;
 import org.hxzon.asn1.mms.common.FileName;
 
-
 public class FileRenameRequest extends BerSequence {
 //	FileRename-Request ::= SEQUENCE {
 //		currentFileName	[0] IMPLICIT FileName,
 //		newFileName	[1] IMPLICIT FileName
 //		}
-	public BerNode create(int tag, BerInputStream stream) {
-		switch (tag) {
-		case Tag.CONTEXT | 0:
-			return new FileName().init("currentFileName", "currentFileName", tag, stream);
-		case Tag.CONTEXT | 1:
-			return new FileName().init("newFileName", "newFileName", tag, stream);
-		default:
-			return Asn1Utils.createUnknown(tag, stream);
-		}
-	}
+    public BerNode create(int tag, BerInputStream stream) {
+        switch (tag) {
+        case Tag.CONTEXT | 0:
+            return new FileName().init("currentFileName", "currentFileName", tag, stream);
+        case Tag.CONTEXT | 1:
+            return new FileName().init("newFileName", "newFileName", tag, stream);
+        default:
+            return Asn1Utils.createUnknown(tag, stream);
+        }
+    }
 
 }

@@ -50,7 +50,7 @@ import org.hxzon.util.BytesUtil;
  * is unknown, but well formed.
  */
 public class BerPrimitive extends BerNode {
-	private byte[] fValue;
+    private byte[] fValue;
 
 //    /**
 //     * Construct a new primitive object by reading it in from the input stream
@@ -65,48 +65,48 @@ public class BerPrimitive extends BerNode {
 //        fData = new byte[stream.readBerLength()];
 //        stream.read(fData);
 //    }
-	public BerPrimitive() {
-		super(Tag.NoTag);
-	}
+    public BerPrimitive() {
+        super(Tag.NoTag);
+    }
 
-	/**
-	 * Write the element out to the output stream
-	 * @param stream
-	 * @throws IOException 
-	 * @see org.hxzon.asn1.core.type.base.BerNode#writeElement(org.hxzon.asn1.core.parse.BerOutputStream)
-	 */
+    /**
+     * Write the element out to the output stream
+     * @param stream
+     * @throws IOException 
+     * @see org.hxzon.asn1.core.type.base.BerNode#writeElement(org.hxzon.asn1.core.parse.BerOutputStream)
+     */
 
-	public void writeElement(BerOutputStream stream) throws IOException {
-		stream.writeBerTag(getTag());
-		stream.writeBerLength(fValue.length);
-		stream.write(fValue);
-	}
+    public void writeElement(BerOutputStream stream) throws IOException {
+        stream.writeBerTag(getTag());
+        stream.writeBerLength(fValue.length);
+        stream.write(fValue);
+    }
 
-	/**
-	 * Return the data representation of this primitive
-	 * @return
-	 */
-	public byte[] getValue() {
-		return fValue;
-	}
+    /**
+     * Return the data representation of this primitive
+     * @return
+     */
+    public byte[] getValue() {
+        return fValue;
+    }
 
-	public String getAsn1TypeDesc() {
-		return "BerPrimitive";
-	}
+    public String getAsn1TypeDesc() {
+        return "BerPrimitive";
+    }
 
-	//add by hxzon
-	protected void readValue(BerInputStream stream) {
-		try {
-			fValue = new byte[stream.readBerLength()];
-			stream.read(fValue);
-			super.setOffsetAndLen(stream);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+    //add by hxzon
+    protected void readValue(BerInputStream stream) {
+        try {
+            fValue = new byte[stream.readBerLength()];
+            stream.read(fValue);
+            super.setOffsetAndLen(stream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-	//add by hxzon
-	public String getValueAsString() {
-		return BytesUtil.toDisplayHexString(getValue());
-	}
+    //add by hxzon
+    public String getValueAsString() {
+        return BytesUtil.toDisplayHexString(getValue());
+    }
 }

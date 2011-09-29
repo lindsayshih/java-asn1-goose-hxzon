@@ -51,16 +51,16 @@ public class BerNumericString extends BerAbstractString {
 //        if (!validate(value)) throw new AsnEncodingException("Illegal numeric value");
 //    }
 
-	public BerNumericString() {
-		super(Tag.NUMERICSTRING);
-	}
+    public BerNumericString() {
+        super(Tag.NUMERICSTRING);
+    }
 
-	public static final boolean validate(String str) {
-		return validateString(str, NUMBER);
-	}
+    public static final boolean validate(String str) {
+        return validateString(str, NUMBER);
+    }
 
-	public String getAsn1TypeDesc() {
-		return "BerNumericString";
-	}
+    public String getAsn1TypeDesc() {
+        return "BerNumericString";
+    }
 
 }

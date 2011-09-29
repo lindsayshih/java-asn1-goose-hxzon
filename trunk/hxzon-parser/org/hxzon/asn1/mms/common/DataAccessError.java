@@ -4,10 +4,10 @@ import org.hxzon.asn1.core.type.BerInteger;
 
 public class DataAccessError extends BerInteger {
 
-	public DataAccessError() {
-		setName("data access error");
-		setDisplayString("data access error");
-	}
+    public DataAccessError() {
+        setName("data access error");
+        setDisplayString("data access error");
+    }
 
 //	DataAccessError ::= INTEGER
 //	{
@@ -24,33 +24,33 @@ public class DataAccessError extends BerInteger {
 //	object-non-existent		(10)
 //	}
 
-	public String getValueAsString() {
-		switch ((int) getValue()) {
-		case 0:
-			return "object-invalidated(0)";
-		case 1:
-			return "hardware-fault(1)";
-		case 2:
-			return "temporarily-unavailable(2)";
-		case 3:
-			return "object-access-denied(3)";
-		case 4:
-			return "object-undefined(4)";
-		case 5:
-			return "invalid-address(5)";
-		case 6:
-			return "type-unsupported(6)";
-		case 7:
-			return "type-inconsistent(7)";
-		case 8:
-			return "object-attribute-inconsistent(8)";
-		case 9:
-			return "object-access-unsupported(9)";
-		case 10:
-			return "object-non-existent(10)";
-		default:
-			return "";
-		}
-	}
+    public String getValueAsString() {
+        switch ((int) getValue()) {
+        case 0:
+            return "object-invalidated(0)";
+        case 1:
+            return "hardware-fault(1)";
+        case 2:
+            return "temporarily-unavailable(2)";
+        case 3:
+            return "object-access-denied(3)";
+        case 4:
+            return "object-undefined(4)";
+        case 5:
+            return "invalid-address(5)";
+        case 6:
+            return "type-unsupported(6)";
+        case 7:
+            return "type-inconsistent(7)";
+        case 8:
+            return "object-attribute-inconsistent(8)";
+        case 9:
+            return "object-access-unsupported(9)";
+        case 10:
+            return "object-non-existent(10)";
+        default:
+            return "";
+        }
+    }
 
 }

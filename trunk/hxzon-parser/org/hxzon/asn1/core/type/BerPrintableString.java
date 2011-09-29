@@ -48,16 +48,16 @@ public class BerPrintableString extends BerAbstractString {
 //        super(tag, value);
 //        if (!validate(value)) throw new AsnEncodingException("Illegal printable string");
 //    }
-	public BerPrintableString() {
-		super(Tag.PRINTABLESTRING);
-	}
+    public BerPrintableString() {
+        super(Tag.PRINTABLESTRING);
+    }
 
-	public static final boolean validate(String str) {
-		return validateString(str, ASCII | NUMBER | MINUS | PUNCT);
-	}
+    public static final boolean validate(String str) {
+        return validateString(str, ASCII | NUMBER | MINUS | PUNCT);
+    }
 
-	public String getAsn1TypeDesc() {
-		return "BerPrintableString";
-	}
+    public String getAsn1TypeDesc() {
+        return "BerPrintableString";
+    }
 
 }

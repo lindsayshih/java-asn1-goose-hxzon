@@ -48,7 +48,7 @@ public class BerEnumerated extends BerInteger {
 //        super(tag, stream);
 //    }
 
-	public BerEnumerated() {
-		setTypeTag(Tag.ENUMERATED);
-	}
+    public BerEnumerated() {
+        setTypeTag(Tag.ENUMERATED);
+    }
 }

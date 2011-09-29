@@ -41,12 +41,12 @@ import org.hxzon.asn1.core.type.base.BerConstruct;
 
 public class BerSet extends BerConstruct {
 
-	/**
-	 * Construct a new BerSet with the default set type
-	 */
-	public BerSet() {
-		super(Tag.SET);
-	}
+    /**
+     * Construct a new BerSet with the default set type
+     */
+    public BerSet() {
+        super(Tag.SET);
+    }
 
 //    /**
 //     * Construt a new BerSet from the input stream
@@ -61,8 +61,8 @@ public class BerSet extends BerConstruct {
 //        super(tag, state, parser, stream);
 //    }
 
-	public String getAsn1TypeDesc() {
-		return "BerSet";
-	}
+    public String getAsn1TypeDesc() {
+        return "BerSet";
+    }
 
 }

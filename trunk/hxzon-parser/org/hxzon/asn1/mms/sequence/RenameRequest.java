@@ -9,8 +9,7 @@ import org.hxzon.asn1.mms.choice.ExtendedObjectClass;
 import org.hxzon.asn1.mms.choice.ObjectName;
 import org.hxzon.asn1.mms.common.Identifier;
 
-
-public class RenameRequest extends BerSequence{
+public class RenameRequest extends BerSequence {
 //	Rename-Request ::= SEQUENCE 
 //	{
 //	extendedObjectClass	[0] CHOICE {
@@ -34,17 +33,17 @@ public class RenameRequest extends BerSequence{
 //	currentName 		[1] ObjectName,
 //	newIdentifier		[2] IMPLICIT Identifier
 //      	}
-	public BerNode create(int tag,BerInputStream stream){
-		switch(tag){
-		case Tag.CONTEXT|0:
-			return new ExtendedObjectClass().init(tag,stream);
-		case Tag.CONTEXT|1:
-			return new ObjectName().init("currentName","currentName", tag, stream);
-		case Tag.CONTEXT|2:
-			return new Identifier().init("newIdentifier","newIdentifier",tag, stream);
-		default:
-			return Asn1Utils.createUnknown(tag, stream);
-		}
-	}
+    public BerNode create(int tag, BerInputStream stream) {
+        switch (tag) {
+        case Tag.CONTEXT | 0:
+            return new ExtendedObjectClass().init(tag, stream);
+        case Tag.CONTEXT | 1:
+            return new ObjectName().init("currentName", "currentName", tag, stream);
+        case Tag.CONTEXT | 2:
+            return new Identifier().init("newIdentifier", "newIdentifier", tag, stream);
+        default:
+            return Asn1Utils.createUnknown(tag, stream);
+        }
+    }
 
 }

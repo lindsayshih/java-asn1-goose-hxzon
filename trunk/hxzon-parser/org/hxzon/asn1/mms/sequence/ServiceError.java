@@ -11,7 +11,6 @@ import org.hxzon.asn1.mms.choice.ErrorClass;
 import org.hxzon.asn1.mms.choice.ObjectName;
 import org.hxzon.asn1.mms.common.ProgramInvocationState;
 
-
 public class ServiceError extends BerSequence {
 //	ServiceError ::= SEQUENCE 
 //	{	
@@ -136,20 +135,20 @@ public class ServiceError extends BerSequence {
 //--			additionalService		[10] AdditionalServiceError
 //			} OPTIONAL
 //	}
-	public BerNode create(int tag, BerInputStream stream) {
-		switch (tag) {
-		case Tag.CONTEXT | 0:
-			return new ErrorClass().init("errorClass", "errorClass", tag, stream, true);
-		case Tag.CONTEXT | 1:
-			return Asn1Utils.createBerIntegerX("additionalCode", "additionalCode", tag, stream);
-		case Tag.CONTEXT | 2:
-			return Asn1Utils.createBerVisibleString("additionalDescription", "additionalDescription", tag, stream);
-		case Tag.CONTEXT | 3:
-			return new ServiceSpecificInformation().init("serviceSpecificInformation", "serviceSpecificInformation", tag, stream, true);
-		default:
-			return Asn1Utils.createUnknown(tag, stream);
-		}
-	}
+    public BerNode create(int tag, BerInputStream stream) {
+        switch (tag) {
+        case Tag.CONTEXT | 0:
+            return new ErrorClass().init("errorClass", "errorClass", tag, stream, true);
+        case Tag.CONTEXT | 1:
+            return Asn1Utils.createBerIntegerX("additionalCode", "additionalCode", tag, stream);
+        case Tag.CONTEXT | 2:
+            return Asn1Utils.createBerVisibleString("additionalDescription", "additionalDescription", tag, stream);
+        case Tag.CONTEXT | 3:
+            return new ServiceSpecificInformation().init("serviceSpecificInformation", "serviceSpecificInformation", tag, stream, true);
+        default:
+            return Asn1Utils.createUnknown(tag, stream);
+        }
+    }
 
 //	serviceSpecificInformation	[3] CHOICE
 //	{
@@ -166,75 +165,75 @@ public class ServiceError extends BerSequence {
 //-- XXX this one is neither in this ASN nor in the IMPORTS
 //--			additionalService		[10] AdditionalServiceError
 //	} OPTIONAL	
-	public static class ServiceSpecificInformation extends BerChoice {
-		public BerNode create(int tag, BerInputStream stream) {
-			switch (tag) {
-			case Tag.CONTEXT | 0:
-				return new ObtainFileError().init("obtainFile", "obtainFile", tag, stream);
-			case Tag.CONTEXT | 1:
-				//Start-Error ::= ProgramInvocationState
-				return new ProgramInvocationState().init("start", "start", tag, stream);
-			case Tag.CONTEXT | 2:
-				//Stop-Error ::= ProgramInvocationState
-				return new ProgramInvocationState().init("stop", "stop", tag, stream);
-			case Tag.CONTEXT | 3:
-				//Resume-Error ::= ProgramInvocationState
-				return new ProgramInvocationState().init("resume", "resume", tag, stream);
-			case Tag.CONTEXT | 4:
-				//Reset-Error ::= ProgramInvocationState
-				return new ProgramInvocationState().init("reset", "reset", tag, stream);
-			case Tag.CONTEXT | 5:
-				//DeleteVariableAccess-Error ::= Unsigned32	-- numberDeleted
-				return Asn1Utils.createBerUnsigned32("deleteVariableAccess", "deleteVariableAccess", tag, stream);
-			case Tag.CONTEXT | 6:
-				//DeleteNamedVariableList-Error ::= Unsigned32	--	number Deleted
-				return Asn1Utils.createBerUnsigned32("deleteNamedVariableList", "deleteNamedVariableList", tag, stream);
-			case Tag.CONTEXT | 7:
-				//DeleteNamedType-Error ::= Unsigned32	--	number Deleted
-				return Asn1Utils.createBerUnsigned32("deleteNamedType", "deleteNamedType", tag, stream);
-			case Tag.CONTEXT | 8:
-				//DefineEventEnrollment-Error ::= ObjectName
-				return new ObjectName().init("defineEventEnrollment-Error", "defineEventEnrollment-Error", tag, stream);
-			case Tag.CONTEXT | 9:
-				return new FileRenameError().init("fileRename", "fileRename", tag, stream);
-			default:
-				return Asn1Utils.createUnknown(tag, stream);
-			}
-		}
-	}
+    public static class ServiceSpecificInformation extends BerChoice {
+        public BerNode create(int tag, BerInputStream stream) {
+            switch (tag) {
+            case Tag.CONTEXT | 0:
+                return new ObtainFileError().init("obtainFile", "obtainFile", tag, stream);
+            case Tag.CONTEXT | 1:
+                //Start-Error ::= ProgramInvocationState
+                return new ProgramInvocationState().init("start", "start", tag, stream);
+            case Tag.CONTEXT | 2:
+                //Stop-Error ::= ProgramInvocationState
+                return new ProgramInvocationState().init("stop", "stop", tag, stream);
+            case Tag.CONTEXT | 3:
+                //Resume-Error ::= ProgramInvocationState
+                return new ProgramInvocationState().init("resume", "resume", tag, stream);
+            case Tag.CONTEXT | 4:
+                //Reset-Error ::= ProgramInvocationState
+                return new ProgramInvocationState().init("reset", "reset", tag, stream);
+            case Tag.CONTEXT | 5:
+                //DeleteVariableAccess-Error ::= Unsigned32	-- numberDeleted
+                return Asn1Utils.createBerUnsigned32("deleteVariableAccess", "deleteVariableAccess", tag, stream);
+            case Tag.CONTEXT | 6:
+                //DeleteNamedVariableList-Error ::= Unsigned32	--	number Deleted
+                return Asn1Utils.createBerUnsigned32("deleteNamedVariableList", "deleteNamedVariableList", tag, stream);
+            case Tag.CONTEXT | 7:
+                //DeleteNamedType-Error ::= Unsigned32	--	number Deleted
+                return Asn1Utils.createBerUnsigned32("deleteNamedType", "deleteNamedType", tag, stream);
+            case Tag.CONTEXT | 8:
+                //DefineEventEnrollment-Error ::= ObjectName
+                return new ObjectName().init("defineEventEnrollment-Error", "defineEventEnrollment-Error", tag, stream);
+            case Tag.CONTEXT | 9:
+                return new FileRenameError().init("fileRename", "fileRename", tag, stream);
+            default:
+                return Asn1Utils.createUnknown(tag, stream);
+            }
+        }
+    }
 
 //	ObtainFile-Error ::= INTEGER {
 //		source-file	 (0),
 //		destination-file (1)
 //		}
-	public static class ObtainFileError extends BerInteger {
-		public String getValueAsString() {
-			switch ((int) getValue()) {
-			case 0:
-				return "source-file	 (0)";
-			case 1:
-				return "destination-file (1)";
-			default:
-				return "";
-			}
-		}
-	}
+    public static class ObtainFileError extends BerInteger {
+        public String getValueAsString() {
+            switch ((int) getValue()) {
+            case 0:
+                return "source-file	 (0)";
+            case 1:
+                return "destination-file (1)";
+            default:
+                return "";
+            }
+        }
+    }
 
 //	FileRename-Error ::= INTEGER {
 //		source-file	 (0),
 //		destination-file (1)
 //		}
-	public static class FileRenameError extends BerInteger {
-		public String getValueAsString() {
-			switch ((int) getValue()) {
-			case 0:
-				return "source-file	 (0)";
-			case 1:
-				return "destination-file (1)";
-			default:
-				return "";
-			}
-		}
-	}
+    public static class FileRenameError extends BerInteger {
+        public String getValueAsString() {
+            switch ((int) getValue()) {
+            case 0:
+                return "source-file	 (0)";
+            case 1:
+                return "destination-file (1)";
+            default:
+                return "";
+            }
+        }
+    }
 
 }

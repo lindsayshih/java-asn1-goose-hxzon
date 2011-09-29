@@ -7,7 +7,6 @@ import org.hxzon.asn1.core.type.BerSequence;
 import org.hxzon.asn1.core.type.base.BerNode;
 import org.hxzon.asn1.mms.choice.ObjectName;
 
-
 public class DefineScatteredAccessRequest extends BerSequence {
 //	DefineScatteredAccess-Request ::= SEQUENCE
 //	{
@@ -15,15 +14,15 @@ public class DefineScatteredAccessRequest extends BerSequence {
 //	scatteredAccessDescription	[1] IMPLICIT ScatteredAccessDescription
 //	}
 
-	public BerNode create(int tag, BerInputStream stream) {
-		switch (tag) {
-		case Tag.CONTEXT | 0:
-			return new ObjectName().init("scatteredAccessName", "scatteredAccessName", tag, stream, true);
-		case Tag.CONTEXT | 1:
-			return new ScatteredAccessDescription().init("scatteredAccessDescription", "scatteredAccessDescription", tag, stream);
-		default:
-			return Asn1Utils.createUnknown(tag, stream);
-		}
-	}
+    public BerNode create(int tag, BerInputStream stream) {
+        switch (tag) {
+        case Tag.CONTEXT | 0:
+            return new ObjectName().init("scatteredAccessName", "scatteredAccessName", tag, stream, true);
+        case Tag.CONTEXT | 1:
+            return new ScatteredAccessDescription().init("scatteredAccessDescription", "scatteredAccessDescription", tag, stream);
+        default:
+            return Asn1Utils.createUnknown(tag, stream);
+        }
+    }
 
 }

@@ -8,13 +8,12 @@ import org.hxzon.asn1.core.type.base.BerNode;
 import org.hxzon.asn1.core.type.ext.BerChoice;
 import org.hxzon.asn1.mms.common.Identifier;
 
-
 public class ObjectScope extends BerChoice {
 
-	public ObjectScope() {
-		setName("object scope");
-		setDisplayString("object scope");
-	}
+    public ObjectScope() {
+        setName("object scope");
+        setDisplayString("object scope");
+    }
 
 //	GetNameList-Request ::= SEQUENCE
 //	{
@@ -45,16 +44,16 @@ public class ObjectScope extends BerChoice {
 //	continueAfter 	[2] IMPLICIT Identifier OPTIONAL
 //	}
 
-	public BerNode create(int tag, BerInputStream stream) {
-		switch (tag) {
-		case Tag.CONTEXT | 0:
-			return new BerNull().init("vmd specific", "vmd specific", tag, stream);
-		case Tag.CONTEXT | 1:
-			return new Identifier().init("domain specific", "domain specific", tag, stream);
-		case Tag.CONTEXT | 2:
-			return new BerNull().init("aaSpecific", "aaSpecific", tag, stream);
-		default:
-			return Asn1Utils.createUnknown(tag, stream);
-		}
-	}
+    public BerNode create(int tag, BerInputStream stream) {
+        switch (tag) {
+        case Tag.CONTEXT | 0:
+            return new BerNull().init("vmd specific", "vmd specific", tag, stream);
+        case Tag.CONTEXT | 1:
+            return new Identifier().init("domain specific", "domain specific", tag, stream);
+        case Tag.CONTEXT | 2:
+            return new BerNull().init("aaSpecific", "aaSpecific", tag, stream);
+        default:
+            return Asn1Utils.createUnknown(tag, stream);
+        }
+    }
 }

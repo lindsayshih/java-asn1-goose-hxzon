@@ -13,24 +13,24 @@ import org.hxzon.netprotocol.common.IPacketPayload;
 import org.hxzon.util.BytesUtil;
 
 public class Smv92Pdu extends BerSequence implements IPacketPayload {
-	public Smv92Pdu() {
-		setName("smv9-2Pdu");
-		setDisplayString("9-2采样值");
-	}
+    public Smv92Pdu() {
+        setName("smv9-2Pdu");
+        setDisplayString("9-2采样值");
+    }
 
 //      -- $Id: sv.asn 33058 2010-06-02 19:01:16Z jake $
 //      IEC61850 DEFINITIONS ::= BEGIN
-	//
+    //
 //      SampledValues ::= CHOICE {
 //          savPdu  [APPLICATION 0] IMPLICIT SavPdu,
 //          ...
 //      }
-	//
+    //
 //      SavPdu ::= SEQUENCE {
 //          noASDU  [0] IMPLICIT INTEGER(0..65535),
 //          seqASDU [2] IMPLICIT SEQUENCE OF ASDU
 //      }
-	//
+    //
 //      ASDU ::= SEQUENCE {
 //          svID        [0] IMPLICIT VisibleString,
 //          smpCnt      [2] IMPLICIT INTEGER(0..65535),
@@ -39,74 +39,74 @@ public class Smv92Pdu extends BerSequence implements IPacketPayload {
 //          seqData     [7] IMPLICIT Data,
 //          ...
 //      }
-	//
+    //
 //      Data ::= OCTET STRING
-	//
+    //
 //      END
-	public BerNode create(int tag, BerInputStream stream) {
-		switch (tag) {
-		case Tag.CONTEXT | 0:
-			return Asn1Utils.createBerInteger16("number of asdu", "asdu条目数", tag, stream);
-		case Tag.CONTEXT | 2:
-			return Asn1Utils.createBerSequenceOf("seq of asdu", "asdu集", tag, stream, Smv92Asdu.class);
-		default:
-			return Asn1Utils.createUnknown(tag, stream);
-		}
-	}
+    public BerNode create(int tag, BerInputStream stream) {
+        switch (tag) {
+        case Tag.CONTEXT | 0:
+            return Asn1Utils.createBerInteger16("number of asdu", "asdu条目数", tag, stream);
+        case Tag.CONTEXT | 2:
+            return Asn1Utils.createBerSequenceOf("seq of asdu", "asdu集", tag, stream, Smv92Asdu.class);
+        default:
+            return Asn1Utils.createUnknown(tag, stream);
+        }
+    }
 
-	public void updateSmv92AsduDataDisplay(List<String> displays) {
-		for (BerNode child : getChildren()) {
-			if (child.getTag() == (Tag.CONTEXT | 2)) {
-				BerSequenceOf seqOf = (BerSequenceOf) child;
-				for (BerNode smv92Asdu : seqOf.getChildren()) {
-					((Smv92Asdu) smv92Asdu).updateAsduDataDisplay(displays);
-				}
-			}
-		}
-	}
+    public void updateSmv92AsduDataDisplay(List<String> displays) {
+        for (BerNode child : getChildren()) {
+            if (child.getTag() == (Tag.CONTEXT | 2)) {
+                BerSequenceOf seqOf = (BerSequenceOf) child;
+                for (BerNode smv92Asdu : seqOf.getChildren()) {
+                    ((Smv92Asdu) smv92Asdu).updateAsduDataDisplay(displays);
+                }
+            }
+        }
+    }
 
-	private IPacket srcPacket;
+    private IPacket srcPacket;
 
-	@Override
-	public byte[] getData() {
-		return BytesUtil.copyBytes(getSrcData(), getOffset(), getLength());
-	}
+    @Override
+    public byte[] getData() {
+        return BytesUtil.copyBytes(getSrcData(), getOffset(), getLength());
+    }
 
-	@Override
-	public int getLength() {
-		return this.getTotalLen();
-	}
+    @Override
+    public int getLength() {
+        return this.getTotalLen();
+    }
 
-	@Override
-	public int getOffset() {
-		return this.getTagOffset();
-	}
+    @Override
+    public int getOffset() {
+        return this.getTagOffset();
+    }
 
-	@Override
-	public byte[] getSrcData() {
-		return this.srcPacket.getSrcData();
-	}
+    @Override
+    public byte[] getSrcData() {
+        return this.srcPacket.getSrcData();
+    }
 
-	public void setSrcData(byte[] srcData) {
+    public void setSrcData(byte[] srcData) {
 
-	}
+    }
 
-	@Override
-	public IPacket getSrcPacket() {
-		return srcPacket;
-	}
+    @Override
+    public IPacket getSrcPacket() {
+        return srcPacket;
+    }
 
-	@Override
-	public void setSrcPacket(IPacket srcPacket) {
-		this.srcPacket = srcPacket;
-	}
+    @Override
+    public void setSrcPacket(IPacket srcPacket) {
+        this.srcPacket = srcPacket;
+    }
 
-	public void initBySrcPacket(IPacket srcPacket) {
-		this.setSrcPacket(srcPacket);
-	}
+    public void initBySrcPacket(IPacket srcPacket) {
+        this.setSrcPacket(srcPacket);
+    }
 
-	public String getProtocolTypeDesc() {
-		return "9-2采样值";
-	}
+    public String getProtocolTypeDesc() {
+        return "9-2采样值";
+    }
 
 }

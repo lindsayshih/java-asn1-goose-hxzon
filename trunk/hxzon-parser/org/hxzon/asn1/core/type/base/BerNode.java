@@ -49,148 +49,148 @@ import org.hxzon.asn1.core.type.ext.IBerConstruct;
  * code for writing the contents of this node
  */
 public abstract class BerNode {
-	//add by hxzon
-	private int typeTag;
-	private int fTag;
+    //add by hxzon
+    private int typeTag;
+    private int fTag;
 
-	protected BerNode(int typeTag) {
-		this.typeTag = typeTag;
-	}
+    protected BerNode(int typeTag) {
+        this.typeTag = typeTag;
+    }
 
-	public int getTag() {
-		return fTag;
-	}
+    public int getTag() {
+        return fTag;
+    }
 
-	public void setTag(int tag) {
-		fTag = tag;
-	}
+    public void setTag(int tag) {
+        fTag = tag;
+    }
 
-	public int getTypeTag() {
-		return typeTag;
-	}
+    public int getTypeTag() {
+        return typeTag;
+    }
 
-	protected void setTypeTag(int tag) {
-		fTag = tag;
-	}
+    protected void setTypeTag(int tag) {
+        fTag = tag;
+    }
 
-	/**
-	 * Handle writing the contents of this node to the output stream provided
-	 * @param stream
-	 * @throws IOException 
-	 */
-	public abstract void writeElement(BerOutputStream stream) throws IOException;
+    /**
+     * Handle writing the contents of this node to the output stream provided
+     * @param stream
+     * @throws IOException 
+     */
+    public abstract void writeElement(BerOutputStream stream) throws IOException;
 
-	/**
-	 * String representation
-	 */
-	//change by getType()
+    /**
+     * String representation
+     */
+    //change by getType()
 //    public abstract String toString();
-	public abstract String getAsn1TypeDesc();
+    public abstract String getAsn1TypeDesc();
 
-	public String getTagDisplay() {
-		return Tag.toString(fTag);
-	}
+    public String getTagDisplay() {
+        return Tag.toString(fTag);
+    }
 
-	//--------------------------------------------------
-	//add by hxzon for offset ,len
-	private int tagOffset;//tag offset
-	private int totalLen;//total len
-	private int lenOffset;
-	private int valueOffset;
-	private String displayString;
-	private String name;
-	private IBerConstruct parent;
+    //--------------------------------------------------
+    //add by hxzon for offset ,len
+    private int tagOffset;//tag offset
+    private int totalLen;//total len
+    private int lenOffset;
+    private int valueOffset;
+    private String displayString;
+    private String name;
+    private IBerConstruct parent;
 
-	public IBerConstruct getParent() {
-		return parent;
-	}
+    public IBerConstruct getParent() {
+        return parent;
+    }
 
-	public BerNode setParent(IBerConstruct parent) {
-		this.parent = parent;
-		return this;
-	}
+    public BerNode setParent(IBerConstruct parent) {
+        this.parent = parent;
+        return this;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public BerNode setName(String name) {
-		this.name = name;
-		return this;
-	}
+    public BerNode setName(String name) {
+        this.name = name;
+        return this;
+    }
 
-	public String getDisplayString() {
-		return displayString;
-	}
+    public String getDisplayString() {
+        return displayString;
+    }
 
-	public BerNode setDisplayString(String display) {
-		this.displayString = display;
-		return this;
-	}
+    public BerNode setDisplayString(String display) {
+        this.displayString = display;
+        return this;
+    }
 
-	public int getTagOffset() {
-		return tagOffset;
-	}
+    public int getTagOffset() {
+        return tagOffset;
+    }
 
-	protected BerNode setTagOffset(int tagOffset) {
-		this.tagOffset = tagOffset;
-		return this;
-	}
+    protected BerNode setTagOffset(int tagOffset) {
+        this.tagOffset = tagOffset;
+        return this;
+    }
 
-	public int getTotalLen() {
-		return totalLen;
-	}
+    public int getTotalLen() {
+        return totalLen;
+    }
 
-	protected BerNode setTotalLen(int totalLen) {
-		this.totalLen = totalLen;
-		return this;
-	}
+    protected BerNode setTotalLen(int totalLen) {
+        this.totalLen = totalLen;
+        return this;
+    }
 
-	public int getLenOffset() {
-		return lenOffset;
-	}
+    public int getLenOffset() {
+        return lenOffset;
+    }
 
-	protected BerNode setLenOffset(int lenOffset) {
-		this.lenOffset = lenOffset;
-		return this;
-	}
+    protected BerNode setLenOffset(int lenOffset) {
+        this.lenOffset = lenOffset;
+        return this;
+    }
 
-	public int getValueOffset() {
-		return valueOffset;
-	}
+    public int getValueOffset() {
+        return valueOffset;
+    }
 
-	protected BerNode setValueOffset(int valueOffset) {
-		this.valueOffset = valueOffset;
-		return this;
-	}
+    protected BerNode setValueOffset(int valueOffset) {
+        this.valueOffset = valueOffset;
+        return this;
+    }
 
-	public abstract String getValueAsString();
+    public abstract String getValueAsString();
 
-	protected BerNode setOffsetAndLen(BerInputStream stream) {
-		setTotalLen(stream.getTotalLen());
-		setTagOffset(stream.getTagOffset());
-		setLenOffset(stream.getLenOffset());
-		setValueOffset(stream.getValueOffset());
+    protected BerNode setOffsetAndLen(BerInputStream stream) {
+        setTotalLen(stream.getTotalLen());
+        setTagOffset(stream.getTagOffset());
+        setLenOffset(stream.getLenOffset());
+        setValueOffset(stream.getValueOffset());
 //		setTotalLen(stream.getValueLen()+stream.getValueOffset()-stream.getTagOffset());
-		return this;
-	}
+        return this;
+    }
 
-	//add by hxzon
-	protected abstract void readValue(BerInputStream stream);
+    //add by hxzon
+    protected abstract void readValue(BerInputStream stream);
 
-	public BerNode init(String name, String display, int tag, BerInputStream stream) {
-		this.setTag(tag);
-		this.setName(name);
-		this.setDisplayString(display);
-		this.readValue(stream);
-		return this;
-	}
+    public BerNode init(String name, String display, int tag, BerInputStream stream) {
+        this.setTag(tag);
+        this.setName(name);
+        this.setDisplayString(display);
+        this.readValue(stream);
+        return this;
+    }
 
-	public BerNode init(String name, int tag, BerInputStream stream) {
-		return init(name, getDisplayString(), tag, stream);
-	}
+    public BerNode init(String name, int tag, BerInputStream stream) {
+        return init(name, getDisplayString(), tag, stream);
+    }
 
-	public BerNode init(int tag, BerInputStream stream) {
-		return init(getName(), tag, stream);
-	}
+    public BerNode init(int tag, BerInputStream stream) {
+        return init(getName(), tag, stream);
+    }
 }

@@ -49,7 +49,7 @@ import org.hxzon.util.BytesUtil;
  * Represents a generic UTF8 encoded string
  */
 public class BerGeneralString extends BerNode {
-	private String fValue;
+    private String fValue;
 
 //    /**
 //     * Construct a boolean from the input stream
@@ -63,47 +63,47 @@ public class BerGeneralString extends BerNode {
 //        
 //        fValue = new String(stream.readOctetString(0 == (tag & Tag.CONSTRUCTED)),"UTF-8");
 //    }
-	public BerGeneralString() {
-		super(Tag.GENERALSTRING);
-	}
+    public BerGeneralString() {
+        super(Tag.GENERALSTRING);
+    }
 
-	/**
-	 * Write this BER element to the output stream
-	 * Comment
-	 * @param stream
-	 * @throws IOException
-	 * @see org.hxzon.asn1.core.type.base.BerNode#writeElement(org.hxzon.asn1.core.parse.BerOutputStream)
-	 */
-	public void writeElement(BerOutputStream stream) throws IOException {
-		byte[] b = fValue.getBytes("UTF-8");
-		stream.writeBerTag(getTag() | (stream.isComplexOctetString(b.length) ? Tag.CONSTRUCTED : 0));
-		stream.writeOctetString(b, 0, b.length);
-	}
+    /**
+     * Write this BER element to the output stream
+     * Comment
+     * @param stream
+     * @throws IOException
+     * @see org.hxzon.asn1.core.type.base.BerNode#writeElement(org.hxzon.asn1.core.parse.BerOutputStream)
+     */
+    public void writeElement(BerOutputStream stream) throws IOException {
+        byte[] b = fValue.getBytes("UTF-8");
+        stream.writeBerTag(getTag() | (stream.isComplexOctetString(b.length) ? Tag.CONSTRUCTED : 0));
+        stream.writeOctetString(b, 0, b.length);
+    }
 
-	/**
-	 * Return the value of this boolean object
-	 * @return
-	 */
-	public String getValue() {
-		return fValue;
-	}
+    /**
+     * Return the value of this boolean object
+     * @return
+     */
+    public String getValue() {
+        return fValue;
+    }
 
-	public String getAsn1TypeDesc() {
-		return "BerGeneralString";
-	}
+    public String getAsn1TypeDesc() {
+        return "BerGeneralString";
+    }
 
-	//add by hxzon
-	protected void readValue(BerInputStream stream) {
-		try {
-			fValue = BytesUtil.toUTF8String(stream.readOctetString(0 == (getTag() & Tag.CONSTRUCTED)));
-			super.setOffsetAndLen(stream);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+    //add by hxzon
+    protected void readValue(BerInputStream stream) {
+        try {
+            fValue = BytesUtil.toUTF8String(stream.readOctetString(0 == (getTag() & Tag.CONSTRUCTED)));
+            super.setOffsetAndLen(stream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-	//add by hxzon
-	public String getValueAsString() {
-		return getValue();
-	}
+    //add by hxzon
+    public String getValueAsString() {
+        return getValue();
+    }
 }

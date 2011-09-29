@@ -8,7 +8,6 @@ import org.hxzon.asn1.core.type.BerSequence;
 import org.hxzon.asn1.core.type.base.BerNode;
 import org.hxzon.asn1.mms.choice.ObjectName;
 
-
 public class GetEventEnrollmentAttributesRequest extends BerSequence {
 //	GetEventEnrollmentAttributes-Request ::= SEQUENCE
 //	{
@@ -25,27 +24,27 @@ public class GetEventEnrollmentAttributesRequest extends BerSequence {
 //	eventActionName		[4] ObjectName OPTIONAL,
 //	continueAfter		[5] ObjectName OPTIONAL
 //	}
-	public BerNode create(int tag, BerInputStream stream) {
-		switch (tag) {
-		case Tag.CONTEXT | 0:
-			return new ScopeOfRequest().init("scopeOfRequest", "scopeOfRequest", tag, stream);
-		case Tag.CONTEXT | 1:
-			return Asn1Utils.createBerSequenceOf("eventEnrollmentNames", "eventEnrollmentNames", tag, stream, ObjectName.class);
-		case Tag.CONTEXT | 2:
-			return new ApplicationReference().init("clientApplication", "clientApplication", tag, stream);
-		case Tag.CONTEXT | 3:
-			return new ObjectName().init("eventConditionName", "eventConditionName", tag, stream);
-		case Tag.CONTEXT | 4:
-			return new ObjectName().init("eventActionName", "eventActionName", tag, stream);
-		case Tag.CONTEXT | 5:
-			return new ObjectName().init("continueAfter", "continueAfter", tag, stream);
-		default:
-			return Asn1Utils.createUnknown(tag, stream);
-		}
-	}
+    public BerNode create(int tag, BerInputStream stream) {
+        switch (tag) {
+        case Tag.CONTEXT | 0:
+            return new ScopeOfRequest().init("scopeOfRequest", "scopeOfRequest", tag, stream);
+        case Tag.CONTEXT | 1:
+            return Asn1Utils.createBerSequenceOf("eventEnrollmentNames", "eventEnrollmentNames", tag, stream, ObjectName.class);
+        case Tag.CONTEXT | 2:
+            return new ApplicationReference().init("clientApplication", "clientApplication", tag, stream);
+        case Tag.CONTEXT | 3:
+            return new ObjectName().init("eventConditionName", "eventConditionName", tag, stream);
+        case Tag.CONTEXT | 4:
+            return new ObjectName().init("eventActionName", "eventActionName", tag, stream);
+        case Tag.CONTEXT | 5:
+            return new ObjectName().init("continueAfter", "continueAfter", tag, stream);
+        default:
+            return Asn1Utils.createUnknown(tag, stream);
+        }
+    }
 
-	public static class ScopeOfRequest extends BerInteger {
+    public static class ScopeOfRequest extends BerInteger {
 
-	}
+    }
 
 }

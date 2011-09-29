@@ -55,22 +55,22 @@ public class BerIA5String extends BerAbstractString {
 //        super(tag, stream);
 //    }
 
-	public BerIA5String() {
-		super(Tag.IA5STRING);
-	}
+    public BerIA5String() {
+        super(Tag.IA5STRING);
+    }
 
-	public static final boolean validate(String str) {
-		int i, len = str.length();
-		for (i = 0; i < len; ++i) {
-			char c = str.charAt(i);
-			if ((c < 0) || (c > 127))
-				return false;
-		}
-		return true;
-	}
+    public static final boolean validate(String str) {
+        int i, len = str.length();
+        for (i = 0; i < len; ++i) {
+            char c = str.charAt(i);
+            if ((c < 0) || (c > 127))
+                return false;
+        }
+        return true;
+    }
 
-	public String getAsn1TypeDesc() {
-		return "BerIA5String";
-	}
+    public String getAsn1TypeDesc() {
+        return "BerIA5String";
+    }
 
 }

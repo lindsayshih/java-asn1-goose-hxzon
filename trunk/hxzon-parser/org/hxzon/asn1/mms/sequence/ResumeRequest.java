@@ -7,7 +7,6 @@ import org.hxzon.asn1.core.type.base.BerNode;
 import org.hxzon.asn1.mms.choice.ExecutionArgument;
 import org.hxzon.asn1.mms.common.Identifier;
 
-
 public class ResumeRequest extends BerSequence {
 //	Resume-Request ::= SEQUENCE
 //	{
@@ -17,13 +16,13 @@ public class ResumeRequest extends BerSequence {
 //	    encodedString	  EXTERNALt
 //	    } OPTIONAL
 //	}
-	public BerNode create(int tag, BerInputStream stream) {
-		switch (tag) {
-		case Tag.CONTEXT | 0:
-			return new Identifier().init("programInvocationName", "programInvocationName", tag, stream);
-		default:
-			return new ExecutionArgument().init("executionArgument", "executionArgument", tag, stream);
-		}
-	}
+    public BerNode create(int tag, BerInputStream stream) {
+        switch (tag) {
+        case Tag.CONTEXT | 0:
+            return new Identifier().init("programInvocationName", "programInvocationName", tag, stream);
+        default:
+            return new ExecutionArgument().init("executionArgument", "executionArgument", tag, stream);
+        }
+    }
 
 }

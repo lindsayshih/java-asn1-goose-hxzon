@@ -8,10 +8,9 @@ import org.hxzon.asn1.core.parse.ext.Asn1Utils;
 import org.hxzon.asn1.core.type.BerSequence;
 import org.hxzon.asn1.core.type.base.BerNode;
 
-
 public class GooseDataset extends BerSequence {
-	public GooseDataset() {
-	}
+    public GooseDataset() {
+    }
 
 //  TimeOfDay ::= OCTET STRING -- (SIZE (4 | 6))
 //  FloatingPoint ::= OCTET STRING
@@ -32,49 +31,49 @@ public class GooseDataset extends BerSequence {
 //  booleanArray [14] IMPLICIT BIT STRING
 //  }
 
-	public BerNode create(int tag, BerInputStream stream) {
-		switch (tag) {
-		case Tag.CONTEXT | 1:
-			return Asn1Utils.createBerSequenceOf("array", "array", tag, stream, GooseDataset.class);
-		case Tag.CONTEXT | 2:
-			return Asn1Utils.createBerSequenceOf("structure", "structure", tag, stream, GooseDataset.class);
-		case Tag.CONTEXT | 3:
-			return Asn1Utils.createBerBoolean("boolean", "boolean", tag, stream);
-		case Tag.CONTEXT | 4:
-			return Asn1Utils.createBerBitString("bit-string", "bit-string", tag, stream);
-		case Tag.CONTEXT | 5:
-			return Asn1Utils.createBerIntegerX("integer", "integer", tag, stream);
-		case Tag.CONTEXT | 6:
-			return Asn1Utils.createBerUnsignedX("unsigned", "unsigned", tag, stream);//unsigned
-		case Tag.CONTEXT | 7:
-			return Asn1Utils.createFloatPoint("floating-point", "floating-point", tag, stream);
-		case Tag.CONTEXT | 8:
-			return Asn1Utils.createBerReal("real", "real", tag, stream);
-		case Tag.CONTEXT | 9:
-			return Asn1Utils.createBerOctetString("octet-string", "octet-string", tag, stream);
-		case Tag.CONTEXT | 10:
-			return Asn1Utils.createBerVisibleString("visible-string", "visible-string", tag, stream);
-		case Tag.CONTEXT | 12:
-			return Asn1Utils.createBerIecTimeOfDay("binary-time", "binary-time", tag, stream);
-		case Tag.CONTEXT | 13:
-			return Asn1Utils.createBerIntegerX("bcd", "bcd", tag, stream);
-		case Tag.CONTEXT | 14:
-			return Asn1Utils.createBerBitString("booleanArray", "booleanArray", tag, stream);
-		case Tag.CONTEXT | 17:
-			return Asn1Utils.createBerIecUtcTime("utc-time", "utc-time", tag, stream);
-		case Tag.CONTEXT | 18:
-			return Asn1Utils.createBerUtf8String("utf8-string", "utf8-string", tag, stream);
-		default:
-			return Asn1Utils.createUnknown(tag, stream);
-		}
-	}
+    public BerNode create(int tag, BerInputStream stream) {
+        switch (tag) {
+        case Tag.CONTEXT | 1:
+            return Asn1Utils.createBerSequenceOf("array", "array", tag, stream, GooseDataset.class);
+        case Tag.CONTEXT | 2:
+            return Asn1Utils.createBerSequenceOf("structure", "structure", tag, stream, GooseDataset.class);
+        case Tag.CONTEXT | 3:
+            return Asn1Utils.createBerBoolean("boolean", "boolean", tag, stream);
+        case Tag.CONTEXT | 4:
+            return Asn1Utils.createBerBitString("bit-string", "bit-string", tag, stream);
+        case Tag.CONTEXT | 5:
+            return Asn1Utils.createBerIntegerX("integer", "integer", tag, stream);
+        case Tag.CONTEXT | 6:
+            return Asn1Utils.createBerUnsignedX("unsigned", "unsigned", tag, stream);//unsigned
+        case Tag.CONTEXT | 7:
+            return Asn1Utils.createFloatPoint("floating-point", "floating-point", tag, stream);
+        case Tag.CONTEXT | 8:
+            return Asn1Utils.createBerReal("real", "real", tag, stream);
+        case Tag.CONTEXT | 9:
+            return Asn1Utils.createBerOctetString("octet-string", "octet-string", tag, stream);
+        case Tag.CONTEXT | 10:
+            return Asn1Utils.createBerVisibleString("visible-string", "visible-string", tag, stream);
+        case Tag.CONTEXT | 12:
+            return Asn1Utils.createBerIecTimeOfDay("binary-time", "binary-time", tag, stream);
+        case Tag.CONTEXT | 13:
+            return Asn1Utils.createBerIntegerX("bcd", "bcd", tag, stream);
+        case Tag.CONTEXT | 14:
+            return Asn1Utils.createBerBitString("booleanArray", "booleanArray", tag, stream);
+        case Tag.CONTEXT | 17:
+            return Asn1Utils.createBerIecUtcTime("utc-time", "utc-time", tag, stream);
+        case Tag.CONTEXT | 18:
+            return Asn1Utils.createBerUtf8String("utf8-string", "utf8-string", tag, stream);
+        default:
+            return Asn1Utils.createUnknown(tag, stream);
+        }
+    }
 
-	public void updateDatasetDisplay(List<String> displays) {
-		BerNode[] children = getChildren();
-		int minIndex = Math.min(displays.size(), children.length);
-		for (int i = 0; i < minIndex; i++) {
-			children[i].setDisplayString(displays.get(i));
-		}
-	}
+    public void updateDatasetDisplay(List<String> displays) {
+        BerNode[] children = getChildren();
+        int minIndex = Math.min(displays.size(), children.length);
+        for (int i = 0; i < minIndex; i++) {
+            children[i].setDisplayString(displays.get(i));
+        }
+    }
 
 }

@@ -9,7 +9,6 @@ import org.hxzon.asn1.mms.choice.ObjectName;
 import org.hxzon.asn1.mms.common.AlarmAckRule;
 import org.hxzon.asn1.mms.common.Transitions;
 
-
 public class AlterEventEnrollmentRequest extends BerSequence {
 //	AlterEventEnrollment-Request ::= SEQUENCE
 //	{
@@ -17,17 +16,17 @@ public class AlterEventEnrollmentRequest extends BerSequence {
 //	eventConditionTransitions	[1] IMPLICIT Transitions OPTIONAL,
 //	alarmAcknowledgmentRule		[2] IMPLICIT AlarmAckRule OPTIONAL
 //	}
-	public BerNode create(int tag, BerInputStream stream) {
-		switch (tag) {
-		case Tag.CONTEXT | 0:
-			return new ObjectName().init("eventEnrollmentName", "eventEnrollmentName", tag, stream);
-		case Tag.CONTEXT | 1:
-			return new Transitions().init("eventConditionTransitions", "eventConditionTransitions", tag, stream);
-		case Tag.CONTEXT | 2:
-			return new AlarmAckRule().init("alarmAcknowledgmentRule", "alarmAcknowledgmentRule", tag, stream);
-		default:
-			return Asn1Utils.createUnknown(tag, stream);
-		}
-	}
+    public BerNode create(int tag, BerInputStream stream) {
+        switch (tag) {
+        case Tag.CONTEXT | 0:
+            return new ObjectName().init("eventEnrollmentName", "eventEnrollmentName", tag, stream);
+        case Tag.CONTEXT | 1:
+            return new Transitions().init("eventConditionTransitions", "eventConditionTransitions", tag, stream);
+        case Tag.CONTEXT | 2:
+            return new AlarmAckRule().init("alarmAcknowledgmentRule", "alarmAcknowledgmentRule", tag, stream);
+        default:
+            return Asn1Utils.createUnknown(tag, stream);
+        }
+    }
 
 }

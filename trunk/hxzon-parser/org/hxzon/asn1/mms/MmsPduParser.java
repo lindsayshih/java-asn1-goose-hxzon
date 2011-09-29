@@ -4,7 +4,6 @@ import org.hxzon.asn1.core.parse.BerInputStream;
 import org.hxzon.asn1.core.parse.BerParser;
 import org.hxzon.asn1.core.type.base.BerNode;
 
-
 public class MmsPduParser extends BerParser {
 //	MMSpdu ::= CHOICE
 //	{
@@ -23,7 +22,7 @@ public class MmsPduParser extends BerParser {
 //	conclude-ResponsePDU	[12] 	IMPLICIT Conclude-ResponsePDU,
 //	conclude-ErrorPDU		[13] 	IMPLICIT Conclude-ErrorPDU
 //	}
-	public static final MmsPduParser mmsParser = new MmsPduParser();
+    public static final MmsPduParser mmsParser = new MmsPduParser();
 
 //	public static final int State_ConfirmedRequestPdu = 1;
 //	public static final int State_ConfirmedResponsePdu = 2;
@@ -40,9 +39,9 @@ public class MmsPduParser extends BerParser {
 //	public static final int State_ConcludeResponsePdu = 13;
 //	public static final int State_ConcludeErrorPdu = 14;
 
-	@Override
-	public BerNode create(int tag, BerInputStream stream, int state) {
-		return new MmsPdu().init(tag, stream);
-	}
+    @Override
+    public BerNode create(int tag, BerInputStream stream, int state) {
+        return new MmsPdu().init(tag, stream);
+    }
 
 }

@@ -8,13 +8,12 @@ import org.hxzon.asn1.core.type.base.BerNode;
 import org.hxzon.asn1.core.type.ext.BerChoice;
 import org.hxzon.asn1.mms.MmsPdu;
 
-
 public class PdvList extends BerSequence implements UserDataContainer {
 //FullyEncodedData
-	public PdvList() {
-		setName("item");
-		setDisplayString("item");
-	}
+    public PdvList() {
+        setName("item");
+        setDisplayString("item");
+    }
 
 //	--  contains one or more PDV-list values.
 //	--  See 8.4.2.
@@ -34,33 +33,33 @@ public class PdvList extends BerSequence implements UserDataContainer {
 //	  --  See 8.4.2.
 //	}
 
-	@Override
-	public BerNode create(int tag, BerInputStream stream) {
-		switch (tag) {
-		case Tag.UNIVERSAL | Tag.OBJECTID:
-			return new TransferSyntaxName().init(tag, stream);
-		case Tag.UNIVERSAL | Tag.INTEGER:
-			return new PresentationContextIdentifier().init(tag, stream);
-		default:
-			return new PresentationDataValues().init(tag, stream, false);
-		}
-	}
+    @Override
+    public BerNode create(int tag, BerInputStream stream) {
+        switch (tag) {
+        case Tag.UNIVERSAL | Tag.OBJECTID:
+            return new TransferSyntaxName().init(tag, stream);
+        case Tag.UNIVERSAL | Tag.INTEGER:
+            return new PresentationContextIdentifier().init(tag, stream);
+        default:
+            return new PresentationDataValues().init(tag, stream, false);
+        }
+    }
 
-	public BerNode[] getUserData() {
-		for (BerNode child : getChildren()) {
-			if (child instanceof UserDataContainer) {
-				return ((UserDataContainer) child).getUserData();
-			}
-		}
-		return null;
-	}
+    public BerNode[] getUserData() {
+        for (BerNode child : getChildren()) {
+            if (child instanceof UserDataContainer) {
+                return ((UserDataContainer) child).getUserData();
+            }
+        }
+        return null;
+    }
 
-	public static class PresentationDataValues extends BerChoice implements UserDataContainer {
+    public static class PresentationDataValues extends BerChoice implements UserDataContainer {
 
-		public PresentationDataValues() {
-			setName("presentation data values");
-			setDisplayString("presentation data values");
-		}
+        public PresentationDataValues() {
+            setName("presentation data values");
+            setDisplayString("presentation data values");
+        }
 
 //		  presentation-data-values
 //	    CHOICE {single-ASN1-type	[0] ANY,
@@ -70,29 +69,29 @@ public class PdvList extends BerSequence implements UserDataContainer {
 //	                        --  Type corresponding to presentation context identifier  }),
 //	            octet-aligned     [1] IMPLICIT OCTET STRING,
 //	            arbitrary         [2] IMPLICIT BIT STRING}
-		@Override
-		public BerNode create(int tag, BerInputStream stream) {
-			switch (tag) {
-			case Tag.CONTEXT | 0:
+        @Override
+        public BerNode create(int tag, BerInputStream stream) {
+            switch (tag) {
+            case Tag.CONTEXT | 0:
 //				return Asn1Utils.createBerSequenceOf("single-ASN1-type", "single-ASN1-type", tag, stream, MmsPdu.class);
-				return new SingleAsn1Type(MmsPdu.class).init("single-ASN1-type", "single-ASN1-type", tag, stream);
-			case Tag.CONTEXT | 1:
-				return Asn1Utils.createBerOctetString("octet aligned", "octet aligned", tag, stream);
-			case Tag.CONTEXT | 2:
-				return Asn1Utils.createBerBitString("arbitrary", "arbitrary", tag, stream);
-			default:
-				return Asn1Utils.createUnknown(tag, stream);
-			}
-		}
+                return new SingleAsn1Type(MmsPdu.class).init("single-ASN1-type", "single-ASN1-type", tag, stream);
+            case Tag.CONTEXT | 1:
+                return Asn1Utils.createBerOctetString("octet aligned", "octet aligned", tag, stream);
+            case Tag.CONTEXT | 2:
+                return Asn1Utils.createBerBitString("arbitrary", "arbitrary", tag, stream);
+            default:
+                return Asn1Utils.createUnknown(tag, stream);
+            }
+        }
 
-		public BerNode[] getUserData() {
-			BerNode child = this.getRealNode();
-			if (child instanceof UserDataContainer) {
-				//single asn1 type
-				return ((UserDataContainer) child).getUserData();
-			}
-			return new BerNode[] { child };
-		}
+        public BerNode[] getUserData() {
+            BerNode child = this.getRealNode();
+            if (child instanceof UserDataContainer) {
+                //single asn1 type
+                return ((UserDataContainer) child).getUserData();
+            }
+            return new BerNode[] { child };
+        }
 
-	}
+    }
 }

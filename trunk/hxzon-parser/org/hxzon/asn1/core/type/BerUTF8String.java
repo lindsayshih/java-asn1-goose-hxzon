@@ -36,8 +36,6 @@
 
 package org.hxzon.asn1.core.type;
 
-import java.io.UnsupportedEncodingException;
-
 import org.hxzon.asn1.core.parse.Tag;
 import org.hxzon.util.BytesUtil;
 
@@ -46,15 +44,15 @@ import org.hxzon.util.BytesUtil;
  * array of 8-bit bytes
  */
 public class BerUTF8String extends BerOctetString {
-	public BerUTF8String() {
-		setTypeTag(Tag.UTF8STRING);
-	}
+    public BerUTF8String() {
+        setTypeTag(Tag.UTF8STRING);
+    }
 
-	public String getAsn1TypeDesc() {
-		return "BerUTF8String";
-	}
+    public String getAsn1TypeDesc() {
+        return "BerUTF8String";
+    }
 
-	public String getValueAsString() {
-		return BytesUtil.toUTF8String(getValue());
-	}
+    public String getValueAsString() {
+        return BytesUtil.toUTF8String(getValue());
+    }
 }

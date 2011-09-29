@@ -7,10 +7,9 @@ import org.hxzon.asn1.core.type.BerSequence;
 import org.hxzon.asn1.core.type.base.BerNode;
 import org.hxzon.asn1.mms.choice.RejectReason;
 
-
 public class RejectPdu extends BerSequence {
-	public RejectPdu() {
-	}
+    public RejectPdu() {
+    }
 
 //	RejectPDU ::= SEQUENCE
 //	{
@@ -106,13 +105,13 @@ public class RejectPdu extends BerSequence {
 //		}
 //	}
 
-	public BerNode create(int tag, BerInputStream stream) {
-		switch (tag) {
-		case Tag.CONTEXT | 0:
-			return Asn1Utils.createBerUnsigned32("originalInvokeID", "originalInvokeID", tag, stream);
-		default:
-			return new RejectReason().init("rejectReason", "rejectReason", tag, stream, false);
-		}
-	}
+    public BerNode create(int tag, BerInputStream stream) {
+        switch (tag) {
+        case Tag.CONTEXT | 0:
+            return Asn1Utils.createBerUnsigned32("originalInvokeID", "originalInvokeID", tag, stream);
+        default:
+            return new RejectReason().init("rejectReason", "rejectReason", tag, stream, false);
+        }
+    }
 
 }

@@ -6,7 +6,6 @@ import org.hxzon.asn1.core.parse.ext.Asn1Utils;
 import org.hxzon.asn1.core.type.BerSequence;
 import org.hxzon.asn1.core.type.base.BerNode;
 
-
 public class ApplicationReference extends BerSequence {
 //	ApplicationReference ::= SEQUENCE
 //	{
@@ -15,13 +14,13 @@ public class ApplicationReference extends BerSequence {
 //	ae-qualifier		[2] AE-qualifier	        OPTIONAL,
 //	ae-invocation-id	[3] AE-invocation-identifier OPTIONAL
 //	}
-	public BerNode create(int tag, BerInputStream stream) {
-		switch (tag) {
-		case Tag.CONTEXT | 0:
+    public BerNode create(int tag, BerInputStream stream) {
+        switch (tag) {
+        case Tag.CONTEXT | 0:
 //			return 
-		default:
-			return Asn1Utils.createUnknown(tag, stream);
-		}
-	}
+        default:
+            return Asn1Utils.createUnknown(tag, stream);
+        }
+    }
 
 }

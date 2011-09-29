@@ -9,7 +9,6 @@ import org.hxzon.asn1.mms.choice.Address;
 import org.hxzon.asn1.mms.choice.ObjectName;
 import org.hxzon.asn1.mms.choice.TypeSpecification;
 
-
 public class DefineNamedVariableRequest extends BerSequence {
 //	DefineNamedVariable-Request ::= SEQUENCE
 //	{
@@ -18,17 +17,17 @@ public class DefineNamedVariableRequest extends BerSequence {
 //	typeSpecification	[2] TypeSpecification OPTIONAL
 //	}
 
-	public BerNode create(int tag, BerInputStream stream) {
-		switch (tag) {
-		case Tag.CONTEXT | 0:
-			return new ObjectName().init("variableName", "variableName", tag, stream, true);
-		case Tag.CONTEXT | 1:
-			return new Address().init("address", "address", tag, stream, true);
-		case Tag.CONTEXT | 2:
-			return new TypeSpecification().init("typeSpecification", "typeSpecification", tag, stream, true);
-		default:
-			return Asn1Utils.createUnknown(tag, stream);
-		}
-	}
+    public BerNode create(int tag, BerInputStream stream) {
+        switch (tag) {
+        case Tag.CONTEXT | 0:
+            return new ObjectName().init("variableName", "variableName", tag, stream, true);
+        case Tag.CONTEXT | 1:
+            return new Address().init("address", "address", tag, stream, true);
+        case Tag.CONTEXT | 2:
+            return new TypeSpecification().init("typeSpecification", "typeSpecification", tag, stream, true);
+        default:
+            return Asn1Utils.createUnknown(tag, stream);
+        }
+    }
 
 }

@@ -8,7 +8,6 @@ import org.hxzon.asn1.core.type.base.BerNode;
 import org.hxzon.asn1.mms.common.ParameterSupportOptions;
 import org.hxzon.asn1.mms.common.ServiceSupportOptions;
 
-
 public class InitResponseDetail extends BerSequence {
 //	InitResponseDetail ::= SEQUENCE
 //	{
@@ -16,16 +15,16 @@ public class InitResponseDetail extends BerSequence {
 //	negociatedParameterCBB			[1] IMPLICIT ParameterSupportOptions,
 //	servicesSupportedCalled			[2] IMPLICIT ServiceSupportOptions
 //	}
-	public BerNode create(int tag, BerInputStream stream) {
-		switch (tag) {
-		case Tag.CONTEXT | 0:
-			return Asn1Utils.createBerInteger16("negociatedVersionNumber", "negociatedVersionNumber", tag, stream);
-		case Tag.CONTEXT | 1:
-			return new ParameterSupportOptions().init("negociatedParameterCBB", "negociatedParameterCBB", tag, stream);
-		case Tag.CONTEXT | 2:
-			return new ServiceSupportOptions().init("servicesSupportedCalled", "servicesSupportedCalled", tag, stream);
-		default:
-			return Asn1Utils.createUnknown(tag, stream);
-		}
-	}
+    public BerNode create(int tag, BerInputStream stream) {
+        switch (tag) {
+        case Tag.CONTEXT | 0:
+            return Asn1Utils.createBerInteger16("negociatedVersionNumber", "negociatedVersionNumber", tag, stream);
+        case Tag.CONTEXT | 1:
+            return new ParameterSupportOptions().init("negociatedParameterCBB", "negociatedParameterCBB", tag, stream);
+        case Tag.CONTEXT | 2:
+            return new ServiceSupportOptions().init("servicesSupportedCalled", "servicesSupportedCalled", tag, stream);
+        default:
+            return Asn1Utils.createUnknown(tag, stream);
+        }
+    }
 }

@@ -43,64 +43,64 @@ import org.hxzon.util.DebugUtil;
  *  when it's time to stop reading objects.
  */
 public class ReadSequence {
-	private String display;
-	private BerInputStream fInputStream;
-	private long fStart;
-	private int fLength;
-	private boolean fEOF;
+    private String display;
+    private BerInputStream fInputStream;
+    private long fStart;
+    private int fLength;
+    private boolean fEOF;
 
-	/**
-	 * Creates a new sequence tracking wrapper.
-	 * @param stream
-	 */
-	public ReadSequence(String display, BerInputStream stream) throws IOException {
-		this.display = display;
-		fInputStream = stream;
-		fLength = fInputStream.readBerLength();
-		fStart = fInputStream.getReadBytes();
+    /**
+     * Creates a new sequence tracking wrapper.
+     * @param stream
+     */
+    public ReadSequence(String display, BerInputStream stream) throws IOException {
+        this.display = display;
+        fInputStream = stream;
+        fLength = fInputStream.readBerLength();
+        fStart = fInputStream.getReadBytes();
 
-		fEOF = (fLength == 0);
-		DebugUtil.trace("read sequence " + display + ", start:" + fStart + ",len:" + fLength);
-	}
+        fEOF = (fLength == 0);
+        DebugUtil.trace("read sequence " + display + ", start:" + fStart + ",len:" + fLength);
+    }
 
-	/**
-	 * Read the next tag in this encapsulated sequence. Returns null if we
-	 * have reached the end of the sequence of tags.
-	 * @return
-	 * @throws IOException
-	 */
-	public int readBerTag() throws IOException {
-		if (fEOF) {
-			return Tag.EOFTYPE;
-		}
+    /**
+     * Read the next tag in this encapsulated sequence. Returns null if we
+     * have reached the end of the sequence of tags.
+     * @return
+     * @throws IOException
+     */
+    public int readBerTag() throws IOException {
+        if (fEOF) {
+            return Tag.EOFTYPE;
+        }
 
-		if (fLength != -1) {
+        if (fLength != -1) {
 //			if (fStart + fLength <= fInputStream.getReadBytes()) {
-			//change by hxzon//FIXME
-			if (fStart + fLength == fInputStream.getReadBytes()) {
-				fEOF = true;
-				return Tag.EOFTYPE;
-			}
-		}
+            //change by hxzon//FIXME
+            if (fStart + fLength == fInputStream.getReadBytes()) {
+                fEOF = true;
+                return Tag.EOFTYPE;
+            }
+        }
 
-		int tag = fInputStream.readBerTag();
-		if (tag == Tag.EOFTYPE) {
-			//remove by hxzon//FIXME
+        int tag = fInputStream.readBerTag();
+        if (tag == Tag.EOFTYPE) {
+            //remove by hxzon//FIXME
 //			if (0 != fInputStream.readBerLength()) {
 //				throw new AsnEncodingException("EOF tag must be zero length");
 //			}
-			fEOF = true;
+            fEOF = true;
 
-			if (fLength != -1) {
-				/* EOF marker early? Skip rest of container */
-				long remain = fInputStream.getReadBytes() - (fStart + fLength);
-				if (remain > 0)
-					fInputStream.skip(remain);
-			}
+            if (fLength != -1) {
+                /* EOF marker early? Skip rest of container */
+                long remain = fInputStream.getReadBytes() - (fStart + fLength);
+                if (remain > 0)
+                    fInputStream.skip(remain);
+            }
 
-			return Tag.EOFTYPE;
-		}
+            return Tag.EOFTYPE;
+        }
 
-		return tag;
-	}
+        return tag;
+    }
 }

@@ -6,20 +6,20 @@ import org.hxzon.netprotocol.field.ProtocolField;
 
 public interface IPacket extends IPacketPayload {
 
-	public int getHeaderLength();
+    public int getHeaderLength();
 
-	public int getPayloadOffset();
+    public int getPayloadOffset();
 
-	public int getPayloadLength();
+    public int getPayloadLength();
 
-	public List<ProtocolField> getHeaderFields();
+    public List<ProtocolField> getHeaderFields();
 
-	public IPacket getSrcPacket();
+    public IPacket getSrcPacket();
 
-	public IPacketPayload getPayload();
+    public IPacketPayload getPayload();
 
-	public IPacket getLastPacket();
+    public IPacket getLastPacket();
 
-	public String getLastPayloadType();
+    public String getLastPayloadType();
 
 }

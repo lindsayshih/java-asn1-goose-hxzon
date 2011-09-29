@@ -9,13 +9,12 @@ import org.hxzon.asn1.mms.sequence.EventNotification;
 import org.hxzon.asn1.mms.sequence.InformationReport;
 import org.hxzon.asn1.mms.sequence.UnsolicitedStatus;
 
-
 public class UnconfirmedService extends BerChoice {
 
-	public UnconfirmedService() {
-		setName("unconfirmedService");
-		setDisplayString("unconfirmedService");
-	}
+    public UnconfirmedService() {
+        setName("unconfirmedService");
+        setDisplayString("unconfirmedService");
+    }
 
 //	UnconfirmedService ::= CHOICE 
 //	{
@@ -25,17 +24,17 @@ public class UnconfirmedService extends BerChoice {
 //-- XXX this one is neither in this ASN nor in the IMPORTS
 //--	additionalService		[3]	AdditionalUnconfirmedService
 //	}
-	public BerNode create(int tag, BerInputStream stream) {
-		switch (tag) {
-		case Tag.CONTEXT | 0:
-			return new InformationReport().init(tag, stream);
-		case Tag.CONTEXT | 1:
-			return new UnsolicitedStatus().init(tag, stream);
-		case Tag.CONTEXT | 2:
-			return new EventNotification().init(tag, stream);
-		default:
-			return Asn1Utils.createUnknown(tag, stream);
-		}
-	}
+    public BerNode create(int tag, BerInputStream stream) {
+        switch (tag) {
+        case Tag.CONTEXT | 0:
+            return new InformationReport().init(tag, stream);
+        case Tag.CONTEXT | 1:
+            return new UnsolicitedStatus().init(tag, stream);
+        case Tag.CONTEXT | 2:
+            return new EventNotification().init(tag, stream);
+        default:
+            return Asn1Utils.createUnknown(tag, stream);
+        }
+    }
 
 }

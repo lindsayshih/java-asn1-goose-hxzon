@@ -43,11 +43,11 @@ import org.hxzon.asn1.core.parse.Tag;
  * array of 8-bit bytes
  */
 public class BerVideoTextString extends BerOctetString {
-	public BerVideoTextString() {
-		setTypeTag(Tag.VIDEOTEXTSTRING);
-	}
+    public BerVideoTextString() {
+        setTypeTag(Tag.VIDEOTEXTSTRING);
+    }
 
-	public String getAsn1TypeDesc() {
-		return "BerVideoTextString";
-	}
+    public String getAsn1TypeDesc() {
+        return "BerVideoTextString";
+    }
 }
