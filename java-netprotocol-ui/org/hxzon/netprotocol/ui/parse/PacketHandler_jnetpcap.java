@@ -21,7 +21,7 @@ public class PacketHandler_jnetpcap implements PcapPacketHandler<Object> {
         pcap.loop(-1, this, null);
         long endTime = System.currentTimeMillis();
         long spanTime = endTime - startTime;
-        DebugUtil.debug("packet num:"+i);
+        DebugUtil.debug("packet num:" + i);
         DebugUtil.debug("packet handler-span time:" + spanTime);
     }
 

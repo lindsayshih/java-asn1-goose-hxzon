@@ -5,7 +5,7 @@ import org.hxzon.netprotocol.packet.TcpPacket;
 import org.hxzon.netprotocol.packet.TpktPacket;
 import org.hxzon.netprotocol.packet.UdpPacket;
 import org.hxzon.netprotocol.packet.VlanPacket;
-import org.hxzon.netprotocol.ui.parse.DisplayFrame2;
+import org.hxzon.netprotocol.ui.parse.DisplayFrame;
 import org.hxzon.util.BytesUtil;
 
 public class PacketUtils {
@@ -95,7 +95,7 @@ public class PacketUtils {
     }
 
     public static void test() {
-        byte[] data = BytesUtil.fromHexString(DisplayFrame2.testMms1);
+        byte[] data = BytesUtil.fromHexString(DisplayFrame.testMms1);
         System.out.println("ethernet type:" + ethernetType(data));
         System.out.println("ip header len:" + ipHeaderLen(data));
         System.out.println("tcp header len:" + tcpHeaderLen(data));

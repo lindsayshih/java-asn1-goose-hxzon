@@ -9,13 +9,13 @@ import org.hxzon.netprotocol.quick.packet.QEthernetPacket;
 import org.hxzon.netprotocol.quick.packet.QGoosePacket;
 import org.hxzon.netprotocol.quick.packet.QSmvPacket;
 import org.hxzon.netprotocol.quick.packet.QVlanPacket;
-import org.hxzon.netprotocol.ui.parse.DisplayFrame2;
+import org.hxzon.netprotocol.ui.parse.DisplayFrame;
 import org.hxzon.util.BytesUtil;
 
 public class TestQPacketDecoder {
 
     public static void main(String[] args) {
-        byte[] data = BytesUtil.fromHexString(DisplayFrame2.testSmv91);
+        byte[] data = BytesUtil.fromHexString(DisplayFrame.testSmv91);
         QEthernetPacket ethernetPacket = new QEthernetPacket();
         String ethernetType = PacketUtils.ethernetType(data);
         int ethernetHeaderLen = PacketUtils.ethernetHeaderLen(data);
