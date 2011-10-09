@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry excluding="test/hxzon/asn1/Asn1Test.java|test/hxzon/asn1/TestGooseEncoder.java|org/hxzon/asn1/smv/SmvPdu.java" kind="src" path="hxzon-parser"/>
+	<classpathentry excluding="test/hxzon/asn1/Asn1Test.java|test/hxzon/asn1/TestGooseEncoder.java|org/hxzon/asn1/smv/SmvPdu.java" kind="src" path="java-asn1"/>
+	<classpathentry kind="src" path="java-netprotocol"/>
+	<classpathentry kind="src" path="java-netprotocol-quick"/>
+	<classpathentry kind="src" path="java-netprotocol-ui"/>
 	<classpathentry kind="src" path="org.hxzon"/>
-	<classpathentry kind="src" path="org.hxzon.netprotocol.quick"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/jnetpcap-1.3.b3-1.jar"/>
+	<classpathentry kind="lib" path="lib/jcommon-1.0.16.jar" sourcepath="lib/jcommon-1.0.16-source.zip"/>
+	<classpathentry kind="lib" path="lib/jfreechart-1.0.13.jar" sourcepath="lib/jfreechart-1.0.13-source.zip"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

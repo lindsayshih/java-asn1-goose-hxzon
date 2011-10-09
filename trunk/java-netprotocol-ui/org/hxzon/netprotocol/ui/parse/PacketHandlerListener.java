@@ -33,7 +33,7 @@ public class PacketHandlerListener implements PcapHandlerListener {
     }
 
     public void endAll() {
-        DebugUtil.debug("packet num:"+i);
+        DebugUtil.debug("packet num:" + i);
     }
 
 }
