@@ -10,6 +10,8 @@ import org.hxzon.netprotocol.packet.Packet;
 
 public class PacketTable extends JTable {
 
+    private static final long serialVersionUID = 1L;
+
     public PacketTable() {
         super(new PacketTableModel());
 //		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -33,6 +35,7 @@ public class PacketTable extends JTable {
     }
 
     public static class PacketTableModel extends AbstractTableModel {
+        private static final long serialVersionUID = 1L;
         private final List<Packet> packets = new ArrayList<Packet>();
 
         public PacketTableModel() {

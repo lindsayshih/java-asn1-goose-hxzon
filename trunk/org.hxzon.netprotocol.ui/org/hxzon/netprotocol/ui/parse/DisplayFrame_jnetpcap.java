@@ -28,11 +28,13 @@ import org.hxzon.netprotocol.packet.TcpPacket;
 import org.hxzon.netprotocol.packet.TpktPacket;
 import org.hxzon.netprotocol.packet.UdpPacket;
 import org.hxzon.netprotocol.packet.VlanPacket;
-import org.hxzon.pcap.PcapHandler;
 import org.hxzon.ui.util.ListSelectionAction;
 import org.hxzon.util.BytesUtil;
+import org.hxzon.util.DebugUtil;
+import org.jnetpcap.Pcap;
 
-public class DisplayFrame2 extends JFrame {
+public class DisplayFrame_jnetpcap extends JFrame {
+    private static final long serialVersionUID = 1L;
     static {
         new EthernetPacket();
         new VlanPacket();
@@ -49,35 +51,41 @@ public class DisplayFrame2 extends JFrame {
     private PacketTable packetsTable;
     private PacketDisplay packetDisplay;
 
-    public DisplayFrame2() {
+    public DisplayFrame_jnetpcap() {
         super("java-asn1-goose parser");
         JPanel toolBar = new JPanel();
         Action openFile = new AbstractAction("打开文件") {
+
+            private static final long serialVersionUID = 1L;
 
             @Override
             public void actionPerformed(ActionEvent e) {
                 Preferences prefs = Preferences.userNodeForPackage(this.getClass());
                 String filePath = prefs.get("openFile", "");
                 JFileChooser chooser = new JFileChooser(filePath);
-                int option = chooser.showOpenDialog(DisplayFrame2.this);
+                int option = chooser.showOpenDialog(DisplayFrame_jnetpcap.this);
                 if (option == JFileChooser.APPROVE_OPTION) {
                     filePath = chooser.getSelectedFile().getAbsolutePath();
                     prefs.put("openFile", filePath);
-                    PcapHandler handler = new PcapHandler();
-                    handler.addListener(new PacketHandlerListener(DisplayFrame2.this));
-                    handler.addFile(filePath);
-                    handler.run();
+                    StringBuilder errbuf = new StringBuilder();
+                    Pcap pcap = Pcap.openOffline(filePath, errbuf);
+                    if (pcap != null) {
+                        new PacketHandler_jnetpcap(pcap, DisplayFrame_jnetpcap.this);
+                    } else {
+                        DebugUtil.error(errbuf.toString());
+                    }
                 }
             }
 
         };
         Action prePacket = new AbstractAction("样例") {
 
+            private static final long serialVersionUID = 1L;
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 packetsTable.clearPackets();
-                packetsTable.addPacket(new Packet(BytesUtil.fromHexString(testGoose1)));
-                packetsTable.addPacket(new Packet(BytesUtil.fromHexString(testGoose2)));
+                packetsTable.addPacket(new Packet(BytesUtil.fromHexString(testGoose)));
                 packetsTable.addPacket(new Packet(BytesUtil.fromHexString(testSmv91)));
                 packetsTable.addPacket(new Packet(BytesUtil.fromHexString(testSmv92)));
                 packetsTable.addPacket(new Packet(BytesUtil.fromHexString(testMms1)));
@@ -124,19 +132,15 @@ public class DisplayFrame2 extends JFrame {
                 try {
                     UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
                 } catch (ClassNotFoundException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 } catch (InstantiationException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 } catch (IllegalAccessException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 } catch (UnsupportedLookAndFeelException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
-                JFrame packageDisplay = new DisplayFrame2();
+                JFrame packageDisplay = new DisplayFrame_jnetpcap();
                 packageDisplay.setVisible(true);
             }
         });
@@ -150,18 +154,12 @@ public class DisplayFrame2 extends JFrame {
         return packetDisplay;
     }
 
-    public static String testGoose1 = "01 0c cd 01 00 05 01 0c " + "cd 01 10 10 81 00 80 01 88 b8 00 05 00 e3 00 00 " + "00 00 61 81 d8 80 20 58 37 32 31 32 5f 32 4c 42 "
+    public static String testGoose = "01 0c cd 01 00 05 01 0c " + "cd 01 10 10 81 00 80 01 88 b8 00 05 00 e3 00 00 " + "00 00 61 81 d8 80 20 58 37 32 31 32 5f 32 4c 42 "
             + "31 5f 47 4f 50 52 4f 54 2f 4c 4c 4e 30 24 47 4f " + "24 67 6f 63 62 54 78 81 01 08 82 20 58 37 32 31 " + "32 5f 32 4c 42 31 5f 47 4f 50 52 4f 54 2f 4c 4c "
             + "4e 30 24 64 73 47 6f 6f 73 65 54 78 83 11 58 37 " + "32 31 32 5f 47 4f 4f 53 45 5f 54 58 5f 49 44 84 " + "08 00 00 00 00 00 00 00 00 85 01 04 86 01 00 87 "
             + "01 00 88 01 20 89 01 00 8a 01 20 ab 60 83 01 00 " + "84 01 00 83 01 00 84 01 00 83 01 00 84 01 00 83 " + "01 00 84 01 00 83 01 00 84 01 00 83 01 00 84 01 "
             + "00 83 01 00 84 01 00 83 01 00 84 01 00 83 01 00 " + "84 01 00 83 01 00 84 01 00 83 01 00 84 01 00 83 " + "01 00 84 01 00 83 01 00 84 01 00 83 01 00 84 01 "
-            + "00 83 01 00 84 01 00 83 01 01 84 01 05 ";
-    public static String testGoose2 = "01 0c cd 01 00 12 00 00 23 06 04 38 88 b8 00 12 " + "01 01 00 00 00 00 61 81 f6 80 22 52 45 43 36 37 " + "30 5f 42 5a 54 31 4c 44 30 2f 4c 4c 4e 30 24 47 "
-            + "4f 24 47 53 45 43 6f 6e 74 72 6f 6c 31 81 02 15 " + "7c 82 1a 52 45 43 36 37 30 5f 42 5a 54 31 4c 44 " + "30 2f 4c 4c 4e 30 24 47 4f 4f 53 45 31 83 0f 52 "
-            + "45 43 36 37 30 5f 42 5a 54 31 5f 54 58 31 84 08 " + "47 9f 84 40 56 c8 b5 0a 85 01 11 86 03 06 fe 6a " + "87 01 00 88 01 01 89 01 00 8a 01 20 ab 81 80 83 "
-            + "01 00 84 03 03 00 00 83 01 00 84 03 03 00 00 83 " + "01 00 84 03 03 00 00 83 01 00 84 03 03 00 00 83 " + "01 00 84 03 03 00 00 83 01 00 84 03 03 00 00 83 "
-            + "01 00 84 03 03 00 00 83 01 00 84 03 03 00 00 83 " + "01 00 84 03 03 00 00 83 01 00 84 03 03 00 00 83 " + "01 00 84 03 03 00 00 83 01 00 84 03 03 00 00 83 "
-            + "01 00 84 03 03 00 00 83 01 00 84 03 03 00 00 83 " + "01 00 84 03 03 00 00 83 01 00 84 03 03 00 00 ";
+            + "00 83 01 00 84 01 00 83 01 01 84 01 00 ";
     public static String testMms1 = "00 50 04 07 76 d6 00 0c 02 b0 89 3a 08 00 45 00"
             + "00 9a 3d 63 90 21 40 06 db 58 ac 1e 04 02 ac 1e"//test fragment offset(13bits)//51 10=4368//2030=8240//9021=4129
             + "05 64 00 66 05 6b 9c 41 29 05 dc 4f 5c b0 50 18" + "39 08 6d 60 00 00 03 00 00 72 02 f0 80 01 00 01"

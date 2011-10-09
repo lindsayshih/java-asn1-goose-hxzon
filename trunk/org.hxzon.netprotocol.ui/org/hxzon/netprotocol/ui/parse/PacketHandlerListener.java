@@ -4,12 +4,13 @@ import org.hxzon.netprotocol.packet.Packet;
 import org.hxzon.pcap.PcapFile;
 import org.hxzon.pcap.PcapHandlerListener;
 import org.hxzon.pcap.PcapPacket;
+import org.hxzon.util.DebugUtil;
 
 public class PacketHandlerListener implements PcapHandlerListener {
-    private DisplayFrame2 display;
+    private DisplayFrame display;
     private int i = 0;
 
-    public PacketHandlerListener(DisplayFrame2 display_) {
+    public PacketHandlerListener(DisplayFrame display_) {
         this.display = display_;
 //		System.out.println(JRegistry.toDebugString());
         display.getPacketsTable().clearPackets();
@@ -32,7 +33,7 @@ public class PacketHandlerListener implements PcapHandlerListener {
     }
 
     public void endAll() {
-
+        DebugUtil.debug("packet num:"+i);
     }
 
 }

@@ -7,12 +7,12 @@ import org.jnetpcap.Pcap;
 import org.jnetpcap.packet.PcapPacket;
 import org.jnetpcap.packet.PcapPacketHandler;
 
-public class PacketHandler implements PcapPacketHandler {
-    private DisplayFrame display;
+public class PacketHandler_jnetpcap implements PcapPacketHandler<Object> {
+    private DisplayFrame_jnetpcap display;
     private Pcap pcap;
     private int i = 0;
 
-    public PacketHandler(Pcap pcap_, DisplayFrame display_) {
+    public PacketHandler_jnetpcap(Pcap pcap_, DisplayFrame_jnetpcap display_) {
         this.display = display_;
         this.pcap = pcap_;
 //		System.out.println(JRegistry.toDebugString());
@@ -21,6 +21,7 @@ public class PacketHandler implements PcapPacketHandler {
         pcap.loop(-1, this, null);
         long endTime = System.currentTimeMillis();
         long spanTime = endTime - startTime;
+        DebugUtil.debug("packet num:"+i);
         DebugUtil.debug("packet handler-span time:" + spanTime);
     }
 
