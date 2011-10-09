@@ -8,6 +8,8 @@ import org.hxzon.ui.util.JTreeUtil;
 
 public class PacketTree extends JTree {
 
+    private static final long serialVersionUID = 1L;
+
     public PacketTree() {
         super.setRootVisible(false);
         super.setModel(null);

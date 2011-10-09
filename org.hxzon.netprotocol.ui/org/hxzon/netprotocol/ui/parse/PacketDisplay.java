@@ -21,6 +21,7 @@ import org.hxzon.netprotocol.packet.Packet;
 import org.hxzon.util.BytesUtil;
 
 public class PacketDisplay extends JPanel {
+    private static final long serialVersionUID = 1L;
     private PacketTree messageTree;
     private JTextPane hexPane;
     private JTextPane indexPane;
