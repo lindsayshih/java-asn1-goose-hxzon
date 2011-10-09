@@ -5,7 +5,7 @@ import org.hxzon.netprotocol.packet.TcpPacket;
 import org.hxzon.netprotocol.packet.TpktPacket;
 import org.hxzon.netprotocol.packet.UdpPacket;
 import org.hxzon.netprotocol.packet.VlanPacket;
-import org.hxzon.netprotocol.ui.DisplayFrame2;
+import org.hxzon.netprotocol.ui.parse.DisplayFrame2;
 import org.hxzon.util.BytesUtil;
 
 public class PacketUtils {
