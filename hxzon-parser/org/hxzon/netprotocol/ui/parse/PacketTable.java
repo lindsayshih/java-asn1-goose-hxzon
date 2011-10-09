@@ -1,4 +1,4 @@
-package org.hxzon.netprotocol.ui;
+package org.hxzon.netprotocol.ui.parse;
 
 import java.util.ArrayList;
 import java.util.List;

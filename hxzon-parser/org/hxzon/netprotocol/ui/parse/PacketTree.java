@@ -1,4 +1,4 @@
-package org.hxzon.netprotocol.ui;
+package org.hxzon.netprotocol.ui.parse;
 
 import javax.swing.JTree;
 import javax.swing.tree.DefaultTreeModel;
