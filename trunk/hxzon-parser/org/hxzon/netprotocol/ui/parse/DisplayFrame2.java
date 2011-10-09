@@ -1,4 +1,4 @@
-package org.hxzon.netprotocol.ui;
+package org.hxzon.netprotocol.ui.parse;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;

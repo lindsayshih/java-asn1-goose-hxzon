@@ -1,4 +1,4 @@
-package org.hxzon.netprotocol.ui;
+package org.hxzon.netprotocol.ui.parse;
 
 import org.hxzon.jnetpcap.JPcapPacket;
 import org.hxzon.netprotocol.packet.Packet;
