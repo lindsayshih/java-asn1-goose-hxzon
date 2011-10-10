@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry kind="src" path="java-asn1-core"/>
 	<classpathentry excluding="test/hxzon/asn1/Asn1Test.java|test/hxzon/asn1/TestGooseEncoder.java|org/hxzon/asn1/smv/SmvPdu.java" kind="src" path="java-asn1"/>
 	<classpathentry kind="src" path="java-netprotocol"/>
 	<classpathentry kind="src" path="java-netprotocol-quick"/>
