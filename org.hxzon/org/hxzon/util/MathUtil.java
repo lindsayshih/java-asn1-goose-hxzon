@@ -12,7 +12,7 @@ public class MathUtil {
         return result;
     }
 
-    public static int[] mul(int array[], int mul) {
+    public static int[] multiply(int array[], int mul) {
         int len = array.length;
         int[] result = new int[len];
         for (int i = 0; i < len; i++) {

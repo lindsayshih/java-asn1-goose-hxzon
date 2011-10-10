@@ -23,7 +23,6 @@ import org.hxzon.util.TimespendDebug;
 
 public class StatisticsControlPanel extends JPanel {
     private static final long serialVersionUID = 1L;
-    private final StatisticsPaintPanel paintPanel;
     private final PacketCheckBox goose;
     private final PacketCheckBox mms;
     private final PacketCheckBox smv;
@@ -32,12 +31,7 @@ public class StatisticsControlPanel extends JPanel {
     private final IsPer100ComboBox isPer100;
     private final IsPacketNumComboBox isPacketNum;
 
-    public StatisticsPaintPanel getPaintPanel() {
-        return paintPanel;
-    }
-
     public StatisticsControlPanel(final StatisticsPaintPanel paintPanel) {
-        this.paintPanel = paintPanel;
 //		this.setBackground(backgroundColor);
         final JPanel packetPanel = new JPanel();
         packetPanel.setLayout(new SimpleLayout());
@@ -101,7 +95,7 @@ public class StatisticsControlPanel extends JPanel {
     class PacketCheckBox extends JCheckBox {
         private static final long serialVersionUID = 1L;
 
-        public PacketCheckBox(final StatisticsPaintPanel flowPanel, final String name, String desc) {
+        public PacketCheckBox(final StatisticsPaintPanel paintPanel, final String name, String desc) {
             super(desc);
             super.setSelected(true);
             this.addItemListener(new ItemListener() {
@@ -109,8 +103,8 @@ public class StatisticsControlPanel extends JPanel {
                 @Override
                 public void itemStateChanged(ItemEvent e) {
                     boolean selected = e.getStateChange() == ItemEvent.SELECTED;
-                    flowPanel.getModel().showData(name, selected);
-                    flowPanel.showData(name, selected);
+                    paintPanel.getModel().showData(name, selected);
+                    paintPanel.showData(name, selected);
                 }
             });
         }
@@ -119,15 +113,15 @@ public class StatisticsControlPanel extends JPanel {
     class IsPer100ComboBox extends JComboBox {
         private static final long serialVersionUID = 1L;
 
-        public IsPer100ComboBox(final StatisticsPaintPanel flowPanel) {
+        public IsPer100ComboBox(final StatisticsPaintPanel paintPanel) {
             this.addItem(new MyBooleanComboBoxItem("0.1s", true));
             this.addItem(new MyBooleanComboBoxItem("1s", false));
             this.addItemListener(new ItemListener() {
                 public void itemStateChanged(ItemEvent e) {
                     if (e.getStateChange() == ItemEvent.SELECTED) {
                         MyBooleanComboBoxItem item = (MyBooleanComboBoxItem) e.getItem();
-                        flowPanel.getModel().setPer100(item.b);
-                        flowPanel.showDataPer100(item.b);
+                        paintPanel.getModel().setPer100(item.b);
+                        paintPanel.showDataPer100(item.b);
                     }
                 }
             });
@@ -137,16 +131,15 @@ public class StatisticsControlPanel extends JPanel {
     class IsPacketNumComboBox extends JComboBox {
         private static final long serialVersionUID = 1L;
 
-        public IsPacketNumComboBox(final StatisticsPaintPanel flowPanel) {
+        public IsPacketNumComboBox(final StatisticsPaintPanel paintPanel) {
             this.addItem(new MyBooleanComboBoxItem("比特数", false));
             this.addItem(new MyBooleanComboBoxItem("报文数", true));
             this.addItemListener(new ItemListener() {
                 public void itemStateChanged(ItemEvent e) {
                     if (e.getStateChange() == ItemEvent.SELECTED) {
                         MyBooleanComboBoxItem item = (MyBooleanComboBoxItem) e.getItem();
-                        flowPanel.getModel().setPacketNum(item.b);
-                        flowPanel.updateForPacketNumOrBitNum();
-                        flowPanel.showDataPer100(flowPanel.getModel().isPer100());
+                        paintPanel.getModel().setPacketNum(item.b);
+                        paintPanel.updateForPacketNumOrBitNum();
                     }
                 }
             });
@@ -173,11 +166,11 @@ public class StatisticsControlPanel extends JPanel {
         smv.setEnabled(true);
         other.setEnabled(true);
         all.setEnabled(true);
+        isPer100.setEnabled(true);
+        isPacketNum.setEnabled(true);
         //
         isPacketNum.setSelectedIndex(0);
         //
-        isPer100.setEnabled(true);
-        isPacketNum.setEnabled(true);
         goose.setSelected(true);
         mms.setSelected(true);
         smv.setSelected(true);
@@ -185,6 +178,5 @@ public class StatisticsControlPanel extends JPanel {
         all.setSelected(false);
         //
         isPer100.setSelectedIndex(0);
-
     }
 }

@@ -26,13 +26,13 @@ public class StatisticsPaintPanel extends JPanel {
     private Rectangle viewRect;
     private StatisticsPaintModel model;
 
-    private ValueAxis timeAxis;
-    private NumberAxis valueAxis;
-    private XYLineAndShapeRenderer rendererPer100;
-    private XYLineAndShapeRenderer rendererPer1000;
-    private XYPlot plot;
-    private JFreeChart chart;
-    private ChartPanel chartPanel;
+    private final ValueAxis timeAxis;
+    private final NumberAxis valueAxis;
+    private final XYLineAndShapeRenderer rendererPer100;
+    private final XYLineAndShapeRenderer rendererPer1000;
+    private final XYPlot plot;
+    private final JFreeChart chart;
+    private final ChartPanel chartPanel;
 
     public StatisticsPaintPanel() {
         super(new BorderLayout());
@@ -73,30 +73,26 @@ public class StatisticsPaintPanel extends JPanel {
     }
 
     public void showData(String name, boolean show) {
-        if (rendererPer100 != null) {
-            for (int i = 0; i < model.getDatasetPer100().getSeriesCount(); i++) {
-                String series = (String) model.getDatasetPer100().getSeriesKey(i);
-                if (series.equals(name)) {
-                    rendererPer100.setSeriesLinesVisible(i, show);
-                    break;
-                }
+        for (int i = 0; i < model.getDatasetPer100().getSeriesCount(); i++) {
+            String series = (String) model.getDatasetPer100().getSeriesKey(i);
+            if (series.equals(name)) {
+                rendererPer100.setSeriesLinesVisible(i, show);
+                break;
             }
-            for (int i = 0; i < model.getDatasetPer1000().getSeriesCount(); i++) {
-                String series = (String) model.getDatasetPer1000().getSeriesKey(i);
-                if (series.equals(name)) {
-                    rendererPer1000.setSeriesLinesVisible(i, show);
-                    break;
-                }
+        }
+        for (int i = 0; i < model.getDatasetPer1000().getSeriesCount(); i++) {
+            String series = (String) model.getDatasetPer1000().getSeriesKey(i);
+            if (series.equals(name)) {
+                rendererPer1000.setSeriesLinesVisible(i, show);
+                break;
             }
         }
     }
 
     public void showDataPer100(boolean b) {
-        if (rendererPer100 != null) {
-            for (int i = 0; i < 5; i++) {
-                rendererPer100.setSeriesVisible(i, b);
-                rendererPer1000.setSeriesVisible(i, !b);
-            }
+        for (int i = 0; i < 5; i++) {
+            rendererPer100.setSeriesVisible(i, b);
+            rendererPer1000.setSeriesVisible(i, !b);
         }
     }
 
