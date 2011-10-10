@@ -61,10 +61,12 @@ public class StatisticsPaintPanel extends JPanel {
         rendererPer1000.setDrawSeriesLineAsPath(true);
         rendererPer1000.setDataBoundsIncludesVisibleSeriesOnly(false);
 
-        plot = new XYPlot(new TimeSeriesCollection(), timeAxis, valueAxis, null);
+        EmptyDatasetPlaceholder dataset = new EmptyDatasetPlaceholder();
+        plot = new XYPlot(dataset, timeAxis, valueAxis, null);
         plot.setRenderer(rendererPer100);
         plot.setRenderer(1, rendererPer1000);
         plot.setAxisOffset(new RectangleInsets(5.0, 5.0, 5.0, 5.0));
+        dataset.setupPlot(plot);
         chart = new JFreeChart("", JFreeChart.DEFAULT_TITLE_FONT, plot, true);
         chartPanel = new ChartPanel(chart);
         chartPanel.setFillZoomRectangle(true);
