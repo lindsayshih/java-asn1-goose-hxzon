@@ -5,18 +5,18 @@ import java.awt.Color;
 public class StatisticsData {
     private Color color;
     private String name;
+    private boolean show = true;
     private int[] packetNumOrig;
     private int[] bitNumOrig;
     private int[] packetNumPer100;
     private int[] packetNumPer1000;
     private int[] bitNumPer100;
     private int[] bitNumPer1000;
-    private boolean show = true;
     //dataset
-    private TimeSeriesEx<StatisticsData> packetNumPer100Dataset;
-    private TimeSeriesEx<StatisticsData> packetNumPer1000Dataset;
-    private TimeSeriesEx<StatisticsData> bitNumPer100Dataset;
-    private TimeSeriesEx<StatisticsData> bitNumPer1000Dataset;
+    private final TimeSeriesEx<StatisticsData> packetNumPer100Dataset;
+    private final TimeSeriesEx<StatisticsData> packetNumPer1000Dataset;
+    private final TimeSeriesEx<StatisticsData> bitNumPer100Dataset;
+    private final TimeSeriesEx<StatisticsData> bitNumPer1000Dataset;
 
     public StatisticsData(String name, Color color) {
         this.name = name;

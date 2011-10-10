@@ -11,13 +11,12 @@ import org.hxzon.swing.layout.simple.SimpleLayoutData;
 
 public class StatisticsPanel extends JPanel {
     private static final long serialVersionUID = 1L;
-    private StatisticsPaintPanel paintPanel;
-    private StatisticsControlPanel controlPanel;
+    private final StatisticsPaintPanel paintPanel;
+    private final StatisticsControlPanel controlPanel;
 
     public StatisticsPanel() {
         paintPanel = new StatisticsPaintPanel();
         //
-//		paintPanel.updateData();
         final JScrollPane jsp = new JScrollPane(paintPanel);
         jsp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         jsp.getHorizontalScrollBar().addAdjustmentListener(new AdjustmentListener() {
@@ -42,10 +41,6 @@ public class StatisticsPanel extends JPanel {
         add(jsp, SimpleLayoutData.fillPercent(100));
         controlPanel = new StatisticsControlPanel(paintPanel);
         add(controlPanel, SimpleLayoutData.fixedSize(110));
-    }
-
-    public StatisticsPaintPanel getPaintPanel() {
-        return paintPanel;
     }
 
 }

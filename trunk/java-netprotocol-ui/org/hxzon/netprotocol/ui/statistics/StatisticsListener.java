@@ -88,10 +88,10 @@ public class StatisticsListener implements PcapHandlerListener {
         if (index == -1) {
             return;
         }
-//      DebugTimespendUtil.start("detect type " + num);
+//      TimespendDebug.start("detect type " + num);
         int type = detectType(pcapPacket);
-//      DebugTimespendUtil.end("detect type " + num);
-//      DebugTimespendUtil.start("add num");
+//      TimespendDebug.end("detect type " + num);
+//      TimespendDebug.start("add num");
         if (type == Type_Goose) {
             goosePacketNum.increaseSafe(index);
             gooseBitNum.addSafe(index, (int) pcapPacket.getPacketLen() * 8);
@@ -105,12 +105,12 @@ public class StatisticsListener implements PcapHandlerListener {
             otherPacketNum.increaseSafe(index);
             otherBitNum.addSafe(index, (int) pcapPacket.getPacketLen() * 8);
         }
-//      DebugTimespendUtil.end("add num");
+//      TimespendDebug.end("add num");
         allPacketNum.increaseSafe(index);
         allBitNum.addSafe(index, (int) pcapPacket.getPacketLen() * 8);
     }
 
-    public int computeTimespan(long sec, long usec) {
+    private int computeTimespan(long sec, long usec) {
         if (endTime != null) {
             if (sec > endTime.origsec || (sec == endTime.origsec && usec > endTime.usec)) {
                 return -1;
@@ -183,10 +183,10 @@ public class StatisticsListener implements PcapHandlerListener {
         this.endTime = endTime;
     }
 
-    public static int Type_Goose = 1;
-    public static int Type_Mms = 2;
-    public static int Type_Smv = 3;
-    public static int Type_Other = 4;
+    private static int Type_Goose = 1;
+    private static int Type_Mms = 2;
+    private static int Type_Smv = 3;
+    private static int Type_Other = 4;
 
     private static int detectType(PcapPacket pcapPacket) {
         byte[] data = pcapPacket.getPacketData();

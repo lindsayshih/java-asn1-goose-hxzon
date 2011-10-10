@@ -2,7 +2,6 @@ package org.hxzon.netprotocol.ui.statistics;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -41,18 +40,6 @@ public class StatisticsPaintModel {
         datas.add(otherData);
     }
 
-    private static final int mockMinute = 60;
-
-    public void randomMockData() {
-        startTime = new Daytime(new Date());
-        endTime = startTime.addMinute(mockMinute);
-    }
-
-    public void mockData() {
-        startTime = new Daytime(new Date());
-        endTime = startTime.addMinute(mockMinute);
-    }
-
     public void prepareData() {
         TimespendDebug.start("prepare data");
         FutureTask<StatisticsData> gooseCall = new FutureTask<StatisticsData>(new NumTask(gooseData));
@@ -88,8 +75,8 @@ public class StatisticsPaintModel {
         }
 
         public StatisticsData call() {
-            pointData.setPacketNumPer100(MathUtil.mul(pointData.getPacketNumOrig(), 10));
-            pointData.setBitNumPer100(MathUtil.mul(pointData.getBitNumOrig(), 10));
+            pointData.setPacketNumPer100(MathUtil.multiply(pointData.getPacketNumOrig(), 10));
+            pointData.setBitNumPer100(MathUtil.multiply(pointData.getBitNumOrig(), 10));
             //
             pointData.setPacketNumPer1000(MathUtil.scala(pointData.getPacketNumOrig(), 10));
             pointData.setBitNumPer1000(MathUtil.scala(pointData.getBitNumOrig(), 10));
@@ -97,26 +84,26 @@ public class StatisticsPaintModel {
             TimespendDebug.start("prepare dataset for" + pointData.getName());
             TimeSeries dataset = pointData.getPacketNumPer100Dataset();
             int[] values = pointData.getPacketNumPer100();
-            FutureTask<StatisticsData> d1Call = new FutureTask<StatisticsData>(new DatasetTask(pointData, dataset, values, 100, startTime));
+            FutureTask<StatisticsData> packetNumPer100Call = new FutureTask<StatisticsData>(new DatasetTask(pointData, dataset, values, 100, startTime));
             dataset = pointData.getPacketNumPer1000Dataset();
             values = pointData.getPacketNumPer1000();
-            FutureTask<StatisticsData> d2Call = new FutureTask<StatisticsData>(new DatasetTask(pointData, dataset, values, 1000, startTime));
+            FutureTask<StatisticsData> packetNumPer1000Call = new FutureTask<StatisticsData>(new DatasetTask(pointData, dataset, values, 1000, startTime));
             dataset = pointData.getBitNumPer100Dataset();
             values = pointData.getBitNumPer100();
-            FutureTask<StatisticsData> d3Call = new FutureTask<StatisticsData>(new DatasetTask(pointData, dataset, values, 100, startTime));
+            FutureTask<StatisticsData> bitNumPer100Call = new FutureTask<StatisticsData>(new DatasetTask(pointData, dataset, values, 100, startTime));
             dataset = pointData.getBitNumPer1000Dataset();
             values = pointData.getBitNumPer1000();
-            FutureTask<StatisticsData> d4Call = new FutureTask<StatisticsData>(new DatasetTask(pointData, dataset, values, 1000, startTime));
-            executorService.execute(d1Call);
-            executorService.execute(d2Call);
-            executorService.execute(d3Call);
-            executorService.execute(d4Call);
+            FutureTask<StatisticsData> bitNumPer1000Call = new FutureTask<StatisticsData>(new DatasetTask(pointData, dataset, values, 1000, startTime));
+            executorService.execute(packetNumPer100Call);
+            executorService.execute(packetNumPer1000Call);
+            executorService.execute(bitNumPer100Call);
+            executorService.execute(bitNumPer1000Call);
 
             try {
-                d1Call.get();
-                d2Call.get();
-                d3Call.get();
-                d4Call.get();
+                packetNumPer100Call.get();
+                packetNumPer1000Call.get();
+                bitNumPer100Call.get();
+                bitNumPer1000Call.get();
                 TimespendDebug.end("prepare dataset for" + pointData.getName());
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -145,10 +132,10 @@ public class StatisticsPaintModel {
         public StatisticsData call() {
             int i = 0;
             TimespendDebug.start("prepare dataset for" + pointData.getName() + " " + timespan + this.hashCode());
-            for (int v : values) {
+            for (int value : values) {
                 Daytime tmpTime = startTime.addMillisec(i * timespan);
                 Millisecond millis = new Millisecond(tmpTime.usec / 1000, tmpTime.second, tmpTime.minute, tmpTime.hour, tmpTime.date, tmpTime.month, tmpTime.year);
-                timeSeries.add(millis, v, false);
+                timeSeries.add(millis, value, false);
                 i++;
             }
             TimespendDebug.end("prepare dataset for" + pointData.getName() + " " + timespan + this.hashCode());
