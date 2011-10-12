@@ -16,11 +16,24 @@ public class IntList {
         this.increaseSize = increaseSize;
     }
 
-//	private int[] index(int index) {
-//		return new int[] { index / increaseSize, index % increaseSize };
-//	}
+    private void ensureArraysSize(int index) {
+        if (index < currentSize) {
+            return;
+        }
+        try {
+            synchronized (arrays) {
+                int add = arraysSize(index) - arrays.size();
+                for (int i = 0; i < add; i++) {
+                    arrays.add(new int[increaseSize]);
+                }
+            }
+        } catch (Throwable e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
 
-    private int arraySize(int index) {
+    private int arraysSize(int index) {
         return (index / increaseSize) + 1;
     }
 
@@ -41,11 +54,7 @@ public class IntList {
         if (limitSize != -1 && index > limitSize - 1) {
             return;
         }
-        synchronized (arrays) {
-            for (int i = 0; i <= arraySize(index) - arrays.size(); i++) {
-                arrays.add(new int[increaseSize]);
-            }
-        }
+        ensureArraysSize(index);
         set(index, value);
     }
 
@@ -57,11 +66,7 @@ public class IntList {
         if (limitSize != -1 && index > limitSize - 1) {
             return 0;
         }
-        synchronized (arrays) {
-            for (int i = 0; i <= arraySize(index) - arrays.size(); i++) {
-                arrays.add(new int[increaseSize]);
-            }
-        }
+        ensureArraysSize(index);
         try {
             return get(index);
         } catch (Exception e) {
