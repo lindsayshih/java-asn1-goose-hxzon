@@ -52,6 +52,7 @@ public class DisplayFrame extends JFrame {
 
     public DisplayFrame() {
         super("java-asn1-goose parser");
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel toolBar = new JPanel();
         Action openFile = new AbstractAction("打开文件") {
 
@@ -94,7 +95,6 @@ public class DisplayFrame extends JFrame {
         };
         toolBar.add(new JButton(openFile));
         toolBar.add(new JButton(prePacket));
-        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.add(toolBar, BorderLayout.NORTH);
         JSplitPane contentPane = new JSplitPane();
         contentPane.setOrientation(JSplitPane.VERTICAL_SPLIT);

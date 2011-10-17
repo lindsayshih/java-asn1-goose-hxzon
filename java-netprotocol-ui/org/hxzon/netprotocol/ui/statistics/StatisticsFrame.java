@@ -26,6 +26,7 @@ public class StatisticsFrame extends JFrame {
 
     public StatisticsFrame() {
         super("java-asn1-goose statistics");
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         StatisticsPanel contentPane = new StatisticsPanel();
         this.add(contentPane, BorderLayout.CENTER);
         this.pack();

@@ -3,6 +3,8 @@ package org.hxzon.netprotocol.ui.statistics;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Rectangle;
+import java.awt.Shape;
+import java.awt.geom.Ellipse2D;
 import java.util.List;
 
 import javax.swing.JPanel;
@@ -33,6 +35,7 @@ public class StatisticsPaintPanel extends JPanel {
     private final XYPlot plot;
     private final JFreeChart chart;
     private final ChartPanel chartPanel;
+    private static final Shape shape = new Ellipse2D.Float(-3, -3, 6, 6);
 
     public StatisticsPaintPanel() {
         super(new BorderLayout());
@@ -50,16 +53,21 @@ public class StatisticsPaintPanel extends JPanel {
         XYToolTipGenerator toolTipGenerator = null;
         toolTipGenerator = StandardXYToolTipGenerator.getTimeSeriesInstance();
 
-        rendererPer100 = new XYLineAndShapeRenderer(true, false);
-        rendererPer100.setBaseToolTipGenerator(toolTipGenerator);
-        rendererPer100.setURLGenerator(null);
+        rendererPer100 = new XYLineAndShapeRenderer(true, true);
+        rendererPer100.setAutoPopulateSeriesShape(false);
+        rendererPer100.setBaseShape(shape);
         rendererPer100.setDrawSeriesLineAsPath(true);
         rendererPer100.setDataBoundsIncludesVisibleSeriesOnly(false);
-        rendererPer1000 = new XYLineAndShapeRenderer(true, false);
-        rendererPer1000.setBaseToolTipGenerator(toolTipGenerator);
-        rendererPer1000.setURLGenerator(null);
+        rendererPer100.setBaseToolTipGenerator(toolTipGenerator);
+        rendererPer100.setURLGenerator(null);
+
+        rendererPer1000 = new XYLineAndShapeRenderer(true, true);
+        rendererPer1000.setAutoPopulateSeriesShape(false);
+        rendererPer1000.setBaseShape(shape);
         rendererPer1000.setDrawSeriesLineAsPath(true);
         rendererPer1000.setDataBoundsIncludesVisibleSeriesOnly(false);
+        rendererPer1000.setBaseToolTipGenerator(toolTipGenerator);
+        rendererPer1000.setURLGenerator(null);
 
         EmptyDatasetPlaceholder dataset = new EmptyDatasetPlaceholder();
         plot = new XYPlot(dataset, timeAxis, valueAxis, null);
@@ -75,19 +83,19 @@ public class StatisticsPaintPanel extends JPanel {
     }
 
     public void showData(String name, boolean show) {
-        for (int i = 0; i < model.getDatasetPer100().getSeriesCount(); i++) {
-            String series = (String) model.getDatasetPer100().getSeriesKey(i);
-            if (series.equals(name)) {
-                rendererPer100.setSeriesLinesVisible(i, show);
-                break;
-            }
+        TimeSeriesCollection dataset = model.getDatasetPer100();
+        for (TimeSeriesEx<StatisticsData> timeSeriesEx : (List<TimeSeriesEx<StatisticsData>>) dataset.getSeries()) {
+            StatisticsData data = timeSeriesEx.getUserObject();
+            int seriesIndex = dataset.indexOf(timeSeriesEx);
+            rendererPer100.setSeriesLinesVisible(seriesIndex, data.isShow());
+            rendererPer100.setSeriesShapesVisible(seriesIndex, data.isShow() && timeSeriesEx.getItemCount() == 1);
         }
-        for (int i = 0; i < model.getDatasetPer1000().getSeriesCount(); i++) {
-            String series = (String) model.getDatasetPer1000().getSeriesKey(i);
-            if (series.equals(name)) {
-                rendererPer1000.setSeriesLinesVisible(i, show);
-                break;
-            }
+        dataset = model.getDatasetPer1000();
+        for (TimeSeriesEx<StatisticsData> timeSeriesEx : (List<TimeSeriesEx<StatisticsData>>) dataset.getSeries()) {
+            StatisticsData data = timeSeriesEx.getUserObject();
+            int seriesIndex = dataset.indexOf(timeSeriesEx);
+            rendererPer1000.setSeriesLinesVisible(seriesIndex, data.isShow());
+            rendererPer1000.setSeriesShapesVisible(seriesIndex, data.isShow() && timeSeriesEx.getItemCount() == 1);
         }
     }
 
@@ -109,6 +117,7 @@ public class StatisticsPaintPanel extends JPanel {
             rendererPer100.setSeriesPaint(seriesIndex, data.getColor());
             rendererPer100.setSeriesVisible(seriesIndex, model.isPer100());
             rendererPer100.setSeriesLinesVisible(seriesIndex, data.isShow());
+            rendererPer100.setSeriesShapesVisible(seriesIndex, data.isShow() && timeSeriesEx.getItemCount() == 1);
         }
         dataset = model.getDatasetPer1000();
         for (TimeSeriesEx<StatisticsData> timeSeriesEx : (List<TimeSeriesEx<StatisticsData>>) dataset.getSeries()) {
@@ -117,6 +126,7 @@ public class StatisticsPaintPanel extends JPanel {
             rendererPer1000.setSeriesPaint(seriesIndex, data.getColor());
             rendererPer1000.setSeriesVisible(seriesIndex, !model.isPer100());
             rendererPer1000.setSeriesLinesVisible(seriesIndex, data.isShow());
+            rendererPer1000.setSeriesShapesVisible(seriesIndex, data.isShow() && timeSeriesEx.getItemCount() == 1);
         }
 
     }
