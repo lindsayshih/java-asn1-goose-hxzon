@@ -92,8 +92,11 @@ public class IntList {
     }
 
     public int[] getArray() {
-        TimespendDebug.start("get array");
         int[] result = new int[currentSize];
+        if (currentSize == 0) {
+            return result;
+        }
+        TimespendDebug.start("get array");
         int i = 0;
         for (int[] array : arrays) {
             for (int v : array) {

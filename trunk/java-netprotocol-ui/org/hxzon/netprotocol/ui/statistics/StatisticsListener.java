@@ -31,16 +31,6 @@ public class StatisticsListener implements PcapHandlerListener {
     public StatisticsListener(StatisticsPaintPanel paintPanel, StatisticsControlPanel controlPanel) {
         this.paintPanel = paintPanel;
         this.controlPanel = controlPanel;
-        goosePacketNum.setSafe(0, 0);
-        mmsPacketNum.setSafe(0, 0);
-        smvPacketNum.setSafe(0, 0);
-        otherPacketNum.setSafe(0, 0);
-        allPacketNum.setSafe(0, 0);
-        gooseBitNum.setSafe(0, 0);
-        mmsBitNum.setSafe(0, 0);
-        smvBitNum.setSafe(0, 0);
-        otherBitNum.setSafe(0, 0);
-        allBitNum.setSafe(0, 0);
     }
 
     public void startPcapFile(PcapFile pcapFile) {
