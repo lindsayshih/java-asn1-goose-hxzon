@@ -34,7 +34,7 @@ public class OsiPresentationPacket extends Packet {
         if (pres instanceof OsiPresentation) {
             return ((OsiPresentation) pres).getUserData();
         }
-        return null;
+        return new BerNode[0];
     }
 
     public BerNode fetchOsiPresentation() {

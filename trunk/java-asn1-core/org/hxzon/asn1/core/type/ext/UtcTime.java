@@ -9,7 +9,7 @@ import org.hxzon.asn1.core.type.BerOctetString;
 import org.hxzon.util.BytesUtil;
 
 public class UtcTime extends BerOctetString {
-    private static final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd,hh:mm:ss");
+    private static final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd,HH:mm:ss");
     private static final DecimalFormat decimalFormat = new DecimalFormat();
     private static final String numberPattern = "0.000000";
     static {
