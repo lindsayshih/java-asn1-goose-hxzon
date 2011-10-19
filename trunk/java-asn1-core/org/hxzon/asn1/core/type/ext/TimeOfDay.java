@@ -1,4 +1,7 @@
 package org.hxzon.asn1.core.type.ext;
 
-public class TimeOfDay extends UtcTime {
+import org.hxzon.asn1.core.type.BerOctetString;
+
+public class TimeOfDay extends BerOctetString {
+    //TimeOfDay ::= OCTET STRING -- (SIZE (4 | 6))
 }
