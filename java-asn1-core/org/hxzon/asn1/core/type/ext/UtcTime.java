@@ -24,12 +24,16 @@ public class UtcTime extends BerOctetString {
     //84 08 49 56 dc 03 6d 0e 56 50
     //参见：61850-7-2：5.5.3.7.2，61850-7-2：5.5.3.7.3，61850-8-1：8.1.3.6。
     public String getValueAsString() {
-        String str = BytesUtil.toHexString(getValue());
-        long seconds = Long.parseLong(str.substring(0, 8), 16);
-        long millis = Long.parseLong(str.substring(8, 14), 16);
-        double millisD = millis / Math.pow(2, 24);
+        try {
+            String str = BytesUtil.toHexString(getValue());
+            long seconds = Long.parseLong(str.substring(0, 8), 16);
+            long millis = Long.parseLong(str.substring(8, 14), 16);
+            double millisD = millis / Math.pow(2, 24);
 //		Date date = new Date(seconds * 1000 + millisD * 1000);
-        Date date = new Date(seconds * 1000);
-        return format.format(date) + decimalFormat.format(millisD).substring(1) + "," + str.substring(14);
+            Date date = new Date(seconds * 1000);
+            return format.format(date) + decimalFormat.format(millisD).substring(1) + "," + str.substring(14);
+        } catch (Exception e) {
+            return super.getValueAsString();
+        }
     }
 }

@@ -88,6 +88,7 @@ public class DisplayFrame extends JFrame {
                 packetsTable.addPacket(new Packet(BytesUtil.fromHexString(testSmv92)));
                 packetsTable.addPacket(new Packet(BytesUtil.fromHexString(testMms1)));
                 packetsTable.addPacket(new Packet(BytesUtil.fromHexString(testMms2)));
+                packetsTable.addPacket(new Packet(BytesUtil.fromHexString(testMms3)));
                 packetsTable.addPacket(new Packet(BytesUtil.fromHexString(testError)));
                 packetsTable.addPacket(new Packet(BytesUtil.fromHexString(testError2)));
             }
@@ -172,6 +173,12 @@ public class DisplayFrame extends JFrame {
     public static String testMms2 = "00 50 04 07 76 d6 00 0c 02 b0 89 3a 08 00 45 00" + "00 9a 3d 63 90 21 40 06 db 58 ac 1e 04 02 ac 1e"//test fragment offset(13bits)//51 10=4368//2030=8240//9021=4129
             + "05 64 00 66 05 6b 9c 41 29 05 dc 4f 5c b0 50 18" + "39 08 6d 60 00 00 03 00 00 72 02 f0 80 01 00 01" + "00 " + "61 18 30 16 02 01 03 a0 11 a0 0f 02 02 01 5d"//mms begin a0 0f
             + "a1 09 a0 03 80 01 09 a1 02 80 00               ";
+    public static String testMms3 = "00 01 7a 88 ff 0b 08 01 c6 78 00 2f 81 00 00 66" + "08 00 45 00 00 e9 c7 68 40 00 40 06 e4 bc c6 78 " + "00 15 c6 78 00 c8 00 66 08 08 92 4a ee 6a 7d ad "
+            + "a8 56 80 18 20 00 2d 0b 00 00 01 01 08 0a 00 7e " + "44 80 00 02 3d bb 03 00 00 b5 02 f0 80 01 00 01 " + "00 61 81 a7 30 81 a4 02 01 03 a0 81 9e a3 81 9b "
+            + "a0 81 98 a1 05 80 03 52 50 54 a0 81 8e 8a 0c 45 " + "31 51 31 52 65 6c 61 79 41 69 6e 84 03 06 3c 00 " + "8c 06 00 dc b6 94 26 1b 8a 1d 50 4c 31 30 30 37 "
+            + "50 43 53 39 36 31 31 2f 4c 4c 4e 30 24 64 73 52 " + "65 6c 61 79 41 69 6e 84 03 02 80 00 8a 24 50 4c " + "31 30 30 37 50 43 53 39 36 31 31 2f 52 65 6c 79 "
+            + "4d 4d 58 55 32 24 4d 58 24 50 50 56 24 70 68 73 " + "41 42 a2 23 a2 12 a2 07 87 05 08 42 cb 4f c8 a2 " + "07 87 05 08 00 00 00 00 84 03 03 00 00 91 08 4c "
+            + "91 96 80 99 99 90 0a 84 02 02 40 ";
     public static String testSmv91 = "01 0c cd 04 01 03 08 ac 7d 01 26 64 81 00 80 00 " + "88 ba 40 00 00 c5 00 00 00 00 80 81 ba 00 04 00 " + "2c 02 01 00 03 01 f4 01 f4 16 8e 0f a0 00 00 00 "
             + "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 " + "00 00 00 00 00 0f f0 40 1f 0e bf 64 00 00 2c 02 " + "01 00 03 01 f4 01 f4 16 8e 0f a0 00 00 00 00 00 "
             + "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 " + "00 00 00 0f f0 40 1f 0e c0 64 00 00 2c 02 01 00 " + "03 01 f4 01 f4 16 8e 0f a0 00 00 00 00 00 00 00 "

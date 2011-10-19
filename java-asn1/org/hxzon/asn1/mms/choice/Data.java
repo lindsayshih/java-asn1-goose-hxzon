@@ -5,14 +5,14 @@ import org.hxzon.asn1.core.parse.Tag;
 import org.hxzon.asn1.core.parse.ext.Asn1Utils;
 import org.hxzon.asn1.core.type.base.BerNode;
 import org.hxzon.asn1.core.type.ext.BerChoice;
-import org.hxzon.asn1.core.type.ext.UtcTime;
 import org.hxzon.asn1.mms.common.FloatingPoint;
 import org.hxzon.asn1.mms.common.MMSString;
 
 public class Data extends BerChoice {
 
     public Data() {
-        setName("Data");
+        setName("data");
+        setDisplayString("data");
     }
 
 //	Data ::= CHOICE
@@ -70,7 +70,7 @@ public class Data extends BerChoice {
         case Tag.CONTEXT | 16:
             return new MMSString().init("mmsString", "mmsString", tag, stream);
         case Tag.CONTEXT | 17:
-            return new UtcTime().init("utc-time", "utc-time", tag, stream);
+            return Asn1Utils.createBerIecUtcTime("utc-time", "utc-time", tag, stream);
         case Tag.UNIVERSAL | Tag.SEQUENCE:
             //FIXME why is ObjectName
             return Asn1Utils.createBerSequenceOf("", "", tag, stream, ObjectName.class, true);
