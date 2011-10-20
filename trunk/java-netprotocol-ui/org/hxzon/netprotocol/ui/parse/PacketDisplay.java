@@ -2,6 +2,7 @@ package org.hxzon.netprotocol.ui.parse;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Font;
 
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
@@ -27,6 +28,7 @@ public class PacketDisplay extends JPanel {
     private JTextPane indexPane;
     private SimpleAttributeSet notSelected;
     private SimpleAttributeSet selected;
+    private static final Font font = Font.decode("Courier New PLAIN 12");
 
     public PacketDisplay() {
         super(new BorderLayout());
@@ -42,6 +44,13 @@ public class PacketDisplay extends JPanel {
         hexPane = new JTextPane();
         hexPane.setMinimumSize(new Dimension(350, 300));
         hexPane.setEditable(false);
+//        for(Font font:GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts()){
+//            System.out.println(font);
+//        }
+//        System.out.println(hexPane.getFont());
+        indexPane.setFont(font);
+        hexPane.setFont(font);
+//        System.out.println(hexPane.getFont());
         messagePane.setLayout(new BoxLayout(messagePane, BoxLayout.X_AXIS));
         messagePane.add(indexPane);
         messagePane.add(hexPane);
