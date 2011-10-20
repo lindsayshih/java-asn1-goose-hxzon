@@ -4,8 +4,8 @@ import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
+
+import org.hxzon.ui.util.UIUtil;
 
 public class StatisticsFrame extends JFrame {
     private static final long serialVersionUID = 1L;
@@ -35,17 +35,7 @@ public class StatisticsFrame extends JFrame {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                try {
-                    UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                } catch (InstantiationException e) {
-                    e.printStackTrace();
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                } catch (UnsupportedLookAndFeelException e) {
-                    e.printStackTrace();
-                }
+                UIUtil.setupUILookAndFeel();
                 JFrame packetStatistics = new StatisticsFrame();
                 packetStatistics.setVisible(true);
             }
