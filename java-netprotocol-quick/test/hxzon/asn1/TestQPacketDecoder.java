@@ -9,13 +9,13 @@ import org.hxzon.netprotocol.quick.packet.QEthernetPacket;
 import org.hxzon.netprotocol.quick.packet.QGoosePacket;
 import org.hxzon.netprotocol.quick.packet.QSmvPacket;
 import org.hxzon.netprotocol.quick.packet.QVlanPacket;
-import org.hxzon.netprotocol.ui.parse.DisplayFrame;
+import org.hxzon.ui.util.UIUtil;
 import org.hxzon.util.BytesUtil;
 
 public class TestQPacketDecoder {
 
     public static void main(String[] args) {
-        byte[] data = BytesUtil.fromHexString(DisplayFrame.testSmv91);
+        byte[] data = BytesUtil.fromHexString(UIUtil.testSmv91);
         QEthernetPacket ethernetPacket = new QEthernetPacket();
         String ethernetType = PacketUtils.ethernetType(data);
         int ethernetHeaderLen = PacketUtils.ethernetHeaderLen(data);
@@ -51,5 +51,13 @@ public class TestQPacketDecoder {
                 System.out.println(field.getDesc() + ":" + field.getValueAsString());
             }
         }
+    }
+
+    public static void test() {
+        byte[] data = BytesUtil.fromHexString(UIUtil.testMms1);
+        System.out.println("ethernet type:" + PacketUtils.ethernetType(data));
+        System.out.println("ip header len:" + PacketUtils.ipHeaderLen(data));
+        System.out.println("tcp header len:" + PacketUtils.tcpHeaderLen(data));
+        System.out.println("is tpkt packet:" + PacketUtils.isTpktPacket(data));
     }
 }
