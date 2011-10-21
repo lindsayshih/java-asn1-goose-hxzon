@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TimespendDebug {
+public class DebugTimespend {
     public static boolean open = false;
     public static int timeout = 5;
     private static final List<String> classNames = new ArrayList<String>();

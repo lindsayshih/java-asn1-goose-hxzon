@@ -10,8 +10,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
 
 import org.hxzon.util.Daytime;
+import org.hxzon.util.DebugTimespend;
 import org.hxzon.util.MathUtil;
-import org.hxzon.util.TimespendDebug;
 import org.jfree.data.time.Millisecond;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
@@ -41,7 +41,7 @@ public class StatisticsPaintModel {
     }
 
     public void prepareData() {
-        TimespendDebug.start("prepare data");
+        DebugTimespend.start("prepare data");
         FutureTask<StatisticsData> gooseCall = new FutureTask<StatisticsData>(new NumTask(gooseData));
         FutureTask<StatisticsData> mmsCall = new FutureTask<StatisticsData>(new NumTask(mmsData));
         FutureTask<StatisticsData> smvCall = new FutureTask<StatisticsData>(new NumTask(smvData));
@@ -59,7 +59,7 @@ public class StatisticsPaintModel {
             smvCall.get();
             otherCall.get();
             allCall.get();
-            TimespendDebug.end("prepare data");
+            DebugTimespend.end("prepare data");
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -81,7 +81,7 @@ public class StatisticsPaintModel {
             pointData.setPacketNumPer1000(MathUtil.scala(pointData.getPacketNumOrig(), 10));
             pointData.setBitNumPer1000(MathUtil.scala(pointData.getBitNumOrig(), 10));
             //dataset
-            TimespendDebug.start("prepare dataset for" + pointData.getName());
+            DebugTimespend.start("prepare dataset for" + pointData.getName());
             TimeSeries dataset = pointData.getPacketNumPer100Dataset();
             int[] values = pointData.getPacketNumPer100();
             FutureTask<StatisticsData> packetNumPer100Call = new FutureTask<StatisticsData>(new DatasetTask(pointData, dataset, values, 100, startTime));
@@ -104,7 +104,7 @@ public class StatisticsPaintModel {
                 packetNumPer1000Call.get();
                 bitNumPer100Call.get();
                 bitNumPer1000Call.get();
-                TimespendDebug.end("prepare dataset for" + pointData.getName());
+                DebugTimespend.end("prepare dataset for" + pointData.getName());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } catch (ExecutionException e) {
@@ -131,14 +131,14 @@ public class StatisticsPaintModel {
 
         public StatisticsData call() {
             int i = 0;
-            TimespendDebug.start("prepare dataset for" + pointData.getName() + " " + timespan + this.hashCode());
+            DebugTimespend.start("prepare dataset for" + pointData.getName() + " " + timespan + this.hashCode());
             for (int value : values) {
                 Daytime tmpTime = startTime.addMillisec(i * timespan);
                 Millisecond millis = new Millisecond(tmpTime.usec / 1000, tmpTime.second, tmpTime.minute, tmpTime.hour, tmpTime.date, tmpTime.month, tmpTime.year);
                 timeSeries.add(millis, value, false);
                 i++;
             }
-            TimespendDebug.end("prepare dataset for" + pointData.getName() + " " + timespan + this.hashCode());
+            DebugTimespend.end("prepare dataset for" + pointData.getName() + " " + timespan + this.hashCode());
             return pointData;
         }
     }

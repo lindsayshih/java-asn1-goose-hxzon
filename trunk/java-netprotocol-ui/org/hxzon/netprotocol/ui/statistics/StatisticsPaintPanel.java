@@ -77,6 +77,10 @@ public class StatisticsPaintPanel extends JPanel {
         this.add(chartPanel);
     }
 
+    public void useAntiAlias(boolean use) {
+        chart.setAntiAlias(use);
+    }
+
     public void showData(String name, boolean show) {
         TimeSeriesCollection dataset = model.getDatasetPer100();
         boolean shapeVisible = false;

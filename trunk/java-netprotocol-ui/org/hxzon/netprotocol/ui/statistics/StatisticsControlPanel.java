@@ -19,7 +19,7 @@ import javax.swing.SwingUtilities;
 import org.hxzon.pcap.PcapHandler;
 import org.hxzon.swing.layout.simple.SimpleLayout;
 import org.hxzon.swing.layout.simple.SimpleLayoutData;
-import org.hxzon.util.TimespendDebug;
+import org.hxzon.util.DebugTimespend;
 
 public class StatisticsControlPanel extends JPanel {
     private static final long serialVersionUID = 1L;
@@ -30,6 +30,7 @@ public class StatisticsControlPanel extends JPanel {
     private final PacketCheckBox all;
     private final IsPer100ComboBox isPer100;
     private final IsPacketNumComboBox isPacketNum;
+    private final AntiAliasCheckBox antiAlias;
 
     public StatisticsControlPanel(final StatisticsPaintPanel paintPanel) {
 //		this.setBackground(backgroundColor);
@@ -58,27 +59,29 @@ public class StatisticsControlPanel extends JPanel {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                TimespendDebug.start("open file");
+                DebugTimespend.start("open file");
                 Preferences prefs = Preferences.userNodeForPackage(this.getClass());
                 String filePath = prefs.get("openFile", "");
                 JFileChooser chooser = new JFileChooser(filePath);
                 chooser.setMultiSelectionEnabled(true);
                 int option = chooser.showOpenDialog(SwingUtilities.windowForComponent(packetPanel));
-                TimespendDebug.end("open file");
+                DebugTimespend.end("open file");
                 if (option == JFileChooser.APPROVE_OPTION) {
                     File[] files = chooser.getSelectedFiles();
                     prefs.put("openFile", files[0].getAbsolutePath());
-                    TimespendDebug.start("open file:run");
+                    DebugTimespend.start("open file:run");
                     PcapHandler handler = new PcapHandler();
                     handler.addListener(new StatisticsListener(paintPanel, StatisticsControlPanel.this));
                     handler.addFiles(files);
                     handler.run();
-                    TimespendDebug.end("open file:run");
+                    DebugTimespend.end("open file:run");
                     initButton();
                 }
             }
 
         };
+        antiAlias = new AntiAliasCheckBox(paintPanel);
+        packetPanel.add(antiAlias);
         packetPanel.add(new JLabel("打开文件："), SimpleLayoutData.fixedSize(25));
         packetPanel.add(new JButton(openFile));
         //
@@ -89,6 +92,7 @@ public class StatisticsControlPanel extends JPanel {
         all.setEnabled(false);
         isPer100.setEnabled(false);
         isPacketNum.setEnabled(false);
+        antiAlias.setEnabled(false);
         this.add(packetPanel);
     }
 
@@ -105,6 +109,23 @@ public class StatisticsControlPanel extends JPanel {
                     boolean selected = e.getStateChange() == ItemEvent.SELECTED;
                     paintPanel.getModel().showData(name, selected);
                     paintPanel.showData(name, selected);
+                }
+            });
+        }
+    }
+
+    class AntiAliasCheckBox extends JCheckBox {
+        private static final long serialVersionUID = 1L;
+
+        public AntiAliasCheckBox(final StatisticsPaintPanel paintPanel) {
+            super("AntiAlias");//抗锯齿,平滑
+            super.setSelected(true);
+            this.addItemListener(new ItemListener() {
+
+                @Override
+                public void itemStateChanged(ItemEvent e) {
+                    boolean selected = e.getStateChange() == ItemEvent.SELECTED;
+                    paintPanel.useAntiAlias(selected);
                 }
             });
         }
@@ -168,6 +189,7 @@ public class StatisticsControlPanel extends JPanel {
         all.setEnabled(true);
         isPer100.setEnabled(true);
         isPacketNum.setEnabled(true);
+        antiAlias.setEnabled(true);
         //
         isPacketNum.setSelectedIndex(0);
         //
@@ -178,5 +200,7 @@ public class StatisticsControlPanel extends JPanel {
         all.setSelected(false);
         //
         isPer100.setSelectedIndex(0);
+        //
+        antiAlias.setSelected(true);
     }
 }

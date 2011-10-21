@@ -3,6 +3,12 @@ package org.hxzon.util;
 import java.io.UnsupportedEncodingException;
 
 public class BytesUtil {
+    public static final int LineLen = 16;
+    public static final String WordSplit = " ";
+    public static final String HtmlWordSplit = "&nbsp;";
+    public static final String LineSplit = "\n";
+    public static final String HtmlLineSplit = "<br />";
+
     //2<<0=1;2<<1=2;2<<2=4;2<<3=8;2<<4=16;2<<5=32;
     //2<<6=64;2<<7=128;2<<8=256;2<<9=512
 //	public static final int[] bitMasks = { 1, 3, 7, 15, 31, 63, 127, 255 };
@@ -163,49 +169,69 @@ public class BytesUtil {
 
 //--------------------------------------------------------------------------
     public static String toDisplayHexString(byte[] orig) {
-        return toDisplayHexString(orig, 0, orig.length);
+        return toDisplayHexString(orig, false);
     }
 
-    public static String toDisplayHexString(byte[] orig, int offset, int len) {
-        return implToDisplayHexString(orig, offset, len, 16, " ");
+    public static String toDisplayHexString(byte[] orig, boolean html) {
+        return toDisplayHexString(orig, 0, orig.length, html);
     }
 
-    private static String implToDisplayHexString(byte[] orig, int offset, int len, int lineLen, String split) {
+    public static String toDisplayHexString(byte[] orig, int lineLen, boolean html) {
+        if (html) {
+            return implToDisplayHexString(orig, 0, orig.length, lineLen, HtmlWordSplit, HtmlLineSplit);
+        } else {
+            return implToDisplayHexString(orig, 0, orig.length, lineLen, WordSplit, LineSplit);
+        }
+    }
+
+    public static String toDisplayHexString(byte[] orig, int offset, int len, boolean html) {
+        if (html) {
+            return implToDisplayHexString(orig, offset, len, LineLen, HtmlWordSplit, HtmlLineSplit);
+        } else {
+            return implToDisplayHexString(orig, offset, len, LineLen, WordSplit, LineSplit);
+        }
+    }
+
+    public static String toDisplayHexString(byte[] orig, int offset, int len, int lineLen, String split, String lineSplit) {
+        return implToDisplayHexString(orig, offset, len, lineLen, split, lineSplit);
+    }
+
+    private static String implToDisplayHexString(byte[] orig, int offset, int len, int lineLen, String split, String lineSplit) {
 
         StringBuffer buffer = new StringBuffer();
-
+        int lastIndex = lineLen - 1;
         for (int i = 0; i < len; i++) {
             buffer.append(toHexCharArray(orig[offset + i]));
             buffer.append(split);
-            if (i % lineLen == lineLen - 1) {
-                buffer.append("\n");
+            if (i % lineLen == lastIndex) {
+                buffer.append(lineSplit);
             }
         }
         return buffer.toString();
     }
 
-    public static String toDisplayHexString(byte[]... orig) {
-        return toDisplayHexString(orig, 0, -1);
-    }
-
-    public static String toDisplayHexString(byte[][] orig, int offset, int len) {
-        return implToDisplayHexString(orig, offset, len);
-    }
-
-    public static String implToDisplayHexString(byte[][] orig, int offset, int len) {
-        StringBuilder sb = new StringBuilder();
-        int j = 0;
-        for (byte[] bytes : orig) {
-            for (int i = 0; i < bytes.length; i++, j++) {
-                sb.append(toHexCharArray(bytes[i]));
-                sb.append(" ");
-                if (j % 16 == 15) {
-                    sb.append("\n");
-                }
-            }
-        }
-        return sb.toString();
-    }
+//    public static String toDisplayHexString(byte[]... orig) {
+//        return toDisplayHexString(orig, 0, -1);
+//    }
+//
+//    public static String toDisplayHexString(byte[][] orig, int offset, int len) {
+//        return implToDisplayHexString(orig, offset, len);
+//    }
+//
+//    public static String implToDisplayHexString(byte[][] orig, int offset, int len) {
+//        StringBuilder sb = new StringBuilder();
+//        int j = 0;
+//        for (byte[] bytes : orig) {
+//            for (int i = 0; i < bytes.length; i++, j++) {
+//                sb.append(toHexCharArray(bytes[i]));
+//                sb.append(" ");
+//                if (j % 16 == 15) {
+//                    sb.append("\n");
+//                }
+//            }
+//        }
+//        return sb.toString();
+//    }
 
     //--------------------------------------------------------------------------
     public static String toHexString(byte[] orig) {
@@ -221,49 +247,65 @@ public class BytesUtil {
     }
 
     public static String toIndex(byte[] orig) {
+        return toIndex(orig, false);
+    }
+
+    public static String toIndex(byte[] orig, boolean html) {
+        if (html) {
+            return implToIndex(orig, 0, orig.length, LineLen, HtmlLineSplit);
+        } else {
+            return implToIndex(orig, 0, orig.length, LineLen, LineSplit);
+        }
+    }
+
+    public static String toIndex(byte[] orig, int lineLen, boolean html) {
+        if (html) {
+            return implToIndex(orig, 0, orig.length, lineLen, HtmlLineSplit);
+        } else {
+            return implToIndex(orig, 0, orig.length, lineLen, LineSplit);
+        }
+    }
+
+    private static String implToIndex(byte[] orig, int offset, int len, int lineLen, String lineSplit) {
         StringBuffer buffer = new StringBuffer();
-        for (int i = 0; i < orig.length; i++) {
-            if (i != 0 && i % 16 == 0) {
-                buffer.append("\n");
+        for (int i = 0; i < orig.length; i += lineLen) {
+            String row = String.valueOf(i);
+            if (row.length() == 1) {
+                row = "000" + row;
+            } else if (row.length() == 2) {
+                row = "00" + row;
+            } else if (row.length() == 3) {
+                row = "0" + row;
             }
-            if (i % 16 == 0) {
-                String row = Integer.toHexString(i);
-                if (row.length() == 1) {
-                    row = "0x000" + row;
-                } else if (row.length() == 2) {
-                    row = "0x00" + row;
-                } else if (row.length() == 3) {
-                    row = "0x0" + row;
-                }
-                buffer.append(row);
-            }
+            buffer.append(row);
+            buffer.append(lineSplit);
         }
         return buffer.toString();
     }
 
-    public static String toIndex(byte[]... orig) {
-        StringBuffer buffer = new StringBuffer();
-        int j = 0;
-        for (byte[] bytes : orig) {
-            for (int i = 0; i < bytes.length; i++, j++) {
-                if (j % 16 == 0) {
-                    String row = Integer.toHexString(j);
-                    if (row.length() == 1) {
-                        row = "0x000" + row;
-                    } else if (row.length() == 2) {
-                        row = "0x00" + row;
-                    } else if (row.length() == 3) {
-                        row = "0x0" + row;
-                    }
-                    buffer.append(row);
-                }
-                if (j % 16 == 15) {
-                    buffer.append("\n");
-                }
-            }
-        }
-        return buffer.toString();
-    }
+//    public static String toIndex(byte[]... orig) {
+//        StringBuffer buffer = new StringBuffer();
+//        int j = 0;
+//        for (byte[] bytes : orig) {
+//            for (int i = 0; i < bytes.length; i++, j++) {
+//                if (j % 16 == 0) {
+//                    String row = Integer.toHexString(j);
+//                    if (row.length() == 1) {
+//                        row = "0x000" + row;
+//                    } else if (row.length() == 2) {
+//                        row = "0x00" + row;
+//                    } else if (row.length() == 3) {
+//                        row = "0x0" + row;
+//                    }
+//                    buffer.append(row);
+//                }
+//                if (j % 16 == 15) {
+//                    buffer.append("\n");
+//                }
+//            }
+//        }
+//        return buffer.toString();
+//    }
 
     //--------------------------------------------------------------------------
     public static char toHexChar(int orig) {
