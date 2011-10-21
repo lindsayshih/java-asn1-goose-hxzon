@@ -45,7 +45,7 @@ public class TcpPacket extends Packet {
 
     public ProtocolInt31Field fetchSourcePort() {
         if (sourcePort == null) {
-            sourcePort = new ProtocolInt31Field("sourcePort", "源端口", 0, 2, this);
+            sourcePort = new ProtocolInt31Field("sourcePort", "源端口", 0, 2, true, this);
         }
         return sourcePort;
     }
@@ -56,7 +56,7 @@ public class TcpPacket extends Packet {
 
     public ProtocolInt31Field fetchDestPort() {
         if (destPort == null) {
-            destPort = new ProtocolInt31Field("destPort", "目的端口", 2, 2, this);
+            destPort = new ProtocolInt31Field("destPort", "目的端口", 2, 2, true, this);
         }
         return destPort;
     }
@@ -67,7 +67,7 @@ public class TcpPacket extends Packet {
 
     public ProtocolInt63Field fetchSequenceNumber() {
         if (sequenceNumber == null) {
-            sequenceNumber = new ProtocolInt63Field("sequenceNumber", "序列号", 4, 4, this);
+            sequenceNumber = new ProtocolInt63Field("sequenceNumber", "序列号", 4, 4, true, this);
         }
         return sequenceNumber;
     }
@@ -77,7 +77,7 @@ public class TcpPacket extends Packet {
 
     public ProtocolInt63Field fetchAcknowledgementNumber() {
         if (acknowledgementNumber == null) {
-            acknowledgementNumber = new ProtocolInt63Field("acknowledgementNumber", "确认序列号", 8, 4, this);
+            acknowledgementNumber = new ProtocolInt63Field("acknowledgementNumber", "确认序列号", 8, 4, true, this);
         }
         return acknowledgementNumber;
     }
@@ -147,7 +147,7 @@ public class TcpPacket extends Packet {
 
     public ProtocolInt31Field fetchWindowSize() {
         if (windowSize == null) {
-            windowSize = new ProtocolInt31Field("window size", "窗口大小", 14, 2, this);
+            windowSize = new ProtocolInt31Field("window size", "窗口大小", 14, 2, true, this);
         }
         return windowSize;
     }
@@ -169,7 +169,7 @@ public class TcpPacket extends Packet {
 
     public ProtocolInt31Field fetchUrgentPointer() {
         if (urgentPointer == null) {
-            urgentPointer = new ProtocolInt31Field("urgent pointer", "紧急指针", 18, 2, this);
+            urgentPointer = new ProtocolInt31Field("urgent pointer", "紧急指针", 18, 2, true, this);
         }
         return urgentPointer;
     }

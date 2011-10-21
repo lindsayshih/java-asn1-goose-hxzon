@@ -76,7 +76,7 @@ public class Ip4Packet extends Packet {
 //	}
     public ProtocolInt31Field fetchTotalLen() {
         if (totalLen == null) {
-            totalLen = new ProtocolInt31Field("total len", "总长度", 2, 2, this);
+            totalLen = new ProtocolInt31Field("total len", "总长度", 2, 2, true, this);
         }
         return totalLen;
     }
@@ -165,7 +165,7 @@ public class Ip4Packet extends Packet {
 
     public ProtocolInt31Field fetchTtl() {
         if (ttl == null) {
-            ttl = new ProtocolInt31Field("ttl", "生存时间", 8, 1, this);
+            ttl = new ProtocolInt31Field("ttl", "生存时间", 8, 1, true, this);
         }
         return ttl;
     }
