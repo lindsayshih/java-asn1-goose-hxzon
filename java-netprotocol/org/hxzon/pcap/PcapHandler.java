@@ -11,11 +11,11 @@ import org.hxzon.util.DebugUtil;
 
 public class PcapHandler implements Runnable {
     private List<PcapHandlerListener> listeners = new ArrayList<PcapHandlerListener>();
-    private final List<File> files = new ArrayList<File>();
+    private final List<File> _files = new ArrayList<File>();
     private boolean stop;
 
     public void addFile(File file) {
-        files.add(file);
+        _files.add(file);
     }
 
     public void addFile(String filepath) {
@@ -23,7 +23,7 @@ public class PcapHandler implements Runnable {
     }
 
     public void addFiles(Collection<File> files) {
-        files.addAll(files);
+        _files.addAll(files);
     }
 
     public void addFiles(File[] files) {
@@ -61,7 +61,7 @@ public class PcapHandler implements Runnable {
     }
 
     public void run() {
-        for (File file : files) {
+        for (File file : _files) {
             if (stop) {
                 break;
             }
