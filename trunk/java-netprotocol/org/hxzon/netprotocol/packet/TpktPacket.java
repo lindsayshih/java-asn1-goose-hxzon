@@ -36,7 +36,7 @@ public class TpktPacket extends Packet {
 
     public ProtocolInt31Field fetchVersion() {
         if (version == null) {
-            version = new ProtocolInt31Field("version", "版本", 0, 1, this);
+            version = new ProtocolInt31Field("version", "版本", 0, 1, true, this);
         }
         return version;
     }
@@ -58,7 +58,7 @@ public class TpktPacket extends Packet {
 
     public ProtocolInt31Field fetchTotalLen() {
         if (totalLen == null) {
-            totalLen = new ProtocolInt31Field("total length", "总长度", 2, 2, this);
+            totalLen = new ProtocolInt31Field("total length", "总长度", 2, 2, true, this);
         }
         return totalLen;
     }

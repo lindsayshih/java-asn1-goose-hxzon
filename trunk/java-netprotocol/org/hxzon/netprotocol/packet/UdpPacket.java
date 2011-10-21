@@ -38,7 +38,7 @@ public class UdpPacket extends Packet {
 
     public ProtocolInt31Field fetchSourcePort() {
         if (sourcePort == null) {
-            sourcePort = new ProtocolInt31Field("sourcePort", "源端口", 0, 2, this);
+            sourcePort = new ProtocolInt31Field("sourcePort", "源端口", 0, 2, true, this);
         }
         return sourcePort;
     }
@@ -49,7 +49,7 @@ public class UdpPacket extends Packet {
 
     public ProtocolInt31Field fetchDestPort() {
         if (destPort == null) {
-            destPort = new ProtocolInt31Field("destPort", "目的端口", 2, 2, this);
+            destPort = new ProtocolInt31Field("destPort", "目的端口", 2, 2, true, this);
         }
         return destPort;
     }
@@ -60,7 +60,7 @@ public class UdpPacket extends Packet {
 
     public ProtocolInt31Field fetchTotalLen() {
         if (totalLen == null) {
-            totalLen = new ProtocolInt31Field("totalLen", "总长度", 4, 2, this);
+            totalLen = new ProtocolInt31Field("totalLen", "总长度", 4, 2, true, this);
         }
         return totalLen;
     }

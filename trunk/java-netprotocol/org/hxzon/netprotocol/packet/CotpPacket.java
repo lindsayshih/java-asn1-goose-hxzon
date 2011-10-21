@@ -35,7 +35,7 @@ public class CotpPacket extends Packet {
 
     public ProtocolInt31Field fetchPduLength() {
         if (length == null) {
-            length = new ProtocolInt31Field("pdu length", "PDU长度", 0, 1, this);
+            length = new ProtocolInt31Field("pdu length", "PDU长度", 0, 1, true, this);
         }
         return length;
     }

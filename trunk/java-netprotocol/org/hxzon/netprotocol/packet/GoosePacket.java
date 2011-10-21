@@ -54,7 +54,7 @@ public class GoosePacket extends Packet {
 
     public ProtocolInt31Field fetchAppId() {
         if (appId == null) {
-            appId = new ProtocolInt31Field("appId", "应用标识", 0, 2, this);
+            appId = new ProtocolInt31Field("appId", "应用标识", 0, 2, true, this);
         }
         return appId;
     }
@@ -65,7 +65,7 @@ public class GoosePacket extends Packet {
 
     public ProtocolInt31Field fetchPduLen() {
         if (pduLen == null) {
-            pduLen = new ProtocolInt31Field("pduLen", "PDU长度", 2, 2, this);
+            pduLen = new ProtocolInt31Field("pduLen", "PDU长度", 2, 2, true, this);
         }
         return pduLen;
     }
