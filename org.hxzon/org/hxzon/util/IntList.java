@@ -96,14 +96,14 @@ public class IntList {
         if (currentSize == 0) {
             return result;
         }
-        TimespendDebug.start("get array");
+        DebugTimespend.start("get array");
         int i = 0;
         for (int[] array : arrays) {
             for (int v : array) {
                 result[i] = v;
                 i++;
                 if (i >= currentSize) {
-                    TimespendDebug.end("get array");
+                    DebugTimespend.end("get array");
                     return result;
                 }
             }
