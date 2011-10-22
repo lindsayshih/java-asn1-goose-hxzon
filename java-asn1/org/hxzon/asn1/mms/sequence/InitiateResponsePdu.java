@@ -7,6 +7,11 @@ import org.hxzon.asn1.core.type.BerSequence;
 import org.hxzon.asn1.core.type.base.BerNode;
 
 public class InitiateResponsePdu extends BerSequence {
+    public InitiateResponsePdu() {
+        setName("initiate-ResponsePDU");
+        setDisplayString("initiate-ResponsePDU");
+    }
+
 //	Initiate-ResponsePDU ::= SEQUENCE
 //	{
 //	localDetailCalled					[0] IMPLICIT Integer32 OPTIONAL,

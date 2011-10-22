@@ -8,6 +8,8 @@ import org.hxzon.asn1.core.type.base.BerNode;
 
 public class ConfirmedErrorPdu extends BerSequence {
     public ConfirmedErrorPdu() {
+        setName("confirmed-ErrorPDU");
+        setDisplayString("confirmed-ErrorPDU");
     }
 
 //	Confirmed-ErrorPDU ::= SEQUENCE 

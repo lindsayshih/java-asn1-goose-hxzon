@@ -11,6 +11,7 @@ public class VariableDescription extends BerSequence {
 
     public VariableDescription() {
         setName("VariableDescription");
+        setDisplayString("VariableDescription");
     }
 
 //	VariableSpecification ::= CHOICE

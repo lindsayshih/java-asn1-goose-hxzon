@@ -12,6 +12,7 @@ public class VariableSpecification extends BerChoice {
 
     public VariableSpecification() {
         setName("variable specification");
+        setDisplayString("variable specification");
     }
 
 //	VariableSpecification ::= CHOICE

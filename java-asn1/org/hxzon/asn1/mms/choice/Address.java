@@ -10,6 +10,7 @@ public class Address extends BerChoice {
 
     public Address() {
         setName("address");
+        setDisplayString("address");
     }
 
 //	Address ::= CHOICE

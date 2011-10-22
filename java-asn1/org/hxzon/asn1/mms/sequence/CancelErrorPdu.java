@@ -7,6 +7,11 @@ import org.hxzon.asn1.core.type.BerSequence;
 import org.hxzon.asn1.core.type.base.BerNode;
 
 public class CancelErrorPdu extends BerSequence {
+    public CancelErrorPdu() {
+        setName("cancel-ErrorPDU");
+        setDisplayString("cancel-ErrorPDU");
+    }
+
 //	Cancel-ErrorPDU ::= SEQUENCE
 //	{
 //	originalInvokeID	[0] IMPLICIT Unsigned32,
