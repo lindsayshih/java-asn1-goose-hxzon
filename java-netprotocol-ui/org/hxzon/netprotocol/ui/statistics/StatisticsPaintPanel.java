@@ -48,21 +48,13 @@ public class StatisticsPaintPanel extends JPanel {
         valueAxis.setNumberFormatOverride(MyNumberFormat.getMyNumberFormat());
         XYToolTipGenerator toolTipGenerator = StandardXYToolTipGenerator.getTimeSeriesInstance();
 
-        rendererPer100 = new XYLineAndShapeRenderer(true, false);
-        rendererPer100.setAutoPopulateSeriesShape(false);
+        rendererPer100 = new XYLineAndShapeRendererCustom();
         rendererPer100.setBaseShape(shape);
-        rendererPer100.setDrawSeriesLineAsPath(true);
-        rendererPer100.setDataBoundsIncludesVisibleSeriesOnly(false);
         rendererPer100.setBaseToolTipGenerator(toolTipGenerator);
-        rendererPer100.setURLGenerator(null);
 
-        rendererPer1000 = new XYLineAndShapeRenderer(true, false);
-        rendererPer1000.setAutoPopulateSeriesShape(false);
+        rendererPer1000 = new XYLineAndShapeRendererCustom();
         rendererPer1000.setBaseShape(shape);
-        rendererPer1000.setDrawSeriesLineAsPath(true);
-        rendererPer1000.setDataBoundsIncludesVisibleSeriesOnly(false);
         rendererPer1000.setBaseToolTipGenerator(toolTipGenerator);
-        rendererPer1000.setURLGenerator(null);
 
         EmptyDatasetPlaceholder dataset = new EmptyDatasetPlaceholder();
         plot = new XYPlot(dataset, timeAxis, valueAxis, null);
