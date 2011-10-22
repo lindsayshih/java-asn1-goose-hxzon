@@ -3,9 +3,9 @@ package org.hxzon.asn1.mms.sequence;
 import org.hxzon.asn1.core.parse.BerInputStream;
 import org.hxzon.asn1.core.parse.Tag;
 import org.hxzon.asn1.core.parse.ext.Asn1Utils;
-import org.hxzon.asn1.core.type.BerInteger;
 import org.hxzon.asn1.core.type.BerSequence;
 import org.hxzon.asn1.core.type.base.BerNode;
+import org.hxzon.asn1.core.type.ext.BerIntegerEx;
 
 public class ReportSemaphoreStatusResponse extends BerSequence {
 //	ReportSemaphoreStatus-Response ::= SEQUENCE
@@ -37,8 +37,16 @@ public class ReportSemaphoreStatusResponse extends BerSequence {
         }
     }
 
-    public static class ReportSemaphoreStatusResponseClazz extends BerInteger {
-
+    public static class ReportSemaphoreStatusResponseClazz extends BerIntegerEx {
+        //  class           [1] IMPLICIT INTEGER
+//      {
+//      token   (0),
+//      pool    (1)
+//      },
+        public ReportSemaphoreStatusResponseClazz() {
+            addValueString(0, "token(0)");
+            addValueString(1, "pool(1)");
+        }
     }
 
 }
