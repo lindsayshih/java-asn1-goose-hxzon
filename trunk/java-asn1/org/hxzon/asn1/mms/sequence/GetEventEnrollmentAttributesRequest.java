@@ -3,9 +3,9 @@ package org.hxzon.asn1.mms.sequence;
 import org.hxzon.asn1.core.parse.BerInputStream;
 import org.hxzon.asn1.core.parse.Tag;
 import org.hxzon.asn1.core.parse.ext.Asn1Utils;
-import org.hxzon.asn1.core.type.BerInteger;
 import org.hxzon.asn1.core.type.BerSequence;
 import org.hxzon.asn1.core.type.base.BerNode;
+import org.hxzon.asn1.core.type.ext.BerIntegerEx;
 import org.hxzon.asn1.mms.choice.ObjectName;
 
 public class GetEventEnrollmentAttributesRequest extends BerSequence {
@@ -43,8 +43,20 @@ public class GetEventEnrollmentAttributesRequest extends BerSequence {
         }
     }
 
-    public static class ScopeOfRequest extends BerInteger {
-
+    public static class ScopeOfRequest extends BerIntegerEx {
+        //  scopeOfRequest      [0] IMPLICIT INTEGER 
+//      {
+//      specific    (0),
+//      client      (1),
+//      ec      (2),
+//      ea      (3)
+//      } DEFAULT client,
+        public ScopeOfRequest() {
+            addValueString(0, "specific(0)");
+            addValueString(1, "client(1)");
+            addValueString(2, "ec(2)");
+            addValueString(3, "ea(3)");
+        }
     }
 
 }

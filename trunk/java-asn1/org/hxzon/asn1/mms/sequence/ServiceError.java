@@ -3,10 +3,10 @@ package org.hxzon.asn1.mms.sequence;
 import org.hxzon.asn1.core.parse.BerInputStream;
 import org.hxzon.asn1.core.parse.Tag;
 import org.hxzon.asn1.core.parse.ext.Asn1Utils;
-import org.hxzon.asn1.core.type.BerInteger;
 import org.hxzon.asn1.core.type.BerSequence;
 import org.hxzon.asn1.core.type.base.BerNode;
 import org.hxzon.asn1.core.type.ext.BerChoice;
+import org.hxzon.asn1.core.type.ext.BerIntegerEx;
 import org.hxzon.asn1.mms.choice.ErrorClass;
 import org.hxzon.asn1.mms.choice.ObjectName;
 import org.hxzon.asn1.mms.common.ProgramInvocationState;
@@ -206,16 +206,10 @@ public class ServiceError extends BerSequence {
 //		source-file	 (0),
 //		destination-file (1)
 //		}
-    public static class ObtainFileError extends BerInteger {
-        public String getValueAsString() {
-            switch ((int) getValue()) {
-            case 0:
-                return "source-file	 (0)";
-            case 1:
-                return "destination-file (1)";
-            default:
-                return "";
-            }
+    public static class ObtainFileError extends BerIntegerEx {
+        public ObtainFileError() {
+            addValueString(0, "source-file(0)");
+            addValueString(1, "destination-file(1)");
         }
     }
 
@@ -223,16 +217,10 @@ public class ServiceError extends BerSequence {
 //		source-file	 (0),
 //		destination-file (1)
 //		}
-    public static class FileRenameError extends BerInteger {
-        public String getValueAsString() {
-            switch ((int) getValue()) {
-            case 0:
-                return "source-file	 (0)";
-            case 1:
-                return "destination-file (1)";
-            default:
-                return "";
-            }
+    public static class FileRenameError extends BerIntegerEx {
+        public FileRenameError() {
+            addValueString(0, "source-file(0)");
+            addValueString(1, "destination-file(1)");
         }
     }
 

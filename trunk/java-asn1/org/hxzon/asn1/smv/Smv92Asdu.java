@@ -5,9 +5,9 @@ import java.util.List;
 import org.hxzon.asn1.core.parse.BerInputStream;
 import org.hxzon.asn1.core.parse.Tag;
 import org.hxzon.asn1.core.parse.ext.Asn1Utils;
-import org.hxzon.asn1.core.type.BerInteger;
 import org.hxzon.asn1.core.type.BerSequence;
 import org.hxzon.asn1.core.type.base.BerNode;
+import org.hxzon.asn1.core.type.ext.BerIntegerEx;
 
 public class Smv92Asdu extends BerSequence {
 //	private static final Logger logger=LoggerFactory.getLogger(Smv92Asdu.class);
@@ -73,18 +73,11 @@ public class Smv92Asdu extends BerSequence {
         }
     }
 
-    public static class SmvSynchInteger extends BerInteger {
-        public String getValueAsString() {
-            switch ((int) getValue()) {
-            case 0:
-                return "none(0)";
-            case 1:
-                return "local(1)";
-            case 2:
-                return "global(2)";
-            default:
-                return "";
-            }
+    public static class SmvSynchInteger extends BerIntegerEx {
+        public SmvSynchInteger() {
+            addValueString(0, "none(0)");
+            addValueString(1, "local(1)");
+            addValueString(2, "global(2)");
         }
     }
 

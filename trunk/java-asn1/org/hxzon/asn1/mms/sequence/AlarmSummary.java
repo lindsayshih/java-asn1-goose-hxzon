@@ -3,9 +3,9 @@ package org.hxzon.asn1.mms.sequence;
 import org.hxzon.asn1.core.parse.BerInputStream;
 import org.hxzon.asn1.core.parse.Tag;
 import org.hxzon.asn1.core.parse.ext.Asn1Utils;
-import org.hxzon.asn1.core.type.BerInteger;
 import org.hxzon.asn1.core.type.BerSequence;
 import org.hxzon.asn1.core.type.base.BerNode;
+import org.hxzon.asn1.core.type.ext.BerIntegerEx;
 import org.hxzon.asn1.mms.choice.EventTime;
 import org.hxzon.asn1.mms.choice.ObjectName;
 import org.hxzon.asn1.mms.common.ECState;
@@ -45,7 +45,7 @@ public class AlarmSummary extends BerSequence {
         }
     }
 
-    public static class UnacknowledgedState extends BerInteger {
+    public static class UnacknowledgedState extends BerIntegerEx {
 //		unacknowledgedState			[3] IMPLICIT INTEGER
 //		{
 //		none		(0),
@@ -53,6 +53,12 @@ public class AlarmSummary extends BerSequence {
 //		idle		(2),
 //		both		(3)
 //		},
+        public UnacknowledgedState() {
+            addValueString(0, "none(0)");
+            addValueString(1, "active(1)");
+            addValueString(2, "idle(2)");
+            addValueString(3, "both(3)");
+        }
     }
 
 }

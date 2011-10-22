@@ -3,9 +3,9 @@ package org.hxzon.asn1.mms.sequence;
 import org.hxzon.asn1.core.parse.BerInputStream;
 import org.hxzon.asn1.core.parse.Tag;
 import org.hxzon.asn1.core.parse.ext.Asn1Utils;
-import org.hxzon.asn1.core.type.BerInteger;
 import org.hxzon.asn1.core.type.BerSequence;
 import org.hxzon.asn1.core.type.base.BerNode;
+import org.hxzon.asn1.core.type.ext.BerIntegerEx;
 import org.hxzon.asn1.mms.common.Identifier;
 import org.hxzon.asn1.mms.common.Priority;
 
@@ -48,8 +48,16 @@ public class SemaphoreEntry extends BerSequence {
         }
     }
 
-    public static class EntryClass extends BerInteger {
-
+    public static class EntryClass extends BerIntegerEx {
+        //  entryClass          [1] IMPLICIT INTEGER
+//      {
+//      simple      (0),
+//      modifier    (1)
+//      },
+        public EntryClass() {
+            addValueString(0, "simple(0)");
+            addValueString(1, "modifier(1)");
+        }
     }
 
 }
