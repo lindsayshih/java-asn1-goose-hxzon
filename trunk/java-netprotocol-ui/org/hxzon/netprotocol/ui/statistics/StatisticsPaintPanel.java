@@ -135,6 +135,7 @@ public class StatisticsPaintPanel extends JPanel {
             shapeVisible = data.isShow() && timeSeriesEx.getItemCount() == 1;
             rendererPer1000.setSeriesShapesVisible(seriesIndex, shapeVisible);
         }
+        chartPanel.restoreAutoBounds();
 
     }
 

@@ -197,6 +197,7 @@ public class StatisticsControlPanel extends JPanel {
         mms.setSelected(true);
         smv.setSelected(true);
         other.setSelected(true);
+        all.setSelected(true);
         all.setSelected(false);
         //
         isPer100.setSelectedIndex(0);
