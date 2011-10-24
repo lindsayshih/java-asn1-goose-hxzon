@@ -69,16 +69,23 @@ public class PacketDisplay extends JPanel {
                 if (!node.isLeaf()) {
                     messageTree.expandPath(treePath);
                 }
-                int offset = node.getOffset();
-                int len = node.getLen();
-                int end = offset + len;
-                offset = offset * 2 + offset;
-                end = end * 2 + end;
-                offset += offset / 48;
-                end += end / 48;
+                //
+                int offset = node.getOffset();//byte offset
+                int len = node.getLen();//byte len
+                int end = offset + len;//byte end
+                //
+                int wordSplitLen = 1;
+                int charLenForByte = 2 + wordSplitLen;
+                int lineSplitLen = 1;
+                int byteNumInOneLine = 16;
+                //
+                offset = offset * charLenForByte;
+                end = end * charLenForByte;
+                offset += offset / (byteNumInOneLine * charLenForByte) * lineSplitLen;
+                end += end / (byteNumInOneLine * charLenForByte) * lineSplitLen;
                 //fix bug when len=0 make end=offset
                 if (end > offset) {
-                    end -= 1;
+                    end -= wordSplitLen;
                 }
                 try {
                     StyledDocument doc = hexPane.getStyledDocument();
