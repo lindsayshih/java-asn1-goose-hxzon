@@ -11,7 +11,7 @@ public class ErrorClass extends BerChoice {
 //	errorClass	[0] CHOICE
 //	{ 
     public static class ErrorClassInteger extends BerIntegerEx2 {
-        public ErrorClassInteger() {
+        static {
             addDisplayString(0, "vmd-state");
             addValueString(0, 0, "other(0)");
             addValueString(0, 1, "vmd-state-conflict(1)");
@@ -189,6 +189,22 @@ public class ErrorClass extends BerChoice {
             addValueString(12, "others");
 //	others	 		        [12] IMPLICIT INTEGER
 //        },
+        }
+
+        public static void addValueString(int tagNumber, int value, String valueString) {
+            addValueString(tagNumber, value, valueString, ErrorClassInteger.class);
+        }
+
+        public static void addValueString(int tagNumber, String valueString) {
+            addValueString(tagNumber, valueString, ErrorClassInteger.class);
+        }
+
+        public static void addDisplayString(int tagNumber, String displayString) {
+            addValueString(tagNumber, displayString, ErrorClassInteger.class);
+        }
+
+        public ErrorClassInteger() {
+
         }
     }
 
