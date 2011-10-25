@@ -23,7 +23,7 @@ public class RejectReason extends BerChoice {
 //		value-out-of-range			(9)
 //		},
     public static class RejectReasonInteger extends BerIntegerEx2 {
-        public RejectReasonInteger() {
+        static {
             addDisplayString(1, "confirmed-requestPDU");
             addValueString(1, 0, "other(0)");
             addValueString(1, 1, "unrecognized-service(1)");
@@ -155,6 +155,22 @@ public class RejectReason extends BerChoice {
             addValueString(11, 1, "invalid-serviceError(1)");
             addValueString(11, 2, "value-out-of-range(2)");
 //	}
+
+        }
+
+        public static void addValueString(int tagNumber, int value, String valueString) {
+            addValueString(tagNumber, value, valueString, RejectReasonInteger.class);
+        }
+
+        public static void addValueString(int tagNumber, String valueString) {
+            addValueString(tagNumber, valueString, RejectReasonInteger.class);
+        }
+
+        public static void addDisplayString(int tagNumber, String displayString) {
+            addValueString(tagNumber, displayString, RejectReasonInteger.class);
+        }
+
+        public RejectReasonInteger() {
 
         }
     }
