@@ -8,9 +8,13 @@ public class ECClass extends BerIntegerEx {
 //	network-triggered	(0),
 //	monitored		(1)
 //	}
+    static {
+        addValueString(0, "network-triggered(0)", ECClass.class);
+        addValueString(1, "monitored(1)", ECClass.class);
+
+    }
+
     public ECClass() {
-        addValueString(0, "network-triggered(0)");
-        addValueString(1, "monitored(1)");
     }
 
 }

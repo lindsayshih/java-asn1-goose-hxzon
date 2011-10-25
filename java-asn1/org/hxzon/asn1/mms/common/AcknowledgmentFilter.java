@@ -9,9 +9,13 @@ public class AcknowledgmentFilter extends BerIntegerEx {
 //	acked				(1),
 //	all				(2) 
 //	} DEFAULT not-acked,
-    public AcknowledgmentFilter() {
-        addValueString(0, "not-acked(0)");
-        addValueString(1, "acked(1)");
-        addValueString(2, "all(2)");
+    static {
+        addValueString(0, "not-acked(0)", AcknowledgmentFilter.class);
+        addValueString(1, "acked(1)", AcknowledgmentFilter.class);
+        addValueString(2, "all(2)", AcknowledgmentFilter.class);
     }
+
+    public AcknowledgmentFilter() {
+    }
+
 }

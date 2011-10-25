@@ -40,20 +40,28 @@ public class StatusResponse extends BerSequence {
     }
 
     public static class VmdLogicalStatus extends BerIntegerEx {
+        static {
+            addValueString(0, "state-changes-allowed(0)", VmdLogicalStatus.class);
+            addValueString(1, "no-state-changes-allowed(1)", VmdLogicalStatus.class);
+            addValueString(2, "limited-services-allowed(2)", VmdLogicalStatus.class);
+            addValueString(3, "support-services-allowed(3)", VmdLogicalStatus.class);
+
+        }
+
         public VmdLogicalStatus() {
-            addValueString(0, "state-changes-allowed(0)");
-            addValueString(1, "no-state-changes-allowed(1)");
-            addValueString(2, "limited-services-allowed(2)");
-            addValueString(3, "support-services-allowed(3)");
         }
     }
 
     public static class VmdPhysicalStatus extends BerIntegerEx {
+        static {
+            addValueString(0, "operational(0)", VmdPhysicalStatus.class);
+            addValueString(1, "partially-operational(1)", VmdPhysicalStatus.class);
+            addValueString(2, "inoperable(2)", VmdPhysicalStatus.class);
+            addValueString(3, "needs-commissioning(3)", VmdPhysicalStatus.class);
+
+        }
+
         public VmdPhysicalStatus() {
-            addValueString(0, "operational(0)");
-            addValueString(1, "partially-operational(1)");
-            addValueString(2, "inoperable(2)");
-            addValueString(3, "needs-commissioning(3)");
         }
     }
 

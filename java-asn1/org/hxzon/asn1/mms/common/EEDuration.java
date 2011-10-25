@@ -8,9 +8,13 @@ public class EEDuration extends BerIntegerEx {
 //	current			(0),
 //	permanent		(1)
 //	}
+    static {
+        addValueString(0, "current(0)", EEDuration.class);
+        addValueString(1, "permanent(1)", EEDuration.class);
+
+    }
+
     public EEDuration() {
-        addValueString(0, "current(0)");
-        addValueString(1, "permanent(1)");
     }
 
 }

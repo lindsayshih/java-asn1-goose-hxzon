@@ -22,7 +22,7 @@ public class ObjectClass extends BerIntegerEx {
 //			programInvocation	(10),
 //			operatorStation		(11)
 //			}
-    public ObjectClass() {
+    static {
         addValueString(0, "nammedVariable(0)");
         addValueString(1, "scatteredAccess(1)");
         addValueString(2, "namedVariableList(2)");
@@ -35,6 +35,14 @@ public class ObjectClass extends BerIntegerEx {
         addValueString(9, "domain(9)");
         addValueString(10, "programInvocation(10)");
         addValueString(11, "operatorStation(11)");
+
+    }
+
+    public static void addValueString(int value, String valueString) {
+        addValueString(value, valueString, ObjectClass.class);
+    }
+
+    public ObjectClass() {
     }
 //		},
 //	objectScope 		[1] CHOICE

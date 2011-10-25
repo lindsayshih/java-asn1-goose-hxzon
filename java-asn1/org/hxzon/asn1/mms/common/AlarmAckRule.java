@@ -10,11 +10,14 @@ public class AlarmAckRule extends BerIntegerEx {
 //	ack-active		(2),
 //	ack-all			(3)
 //	}
-    public AlarmAckRule(){
-        addValueString(0,"none(0)");
-        addValueString(1,"simple(1)");
-        addValueString(2,"ack-active(2)");
-        addValueString(3,"ack-all(3)");
+    static {
+        addValueString(0, "none(0)", AlarmAckRule.class);
+        addValueString(1, "simple(1)", AlarmAckRule.class);
+        addValueString(2, "ack-active(2)", AlarmAckRule.class);
+        addValueString(3, "ack-all(3)", AlarmAckRule.class);
+    }
+
+    public AlarmAckRule() {
     }
 
 }
