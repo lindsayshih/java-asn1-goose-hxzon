@@ -58,6 +58,10 @@ public class UIUtil {
             + "50 43 53 39 36 31 31 2f 4c 4c 4e 30 24 64 73 52 " + "65 6c 61 79 41 69 6e 84 03 02 80 00 8a 24 50 4c " + "31 30 30 37 50 43 53 39 36 31 31 2f 52 65 6c 79 "
             + "4d 4d 58 55 32 24 4d 58 24 50 50 56 24 70 68 73 " + "41 42 a2 23 a2 12 a2 07 87 05 08 42 cb 4f c8 a2 " + "07 87 05 08 00 00 00 00 84 03 03 00 00 91 08 4c "
             + "91 96 80 99 99 90 0a 84 02 02 40 ";
+    public static String testMms4 = "00 10 18 97 87 03 08 01 c6 78 00 29 08 00 45 00 " + "00 48 7d a0 40 00 40 06 2f 41 c6 78 00 29 c6 78 " + "00 b5 00 66 d0 ed cf d3 79 f5 7c 69 32 11 50 18 "
+            + "40 00 05 48 00 00 03 00 00 20 02 f0 80 01 00 01 " + "00 61 13 30 11 02 01 03 a0 0c a1 0a 02 03 66 0b " + "b9 a5 03 80 01 0a ";
+    public static String testMms5 = "00 10 18 97 87 03 08 01 c6 78 01 39 08 00 45 00 " + "00 4a 42 9e 40 00 40 06 69 31 c6 78 01 39 c6 78 " + "00 b5 00 66 d0 bc a6 90 29 87 58 6a dd 97 50 18 "
+            + "20 00 97 ee 00 00 03 00 00 22 02 f0 80 01 00 01 " + "00 61 15 30 13 02 01 03 a0 0e a2 0c 80 03 66 0b " + "af a2 05 a0 03 87 01 02 ";
     public static String testSmv91 = "01 0c cd 04 01 03 08 ac 7d 01 26 64 81 00 80 00 " + "88 ba 40 00 00 c5 00 00 00 00 80 81 ba 00 04 00 " + "2c 02 01 00 03 01 f4 01 f4 16 8e 0f a0 00 00 00 "
             + "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 " + "00 00 00 00 00 0f f0 40 1f 0e bf 64 00 00 2c 02 " + "01 00 03 01 f4 01 f4 16 8e 0f a0 00 00 00 00 00 "
             + "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 " + "00 00 00 0f f0 40 1f 0e c0 64 00 00 2c 02 01 00 " + "03 01 f4 01 f4 16 8e 0f a0 00 00 00 00 00 00 00 "
@@ -80,6 +84,8 @@ public class UIUtil {
     public static String testError1 = "00 50 04 07 76 d6 00 0c 02 b0 85 1c 08 00 45 00 " + "00 28 ae cf 00 00 40 06 6b 59 ac 1e 03 07 ac 1e " + "05 64 00 66 05 4a 52 4d f8 2c 53 2d 34 9a 50 10 "
             + "39 08 3e 33 00 00 03 00 00 72 02 f0 ";
     public static String testError2 = "00 00 00 00 00 00 00 00";
+    public static String testError3 = "00 10 18 97 87 03 c0 00 c6 78 00 40 08 00 45 00 " + "00 57 2f af 40 00 40 06 7d 0c c6 78 00 40 c6 78 " + "00 b5 00 66 d0 e1 93 ca 96 db 2e 49 b2 61 50 18 "
+            + "2e 10 8b e2 00 00 03 00 00 2f 02 f0 80 11 00 00 " + "00 00 00 00 00 cc 00 60 00 00 00 00 00 00 00 00 " + "00 10 00 00 00 c0 03 00 00 00 00 00 00 00 00 00 " + "00 00 00 00 00 ";
 
     public static List<Packet> examplePackets = new ArrayList<Packet>();
     static {
@@ -88,9 +94,12 @@ public class UIUtil {
         examplePackets.add(new Packet(BytesUtil.fromHexString(testMms1)));
         examplePackets.add(new Packet(BytesUtil.fromHexString(testMms2)));
         examplePackets.add(new Packet(BytesUtil.fromHexString(testMms3)));
+        examplePackets.add(new Packet(BytesUtil.fromHexString(testMms4)));
+        examplePackets.add(new Packet(BytesUtil.fromHexString(testMms5)));
         examplePackets.add(new Packet(BytesUtil.fromHexString(testSmv91)));
         examplePackets.add(new Packet(BytesUtil.fromHexString(testSmv92)));
         examplePackets.add(new Packet(BytesUtil.fromHexString(testError1)));
         examplePackets.add(new Packet(BytesUtil.fromHexString(testError2)));
+        examplePackets.add(new Packet(BytesUtil.fromHexString(testError3)));
     }
 }
