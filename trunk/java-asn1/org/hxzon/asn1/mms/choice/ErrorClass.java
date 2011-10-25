@@ -200,7 +200,7 @@ public class ErrorClass extends BerChoice {
         }
 
         public static void addDisplayString(int tagNumber, String displayString) {
-            addValueString(tagNumber, displayString, ErrorClassInteger.class);
+            addDisplayString(tagNumber, displayString, ErrorClassInteger.class);
         }
 
         public ErrorClassInteger() {
