@@ -21,7 +21,7 @@ public class DomainState extends BerIntegerEx {
 //	d8		(14),
 //	d9		(15)
 //	}
-    public DomainState() {
+    static {
         addValueString(0, "non-existent(0)");
         addValueString(1, "loading(1)");
         addValueString(2, "ready(2)");
@@ -38,6 +38,14 @@ public class DomainState extends BerIntegerEx {
         addValueString(13, "d7(13)");
         addValueString(14, "d8(14)");
         addValueString(15, "d9(15)");
+
+    }
+
+    public static void addValueString(int value, String valueString) {
+        addValueString(value, valueString, DomainState.class);
+    }
+
+    public DomainState() {
     }
 
 }

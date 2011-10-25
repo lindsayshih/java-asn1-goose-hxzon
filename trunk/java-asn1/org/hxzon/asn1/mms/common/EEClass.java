@@ -8,9 +8,13 @@ public class EEClass extends BerIntegerEx {
 //	modifier		(0),
 //	notification		(1)
 //	}
-    public EEClass(){
-        addValueString(0,"modifier(0)");
-        addValueString(1,"notification(1)");
+    static {
+        addValueString(0, "modifier(0)", EEClass.class);
+        addValueString(1, "notification(1)", EEClass.class);
+
+    }
+
+    public EEClass() {
     }
 
 }

@@ -74,10 +74,14 @@ public class Smv92Asdu extends BerSequence {
     }
 
     public static class SmvSynchInteger extends BerIntegerEx {
+        static {
+            addValueString(0, "none(0)", SmvSynchInteger.class);
+            addValueString(1, "local(1)", SmvSynchInteger.class);
+            addValueString(2, "global(2)", SmvSynchInteger.class);
+
+        }
+
         public SmvSynchInteger() {
-            addValueString(0, "none(0)");
-            addValueString(1, "local(1)");
-            addValueString(2, "global(2)");
         }
     }
 

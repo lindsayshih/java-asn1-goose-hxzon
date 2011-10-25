@@ -43,9 +43,13 @@ public class ReportSemaphoreStatusResponse extends BerSequence {
 //      token   (0),
 //      pool    (1)
 //      },
+        static {
+            addValueString(0, "token(0)", ReportSemaphoreStatusResponseClazz.class);
+            addValueString(1, "pool(1)", ReportSemaphoreStatusResponseClazz.class);
+
+        }
+
         public ReportSemaphoreStatusResponseClazz() {
-            addValueString(0, "token(0)");
-            addValueString(1, "pool(1)");
         }
     }
 

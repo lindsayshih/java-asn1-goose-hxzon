@@ -54,9 +54,13 @@ public class SemaphoreEntry extends BerSequence {
 //      simple      (0),
 //      modifier    (1)
 //      },
+        static {
+            addValueString(0, "simple(0)", EntryClass.class);
+            addValueString(1, "modifier(1)", EntryClass.class);
+
+        }
+
         public EntryClass() {
-            addValueString(0, "simple(0)");
-            addValueString(1, "modifier(1)");
         }
     }
 

@@ -53,11 +53,19 @@ public class AlarmSummary extends BerSequence {
 //		idle		(2),
 //		both		(3)
 //		},
-        public UnacknowledgedState() {
+        static {
             addValueString(0, "none(0)");
             addValueString(1, "active(1)");
             addValueString(2, "idle(2)");
             addValueString(3, "both(3)");
+
+        }
+
+        public static void addValueString(int value, String valueString) {
+            addValueString(value, valueString, UnacknowledgedState.class);
+        }
+
+        public UnacknowledgedState() {
         }
     }
 

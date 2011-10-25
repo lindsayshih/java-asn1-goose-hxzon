@@ -16,8 +16,7 @@ public class ProgramInvocationState extends BerIntegerEx {
 //	resetting		(8)
 //	}
 //	-- Companion Standard may add additional values
-
-    public ProgramInvocationState() {
+    static {
         addValueString(0, "non-existent(0)");
         addValueString(1, "unrunable(1)");
         addValueString(2, "idle(2)");
@@ -27,5 +26,13 @@ public class ProgramInvocationState extends BerIntegerEx {
         addValueString(6, "stopping(6)");
         addValueString(7, "resuming(7)");
         addValueString(8, "resetting(8)");
+
+    }
+
+    public static void addValueString(int value, String valueString) {
+        addValueString(value, valueString, ProgramInvocationState.class);
+    }
+
+    public ProgramInvocationState() {
     }
 }

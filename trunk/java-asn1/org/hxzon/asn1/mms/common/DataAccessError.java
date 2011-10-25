@@ -4,10 +4,6 @@ import org.hxzon.asn1.core.type.ext.BerIntegerEx;
 
 public class DataAccessError extends BerIntegerEx {
 
-    public DataAccessError() {
-        setName("data access error");
-        setDisplayString("data access error");
-
 //	DataAccessError ::= INTEGER
 //	{
 //	object-invalidated		(0),
@@ -22,6 +18,7 @@ public class DataAccessError extends BerIntegerEx {
 //	object-access-unsupported	(9),
 //	object-non-existent		(10)
 //	}
+    static {
         addValueString(0, "object-invalidated(0)");
         addValueString(1, "hardware-fault(1)");
         addValueString(2, "temporarily-unavailable(2)");
@@ -33,6 +30,15 @@ public class DataAccessError extends BerIntegerEx {
         addValueString(8, "object-attribute-inconsistent(8)");
         addValueString(9, "object-access-unsupported(9)");
         addValueString(10, "object-non-existent(10)");
+    }
+
+    public static void addValueString(int value, String valueString) {
+        addValueString(value, valueString, DataAccessError.class);
+    }
+
+    public DataAccessError() {
+        setName("data access error");
+        setDisplayString("data access error");
     }
 
 }

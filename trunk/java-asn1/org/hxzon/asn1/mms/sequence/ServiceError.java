@@ -207,9 +207,13 @@ public class ServiceError extends BerSequence {
 //		destination-file (1)
 //		}
     public static class ObtainFileError extends BerIntegerEx {
+        static {
+            addValueString(0, "source-file(0)", ObtainFileError.class);
+            addValueString(1, "destination-file(1)", ObtainFileError.class);
+
+        }
+
         public ObtainFileError() {
-            addValueString(0, "source-file(0)");
-            addValueString(1, "destination-file(1)");
         }
     }
 
@@ -218,9 +222,13 @@ public class ServiceError extends BerSequence {
 //		destination-file (1)
 //		}
     public static class FileRenameError extends BerIntegerEx {
+        static {
+            addValueString(0, "source-file(0)", FileRenameError.class);
+            addValueString(1, "destination-file(1)", FileRenameError.class);
+
+        }
+
         public FileRenameError() {
-            addValueString(0, "source-file(0)");
-            addValueString(1, "destination-file(1)");
         }
     }
 

@@ -40,10 +40,14 @@ public class ReportSemaphoreEntryStatusRequest extends BerSequence {
 //      owner   (1),
 //      hung    (2)
 //      } ,
+        static {
+            addValueString(0, "queued(0)", State.class);
+            addValueString(1, "owner(1)", State.class);
+            addValueString(2, "hung(2)", State.class);
+
+        }
+
         public State() {
-            addValueString(0, "queued(0)");
-            addValueString(1, "owner(1)");
-            addValueString(2, "hung(2)");
         }
     }
 

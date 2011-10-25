@@ -51,11 +51,15 @@ public class GetEventEnrollmentAttributesRequest extends BerSequence {
 //      ec      (2),
 //      ea      (3)
 //      } DEFAULT client,
+        static {
+            addValueString(0, "specific(0)", ScopeOfRequest.class);
+            addValueString(1, "client(1)", ScopeOfRequest.class);
+            addValueString(2, "ec(2)", ScopeOfRequest.class);
+            addValueString(3, "ea(3)", ScopeOfRequest.class);
+
+        }
+
         public ScopeOfRequest() {
-            addValueString(0, "specific(0)");
-            addValueString(1, "client(1)");
-            addValueString(2, "ec(2)");
-            addValueString(3, "ea(3)");
         }
     }
 

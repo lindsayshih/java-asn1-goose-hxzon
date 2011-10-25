@@ -9,10 +9,14 @@ public class ECState extends BerIntegerEx {
 //	idle			(1),
 //	active			(2)
 //	}
+    static {
+        addValueString(0, "disabled(0)", ECState.class);
+        addValueString(1, "idle(1)", ECState.class);
+        addValueString(2, "active(2)", ECState.class);
+
+    }
+
     public ECState() {
-        addValueString(0, "disabled(0)");
-        addValueString(1, "idle(1)");
-        addValueString(2, "active(2)");
     }
 
 }
