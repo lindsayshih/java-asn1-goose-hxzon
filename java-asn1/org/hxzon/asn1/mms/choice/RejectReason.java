@@ -167,7 +167,7 @@ public class RejectReason extends BerChoice {
         }
 
         public static void addDisplayString(int tagNumber, String displayString) {
-            addValueString(tagNumber, displayString, RejectReasonInteger.class);
+            addDisplayString(tagNumber, displayString, RejectReasonInteger.class);
         }
 
         public RejectReasonInteger() {
