@@ -255,28 +255,4 @@ public abstract class BerConstruct extends BerNode implements IBerConstruct {
         return "";
     }
 
-    //add by hxzon
-    //use parser state
-//	public BerConstruct init(String name, String name2, int tag, BerInputStream stream, int state, BerParser parser) {
-//		setTag(tag);
-//		setName(name);
-//		setDisplayString(name2);
-//		readValue(stream, state, parser);
-//		return this;
-//	}
-
-//	public void readValue(BerInputStream stream, int state, BerParser parser) {
-//		try {
-//			int readTag;
-//			ReadSequence seq = new ReadSequence(stream);
-//			//add by hxzon:after read len
-//			super.setOffsetAndLen(stream);
-//			while (0 != (readTag = seq.readBerTag())) {
-//				fList.add(parser.create(readTag, stream, state));
-//			}
-//			super.setTotalLen(stream.getTagOffset() - super.getTagOffset() + stream.getTotalLen());
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//	}
 }

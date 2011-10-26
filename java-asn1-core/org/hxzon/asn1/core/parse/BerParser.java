@@ -68,11 +68,6 @@ import org.hxzon.asn1.core.type.base.BerNode;
  * or sequence.
  */
 public abstract class BerParser {
-    /**
-     * This is the start state in my parsing state machine.
-     */
-    //change by hxzon,name change to State_Start
-    protected static final int State_Start = 0;
 
 //    /**
 //     * This reads the contents associated with a tag. If this is a primitive
@@ -175,7 +170,7 @@ public abstract class BerParser {
      * @return
      */
     //change by hxzon,state be the last argument and not throw IOException
-    public abstract BerNode create(int tag, BerInputStream stream, int state);
+    public abstract BerNode create(int tag, BerInputStream stream);
 
     /**
      * The readPacket method is called by any code looking to parse an incoming
@@ -204,6 +199,6 @@ public abstract class BerParser {
          */
         //change by hxzon
 //        return read(tag,START,stream);
-        return create(tag, stream, State_Start);
+        return create(tag, stream);
     }
 }

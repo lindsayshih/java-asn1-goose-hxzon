@@ -19,7 +19,7 @@ public class GoosePduParser extends BerParser {
     }
 
     @Override
-    public BerNode create(int tag, BerInputStream stream, int state) {
+    public BerNode create(int tag, BerInputStream stream) {
         switch (tag) {
         case Tag.APPLICATION | 1:
             return new GoosePdu().init("goose pdu", "goose pdu", tag, stream);

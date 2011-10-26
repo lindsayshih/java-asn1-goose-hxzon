@@ -44,6 +44,8 @@ package org.hxzon.asn1.core.parse;
  * the input stream and terminate.
  */
 public class AsnFatalException extends AsnEncodingException {
+    private static final long serialVersionUID = 1L;
+
     public AsnFatalException() {
         super();
     }

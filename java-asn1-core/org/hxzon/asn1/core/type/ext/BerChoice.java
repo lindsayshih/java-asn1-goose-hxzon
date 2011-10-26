@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import org.hxzon.asn1.core.parse.BerInputStream;
 import org.hxzon.asn1.core.parse.BerOutputStream;
-import org.hxzon.asn1.core.parse.BerParser;
 import org.hxzon.asn1.core.parse.Tag;
 import org.hxzon.asn1.core.parse.ext.Asn1Utils;
 import org.hxzon.asn1.core.type.base.BerNode;
@@ -110,18 +109,4 @@ public class BerChoice extends BerNode implements FakeBerConstruct {
         return true;
     }
 
-    public BerChoice init(String name, String displayString, int tag, BerInputStream stream, int state, BerParser parser) {
-        setTag(tag);
-        setName(name);
-        setDisplayString(displayString);
-        readValue(stream, state, parser);
-        return this;
-    }
-
-    protected void readValue(BerInputStream stream, int state, BerParser parser) {
-        super.setTagOffset(stream.getTagOffset());
-        realNode = parser.create(getTag(), stream, state);
-        super.setTotalLen(stream.getTagOffset() - super.getTagOffset() + stream.getTotalLen());
-        realNode.setName(this.getName() + "-" + realNode.getName());
-    }
 }
