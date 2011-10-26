@@ -39,6 +39,8 @@ import java.io.IOException;
  * problem with the input or output encoding process.
  */
 public class AsnEncodingException extends IOException {
+    private static final long serialVersionUID = 1L;
+
     public AsnEncodingException() {
         super();
     }

@@ -18,7 +18,7 @@ public class SmvPduParser extends BerParser {
     public static final SmvPduParser parser = new SmvPduParser();
 
     @Override
-    public BerNode create(int tag, BerInputStream stream, int state) {
+    public BerNode create(int tag, BerInputStream stream) {
         switch (tag) {
         case Tag.APPLICATION | 0:
             return new Smv92Pdu().init(tag, stream);

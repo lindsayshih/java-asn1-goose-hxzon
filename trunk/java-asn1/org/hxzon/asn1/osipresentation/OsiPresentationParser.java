@@ -18,7 +18,7 @@ public class OsiPresentationParser extends BerParser {
     }
 
     @Override
-    public BerNode create(int tag, BerInputStream stream, int state) {
+    public BerNode create(int tag, BerInputStream stream) {
         switch (tag) {
         case Tag.APPLICATION | 1:
             return new OsiPresentation().init("iso 8823 osi presentation", "iso 8823 osi presentation", tag, stream);

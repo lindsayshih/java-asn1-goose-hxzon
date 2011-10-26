@@ -90,8 +90,9 @@ public class BerNull extends BerNode {
     protected void readValue(BerInputStream stream) {
         try {
             int len = stream.readBerLength();
-            if (len != 0)
+            if (len != 0) {
                 throw new AsnEncodingException("Illegal null object");
+            }
             super.setOffsetAndLen(stream);
         } catch (IOException e) {
             DebugUtil.error("BerNull read value error", e);

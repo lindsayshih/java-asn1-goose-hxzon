@@ -40,7 +40,7 @@ public class MmsPduParser extends BerParser {
 //	public static final int State_ConcludeErrorPdu = 14;
 
     @Override
-    public BerNode create(int tag, BerInputStream stream, int state) {
+    public BerNode create(int tag, BerInputStream stream) {
         return new MmsPdu().init(tag, stream);
     }
 
