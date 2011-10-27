@@ -9,7 +9,7 @@ import org.hxzon.asn1.core.type.ext.FakeBerConstruct;
 import org.hxzon.asn1.core.type.ext.FakeBerNode;
 import org.hxzon.util.BytesUtil;
 
-public class Smv91Asdu extends FakeBerNode implements FakeBerConstruct {
+public class Sv91Asdu extends FakeBerNode implements FakeBerConstruct {
     private List<BerNode> fList;
     private int datasetLen;//	数据集长度44,2
     private int lnName;//	LNName  逻辑节点名    ,1
@@ -34,12 +34,12 @@ public class Smv91Asdu extends FakeBerNode implements FakeBerConstruct {
     private int channel12;//通道12的采样值
     private int state1;//状态字1
     private int state2;//状态字2
-    private int smvCount;//采样计数器
+    private int svCount;//采样计数器
     //
-    private int smvRate;//采样率,1
+    private int svRate;//采样率,1
     private int version;//配置版本号,1
 
-    public Smv91Asdu(Smv91Pdu pdu, int offset) {
+    public Sv91Asdu(Sv91Pdu pdu, int offset) {
         setName("asdu");
         setDisplayString("asdu");
         this.setTagOffset(pdu.getValueOffset() + offset);
@@ -48,7 +48,7 @@ public class Smv91Asdu extends FakeBerNode implements FakeBerConstruct {
         init(pdu, offset);
     }
 
-    private void init(Smv91Pdu pdu, int offset) {
+    private void init(Sv91Pdu pdu, int offset) {
         byte[] data = pdu.getValue();
         fList = new ArrayList<BerNode>(25);
         BerNode node;
@@ -146,14 +146,14 @@ public class Smv91Asdu extends FakeBerNode implements FakeBerConstruct {
         node = Asn1Utils.createFakeBerInteger("state2", "状态2", state2, this.getValueOffset() + offset, len);
         fList.add(node);
         offset += len;
-        smvCount = (int) BytesUtil.toSigned(data, offset, len);
-        node = Asn1Utils.createFakeBerInteger("smvCount", "采样计数", smvCount, this.getValueOffset() + offset, len);
+        svCount = (int) BytesUtil.toSigned(data, offset, len);
+        node = Asn1Utils.createFakeBerInteger("smvCount", "采样计数", svCount, this.getValueOffset() + offset, len);
         fList.add(node);
         offset += len;
         //
         len = 1;
-        smvRate = (int) BytesUtil.toSigned(data, offset, len);
-        node = Asn1Utils.createFakeBerInteger("smvRate", "采样率", smvRate, this.getValueOffset() + offset, len);
+        svRate = (int) BytesUtil.toSigned(data, offset, len);
+        node = Asn1Utils.createFakeBerInteger("smvRate", "采样率", svRate, this.getValueOffset() + offset, len);
         fList.add(node);
         offset += len;
         version = (int) BytesUtil.toSigned(data, offset, len);

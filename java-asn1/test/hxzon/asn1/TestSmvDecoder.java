@@ -6,7 +6,7 @@ import java.io.IOException;
 import org.hxzon.asn1.core.parse.BerInputStream;
 import org.hxzon.asn1.core.parse.ext.Asn1Utils;
 import org.hxzon.asn1.core.type.base.BerNode;
-import org.hxzon.asn1.smv.SmvPduParser;
+import org.hxzon.asn1.smv.SvPduParser;
 import org.hxzon.util.BytesUtil;
 
 public class TestSmvDecoder {
@@ -105,7 +105,7 @@ public class TestSmvDecoder {
         ByteArrayInputStream inStream = new ByteArrayInputStream(data);
         BerInputStream in = new BerInputStream(inStream);
 
-        SmvPduParser parser = SmvPduParser.parser;
+        SvPduParser parser = SvPduParser.parser;
         BerNode node;
         while (null != (node = parser.readPacket(in))) {
             System.out.println(Asn1Utils.printBerNode(node));

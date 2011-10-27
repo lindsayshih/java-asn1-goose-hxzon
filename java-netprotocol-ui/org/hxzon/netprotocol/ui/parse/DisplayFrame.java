@@ -21,7 +21,7 @@ import org.hxzon.netprotocol.packet.Ip4Packet;
 import org.hxzon.netprotocol.packet.OsiPresentationPacket;
 import org.hxzon.netprotocol.packet.OsiSessionPacket;
 import org.hxzon.netprotocol.packet.Packet;
-import org.hxzon.netprotocol.packet.SmvPacket;
+import org.hxzon.netprotocol.packet.SvPacket;
 import org.hxzon.netprotocol.packet.TcpPacket;
 import org.hxzon.netprotocol.packet.TpktPacket;
 import org.hxzon.netprotocol.packet.UdpPacket;
@@ -36,7 +36,7 @@ public class DisplayFrame extends JFrame {
         new EthernetPacket();
         new VlanPacket();
         new GoosePacket();
-        new SmvPacket();
+        new SvPacket();
         new Ip4Packet();
         new TcpPacket();
         new UdpPacket();
