@@ -9,9 +9,9 @@ import org.hxzon.asn1.core.type.BerSequence;
 import org.hxzon.asn1.core.type.base.BerNode;
 import org.hxzon.asn1.core.type.ext.BerIntegerEx;
 
-public class Smv92Asdu extends BerSequence {
+public class Sv92Asdu extends BerSequence {
 //	private static final Logger logger=LoggerFactory.getLogger(Smv92Asdu.class);
-    public Smv92Asdu() {
+    public Sv92Asdu() {
         setName("asdu");
         setDisplayString("asdu");
     }
@@ -52,9 +52,9 @@ public class Smv92Asdu extends BerSequence {
         case Tag.CONTEXT | 3:
             return Asn1Utils.createBerInteger32("confRef", "配置版本", tag, stream);
         case Tag.CONTEXT | 5:
-            return new SmvSynchInteger().init("sample synch", "采样同步", tag, stream);
+            return new SvSynchInteger().init("sample synch", "采样同步", tag, stream);
         case Tag.CONTEXT | 7:
-            return new Smv92AsduData().init("seqData", "asdu数据集", tag, stream);
+            return new Sv92AsduData().init("seqData", "asdu数据集", tag, stream);
         case Tag.CONTEXT | 4:
             return Asn1Utils.createBerIecUtcTime("refrTm", "刷新时间", tag, stream);
         case Tag.CONTEXT | 6:
@@ -66,22 +66,22 @@ public class Smv92Asdu extends BerSequence {
 
     public void updateAsduDataDisplay(List<String> displays) {
         for (BerNode child : getChildren()) {
-            if (child instanceof Smv92AsduData) {
-                ((Smv92AsduData) child).updateDataDisplay(displays);
+            if (child instanceof Sv92AsduData) {
+                ((Sv92AsduData) child).updateDataDisplay(displays);
                 break;//only one
             }
         }
     }
 
-    public static class SmvSynchInteger extends BerIntegerEx {
+    public static class SvSynchInteger extends BerIntegerEx {
         static {
-            addValueString(0, "none(0)", SmvSynchInteger.class);
-            addValueString(1, "local(1)", SmvSynchInteger.class);
-            addValueString(2, "global(2)", SmvSynchInteger.class);
+            addValueString(0, "none(0)", SvSynchInteger.class);
+            addValueString(1, "local(1)", SvSynchInteger.class);
+            addValueString(2, "global(2)", SvSynchInteger.class);
 
         }
 
-        public SmvSynchInteger() {
+        public SvSynchInteger() {
         }
     }
 

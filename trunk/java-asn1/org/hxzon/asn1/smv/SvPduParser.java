@@ -10,26 +10,26 @@ import org.hxzon.asn1.core.parse.ext.Asn1Utils;
 import org.hxzon.asn1.core.type.base.BerNode;
 import org.hxzon.util.BytesUtil;
 
-public class SmvPduParser extends BerParser {
-    protected SmvPduParser() {
+public class SvPduParser extends BerParser {
+    protected SvPduParser() {
 
     }
 
-    public static final SmvPduParser parser = new SmvPduParser();
+    public static final SvPduParser parser = new SvPduParser();
 
     @Override
     public BerNode create(int tag, BerInputStream stream) {
         switch (tag) {
         case Tag.APPLICATION | 0:
-            return new Smv92Pdu().init(tag, stream);
+            return new Sv92Pdu().init(tag, stream);
         case Tag.CONTEXT | 0:
-            return new Smv91Pdu().init(tag, stream);
+            return new Sv91Pdu().init(tag, stream);
         default:
             return Asn1Utils.createUnknown(tag, stream);
         }
     }
 
-    public BerNode parseSmv(byte[] data, int offset) {
+    public BerNode parseSv(byte[] data, int offset) {
         ByteArrayInputStream inStream = new ByteArrayInputStream(BytesUtil.copyBytes(data, offset));
         BerInputStream in = new BerInputStream(inStream);
         in.setTagOffset(offset);

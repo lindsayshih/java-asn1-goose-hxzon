@@ -2,7 +2,7 @@ package org.hxzon.netprotocol.ui.statistics;
 
 import org.hxzon.asn1.core.parse.ext.PacketUtils;
 import org.hxzon.netprotocol.packet.GoosePacket;
-import org.hxzon.netprotocol.packet.SmvPacket;
+import org.hxzon.netprotocol.packet.SvPacket;
 import org.hxzon.pcap.PcapFile;
 import org.hxzon.pcap.PcapHandlerListener;
 import org.hxzon.pcap.PcapPacket;
@@ -184,7 +184,7 @@ public class StatisticsListener implements PcapHandlerListener {
             String ethernetType = PacketUtils.ethernetType(data);
             if (GoosePacket.EthernetType_Goose.equals(ethernetType)) {
                 return Type_Goose;
-            } else if (SmvPacket.EthernetType_Smv.equals(ethernetType)) {
+            } else if (SvPacket.EthernetType_Sv.equals(ethernetType)) {
                 return Type_Smv;
             } else if (PacketUtils.isTpktPacket(data)) {
                 return Type_Mms;

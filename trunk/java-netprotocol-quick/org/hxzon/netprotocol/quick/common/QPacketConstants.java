@@ -18,7 +18,7 @@ public interface QPacketConstants {
     public static final String PacketTypeDesc_Ethernet = "ethernet";
     public static final String PacketTypeDesc_Vlan = "vlan";
     public static final String PacketTypeDesc_Goose = "goose";
-    public static final String PacketTypeDesc_Smv = "smv";
+    public static final String PacketTypeDesc_Sv = "smv";
     public static final String PacketTypeDesc_Ip4 = "ip4";
 
     public static final String IpType_Tcp = "06";

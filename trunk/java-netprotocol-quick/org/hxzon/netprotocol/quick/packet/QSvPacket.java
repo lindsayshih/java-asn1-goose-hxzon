@@ -1,12 +1,12 @@
 package org.hxzon.netprotocol.quick.packet;
 
 import org.hxzon.asn1.core.type.base.BerNode;
-import org.hxzon.asn1.smv.SmvPduParser;
+import org.hxzon.asn1.smv.SvPduParser;
 import org.hxzon.netprotocol.quick.common.QPacketConstants;
 import org.hxzon.netprotocol.quick.field.QProtocolInt31Field;
 import org.hxzon.util.BytesUtil;
 
-public class QSmvPacket extends QPacket {
+public class QSvPacket extends QPacket {
     public static QProtocolInt31Field fetchAppId(byte[] data, int headerOffset) {
         int fieldOffset = headerOffset + 0;
         int fieldLen = 2;
@@ -48,10 +48,10 @@ public class QSmvPacket extends QPacket {
     }
 
     public static BerNode fetchSmvpdu(byte[] data, int headerOffset) {
-        return SmvPduParser.parser.parseSmv(data, headerOffset + 8);
+        return SvPduParser.parser.parseSv(data, headerOffset + 8);
     }
 
     public String defaultDesc() {
-        return QPacketConstants.PacketTypeDesc_Smv;
+        return QPacketConstants.PacketTypeDesc_Sv;
     }
 }

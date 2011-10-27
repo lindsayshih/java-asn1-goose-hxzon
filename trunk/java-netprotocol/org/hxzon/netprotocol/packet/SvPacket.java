@@ -1,21 +1,21 @@
 package org.hxzon.netprotocol.packet;
 
 import org.hxzon.asn1.core.type.base.BerNode;
-import org.hxzon.asn1.smv.SmvPduParser;
+import org.hxzon.asn1.smv.SvPduParser;
 import org.hxzon.netprotocol.common.IPacketPayload;
 import org.hxzon.netprotocol.field.ProtocolField;
 import org.hxzon.netprotocol.field.ProtocolInt31Field;
 import org.hxzon.netprotocol.parse.ProtocolBinding;
 import org.hxzon.netprotocol.parse.ProtocolBindingList;
 
-public class SmvPacket extends Packet {
+public class SvPacket extends Packet {
     static {
         ProtocolBindingList.addBinding(new ProtocolBinding<EthernetPacket>() {
 
             @Override
             public Packet match(EthernetPacket packet) {
-                if (packet.fetchType().getValue().equalsIgnoreCase(EthernetType_Smv)) {
-                    return new SmvPacket();
+                if (packet.fetchType().getValue().equalsIgnoreCase(EthernetType_Sv)) {
+                    return new SvPacket();
                 } else {
                     return null;
                 }
@@ -26,8 +26,8 @@ public class SmvPacket extends Packet {
 
             @Override
             public Packet match(VlanPacket packet) {
-                if (packet.fetchType().getValue().equalsIgnoreCase(EthernetType_Smv)) {
-                    return new SmvPacket();
+                if (packet.fetchType().getValue().equalsIgnoreCase(EthernetType_Sv)) {
+                    return new SvPacket();
                 } else {
                     return null;
                 }
@@ -36,12 +36,12 @@ public class SmvPacket extends Packet {
         });
     }
     public static final int HeaderLength = 8;
-    public static final String EthernetType_Smv = "88ba";
+    public static final String EthernetType_Sv = "88ba";
     private ProtocolInt31Field appId;
     private ProtocolInt31Field pduLen;
     private ProtocolInt31Field reserved1;
     private ProtocolInt31Field reserved2;
-    private BerNode smvPdu;
+    private BerNode svPdu;
 
     protected int expectHeaderLength() {
         return HeaderLength;
@@ -95,18 +95,18 @@ public class SmvPacket extends Packet {
 //		this.reserved2 = reserved2;
     }
 
-    public BerNode fetchSmvpdu() {
-        if (smvPdu == null) {
-            smvPdu = SmvPduParser.parser.parseSmv(getSrcData(), getPayloadOffset());
+    public BerNode fetchSvpdu() {
+        if (svPdu == null) {
+            svPdu = SvPduParser.parser.parseSv(getSrcData(), getPayloadOffset());
         }
-        return smvPdu;
+        return svPdu;
     }
 
     public IPacketPayload exceptPayload() {
-        return (IPacketPayload) fetchSmvpdu();
+        return (IPacketPayload) fetchSvpdu();
     }
 
     public String getProtocolTypeDesc() {
-        return "smv";
+        return "sv";
     }
 }

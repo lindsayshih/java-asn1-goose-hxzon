@@ -10,8 +10,8 @@ import org.hxzon.asn1.core.type.ext.FakeBerConstruct;
 import org.hxzon.asn1.core.type.ext.FakeBerNode;
 import org.hxzon.util.BytesUtil;
 
-public class Smv92AsduData extends BerOctetString implements FakeBerConstruct {
-    public Smv92AsduData() {
+public class Sv92AsduData extends BerOctetString implements FakeBerConstruct {
+    public Sv92AsduData() {
         setName("asdu data");
         setDisplayString("asdu数据集");
     }
@@ -26,7 +26,7 @@ public class Smv92AsduData extends BerOctetString implements FakeBerConstruct {
         for (int i = 0; i < data.length; i += 8) {
             long value = BytesUtil.toSigned(data, i, 4);
             long quality = BytesUtil.toSigned(data, i + 4, 4);
-            node = new Smv92AsduDataItem(value, quality);
+            node = new Sv92AsduDataItem(value, quality);
             node.setTagOffset(super.getValueOffset() + i);
             node.setTotalLen(8);
             node.setName(String.valueOf(i / 8));
@@ -56,12 +56,12 @@ public class Smv92AsduData extends BerOctetString implements FakeBerConstruct {
         return "";
     }
 
-    public static class Smv92AsduDataItem extends FakeBerNode {
+    public static class Sv92AsduDataItem extends FakeBerNode {
 
         private long value;
         private long quality;
 
-        public Smv92AsduDataItem(long value, long quality) {
+        public Sv92AsduDataItem(long value, long quality) {
             this.value = value;
             this.quality = quality;
         }

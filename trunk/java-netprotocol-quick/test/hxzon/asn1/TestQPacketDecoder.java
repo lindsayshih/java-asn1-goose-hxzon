@@ -7,7 +7,7 @@ import org.hxzon.netprotocol.quick.common.QPacketConstants;
 import org.hxzon.netprotocol.quick.field.QProtocolStringField;
 import org.hxzon.netprotocol.quick.packet.QEthernetPacket;
 import org.hxzon.netprotocol.quick.packet.QGoosePacket;
-import org.hxzon.netprotocol.quick.packet.QSmvPacket;
+import org.hxzon.netprotocol.quick.packet.QSvPacket;
 import org.hxzon.netprotocol.quick.packet.QVlanPacket;
 import org.hxzon.ui.util.UIUtil;
 import org.hxzon.util.BytesUtil;
@@ -36,9 +36,9 @@ public class TestQPacketDecoder {
                 ethernetPacket.getPayload().setPayload(goosePacket);
             }
         } else if (QPacketConstants.EthernetType_Smv.equalsIgnoreCase(ethernetType)) {
-            QSmvPacket smvPacket = new QSmvPacket();
-            smvPacket.addField(QSmvPacket.fetchAppId(data, ethernetHeaderLen));
-            smvPacket.addField(QSmvPacket.fetchPduLen(data, ethernetHeaderLen));
+            QSvPacket smvPacket = new QSvPacket();
+            smvPacket.addField(QSvPacket.fetchAppId(data, ethernetHeaderLen));
+            smvPacket.addField(QSvPacket.fetchPduLen(data, ethernetHeaderLen));
             if (ethernetPacket.getPayload() == null) {
                 ethernetPacket.setPayload(smvPacket);
             } else {
