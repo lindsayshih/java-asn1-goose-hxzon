@@ -1,7 +1,7 @@
 package org.hxzon.netprotocol.packet;
 
 import org.hxzon.asn1.core.type.base.BerNode;
-import org.hxzon.asn1.smv.SvPduParser;
+import org.hxzon.asn1.sv.SvPduParser;
 import org.hxzon.netprotocol.common.IPacketPayload;
 import org.hxzon.netprotocol.field.ProtocolField;
 import org.hxzon.netprotocol.field.ProtocolInt31Field;

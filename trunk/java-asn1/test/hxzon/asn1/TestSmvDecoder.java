@@ -6,7 +6,7 @@ import java.io.IOException;
 import org.hxzon.asn1.core.parse.BerInputStream;
 import org.hxzon.asn1.core.parse.ext.Asn1Utils;
 import org.hxzon.asn1.core.type.base.BerNode;
-import org.hxzon.asn1.smv.SvPduParser;
+import org.hxzon.asn1.sv.SvPduParser;
 import org.hxzon.util.BytesUtil;
 
 public class TestSmvDecoder {

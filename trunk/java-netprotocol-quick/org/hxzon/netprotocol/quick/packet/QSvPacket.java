@@ -1,7 +1,7 @@
 package org.hxzon.netprotocol.quick.packet;
 
 import org.hxzon.asn1.core.type.base.BerNode;
-import org.hxzon.asn1.smv.SvPduParser;
+import org.hxzon.asn1.sv.SvPduParser;
 import org.hxzon.netprotocol.quick.common.QPacketConstants;
 import org.hxzon.netprotocol.quick.field.QProtocolInt31Field;
 import org.hxzon.util.BytesUtil;

@@ -1,4 +1,4 @@
-package org.hxzon.asn1.smv;
+package org.hxzon.asn1.sv;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
