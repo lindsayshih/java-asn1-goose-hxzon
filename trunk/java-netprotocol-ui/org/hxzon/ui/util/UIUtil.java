@@ -81,6 +81,10 @@ public class UIUtil {
             + "ff 00 00 00 00 00 00 0e ff 00 00 00 00 30 7c 80" + "0b 64 6f 6e 67 66 61 6e 67 73 6d 76 82 02 08 24" + "83 04 00 00 00 01 85 01 00 87 60 00 00 01 2f 00"
             + "00 00 00 00 00 02 91 00 00 00 00 ff ff fc 3f 00" + "00 00 00 00 00 01 2f 00 00 00 00 00 00 01 2f 00" + "00 00 00 00 00 02 91 00 00 00 00 ff ff fc 3f 00"
             + "00 00 00 00 00 13 da 00 00 00 00 00 00 2a fb 00" + "00 00 00 ff ff c1 2b 00 00 00 00 00 00 13 da 00" + "00 00 00 00 00 13 da 00 00 00 00               ";
+    public static String testSmv92_2 = "01 0c cd 04 01 81 00 30 00 01 e2 01 81 00 80 79 " + "88 ba 40 11 00 ad 00 00 00 00 60 81 a2 80 01 01 " + "a2 81 9c 30 81 99 80 1a 4d 54 31 31 30 31 42 47 "
+            + "4f 4c 44 2f 4c 4c 4e 30 24 47 4f 24 73 6d 76 63 " + "62 30 82 02 08 54 83 04 00 00 00 01 84 08 00 00 " + "00 00 00 00 00 00 85 01 00 86 02 64 00 87 60 00 "
+            + "00 00 5f 00 00 00 00 00 00 00 4e 00 00 00 00 00 " + "00 00 5f 00 00 00 00 00 00 00 52 00 00 00 00 00 " + "00 00 05 00 00 00 00 00 00 00 04 00 00 00 00 00 "
+            + "00 00 05 00 00 00 00 00 00 00 0a 00 00 00 00 00 " + "00 00 08 00 00 00 00 00 00 00 0b 00 00 00 00 00 " + "00 00 0b 00 00 00 00 00 00 00 0c 00 00 00 00";
     public static String testError1 = "00 50 04 07 76 d6 00 0c 02 b0 85 1c 08 00 45 00 " + "00 28 ae cf 00 00 40 06 6b 59 ac 1e 03 07 ac 1e " + "05 64 00 66 05 4a 52 4d f8 2c 53 2d 34 9a 50 10 "
             + "39 08 3e 33 00 00 03 00 00 72 02 f0 ";
     public static String testError2 = "00 00 00 00 00 00 00 00";
@@ -98,6 +102,7 @@ public class UIUtil {
         examplePackets.add(new Packet(BytesUtil.fromHexString(testMms5)));
         examplePackets.add(new Packet(BytesUtil.fromHexString(testSmv91)));
         examplePackets.add(new Packet(BytesUtil.fromHexString(testSmv92)));
+        examplePackets.add(new Packet(BytesUtil.fromHexString(testSmv92_2)));
         examplePackets.add(new Packet(BytesUtil.fromHexString(testError1)));
         examplePackets.add(new Packet(BytesUtil.fromHexString(testError2)));
         examplePackets.add(new Packet(BytesUtil.fromHexString(testError3)));
