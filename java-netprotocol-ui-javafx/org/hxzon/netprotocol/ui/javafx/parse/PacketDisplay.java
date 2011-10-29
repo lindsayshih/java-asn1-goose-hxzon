@@ -4,9 +4,9 @@ import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.web.WebView;
 
+import org.hxzon.javafx.layout.simple.SimplePane;
 import org.hxzon.netprotocol.packet.Packet;
 import org.hxzon.util.BytesUtil;
 
@@ -23,13 +23,20 @@ public class PacketDisplay extends SplitPane {
         packetTreeView = new PacketTreeView();
         //
         indexPane = new WebView();
-        indexPane.setPrefWidth(50);
+        indexPane.setPrefWidth(80);
+        indexPane.setPrefHeight(1000);
         //
         hexPane = new WebView();
-        HBox hbox = new HBox();
-        hbox.getChildren().addAll(indexPane, hexPane);
+        hexPane.setPrefWidth(500);
+        hexPane.setPrefHeight(1000);
+        //
+        SimplePane messagePane = new SimplePane(true);
+        messagePane.setStyle("-fx-background-color:red");
+        messagePane.getChildren().add(indexPane);
+        messagePane.getChildren().add(hexPane);
+        //
         ScrollPane scrollPane = new ScrollPane();
-        scrollPane.setContent(hbox);
+        scrollPane.setContent(messagePane);
         getItems().addAll(scrollPane, packetTreeView);
         //
         packetTreeView.getSelectionModel().selectedItemProperty().addListener(new InvalidationListener() {
@@ -106,4 +113,5 @@ public class PacketDisplay extends SplitPane {
     private void setText(WebView webView, String content) {
         webView.getEngine().loadContent("<div style=\"font-family:'Courier New';\">" + content + "</div>");
     }
+
 }

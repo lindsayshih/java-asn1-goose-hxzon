@@ -3,8 +3,8 @@ package org.hxzon.netprotocol.ui.javafx.parse;
 import java.io.File;
 
 import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Orientation;
@@ -92,12 +92,21 @@ public class DisplayApplication extends Application {
         ToolBar toolBar = new ToolBar(openFile, prePacket);
         packetDisplay = new PacketDisplay();
         packetsTableView = new PacketTableView();
-        packetsTableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Packet>() {
-            public void changed(ObservableValue<? extends Packet> ov, Packet old_val, Packet new_val) {
-                packetDisplay.updateData(new_val);
+        packetsTableView.getSelectionModel().selectedItemProperty().addListener(new InvalidationListener() {
+
+            @Override
+            public void invalidated(Observable arg0) {
+                Packet packet = packetsTableView.getSelectionModel().getSelectedItem();
+                packetDisplay.updateData(packet);
             }
 
         });
+//                new ChangeListener<Packet>() {
+//            public void changed(ObservableValue<? extends Packet> ov, Packet old_val, Packet new_val) {
+//                packetDisplay.updateData(new_val);
+//            }
+//
+//        });
         SplitPane splitPane = new SplitPane();
         splitPane.setOrientation(Orientation.VERTICAL);
         splitPane.getItems().addAll(packetsTableView, packetDisplay);
