@@ -213,4 +213,17 @@ public class PacketTreeItem extends TreeItem<Object> {
         return userObject;
     }
 
+    //fixed for bug
+//    at javafx.scene.control.TreeItem.equals(TreeItem.java:661)
+//    at javafx.scene.control.TreeItem.equals(TreeItem.java:658)
+//    at java.util.AbstractList.equals(AbstractList.java:507)
+//    at com.sun.javafx.collections.ObservableListWrapper.equals(ObservableListWrapper.java:136)
+//    at javafx.scene.control.TreeItem.equals(TreeItem.java:661)
+//    at javafx.scene.control.TreeItem.equals(TreeItem.java:658)
+//    at java.util.AbstractList.equals(AbstractList.java:507)
+//    at com.sun.javafx.collections.ObservableListWrapper.equals(ObservableListWrapper.java:136)
+    public boolean equals(Object other) {
+        return this == other;
+    }
+
 }
