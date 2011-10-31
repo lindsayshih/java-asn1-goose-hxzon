@@ -2,18 +2,15 @@ package org.hxzon.netprotocol.ui.javafx.parse;
 
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
 import javafx.scene.web.WebView;
 
-import org.hxzon.javafx.layout.simple.SimplePane;
 import org.hxzon.netprotocol.packet.Packet;
 import org.hxzon.util.BytesUtil;
 
 public class PacketDisplay extends SplitPane {
 
     private final PacketTreeView packetTreeView;
-    private final WebView indexPane;
     private final WebView hexPane;
 //    private static final Font font = Font.font("Courier New", 12);
     private static final int byteSplitLen = BytesUtil.HtmlWordSplit.length();
@@ -22,22 +19,11 @@ public class PacketDisplay extends SplitPane {
     public PacketDisplay() {
         packetTreeView = new PacketTreeView();
         //
-        indexPane = new WebView();
-        indexPane.setPrefWidth(80);
-        indexPane.setPrefHeight(1000);
-        //
         hexPane = new WebView();
         hexPane.setPrefWidth(500);
-        hexPane.setPrefHeight(1000);
+        hexPane.setMinHeight(200);
         //
-        SimplePane messagePane = new SimplePane(true);
-        messagePane.setStyle("-fx-background-color:red");
-        messagePane.getChildren().add(indexPane);
-        messagePane.getChildren().add(hexPane);
-        //
-        ScrollPane scrollPane = new ScrollPane();
-        scrollPane.setContent(messagePane);
-        getItems().addAll(scrollPane, packetTreeView);
+        getItems().addAll(hexPane, packetTreeView);
         //
         packetTreeView.getSelectionModel().selectedItemProperty().addListener(new InvalidationListener() {
 
@@ -62,56 +48,39 @@ public class PacketDisplay extends SplitPane {
                 if (end > offset) {
                     end -= byteSplitLen;
                 }
-                StringBuffer detailText = new StringBuffer(BytesUtil.toDisplayHexString(packet.getData(), true));
+                String hex = BytesUtil.toDisplayHexString(packet.getData(), true);
+                String index = BytesUtil.toIndex(packet.getData(), true);
+                StringBuffer detailText = new StringBuffer(hex);
                 detailText.insert(end, "</span>");
                 detailText.insert(offset, "<span style='background:#bce2ec'>");
-                setText(hexPane, detailText.toString());
+                setText(hexPane, index, detailText.toString());
             }
 
         });
-//        .addListener(new ChangeListener<TreeItem<Object>>() {
-//
-//            @Override
-//            public void changed(ObservableValue<? extends TreeItem<Object>> ov, TreeItem<Object> old_val, TreeItem<Object> new_val) {
-//                PacketTreeItem node = (PacketTreeItem) new_val;
-//                Packet packet = (Packet) ((PacketTreeItem) packetTreeView.getRoot()).getData();
-//                //
-//                int charLenForByte = byteSplitLen + 2;
-//                int offset = node.getOffset();
-//                int len = node.getLen();
-//                int end = offset + len;
-//                offset = offset * charLenForByte;
-//                end = end * charLenForByte;
-//                offset += offset / (16 * charLenForByte) * lineSplitLen;
-//                end += end / (16 * charLenForByte) * lineSplitLen;
-//                //fix bug when len=0 make end=offset
-//                if (end > offset) {
-//                    end -= byteSplitLen;
-//                }
-//                StringBuffer detailText = new StringBuffer(BytesUtil.toDisplayHexString(packet.getData(), true));
-//                detailText.insert(end, "</span>");
-//                detailText.insert(offset, "<span style='background:#bce2ec'>");
-//                hexPane.getEngine().loadContent(detailText.toString());
-//            }
-//
-//        });
     }
 
     public void updateData(Packet packet) {
         if (packet == null) {
-            indexPane.getEngine().loadContent("");
             hexPane.getEngine().loadContent("");
             packetTreeView.updateData(null);
         } else {
             byte[] data = packet.getData();
-            setText(indexPane, BytesUtil.toIndex(data, true));
-            setText(hexPane, BytesUtil.toDisplayHexString(data, true));
+            String index = BytesUtil.toIndex(data, true);
+            String hex = BytesUtil.toDisplayHexString(data, true);
+            setText(hexPane, index, hex);
             packetTreeView.updateData(packet);
         }
     }
 
-    private void setText(WebView webView, String content) {
-        webView.getEngine().loadContent("<div style=\"font-family:'Courier New';\">" + content + "</div>");
+    private void setText(WebView webView, String index, String hex) {
+        StringBuffer sb = new StringBuffer("<table>");
+        sb.append("<tr style=\"font-family:'Courier New';\" >");
+        sb.append("<td >").append(index).append("</td>");
+        sb.append("<td >").append(BytesUtil.HtmlWordSplit).append("</td>");
+        sb.append("<td >").append(hex).append("</td>");
+        sb.append("</tr>");
+        sb.append("</table>");
+        webView.getEngine().loadContent(sb.toString());
     }
 
 }
