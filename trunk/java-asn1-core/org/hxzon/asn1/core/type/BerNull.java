@@ -44,13 +44,15 @@ import org.hxzon.asn1.core.parse.BerInputStream;
 import org.hxzon.asn1.core.parse.BerOutputStream;
 import org.hxzon.asn1.core.parse.Tag;
 import org.hxzon.asn1.core.type.base.BerNode;
-import org.hxzon.util.DebugUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Represents a null object. This object represents a 'null', which is distinct
  * from no data.
  */
 public class BerNull extends BerNode {
+    private static final Logger logger = LoggerFactory.getLogger(BerNull.class);
 
     public BerNull() {
         super(Tag.NULL);
@@ -95,7 +97,7 @@ public class BerNull extends BerNode {
             }
             super.setOffsetAndLen(stream);
         } catch (IOException e) {
-            DebugUtil.error("BerNull read value error", e);
+            logger.error("BerNull read value error", e);
         }
     }
 

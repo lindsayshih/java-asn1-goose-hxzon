@@ -43,12 +43,14 @@ import org.hxzon.asn1.core.parse.BerInputStream;
 import org.hxzon.asn1.core.parse.BerOutputStream;
 import org.hxzon.asn1.core.parse.Tag;
 import org.hxzon.asn1.core.type.base.BerNode;
-import org.hxzon.util.DebugUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Represents an integer in the BER stream
  */
 public class BerInteger extends BerNode {
+    private static final Logger logger = LoggerFactory.getLogger(BerInteger.class);
     private long fValue;
 
 //    /**
@@ -105,7 +107,7 @@ public class BerInteger extends BerNode {
         this.bitLen = bitLen;
         this.unsigned = unsigned;
         if (bitLen < 32) {
-            DebugUtil.debug("bitLen:" + bitLen);
+            logger.debug("bitLen:" + bitLen);
         }
         return this;
     }

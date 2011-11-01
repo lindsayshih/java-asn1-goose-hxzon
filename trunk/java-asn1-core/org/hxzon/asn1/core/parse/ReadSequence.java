@@ -35,7 +35,8 @@ package org.hxzon.asn1.core.parse;
 
 import java.io.IOException;
 
-import org.hxzon.util.DebugUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *  This is a wrapper class that supports reading in a sequence. This is called
@@ -43,6 +44,7 @@ import org.hxzon.util.DebugUtil;
  *  when it's time to stop reading objects.
  */
 public class ReadSequence {
+    private static final Logger logger = LoggerFactory.getLogger(ReadSequence.class);
     private String display;
     private BerInputStream fInputStream;
     private long fStart;
@@ -60,7 +62,7 @@ public class ReadSequence {
         fStart = fInputStream.getReadBytes();
 
         fEOF = (fLength == 0);
-        DebugUtil.trace("read sequence " + display + ", start:" + fStart + ",len:" + fLength);
+        logger.trace("read sequence " + display + ", start:" + fStart + ",len:" + fLength);
     }
 
     /**
