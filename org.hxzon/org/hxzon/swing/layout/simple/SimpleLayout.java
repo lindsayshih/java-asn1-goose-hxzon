@@ -9,9 +9,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.hxzon.util.DebugUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SimpleLayout implements LayoutManager2 {
+    private static final Logger logger = LoggerFactory.getLogger(SimpleLayout.class);
     protected Map<Component, SimpleLayoutData> componentMap;
     protected boolean horizontal;
 
@@ -101,10 +103,10 @@ public class SimpleLayout implements LayoutManager2 {
             int fixedSize = getTotalFixedSize();
             if (horizontal) {//h
                 fillSize = parentWidth - fixedSize;
-                DebugUtil.debug("parent size:" + parentWidth);
+                logger.debug("parent size:" + parentWidth);
             } else {//v
                 fillSize = parentHeight - fixedSize;
-                DebugUtil.debug("parent size:" + parentHeight);
+                logger.debug("parent size:" + parentHeight);
             }
             layoutWhenFull(components, parent, fillSize, parentWidth, parentHeight, x, y);
         }
@@ -136,25 +138,25 @@ public class SimpleLayout implements LayoutManager2 {
                 result += layoutData.fixedSize;
             }
         }
-        DebugUtil.debug("total fixed size:" + result);
+        logger.debug("total fixed size:" + result);
         return result;
     }
 
     private void layoutWhenFull(Component[] components, Container parent, int fillSize, int parentWidth, int parentHeight, int x, int y) {
         int curSize = 0;
-        DebugUtil.debug("total fill size:" + fillSize);
+        logger.debug("total fill size:" + fillSize);
         if (horizontal) {//h
             for (Component comp : components) {
                 SimpleLayoutData layoutData = componentMap.get(comp);
                 if (layoutData == null) {
                     curSize = getCompPreferredSize(comp).width;
-                    DebugUtil.debug("preferred size:" + curSize);
+                    logger.debug("preferred size:" + curSize);
                 } else if (layoutData.isFixedSize()) {
                     curSize = layoutData.fixedSize;
-                    DebugUtil.debug("fixed size:" + curSize);
+                    logger.debug("fixed size:" + curSize);
                 } else {
                     curSize = fillSize * layoutData.fixedPercent / 100;
-                    DebugUtil.debug("fill size:" + curSize + ", percent:" + layoutData.fixedPercent);
+                    logger.debug("fill size:" + curSize + ", percent:" + layoutData.fixedPercent);
                 }
                 comp.setBounds(x, y, curSize, parentHeight);
                 x += curSize;
@@ -164,19 +166,19 @@ public class SimpleLayout implements LayoutManager2 {
                 SimpleLayoutData layoutData = componentMap.get(comp);
                 if (layoutData == null) {
                     curSize = getCompPreferredSize(comp).height;
-                    DebugUtil.debug("preferred size:" + curSize);
+                    logger.debug("preferred size:" + curSize);
                 } else if (layoutData.isFixedSize()) {
                     curSize = layoutData.fixedSize;
-                    DebugUtil.debug("fixed size:" + curSize);
+                    logger.debug("fixed size:" + curSize);
                 } else {
                     curSize = fillSize * layoutData.fixedPercent / 100;
-                    DebugUtil.debug("fill size:" + curSize + ", percent:" + layoutData.fixedPercent);
+                    logger.debug("fill size:" + curSize + ", percent:" + layoutData.fixedPercent);
                 }
                 comp.setBounds(x, y, parentWidth, curSize);
                 y += curSize;
             }
         }
-        DebugUtil.debug("-----------------------------");
+        logger.debug("-----------------------------");
     }
 
     @SuppressWarnings("unused")

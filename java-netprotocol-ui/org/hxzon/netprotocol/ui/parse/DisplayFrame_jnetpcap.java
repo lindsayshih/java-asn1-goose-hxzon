@@ -28,10 +28,12 @@ import org.hxzon.netprotocol.packet.UdpPacket;
 import org.hxzon.netprotocol.packet.VlanPacket;
 import org.hxzon.ui.util.ListSelectionAction;
 import org.hxzon.ui.util.UIUtil;
-import org.hxzon.util.DebugUtil;
 import org.jnetpcap.Pcap;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class DisplayFrame_jnetpcap extends JFrame {
+    private static final Logger logger = LoggerFactory.getLogger(DisplayFrame_jnetpcap.class);
     private static final long serialVersionUID = 1L;
     static {
         new EthernetPacket();
@@ -71,7 +73,7 @@ public class DisplayFrame_jnetpcap extends JFrame {
                     if (pcap != null) {
                         new PacketHandler_jnetpcap(pcap, DisplayFrame_jnetpcap.this);
                     } else {
-                        DebugUtil.error(errbuf.toString());
+                        logger.error(errbuf.toString());
                     }
                 }
             }

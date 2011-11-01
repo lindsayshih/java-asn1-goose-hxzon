@@ -44,7 +44,8 @@ import org.hxzon.asn1.core.parse.BerOutputStream;
 import org.hxzon.asn1.core.parse.Tag;
 import org.hxzon.asn1.core.type.base.BerNode;
 import org.hxzon.util.BytesUtil;
-import org.hxzon.util.DebugUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Represents an octet string, or a string made up of 8-bit characters. No encoding
@@ -53,6 +54,7 @@ import org.hxzon.util.DebugUtil;
  * octet strings using UTF-8 encoding.
  */
 public class BerOctetString extends BerNode {
+    private static final Logger logger = LoggerFactory.getLogger(BerOctetString.class);
     private byte[] fValue;
 
 //    /**
@@ -101,7 +103,7 @@ public class BerOctetString extends BerNode {
             fValue = stream.readOctetString(0 == (getTag() & Tag.CONSTRUCTED));
             super.setOffsetAndLen(stream);
         } catch (IOException e) {
-            DebugUtil.error("read value error", e);
+            logger.error("read value error", e);
             fValue = new byte[0];
         }
     }

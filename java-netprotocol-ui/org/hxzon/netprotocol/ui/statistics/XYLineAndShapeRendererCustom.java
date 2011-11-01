@@ -53,8 +53,8 @@ public class XYLineAndShapeRendererCustom extends XYLineAndShapeRenderer {
                 boolean lineVisible = false;//getItemLineVisible(series, 0);
                 Stroke lineStroke = lookupSeriesStroke(series);
                 Paint linePaint = lookupSeriesPaint(series);
-                result = new LegendItem(label, description, toolTipText, urlText, shapeIsVisible, legendItemShape, shapeIsFilled, fillPaint, shapeOutlineVisible, outlinePaint, outlineStroke, lineVisible,
-                        this.getLegendLine(), lineStroke, linePaint);
+                result = new LegendItem(label, description, toolTipText, urlText, shapeIsVisible, legendItemShape, shapeIsFilled, fillPaint, shapeOutlineVisible, outlinePaint, outlineStroke,
+                        lineVisible, this.getLegendLine(), lineStroke, linePaint);
                 result.setLabelFont(lookupLegendTextFont(series));
                 Paint labelPaint = lookupLegendTextPaint(series);
                 if (labelPaint != null) {

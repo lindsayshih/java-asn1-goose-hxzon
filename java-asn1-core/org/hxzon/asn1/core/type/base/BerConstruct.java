@@ -48,13 +48,15 @@ import org.hxzon.asn1.core.parse.ReadSequence;
 import org.hxzon.asn1.core.parse.Tag;
 import org.hxzon.asn1.core.parse.ext.Asn1Utils;
 import org.hxzon.asn1.core.type.ext.IBerConstruct;
-import org.hxzon.util.DebugUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Represents a constructed object. A constructed object is a collection of other
  * BerNode objects.
  */
 public abstract class BerConstruct extends BerNode implements IBerConstruct {
+    private static final Logger logger = LoggerFactory.getLogger(BerConstruct.class);
     private ArrayList<BerNode> fList;
 
     protected BerConstruct(int typeTag) {
@@ -217,7 +219,7 @@ public abstract class BerConstruct extends BerNode implements IBerConstruct {
             readTag = seq.readBerTag();
             while (Tag.EOFTYPE != readTag) {
                 BerNode cnode = create(readTag, stream);
-                DebugUtil.trace("create " + cnode.getDisplayString() + "," + cnode.getTagDisplay() + ",tag offset:" + cnode.getTagOffset() + ",len:" + cnode.getTotalLen());
+                logger.trace("create " + cnode.getDisplayString() + "," + cnode.getTagDisplay() + ",tag offset:" + cnode.getTagOffset() + ",len:" + cnode.getTotalLen());
                 /** always add choice?
                 				//if child is a choice ,and no tag ,and global set don't add choice node
                 				if (cnode instanceof BerChoice && !((BerChoice) cnode).hasTag() && Asn1Utils.isNotAddChoiceNode()) {

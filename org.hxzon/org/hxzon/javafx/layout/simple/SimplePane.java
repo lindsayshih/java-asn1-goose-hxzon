@@ -11,9 +11,11 @@ import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 
 import org.hxzon.swing.layout.simple.SimpleLayoutData;
-import org.hxzon.util.DebugUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SimplePane extends Pane {
+    private static final Logger logger = LoggerFactory.getLogger(SimplePane.class);
     protected Map<Node, SimpleLayoutData> componentMap;
     protected boolean horizontal;
 
@@ -95,14 +97,14 @@ public class SimplePane extends Pane {
         Insets insets = new Insets(0, 0, 0, 0);
         if (horizontal) {//h
             for (Entry<Node, SimpleLayoutData> e : componentMap.entrySet()) {
-                DebugUtil.debug(e.getKey() + " pref height:" + e.getKey().prefHeight(width));
+                logger.debug(e.getKey() + " pref height:" + e.getKey().prefHeight(width));
                 resultHeight = Math.max(resultHeight, e.getKey().prefHeight(width));
             }
         } else {//v
             for (Entry<Node, SimpleLayoutData> e : componentMap.entrySet()) {
                 SimpleLayoutData layoutData = e.getValue();
                 double compPreferredSize = e.getKey().prefHeight(width);
-                DebugUtil.debug(e.getKey() + " pref height:" + compPreferredSize);
+                logger.debug(e.getKey() + " pref height:" + compPreferredSize);
                 if (layoutData == null) {
                     resultHeight += compPreferredSize;
                 } else if (layoutData.isFixedSize()) {
@@ -123,7 +125,7 @@ public class SimplePane extends Pane {
             for (Entry<Node, SimpleLayoutData> e : componentMap.entrySet()) {
                 SimpleLayoutData layoutData = e.getValue();
                 double compPreferredSize = e.getKey().prefWidth(height);
-//                DebugUtil.debug(e.getKey()+" pref width:"+compPreferredSize);
+//                logger.debug(e.getKey()+" pref width:"+compPreferredSize);
                 if (layoutData == null) {
                     resultWidth += compPreferredSize;
                 } else if (layoutData.isFixedSize()) {
@@ -163,10 +165,10 @@ public class SimplePane extends Pane {
             double fixedSize = getTotalFixedSize();
             if (horizontal) {//h
                 fillSize = parentWidth - fixedSize;
-                DebugUtil.debug("parent size:" + parentWidth);
+                logger.debug("parent size:" + parentWidth);
             } else {//v
                 fillSize = parentHeight - fixedSize;
-                DebugUtil.debug("parent size:" + parentHeight);
+                logger.debug("parent size:" + parentHeight);
             }
             layoutWhenFull(components, this, fillSize, parentWidth, parentHeight, x, y);
         }
@@ -180,27 +182,27 @@ public class SimplePane extends Pane {
                 result += layoutData.fixedSize;
             }
         }
-        DebugUtil.debug("total fixed size:" + result);
+        logger.debug("total fixed size:" + result);
         return result;
     }
 
     private void layoutWhenFull(ObservableList<Node> components, SimplePane parent, double fillSize, double parentWidth, double parentHeight, double x, double y) {
         double curSize = 0;
-        DebugUtil.debug("total fill size:" + fillSize);
-        DebugUtil.debug("parent height:" + parentHeight);
-        DebugUtil.debug("parent width:" + parentWidth);
+        logger.debug("total fill size:" + fillSize);
+        logger.debug("parent height:" + parentHeight);
+        logger.debug("parent width:" + parentWidth);
         if (horizontal) {//h
             for (Node comp : components) {
                 SimpleLayoutData layoutData = componentMap.get(comp);
                 if (layoutData == null) {
                     curSize = comp.prefWidth(USE_PREF_SIZE);
-                    DebugUtil.debug("preferred size:" + curSize);
+                    logger.debug("preferred size:" + curSize);
                 } else if (layoutData.isFixedSize()) {
                     curSize = layoutData.fixedSize;
-                    DebugUtil.debug("fixed size:" + curSize);
+                    logger.debug("fixed size:" + curSize);
                 } else {
                     curSize = fillSize * layoutData.fixedPercent / 100;
-                    DebugUtil.debug("fill size:" + curSize + ", percent:" + layoutData.fixedPercent);
+                    logger.debug("fill size:" + curSize + ", percent:" + layoutData.fixedPercent);
                 }
                 comp.relocate(x, y);
                 comp.resize(curSize, parentHeight);
@@ -211,20 +213,20 @@ public class SimplePane extends Pane {
                 SimpleLayoutData layoutData = componentMap.get(comp);
                 if (layoutData == null) {
                     curSize = comp.prefHeight(USE_PREF_SIZE);
-                    DebugUtil.debug("preferred size:" + curSize);
+                    logger.debug("preferred size:" + curSize);
                 } else if (layoutData.isFixedSize()) {
                     curSize = layoutData.fixedSize;
-                    DebugUtil.debug("fixed size:" + curSize);
+                    logger.debug("fixed size:" + curSize);
                 } else {
                     curSize = fillSize * layoutData.fixedPercent / 100;
-                    DebugUtil.debug("fill size:" + curSize + ", percent:" + layoutData.fixedPercent);
+                    logger.debug("fill size:" + curSize + ", percent:" + layoutData.fixedPercent);
                 }
                 comp.relocate(x, y);
                 comp.resize(parentWidth, curSize);
                 y += curSize;
             }
         }
-        DebugUtil.debug("-----------------------------");
+        logger.debug("-----------------------------");
     }
 
     @SuppressWarnings("unused")
