@@ -9,7 +9,7 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
-import org.hxzon.util.MyNumberFormat;
+import org.hxzon.util.My1024NumberFormat;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.DateAxis;
@@ -40,12 +40,12 @@ public class StatisticsPaintPanel extends JPanel {
     public StatisticsPaintPanel() {
         super(new BorderLayout());
         timeAxis = new DateAxis("");
-        timeAxis.setLowerMargin(0.02); // reduce the default margins
+        timeAxis.setLowerMargin(0.02);
         timeAxis.setUpperMargin(0.02);
         valueAxis = new NumberAxis("");
-        valueAxis.setAutoRangeIncludesZero(false); // override default
-        valueAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
-        valueAxis.setNumberFormatOverride(MyNumberFormat.getMyNumberFormat());
+        valueAxis.setAutoRangeIncludesZero(false);
+        valueAxis.setStandardTickUnits(JFreechartUtil.create1024IntegerTickUnits());
+        valueAxis.setNumberFormatOverride(My1024NumberFormat.getMyNumberFormat());
         XYToolTipGenerator toolTipGenerator = StandardXYToolTipGenerator.getTimeSeriesInstance();
 
         rendererPer100 = new XYLineAndShapeRendererCustom();
