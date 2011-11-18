@@ -9,8 +9,8 @@ import org.hxzon.asn1.core.parse.ext.Asn1Utils;
 import org.hxzon.asn1.core.type.base.BerNode;
 
 public class BerChoice extends BerNode implements FakeBerConstruct {
-    private boolean hasTag = false;
-    private BerNode realNode;
+    private boolean _hasTag = false;
+    private BerNode _realNode;
 
     public BerChoice() {
         super(Tag.NoTag);
@@ -31,7 +31,7 @@ public class BerChoice extends BerNode implements FakeBerConstruct {
     }
 
     public BerChoice init(String name, String displayString, int tag, BerInputStream stream, boolean hasTag) {
-        this.hasTag = hasTag;//must before super.init()
+        this._hasTag = hasTag;//must before super.init()
         super.init(name, displayString, tag, stream);
         if (!hasTag) {
             setTag(Tag.NoTag);
@@ -44,14 +44,14 @@ public class BerChoice extends BerNode implements FakeBerConstruct {
     }
 
     public boolean hasTag() {
-        return hasTag;
+        return _hasTag;
     }
 
     @Override
     protected void readValue(BerInputStream stream) {
         super.setTagOffset(stream.getTagOffset());
         int childTag = getTag();
-        if (hasTag) {
+        if (_hasTag) {
             try {
                 stream.readBerLength();//choice's length
                 childTag = stream.readBerTag();
@@ -59,22 +59,22 @@ public class BerChoice extends BerNode implements FakeBerConstruct {
                 e.printStackTrace();
             }
         }
-        realNode = create(childTag, stream);
-        realNode.setParent(this);
+        _realNode = create(childTag, stream);
+        _realNode.setParent(this);
         super.setTotalLen(stream.getTagOffset() - super.getTagOffset() + stream.getTotalLen());
-        realNode.setName(this.getName() + "-" + realNode.getName());
+        _realNode.setName(this.getName() + "-" + _realNode.getName());
     }
 
     public BerNode getRealNode() {
-        return realNode;
+        return _realNode;
     }
 
     public BerNode getLastRealNode() {
         //if real node is a choice,and no tag
-        if (realNode instanceof BerChoice && !((BerChoice) realNode).hasTag()) {
-            return ((BerChoice) realNode).getLastRealNode();
+        if (_realNode instanceof BerChoice && !((BerChoice) _realNode).hasTag()) {
+            return ((BerChoice) _realNode).getLastRealNode();
         }
-        return realNode;
+        return _realNode;
     }
 
     public String getValueAsString() {
@@ -92,7 +92,7 @@ public class BerChoice extends BerNode implements FakeBerConstruct {
 
     @Override
     public String toString() {
-        return realNode.toString();
+        return _realNode.toString();
     }
 
     @Override
@@ -101,11 +101,11 @@ public class BerChoice extends BerNode implements FakeBerConstruct {
     }
 
     public BerNode[] getChildren() {
-        return new BerNode[] { realNode };
+        return new BerNode[] { _realNode };
     }
 
     public boolean remove(BerNode o) {
-        realNode = null;
+        _realNode = null;
         return true;
     }
 

@@ -51,7 +51,7 @@ import org.hxzon.util.BytesUtil;
  * Java String syntax to represent the strings.
  */
 public abstract class BerAbstractString extends BerNode {
-    private String fValue;
+    private String _fValue;
 
     protected static final int ASCII = 0x0001; // A-Z a-z
     protected static final int NUMBER = 0x0002; // 0-9
@@ -71,7 +71,7 @@ public abstract class BerAbstractString extends BerNode {
      * @see org.hxzon.asn1.core.type.base.BerNode#writeElement(org.hxzon.asn1.core.parse.BerOutputStream)
      */
     public void writeElement(BerOutputStream stream) throws IOException {
-        byte[] b = fValue.getBytes("UTF-8");
+        byte[] b = _fValue.getBytes("UTF-8");
         stream.writeBerTag(getTag() | (stream.isComplexOctetString(b.length) ? Tag.CONSTRUCTED : 0));
         stream.writeOctetString(b, 0, b.length);
     }
@@ -81,11 +81,11 @@ public abstract class BerAbstractString extends BerNode {
      * @return
      */
     public String getValue() {
-        return fValue;
+        return _fValue;
     }
 
     public void setValue(String fValue) {
-        this.fValue = fValue;
+        this._fValue = fValue;
     }
 
     private static boolean isValidChar(char c, int charSet) {
@@ -136,7 +136,7 @@ public abstract class BerAbstractString extends BerNode {
     //add by hxzon
     protected void readValue(BerInputStream stream) {
         try {
-            fValue = BytesUtil.toUTF8String(stream.readOctetString(0 == (getTag() & Tag.CONSTRUCTED)));
+            _fValue = BytesUtil.toUTF8String(stream.readOctetString(0 == (getTag() & Tag.CONSTRUCTED)));
             super.setOffsetAndLen(stream);
         } catch (IOException e) {
             e.printStackTrace();

@@ -55,7 +55,7 @@ import org.slf4j.LoggerFactory;
  */
 public class BerOctetString extends BerNode {
     private static final Logger logger = LoggerFactory.getLogger(BerOctetString.class);
-    private byte[] fValue;
+    private byte[] _fValue;
 
 //    /**
 //     * Construct a boolean from the input stream
@@ -81,8 +81,8 @@ public class BerOctetString extends BerNode {
      * @see org.hxzon.asn1.core.type.base.BerNode#writeElement(org.hxzon.asn1.core.parse.BerOutputStream)
      */
     public void writeElement(BerOutputStream stream) throws IOException {
-        stream.writeBerTag(getTag() | (stream.isComplexOctetString(fValue.length) ? Tag.CONSTRUCTED : 0));
-        stream.writeOctetString(fValue, 0, fValue.length);
+        stream.writeBerTag(getTag() | (stream.isComplexOctetString(_fValue.length) ? Tag.CONSTRUCTED : 0));
+        stream.writeOctetString(_fValue, 0, _fValue.length);
     }
 
     /**
@@ -90,7 +90,7 @@ public class BerOctetString extends BerNode {
      * @return
      */
     public byte[] getValue() {
-        return fValue;
+        return _fValue;
     }
 
     public String getAsn1TypeDesc() {
@@ -100,11 +100,11 @@ public class BerOctetString extends BerNode {
     //add by hxzon
     protected void readValue(BerInputStream stream) {
         try {
-            fValue = stream.readOctetString(0 == (getTag() & Tag.CONSTRUCTED));
+            _fValue = stream.readOctetString(0 == (getTag() & Tag.CONSTRUCTED));
             super.setOffsetAndLen(stream);
         } catch (IOException e) {
             logger.error("read value error", e);
-            fValue = new byte[0];
+            _fValue = new byte[0];
         }
     }
 

@@ -50,7 +50,7 @@ import org.hxzon.util.BytesUtil;
  * is unknown, but well formed.
  */
 public class BerPrimitive extends BerNode {
-    private byte[] fValue;
+    private byte[] _fValue;
 
 //    /**
 //     * Construct a new primitive object by reading it in from the input stream
@@ -78,8 +78,8 @@ public class BerPrimitive extends BerNode {
 
     public void writeElement(BerOutputStream stream) throws IOException {
         stream.writeBerTag(getTag());
-        stream.writeBerLength(fValue.length);
-        stream.write(fValue);
+        stream.writeBerLength(_fValue.length);
+        stream.write(_fValue);
     }
 
     /**
@@ -87,7 +87,7 @@ public class BerPrimitive extends BerNode {
      * @return
      */
     public byte[] getValue() {
-        return fValue;
+        return _fValue;
     }
 
     public String getAsn1TypeDesc() {
@@ -97,8 +97,8 @@ public class BerPrimitive extends BerNode {
     //add by hxzon
     protected void readValue(BerInputStream stream) {
         try {
-            fValue = new byte[stream.readBerLength()];
-            stream.read(fValue);
+            _fValue = new byte[stream.readBerLength()];
+            stream.read(_fValue);
             super.setOffsetAndLen(stream);
         } catch (IOException e) {
             e.printStackTrace();

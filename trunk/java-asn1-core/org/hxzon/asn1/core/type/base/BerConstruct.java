@@ -57,12 +57,12 @@ import org.slf4j.LoggerFactory;
  */
 public abstract class BerConstruct extends BerNode implements IBerConstruct {
     private static final Logger logger = LoggerFactory.getLogger(BerConstruct.class);
-    private ArrayList<BerNode> fList;
+    private ArrayList<BerNode> _fList;
 
     protected BerConstruct(int typeTag) {
         super(typeTag);
 
-        fList = new ArrayList<BerNode>();
+        _fList = new ArrayList<BerNode>();
     }
 
 //    /**
@@ -103,7 +103,7 @@ public abstract class BerConstruct extends BerNode implements IBerConstruct {
              */
 
             stream.writeBerLength(-1);
-            it = fList.iterator();
+            it = _fList.iterator();
             while (it.hasNext()) {
                 BerNode node = it.next();
                 node.writeElement(stream);
@@ -117,7 +117,7 @@ public abstract class BerConstruct extends BerNode implements IBerConstruct {
 
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             BerOutputStream tmp = new BerOutputStream(baos, stream.getEncodingMethod());
-            it = fList.iterator();
+            it = _fList.iterator();
             while (it.hasNext()) {
                 BerNode node = it.next();
                 node.writeElement(tmp);
@@ -137,14 +137,14 @@ public abstract class BerConstruct extends BerNode implements IBerConstruct {
      * @return
      */
     public boolean add(BerNode o) {
-        return fList.add(o);
+        return _fList.add(o);
     }
 
     /**
      * Clear this constructed object
      */
     public void clear() {
-        fList.clear();
+        _fList.clear();
     }
 
     /**
@@ -153,7 +153,7 @@ public abstract class BerConstruct extends BerNode implements IBerConstruct {
      * @return
      */
     public BerNode get(int index) {
-        return fList.get(index);
+        return _fList.get(index);
     }
 
     /**
@@ -161,7 +161,7 @@ public abstract class BerConstruct extends BerNode implements IBerConstruct {
      * @return
      */
     public boolean isEmpty() {
-        return fList.isEmpty();
+        return _fList.isEmpty();
     }
 
     /**
@@ -169,7 +169,7 @@ public abstract class BerConstruct extends BerNode implements IBerConstruct {
      * @return
      */
     public Iterator<BerNode> iterator() {
-        return fList.iterator();
+        return _fList.iterator();
     }
 
     /**
@@ -178,7 +178,7 @@ public abstract class BerConstruct extends BerNode implements IBerConstruct {
      * @return
      */
     public boolean remove(BerNode o) {
-        return fList.remove(o);
+        return _fList.remove(o);
     }
 
     /**
@@ -186,7 +186,7 @@ public abstract class BerConstruct extends BerNode implements IBerConstruct {
      * @return
      */
     public int size() {
-        return fList.size();
+        return _fList.size();
     }
 
     /**
@@ -194,14 +194,14 @@ public abstract class BerConstruct extends BerNode implements IBerConstruct {
      * @return
      */
     public BerNode[] getChildren() {
-        return fList.toArray(new BerNode[fList.size()]);
+        return _fList.toArray(new BerNode[_fList.size()]);
     }
 
     public String toString() {
         StringBuffer sb = new StringBuffer();
-        sb.append(getAsn1TypeDesc()).append(",").append(Tag.toString(getTag())).append(fList.size()).append(" items,").append("offset=").append(getTagOffset()).append(",len=").append(getTotalLen());
+        sb.append(getAsn1TypeDesc()).append(",").append(Tag.toString(getTag())).append(_fList.size()).append(" items,").append("offset=").append(getTagOffset()).append(",len=").append(getTotalLen());
         sb.append("\n{");
-        Iterator<BerNode> it = fList.iterator();
+        Iterator<BerNode> it = _fList.iterator();
         while (it.hasNext()) {
             sb.append(it.next().toString()).append("\n");
         }
@@ -228,7 +228,7 @@ public abstract class BerConstruct extends BerNode implements IBerConstruct {
                 				}
                 				**/
                 cnode.setParent(this);
-                fList.add(cnode);
+                _fList.add(cnode);
                 readTag = seq.readBerTag();
             }
 //			logger.trace("stream tag offset:"+stream.getTagOffset()+","+super.getDisplayString()+" tag offset:"+super.getTagOffset()

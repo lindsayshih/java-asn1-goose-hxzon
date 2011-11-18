@@ -46,39 +46,39 @@ import java.io.InputStream;
  */
 
 class LengthInputStream extends FilterInputStream {
-    private long fRead;
-    private long fMark;
+    private long _fRead;
+    private long _fMark;
 
     /**
      * Construct a length input stream object
      */
     protected LengthInputStream(InputStream arg0) {
         super(arg0);
-        fRead = 0;
+        _fRead = 0;
     }
 
     public int read() throws IOException {
         int r = super.read();
         if (r != -1)
-            ++fRead;
+            ++_fRead;
         return r;
     }
 
     public int read(byte[] b, int off, int len) throws IOException {
         int r = super.read(b, off, len);
         if (r > 0)
-            fRead += r;
+            _fRead += r;
         return r;
     }
 
     public void mark(int readlimit) {
         super.mark(readlimit);
-        fMark = fRead;
+        _fMark = _fRead;
     }
 
     public void reset() throws IOException {
         super.reset();
-        fRead = fMark;
+        _fRead = _fMark;
     }
 
     /**
@@ -87,13 +87,13 @@ class LengthInputStream extends FilterInputStream {
      * @return The number of bytes read
      */
     public long getReadBytes() {
-        return fRead;
+        return _fRead;
     }
 
     /**
      * Resets the read count to zero.
      */
     public void resetReadCount() {
-        fRead = 0;
+        _fRead = 0;
     }
 }

@@ -2,14 +2,14 @@ package org.hxzon.asn1.core.type.ext;
 
 public class FakeBerInteger extends FakeBerNode {
 
-    private long value;
+    private long _value;
 
     public FakeBerInteger(long value) {
-        this.value = value;
+        this._value = value;
     }
 
     public long getValue() {
-        return value;
+        return _value;
     }
 
     public String getValueAsString() {
