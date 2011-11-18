@@ -9,12 +9,12 @@ import org.hxzon.asn1.core.type.BerOctetString;
 import org.hxzon.util.BytesUtil;
 
 public class UtcTime extends BerOctetString {
-    private static final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd,HH:mm:ss");
-    private static final DecimalFormat decimalFormat = new DecimalFormat();
-    private static final String numberPattern = "0.000000";
+    private static final SimpleDateFormat _format = new SimpleDateFormat("yyyy-MM-dd,HH:mm:ss");
+    private static final DecimalFormat _decimalFormat = new DecimalFormat();
+    private static final String _numberPattern = "0.000000";
     static {
-        decimalFormat.setRoundingMode(RoundingMode.DOWN);
-        decimalFormat.applyPattern(numberPattern);
+        _decimalFormat.setRoundingMode(RoundingMode.DOWN);
+        _decimalFormat.applyPattern(_numberPattern);
     }
 
     //前4个字节是从1970年1月1日0时0分0秒开始的秒数，紧跟的3个字节是秒的小数部分，最后一个字节是时间品质和精度。
@@ -31,7 +31,7 @@ public class UtcTime extends BerOctetString {
             double millisD = millis / Math.pow(2, 24);
 //		Date date = new Date(seconds * 1000 + millisD * 1000);
             Date date = new Date(seconds * 1000);
-            return format.format(date) + decimalFormat.format(millisD).substring(1) + "," + str.substring(14);
+            return _format.format(date) + _decimalFormat.format(millisD).substring(1) + "," + str.substring(14);
         } catch (Exception e) {
             return super.getValueAsString();
         }

@@ -50,7 +50,7 @@ import org.hxzon.asn1.core.type.ext.BitStringPresentation;
  */
 public class BerBitString extends BerNode {
 //	private BitSet fValue;
-    private BitStringPresentation fValue;
+    private BitStringPresentation _fValue;
 
 //    /**
 //     * Construct a boolean from the input stream
@@ -79,8 +79,8 @@ public class BerBitString extends BerNode {
 //		stream.writeBerTag(getTag() | (stream.isComplexBitString(fValue) ? Tag.CONSTRUCTED : 0));
 //		stream.writeBitString(fValue);
         //change by hxzon
-        stream.writeBerTag(getTag() | (stream.isComplexBitString(fValue.getValue()) ? Tag.CONSTRUCTED : 0));
-        stream.writeBitString(fValue.getValue());
+        stream.writeBerTag(getTag() | (stream.isComplexBitString(_fValue.getValue()) ? Tag.CONSTRUCTED : 0));
+        stream.writeBitString(_fValue.getValue());
     }
 
     /**
@@ -91,7 +91,7 @@ public class BerBitString extends BerNode {
 //		return fValue;
 //	}
     public BitStringPresentation getValue() {
-        return fValue;
+        return _fValue;
     }
 
     //add by hxzon
@@ -104,7 +104,7 @@ public class BerBitString extends BerNode {
         try {
 //			fValue = stream.readBitString(0 == (getTag() & Tag.CONSTRUCTED));
             //change by hxzon
-            fValue = stream.readBitString2(0 == (getTag() & Tag.CONSTRUCTED));
+            _fValue = stream.readBitString2(0 == (getTag() & Tag.CONSTRUCTED));
             super.setOffsetAndLen(stream);
         } catch (IOException e) {
             e.printStackTrace();

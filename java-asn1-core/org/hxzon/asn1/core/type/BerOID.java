@@ -52,7 +52,7 @@ import org.hxzon.asn1.core.type.base.BerNode;
  * string representing an OID.
  */
 public class BerOID extends BerNode {
-    private long[] fValue;
+    private long[] _fValue;
 
 //    /**
 //     * Construct a boolean from the input stream
@@ -79,7 +79,7 @@ public class BerOID extends BerNode {
      */
     public void writeElement(BerOutputStream stream) throws IOException {
         stream.writeBerTag(getTag());
-        stream.writeOID(fValue);
+        stream.writeOID(_fValue);
     }
 
     /**
@@ -87,7 +87,7 @@ public class BerOID extends BerNode {
      * @return
      */
     public long[] getValue() {
-        return fValue;
+        return _fValue;
     }
 
     public String getAsn1TypeDesc() {
@@ -97,7 +97,7 @@ public class BerOID extends BerNode {
     //add by hxzon
     protected void readValue(BerInputStream stream) {
         try {
-            fValue = stream.readOID();
+            _fValue = stream.readOID();
             super.setOffsetAndLen(stream);
         } catch (IOException e) {
             e.printStackTrace();

@@ -48,7 +48,7 @@ import org.hxzon.asn1.core.type.base.BerNode;
  * Represents a boolean in the BER stream
  */
 public class BerBoolean extends BerNode {
-    private boolean fValue;
+    private boolean _fValue;
 
 //    /**
 //     * Construct a boolean from the input stream
@@ -75,7 +75,7 @@ public class BerBoolean extends BerNode {
      */
     public void writeElement(BerOutputStream stream) throws IOException {
         stream.writeBerTag(getTag());
-        stream.writeBoolean(fValue);
+        stream.writeBoolean(_fValue);
     }
 
     /**
@@ -83,7 +83,7 @@ public class BerBoolean extends BerNode {
      * @return
      */
     public boolean getValue() {
-        return fValue;
+        return _fValue;
     }
 
     public String getAsn1TypeDesc() {
@@ -98,7 +98,7 @@ public class BerBoolean extends BerNode {
     //add by hxzon
     protected void readValue(BerInputStream stream) {
         try {
-            fValue = stream.readBoolean();
+            _fValue = stream.readBoolean();
             super.setOffsetAndLen(stream);
         } catch (IOException e) {
             e.printStackTrace();

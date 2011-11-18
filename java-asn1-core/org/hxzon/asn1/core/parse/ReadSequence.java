@@ -45,24 +45,24 @@ import org.slf4j.LoggerFactory;
  */
 public class ReadSequence {
     private static final Logger logger = LoggerFactory.getLogger(ReadSequence.class);
-    private String display;
-    private BerInputStream fInputStream;
-    private long fStart;
-    private int fLength;
-    private boolean fEOF;
+    private String _display;
+    private BerInputStream _fInputStream;
+    private long _fStart;
+    private int _fLength;
+    private boolean _fEOF;
 
     /**
      * Creates a new sequence tracking wrapper.
      * @param stream
      */
     public ReadSequence(String display, BerInputStream stream) throws IOException {
-        this.display = display;
-        fInputStream = stream;
-        fLength = fInputStream.readBerLength();
-        fStart = fInputStream.getReadBytes();
+        this._display = display;
+        _fInputStream = stream;
+        _fLength = _fInputStream.readBerLength();
+        _fStart = _fInputStream.getReadBytes();
 
-        fEOF = (fLength == 0);
-        logger.trace("read sequence " + display + ", start:" + fStart + ",len:" + fLength);
+        _fEOF = (_fLength == 0);
+        logger.trace("read sequence " + display + ", start:" + _fStart + ",len:" + _fLength);
     }
 
     /**
@@ -72,32 +72,32 @@ public class ReadSequence {
      * @throws IOException
      */
     public int readBerTag() throws IOException {
-        if (fEOF) {
+        if (_fEOF) {
             return Tag.EOFTYPE;
         }
 
-        if (fLength != -1) {
+        if (_fLength != -1) {
 //			if (fStart + fLength <= fInputStream.getReadBytes()) {
             //change by hxzon//FIXME
-            if (fStart + fLength == fInputStream.getReadBytes()) {
-                fEOF = true;
+            if (_fStart + _fLength == _fInputStream.getReadBytes()) {
+                _fEOF = true;
                 return Tag.EOFTYPE;
             }
         }
 
-        int tag = fInputStream.readBerTag();
+        int tag = _fInputStream.readBerTag();
         if (tag == Tag.EOFTYPE) {
             //remove by hxzon//FIXME
 //			if (0 != fInputStream.readBerLength()) {
 //				throw new AsnEncodingException("EOF tag must be zero length");
 //			}
-            fEOF = true;
+            _fEOF = true;
 
-            if (fLength != -1) {
+            if (_fLength != -1) {
                 /* EOF marker early? Skip rest of container */
-                long remain = fInputStream.getReadBytes() - (fStart + fLength);
+                long remain = _fInputStream.getReadBytes() - (_fStart + _fLength);
                 if (remain > 0)
-                    fInputStream.skip(remain);
+                    _fInputStream.skip(remain);
             }
 
             return Tag.EOFTYPE;

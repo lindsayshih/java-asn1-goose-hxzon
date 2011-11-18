@@ -9,14 +9,14 @@ import org.hxzon.asn1.core.type.BerOctetString;
 import org.hxzon.util.BytesUtil;
 
 public class TimeOfDay extends BerOctetString {
-    private static final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd,HH:mm:ss");
-    private static final DecimalFormat decimalFormat = new DecimalFormat();
-    private static final String numberPattern = "0.000000";
-    private static final long secondsOneDay = 24 * 3600;
-    private static final long millisecondsOneDay = secondsOneDay * 1000;
+    private static final SimpleDateFormat _format = new SimpleDateFormat("yyyy-MM-dd,HH:mm:ss");
+    private static final DecimalFormat _decimalFormat = new DecimalFormat();
+    private static final String _numberPattern = "0.000000";
+    private static final long _secondsOneDay = 24 * 3600;
+    private static final long _millisecondsOneDay = _secondsOneDay * 1000;
     static {
-        decimalFormat.setRoundingMode(RoundingMode.DOWN);
-        decimalFormat.applyPattern(numberPattern);
+        _decimalFormat.setRoundingMode(RoundingMode.DOWN);
+        _decimalFormat.applyPattern(_numberPattern);
     }
 
     //TimeOfDay ::= OCTET STRING -- (SIZE (4 | 6))
@@ -73,10 +73,10 @@ public class TimeOfDay extends BerOctetString {
                 //2010-09-19 08:58:7.200 (days=9758 msec= 32287200)
                 milliseconds = Long.parseLong(str.substring(0, 8), 16);
                 long days = Long.parseLong(str.substring(8, 12), 16);
-                date = new Date((days + 5113) * millisecondsOneDay + milliseconds);
+                date = new Date((days + 5113) * _millisecondsOneDay + milliseconds);
             }
             microsecondPart = ((double) (milliseconds % 1000)) / 1000;
-            return format.format(date) + decimalFormat.format(microsecondPart).substring(1);
+            return _format.format(date) + _decimalFormat.format(microsecondPart).substring(1);
         } catch (Exception e) {
             return super.getValueAsString();
         }

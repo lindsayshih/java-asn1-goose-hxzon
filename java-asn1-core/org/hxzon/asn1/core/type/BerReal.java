@@ -47,7 +47,7 @@ import org.hxzon.asn1.core.type.base.BerNode;
  * Represents a floating point value in the BER stream
  */
 public class BerReal extends BerNode {
-    private double fValue;
+    private double _fValue;
 
 //    /**
 //     * Construct a boolean from the input stream
@@ -74,7 +74,7 @@ public class BerReal extends BerNode {
      */
     public void writeElement(BerOutputStream stream) throws IOException {
         stream.writeBerTag(getTag());
-        stream.writeReal(fValue);
+        stream.writeReal(_fValue);
     }
 
     /**
@@ -82,7 +82,7 @@ public class BerReal extends BerNode {
      * @return
      */
     public double getValue() {
-        return fValue;
+        return _fValue;
     }
 
     public String getAsn1TypeDesc() {
@@ -92,7 +92,7 @@ public class BerReal extends BerNode {
     //add by hxzon
     protected void readValue(BerInputStream stream) {
         try {
-            fValue = stream.readReal();
+            _fValue = stream.readReal();
             super.setOffsetAndLen(stream);
         } catch (IOException e) {
             e.printStackTrace();

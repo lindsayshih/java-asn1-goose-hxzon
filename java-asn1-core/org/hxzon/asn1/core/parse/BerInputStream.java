@@ -51,7 +51,7 @@ import org.hxzon.asn1.core.type.ext.BitStringPresentation;
  * from a BER input stream
  */
 public class BerInputStream extends LengthInputStream {
-    private byte[] fBuffer; // internal copy buffer
+    private byte[] _fBuffer; // internal copy buffer
 
     /**
      * Construct a new input stream reader
@@ -75,7 +75,7 @@ public class BerInputStream extends LengthInputStream {
         if (b == -1) {
             throw new EOFException();
         }
-        totalLen++;//add by hxzon
+        _totalLen++;//add by hxzon
         return (byte) b;
     }
 
@@ -85,8 +85,8 @@ public class BerInputStream extends LengthInputStream {
      * @throws IOException
      */
     public int readBerTag() throws IOException {
-        tagOffset += totalLen;//hxzon
-        totalLen = 0;//hxzon
+        _tagOffset += _totalLen;//hxzon
+        _totalLen = 0;//hxzon
         byte h, x;
         int type;
 
@@ -107,7 +107,7 @@ public class BerInputStream extends LengthInputStream {
             } while (0 != (0x80 & x));
         }
         //add by hxzon,after read tag
-        lenOffset = tagOffset + totalLen;
+        _lenOffset = _tagOffset + _totalLen;
         //change by hxzon,by Fatih Batuk
 //        return Tag.convertTag(0x03 & (h >> 6), type, (0 != (h & 0x20)));
         int hold = Tag.convertTag(0x03 & (h >> 6), type, (0 != (h & 0x20)));
@@ -126,15 +126,15 @@ public class BerInputStream extends LengthInputStream {
         h = readByte();
         if (0 == (0x80 & h)) {
             //add by hxzon,after read length
-            valueOffset = tagOffset + totalLen;
-            valueLen = h;
+            _valueOffset = _tagOffset + _totalLen;
+            _valueLen = h;
             return h; // definite short form
         }
         h &= 0x7F; // definite long form; pull data
         if (h == 0) {
             //add by hxzon,after read length
-            valueOffset = tagOffset + totalLen;
-            valueLen = -1;
+            _valueOffset = _tagOffset + _totalLen;
+            _valueLen = -1;
             return -1; // indefinite long form
         }
         length = 0;
@@ -143,8 +143,8 @@ public class BerInputStream extends LengthInputStream {
             length = (length << 8) | (0x00FF & x);
         }
         //add by hxzon,after read length
-        valueOffset = tagOffset + totalLen;
-        valueLen = length;
+        _valueOffset = _tagOffset + _totalLen;
+        _valueLen = length;
         return length;
     }
 
@@ -560,19 +560,19 @@ public class BerInputStream extends LengthInputStream {
     private void copyToStream(OutputStream stream, int length) throws IOException {
         int off, rlen;
 
-        if (fBuffer == null)
-            fBuffer = new byte[1024]; // small buffer for copy purposes
+        if (_fBuffer == null)
+            _fBuffer = new byte[1024]; // small buffer for copy purposes
 
         off = 0;
         while (off < length) {
             rlen = length - off;
-            if (rlen > fBuffer.length)
-                rlen = fBuffer.length;
+            if (rlen > _fBuffer.length)
+                rlen = _fBuffer.length;
 
-            rlen = read(fBuffer, 0, rlen);
+            rlen = read(_fBuffer, 0, rlen);
             if (rlen == -1)
                 throw new AsnEncodingException("EOF reached unexpectedly");
-            stream.write(fBuffer, 0, rlen);
+            stream.write(_fBuffer, 0, rlen);
 
             off += rlen;
         }
@@ -626,7 +626,7 @@ public class BerInputStream extends LengthInputStream {
         byte[] result = baos.toByteArray();
         //add by hxzon
         if (primitive) {
-            totalLen += result.length;
+            _totalLen += result.length;
 //			logger.trace("read octet string:total len:"+totalLen);
         }
         //end add
@@ -635,49 +635,49 @@ public class BerInputStream extends LengthInputStream {
 
     //-----------------------------------------
     //add by hxzon for offset and len
-    private int tagOffset = 0;
-    private int lenOffset = 0;
-    private int valueOffset = 0;
-    private int valueLen = 0;
-    private int totalLen = 0;
+    private int _tagOffset = 0;
+    private int _lenOffset = 0;
+    private int _valueOffset = 0;
+    private int _valueLen = 0;
+    private int _totalLen = 0;
 
     public int getTagOffset() {
-        return tagOffset;
+        return _tagOffset;
     }
 
     public void setTagOffset(int offset) {
-        this.tagOffset = offset;
+        this._tagOffset = offset;
     }
 
     public int getTotalLen() {
-        return totalLen;
+        return _totalLen;
     }
 
     public void setTotalLen(int len) {
-        this.totalLen = len;
+        this._totalLen = len;
     }
 
     public int getLenOffset() {
-        return lenOffset;
+        return _lenOffset;
     }
 
     public void setLenOffset(int lenOffset) {
-        this.lenOffset = lenOffset;
+        this._lenOffset = lenOffset;
     }
 
     public int getValueOffset() {
-        return valueOffset;
+        return _valueOffset;
     }
 
     public void setValueOffset(int valueOffset) {
-        this.valueOffset = valueOffset;
+        this._valueOffset = valueOffset;
     }
 
     public int getValueLen() {
-        return valueLen;
+        return _valueLen;
     }
 
     public void setValueLen(int valueLen) {
-        this.valueLen = valueLen;
+        this._valueLen = valueLen;
     }
 }

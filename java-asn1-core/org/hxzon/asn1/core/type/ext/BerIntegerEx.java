@@ -6,10 +6,10 @@ import java.util.Map;
 import org.hxzon.asn1.core.type.BerInteger;
 
 public abstract class BerIntegerEx extends BerInteger {
-    private static final Map<String, String> valueStrings = new HashMap<String, String>();
+    private static final Map<String, String> _valueStrings = new HashMap<String, String>();
 
     public String getValueAsString() {
-        String valueAsString = valueStrings.get(getClass().getName() + "-" + getValue());
+        String valueAsString = _valueStrings.get(getClass().getName() + "-" + getValue());
         if (valueAsString != null) {
             return valueAsString;
         } else {
@@ -18,7 +18,7 @@ public abstract class BerIntegerEx extends BerInteger {
     }
 
     public static void addValueString(int value, String valueAsString, Class<?> clazz) {
-        valueStrings.put(clazz.getName() + "-" + value, valueAsString);
+        _valueStrings.put(clazz.getName() + "-" + value, valueAsString);
     }
 
 }

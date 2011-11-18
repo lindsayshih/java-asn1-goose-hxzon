@@ -51,7 +51,7 @@ import org.slf4j.LoggerFactory;
  */
 public class BerInteger extends BerNode {
     private static final Logger logger = LoggerFactory.getLogger(BerInteger.class);
-    private long fValue;
+    private long _fValue;
 
 //    /**
 //     * Construct a boolean from the input stream
@@ -78,7 +78,7 @@ public class BerInteger extends BerNode {
      */
     public void writeElement(BerOutputStream stream) throws IOException {
         stream.writeBerTag(getTag());
-        stream.writeInteger(fValue);
+        stream.writeInteger(_fValue);
     }
 
     /**
@@ -86,26 +86,26 @@ public class BerInteger extends BerNode {
      * @return
      */
     public long getValue() {
-        return fValue;
+        return _fValue;
     }
 
     public void setValue(long value) {
-        if (unsigned && value < 0) {
+        if (_unsigned && value < 0) {
             value = value + 2 ^ 64;
         }
-        this.fValue = value;
+        this._fValue = value;
     }
 
     public String getAsn1TypeDesc() {
         return "BerInteger";
     }
 
-    private boolean unsigned = false;
-    private int bitLen = 64;
+    private boolean _unsigned = false;
+    private int _bitLen = 64;
 
     public BerInteger limitBitLength(int bitLen, boolean unsigned) {
-        this.bitLen = bitLen;
-        this.unsigned = unsigned;
+        this._bitLen = bitLen;
+        this._unsigned = unsigned;
         if (bitLen < 32) {
             logger.debug("bitLen:" + bitLen);
         }
@@ -128,6 +128,6 @@ public class BerInteger extends BerNode {
 
     //add by hxzon
     public String getValueAsString() {
-        return String.valueOf(getValue()) + "[len=" + bitLen + (unsigned ? ",unsigned]" : ",signed]");
+        return String.valueOf(getValue()) + "[len=" + _bitLen + (_unsigned ? ",unsigned]" : ",signed]");
     }
 }

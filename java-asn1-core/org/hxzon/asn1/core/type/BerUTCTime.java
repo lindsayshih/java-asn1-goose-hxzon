@@ -53,10 +53,10 @@ import org.hxzon.util.BytesUtil;
  * Represents a UTC time object.
  */
 public class BerUTCTime extends BerNode {
-    private static SimpleDateFormat gFormat;
-    private Date fValue;
+    private static SimpleDateFormat _gFormat;
+    private Date _fValue;
     //add by hxzon
-    private String origValue;
+    private String _origValue;
 
 //    /**
 //     * Construct a boolean from the input stream
@@ -81,7 +81,7 @@ public class BerUTCTime extends BerNode {
      * @see org.hxzon.asn1.core.type.base.BerNode#writeElement(org.hxzon.asn1.core.parse.BerOutputStream)
      */
     public void writeElement(BerOutputStream stream) throws IOException {
-        String date = formatDate(fValue);
+        String date = formatDate(_fValue);
 
         byte[] b = date.getBytes("UTF-8");
         stream.writeBerTag(getTag() | (stream.isComplexOctetString(b.length) ? Tag.CONSTRUCTED : 0));
@@ -89,33 +89,33 @@ public class BerUTCTime extends BerNode {
     }
 
     public Date getValue() {
-        return fValue;
+        return _fValue;
     }
 
     private static void initFormat() {
-        if (gFormat == null) {
-            gFormat = new SimpleDateFormat("yyMMddHHmmss");
-            gFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        if (_gFormat == null) {
+            _gFormat = new SimpleDateFormat("yyMMddHHmmss");
+            _gFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
         }
     }
 
     private static String formatDate(Date date) {
         initFormat();
 
-        synchronized (gFormat) {
-            return gFormat.format(date) + "Z";
+        synchronized (_gFormat) {
+            return _gFormat.format(date) + "Z";
         }
     }
 
     private static Date parseDate(String date) throws AsnEncodingException {
         initFormat();
 
-        synchronized (gFormat) {
+        synchronized (_gFormat) {
             if (date.endsWith("Z")) {
                 date = date.substring(0, date.length() - 1);
             }
             try {
-                return gFormat.parse(date);
+                return _gFormat.parse(date);
             } catch (ParseException e) {
                 throw new AsnEncodingException("Illegal formatted date read from input stream");
             }
@@ -129,8 +129,8 @@ public class BerUTCTime extends BerNode {
     //add by hxzon
     protected void readValue(BerInputStream stream) {
         try {
-            origValue = BytesUtil.toUTF8String(stream.readOctetString(0 == (getTag() & Tag.CONSTRUCTED)));
-            fValue = parseDate(origValue);
+            _origValue = BytesUtil.toUTF8String(stream.readOctetString(0 == (getTag() & Tag.CONSTRUCTED)));
+            _fValue = parseDate(_origValue);
             super.setOffsetAndLen(stream);
         } catch (IOException e) {
             e.printStackTrace();

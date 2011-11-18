@@ -50,27 +50,27 @@ import org.hxzon.asn1.core.type.ext.IBerConstruct;
  */
 public abstract class BerNode {
     //add by hxzon
-    private int typeTag;
-    private int fTag;
+    private int _typeTag;
+    private int _fTag;
 
     protected BerNode(int typeTag) {
-        this.typeTag = typeTag;
+        this._typeTag = typeTag;
     }
 
     public int getTag() {
-        return fTag;
+        return _fTag;
     }
 
     public void setTag(int tag) {
-        fTag = tag;
+        _fTag = tag;
     }
 
     public int getTypeTag() {
-        return typeTag;
+        return _typeTag;
     }
 
     protected void setTypeTag(int tag) {
-        fTag = tag;
+        _fTag = tag;
     }
 
     /**
@@ -88,79 +88,79 @@ public abstract class BerNode {
     public abstract String getAsn1TypeDesc();
 
     public String getTagDisplay() {
-        return Tag.toString(fTag);
+        return Tag.toString(_fTag);
     }
 
     //--------------------------------------------------
     //add by hxzon for offset ,len
-    private int tagOffset;//tag offset
-    private int totalLen;//total len
-    private int lenOffset;
-    private int valueOffset;
-    private String displayString;
-    private String name;
-    private IBerConstruct parent;
+    private int _tagOffset;//tag offset
+    private int _totalLen;//total len
+    private int _lenOffset;
+    private int _valueOffset;
+    private String _displayString;
+    private String _name;
+    private IBerConstruct _parent;
 
     public IBerConstruct getParent() {
-        return parent;
+        return _parent;
     }
 
     public BerNode setParent(IBerConstruct parent) {
-        this.parent = parent;
+        this._parent = parent;
         return this;
     }
 
     public String getName() {
-        return name;
+        return _name;
     }
 
     public BerNode setName(String name) {
-        this.name = name;
+        this._name = name;
         return this;
     }
 
     public String getDisplayString() {
-        return displayString;
+        return _displayString;
     }
 
     public BerNode setDisplayString(String display) {
-        this.displayString = display;
+        this._displayString = display;
         return this;
     }
 
     public int getTagOffset() {
-        return tagOffset;
+        return _tagOffset;
     }
 
     protected BerNode setTagOffset(int tagOffset) {
-        this.tagOffset = tagOffset;
+        this._tagOffset = tagOffset;
         return this;
     }
 
     public int getTotalLen() {
-        return totalLen;
+        return _totalLen;
     }
 
     protected BerNode setTotalLen(int totalLen) {
-        this.totalLen = totalLen;
+        this._totalLen = totalLen;
         return this;
     }
 
     public int getLenOffset() {
-        return lenOffset;
+        return _lenOffset;
     }
 
     protected BerNode setLenOffset(int lenOffset) {
-        this.lenOffset = lenOffset;
+        this._lenOffset = lenOffset;
         return this;
     }
 
     public int getValueOffset() {
-        return valueOffset;
+        return _valueOffset;
     }
 
     protected BerNode setValueOffset(int valueOffset) {
-        this.valueOffset = valueOffset;
+        this._valueOffset = valueOffset;
         return this;
     }
 

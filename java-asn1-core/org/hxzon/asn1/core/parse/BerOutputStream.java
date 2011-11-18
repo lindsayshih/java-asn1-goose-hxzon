@@ -53,8 +53,8 @@ public class BerOutputStream extends FilterOutputStream {
     /// Tells the output stream to use the DER encoding rules
     public static final int ENCODING_DER = 2;
 
-    private int fEncoding;
-    private byte[] fBuffer;
+    private int _fEncoding;
+    private byte[] _fBuffer;
 
     /**
      * Construt a new output stream writer. This uses the specified encoding
@@ -64,7 +64,7 @@ public class BerOutputStream extends FilterOutputStream {
      */
     public BerOutputStream(OutputStream outStream, int encoding) {
         super(outStream);
-        fEncoding = encoding;
+        _fEncoding = encoding;
     }
 
     /**
@@ -80,7 +80,7 @@ public class BerOutputStream extends FilterOutputStream {
      * @return
      */
     public int getEncodingMethod() {
-        return fEncoding;
+        return _fEncoding;
     }
 
     /**
@@ -272,7 +272,7 @@ public class BerOutputStream extends FilterOutputStream {
         int length;
 
         length = set.length();
-        if ((length > 7992) && (fEncoding == ENCODING_CER)) {
+        if ((length > 7992) && (_fEncoding == ENCODING_CER)) {
             writeBerLength(-1);
 
             /*
@@ -307,7 +307,7 @@ public class BerOutputStream extends FilterOutputStream {
      */
     public boolean isComplexBitString(BitSet set) {
         int length = set.length();
-        return ((length > 7992) && (fEncoding == ENCODING_CER));
+        return ((length > 7992) && (_fEncoding == ENCODING_CER));
     }
 
     /**
@@ -345,19 +345,19 @@ public class BerOutputStream extends FilterOutputStream {
     private void copyFromStream(InputStream stream, int length) throws IOException {
         int off, rlen;
 
-        if (fBuffer == null)
-            fBuffer = new byte[1024]; // small buffer for copy purposes
+        if (_fBuffer == null)
+            _fBuffer = new byte[1024]; // small buffer for copy purposes
 
         off = 0;
         while (off < length) {
             rlen = length - off;
-            if (rlen > fBuffer.length)
-                rlen = fBuffer.length;
+            if (rlen > _fBuffer.length)
+                rlen = _fBuffer.length;
 
-            rlen = stream.read(fBuffer, 0, rlen);
+            rlen = stream.read(_fBuffer, 0, rlen);
             if (rlen == -1)
                 break;
-            write(fBuffer, 0, rlen);
+            write(_fBuffer, 0, rlen);
 
             off += rlen;
         }
@@ -376,13 +376,13 @@ public class BerOutputStream extends FilterOutputStream {
     private int copyToBuffer(InputStream stream) throws IOException {
         int off, rlen;
 
-        if (fBuffer == null)
-            fBuffer = new byte[1024];
+        if (_fBuffer == null)
+            _fBuffer = new byte[1024];
         off = 0;
         while (off < 1000) {
             rlen = 1000 - off;
 
-            rlen = stream.read(fBuffer, off, rlen);
+            rlen = stream.read(_fBuffer, off, rlen);
             if (rlen == -1)
                 break;
             off += rlen;
@@ -401,11 +401,11 @@ public class BerOutputStream extends FilterOutputStream {
      */
     public void writeOctetString(InputStream stream, int length) throws IOException {
         int off, wlen;
-        if ((length == -1) && (fEncoding == ENCODING_DER)) {
+        if ((length == -1) && (_fEncoding == ENCODING_DER)) {
             throw new AsnEncodingException("DER encoding requires a definite length to write");
         }
 
-        if (((fEncoding == ENCODING_CER) && (length > 1000)) || (length == -1)) {
+        if (((_fEncoding == ENCODING_CER) && (length > 1000)) || (length == -1)) {
             /*
              * Requires chunked encoding
              */
@@ -423,7 +423,7 @@ public class BerOutputStream extends FilterOutputStream {
                         break;
                     writeBerTag(Tag.OCTETSTRING);
                     writeBerLength(len);
-                    write(fBuffer, 0, len);
+                    write(_fBuffer, 0, len);
                 }
             } else {
                 /*
@@ -461,7 +461,7 @@ public class BerOutputStream extends FilterOutputStream {
      * @return
      */
     public boolean isComplexOctetString(int length) {
-        return (((fEncoding == ENCODING_CER) && (length > 1000)) || (length == -1));
+        return (((_fEncoding == ENCODING_CER) && (length > 1000)) || (length == -1));
     }
 
     /**
@@ -473,7 +473,7 @@ public class BerOutputStream extends FilterOutputStream {
     public void writeOctetString(byte[] value, int offset, int length) throws IOException {
         int off, wlen;
 
-        if ((fEncoding == ENCODING_CER) && (length > 1000)) {
+        if ((_fEncoding == ENCODING_CER) && (length > 1000)) {
             /*
              * With CER encoding and a length greater than 1000 bytes, this
              * must be broken into chunks.
