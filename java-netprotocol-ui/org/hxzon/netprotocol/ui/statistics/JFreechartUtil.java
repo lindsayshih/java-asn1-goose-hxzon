@@ -43,14 +43,51 @@ public class JFreechartUtil {
 //        units.add(new NumberTickUnit(5000000000.0, df1, 5));
 //        units.add(new NumberTickUnit(10000000000.0, df1, 2));
 
-//        units.add(new NumberTickUnit(128, df0, 2));
+        units.add(new NumberTickUnit(1, df0, 2));
+        units.add(new NumberTickUnit(2, df0, 2));
+        units.add(new NumberTickUnit(4, df0, 2));
+        units.add(new NumberTickUnit(8, df0, 2));
+        units.add(new NumberTickUnit(16, df0, 2));
+        units.add(new NumberTickUnit(32, df0, 2));
+        units.add(new NumberTickUnit(64, df0, 2));
+        units.add(new NumberTickUnit(128, df0, 2));
         units.add(new NumberTickUnit(256, df0, 2));
         units.add(new NumberTickUnit(512, df0, 2));
+
         units.add(new NumberTickUnit(1024, df1, 2));
+        units.add(new NumberTickUnit(1024 * 2, df1, 2));
+        units.add(new NumberTickUnit(1024 * 4, df1, 2));
+        units.add(new NumberTickUnit(1024 * 8, df1, 2));
+        units.add(new NumberTickUnit(1024 * 16, df1, 2));
+        units.add(new NumberTickUnit(1024 * 32, df1, 2));
+        units.add(new NumberTickUnit(1024 * 64, df1, 2));
+        units.add(new NumberTickUnit(1024 * 128, df1, 2));
+        units.add(new NumberTickUnit(1024 * 256, df1, 2));
         units.add(new NumberTickUnit(1024 * 512, df1, 2));
+
         units.add(new NumberTickUnit(1024 * 1024, df1, 2));
+        units.add(new NumberTickUnit(1024 * 1024 * 2, df1, 2));
+        units.add(new NumberTickUnit(1024 * 1024 * 4, df1, 2));
+        units.add(new NumberTickUnit(1024 * 1024 * 8, df1, 2));
+        units.add(new NumberTickUnit(1024 * 1024 * 16, df1, 2));
+        units.add(new NumberTickUnit(1024 * 1024 * 32, df1, 2));
+        units.add(new NumberTickUnit(1024 * 1024 * 64, df1, 2));
+        units.add(new NumberTickUnit(1024 * 1024 * 128, df1, 2));
+        units.add(new NumberTickUnit(1024 * 1024 * 256, df1, 2));
         units.add(new NumberTickUnit(1024 * 1024 * 512, df1, 2));
+
         units.add(new NumberTickUnit(1024 * 1024 * 1024, df1, 2));
+        units.add(new NumberTickUnit(1024 * 1024 * 1024 * 2, df1, 2));
+        units.add(new NumberTickUnit(1024 * 1024 * 1024 * 4, df1, 2));
+        units.add(new NumberTickUnit(1024 * 1024 * 1024 * 8, df1, 2));
+        units.add(new NumberTickUnit(1024 * 1024 * 1024 * 16, df1, 2));
+        units.add(new NumberTickUnit(1024 * 1024 * 1024 * 32, df1, 2));
+        units.add(new NumberTickUnit(1024 * 1024 * 1024 * 64, df1, 2));
+        units.add(new NumberTickUnit(1024 * 1024 * 1024 * 128, df1, 2));
+        units.add(new NumberTickUnit(1024 * 1024 * 1024 * 256, df1, 2));
+        units.add(new NumberTickUnit(1024 * 1024 * 1024 * 512, df1, 2));
+
+        units.add(new NumberTickUnit(1024 * 1024 * 1024 * 1024, df1, 2));
         return units;
     }
 }
