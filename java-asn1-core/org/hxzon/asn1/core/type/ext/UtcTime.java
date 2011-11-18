@@ -1,6 +1,5 @@
 package org.hxzon.asn1.core.type.ext;
 
-import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -11,9 +10,9 @@ import org.hxzon.util.BytesUtil;
 public class UtcTime extends BerOctetString {
     private static final SimpleDateFormat _format = new SimpleDateFormat("yyyy-MM-dd,HH:mm:ss");
     private static final DecimalFormat _decimalFormat = new DecimalFormat();
-    private static final String _numberPattern = "0.000000";
+    private static final String _numberPattern = "000000";
     static {
-        _decimalFormat.setRoundingMode(RoundingMode.DOWN);
+//        _decimalFormat.setRoundingMode(RoundingMode.DOWN);
         _decimalFormat.applyPattern(_numberPattern);
     }
 
@@ -28,12 +27,47 @@ public class UtcTime extends BerOctetString {
             String str = BytesUtil.toHexString(getValue());
             long seconds = Long.parseLong(str.substring(0, 8), 16);
             long millis = Long.parseLong(str.substring(8, 14), 16);
-            double millisD = millis / Math.pow(2, 24);
+//            double millisD = millis / Math.pow(2, 24);
+            double millisD = (int) ((double) millis * 1000000.0 / (double) 0x00ffffff);
 //		Date date = new Date(seconds * 1000 + millisD * 1000);
             Date date = new Date(seconds * 1000);
-            return _format.format(date) + _decimalFormat.format(millisD).substring(1) + "," + str.substring(14);
+//            return _format.format(date) + _decimalFormat.format(millisD).substring(1) + "," + str.substring(14);
+            return _format.format(date) + "." + _decimalFormat.format(millisD) + "," + str.substring(14);
         } catch (Exception e) {
             return super.getValueAsString();
         }
     }
+
+//  ST_RET pts_asn1r_get_utc_time (ASN1_DEC_CTXT *ac, MMS_UTC_TIME *dest)
+//  {
+//
+//
+//  /* Read the number of seconds since January 1, 1970 (4 bytes) */
+//  dest->secs =  (((ST_UINT32) *(ac->asn1r_field_ptr++)) << 24) & 0xFF000000L;
+//  dest->secs |= (((ST_UINT32) *(ac->asn1r_field_ptr++)) << 16) & 0x00FF0000L;
+//  dest->secs |= (((ST_UINT32) *(ac->asn1r_field_ptr++)) << 8)  & 0x0000FF00L;
+//  dest->secs |=  ((ST_UINT32) *(ac->asn1r_field_ptr++))        & 0x000000FFL;
+//
+//  /* read fraction of a second (3 bytes) */
+//  dest->fraction =  (((ST_UINT32) *(ac->asn1r_field_ptr++)) << 16) & 0x00FF0000L;
+//  dest->fraction |= (((ST_UINT32) *(ac->asn1r_field_ptr++)) << 8)  & 0x0000FF00L;
+//  dest->fraction |=  ((ST_UINT32) *(ac->asn1r_field_ptr++))        & 0x000000FFL;
+//
+//
+//
+//  /* read the quality flags (1 byte) */
+//  dest->qflags =  ((ST_UINT32) *(ac->asn1r_field_ptr++));
+//
+//  dest->fraction_decode = (ST_INT32) ((ST_DOUBLE) dest->fraction * 1000000.0/(ST_DOUBLE)0x00FFFFFF);
+//
+//  //MMS_BTOD btod;
+//
+//  //asn1_convert_utc_to_btod(dest, &btod);
+//
+//  //printf("asn1r_get_utc_time =  %d\n",
+//    //  (ST_INT32) ((ST_DOUBLE) dest->fraction * 1000000.0/(ST_DOUBLE)0x00FFFFFF));
+//
+//
+//  return (SD_SUCCESS);
+//  }
 }
