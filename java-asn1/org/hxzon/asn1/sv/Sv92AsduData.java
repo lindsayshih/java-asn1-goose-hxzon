@@ -31,6 +31,7 @@ public class Sv92AsduData extends BerOctetString implements FakeBerConstruct {
             node.setTotalLen(8);
             node.setName(String.valueOf(i / 8));
             node.setDisplayString(String.valueOf(i / 8));
+            node.setParent(this);
             fList.add(node);
         }
     }
