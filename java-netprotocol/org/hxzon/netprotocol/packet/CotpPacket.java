@@ -19,11 +19,11 @@ public class CotpPacket extends Packet {
 
         });
     }
-    private ProtocolInt31Field length;
-    private ProtocolBitField pduType;
+    private ProtocolInt31Field _length;
+    private ProtocolBitField _pduType;
 //	private ProtocolInt31Field nrAndEot;
-    private ProtocolBitField tpduNumber;
-    private ProtocolBitField isLast;
+    private ProtocolBitField _tpduNumber;
+    private ProtocolBitField _isLast;
 
     protected int expectHeaderLength() {
         return fetchPduLength().getValue() + 1;
@@ -34,25 +34,25 @@ public class CotpPacket extends Packet {
     }
 
     public ProtocolInt31Field fetchPduLength() {
-        if (length == null) {
-            length = new ProtocolInt31Field("pdu length", "PDU长度", 0, 1, true, this);
+        if (_length == null) {
+            _length = new ProtocolInt31Field("pdu length", "PDU长度", 0, 1, true, this);
         }
-        return length;
+        return _length;
     }
 
     public void setLength(ProtocolInt31Field length) {
-        this.length = length;
+        this._length = length;
     }
 
     public ProtocolBitField fetchPduType() {
-        if (pduType == null) {
-            pduType = new ProtocolBitField("pdu type", "PDU类型", 1, 0, 4, this) {
+        if (_pduType == null) {
+            _pduType = new ProtocolBitField("pdu type", "PDU类型", 1, 0, 4, this) {
                 public String getValueAsString() {
                     return pduTypeDescription(getValue());
                 }
             };
         }
-        return pduType;
+        return _pduType;
     }
 
 //    14         CR: connection request  (binary 1110)
@@ -84,7 +84,7 @@ public class CotpPacket extends Packet {
     }
 
     public void setPduType(ProtocolBitField pduType) {
-        this.pduType = pduType;
+        this._pduType = pduType;
     }
 
 //	public ProtocolInt31Field fetchNrAndEot() {
@@ -99,23 +99,23 @@ public class CotpPacket extends Packet {
 //	}
 
     public ProtocolBitField fetchTpduNumber() {
-        if (tpduNumber == null) {
-            tpduNumber = new ProtocolBitField("TPDU number", "TPDU number", 2, 1, 7, this);
+        if (_tpduNumber == null) {
+            _tpduNumber = new ProtocolBitField("TPDU number", "TPDU number", 2, 1, 7, this);
         }
-        return tpduNumber;
+        return _tpduNumber;
     }
 
     public static final int LastUnit = 1;
 
     public ProtocolBitField fetchIsLast() {
-        if (isLast == null) {
-            isLast = new ProtocolBitField("is last unit", "is last unit", 2, 0, 1, this) {
+        if (_isLast == null) {
+            _isLast = new ProtocolBitField("is last unit", "is last unit", 2, 0, 1, this) {
                 public String getValueAsString() {
                     return getValue() == LastUnit ? "last" : "not last";
                 }
             };
         }
-        return isLast;
+        return _isLast;
     }
 
     public IPacketPayload exceptPayload() {

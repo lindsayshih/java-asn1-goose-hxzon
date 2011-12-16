@@ -38,11 +38,11 @@ public class GoosePacket extends Packet {
     }
     public static final int HeaderLength = 8;
     public static final String EthernetType_Goose = "88b8";
-    private ProtocolInt31Field appId;
-    private ProtocolInt31Field pduLen;
-    private ProtocolInt31Field reserved1;
-    private ProtocolInt31Field reserved2;
-    private GoosePdu goosePdu;
+    private ProtocolInt31Field _appId;
+    private ProtocolInt31Field _pduLen;
+    private ProtocolInt31Field _reserved1;
+    private ProtocolInt31Field _reserved2;
+    private GoosePdu _goosePdu;
 
     protected int expectHeaderLength() {
         return HeaderLength;
@@ -53,10 +53,10 @@ public class GoosePacket extends Packet {
     }
 
     public ProtocolInt31Field fetchAppId() {
-        if (appId == null) {
-            appId = new ProtocolInt31Field("appId", "应用标识", 0, 2, true, this);
+        if (_appId == null) {
+            _appId = new ProtocolInt31Field("appId", "应用标识", 0, 2, true, this);
         }
-        return appId;
+        return _appId;
     }
 
     public void setAppId(int appId) {
@@ -64,10 +64,10 @@ public class GoosePacket extends Packet {
     }
 
     public ProtocolInt31Field fetchPduLen() {
-        if (pduLen == null) {
-            pduLen = new ProtocolInt31Field("pduLen", "PDU长度", 2, 2, true, this);
+        if (_pduLen == null) {
+            _pduLen = new ProtocolInt31Field("pduLen", "PDU长度", 2, 2, true, this);
         }
-        return pduLen;
+        return _pduLen;
     }
 
     public void setPduLen(int pduLen) {
@@ -75,10 +75,10 @@ public class GoosePacket extends Packet {
     }
 
     public ProtocolInt31Field fetchReserved1() {
-        if (reserved1 == null) {
-            reserved1 = new ProtocolInt31Field("reserved1", "保留1", 4, 2, this);
+        if (_reserved1 == null) {
+            _reserved1 = new ProtocolInt31Field("reserved1", "保留1", 4, 2, this);
         }
-        return reserved1;
+        return _reserved1;
     }
 
     public void setReserved1(int reserved1) {
@@ -86,10 +86,10 @@ public class GoosePacket extends Packet {
     }
 
     public ProtocolInt31Field fetchReserved2() {
-        if (reserved2 == null) {
-            reserved2 = new ProtocolInt31Field("reserved2", "保留2", 6, 2, this);
+        if (_reserved2 == null) {
+            _reserved2 = new ProtocolInt31Field("reserved2", "保留2", 6, 2, this);
         }
-        return reserved2;
+        return _reserved2;
     }
 
     public void setReserved2(int reserved2) {
@@ -97,10 +97,10 @@ public class GoosePacket extends Packet {
     }
 
     public BerNode fetchGoosepdu() {
-        if (goosePdu == null) {
-            goosePdu = GoosePduParser.parser.parseGoose(super.getSrcData(), super.getPayloadOffset());
+        if (_goosePdu == null) {
+            _goosePdu = GoosePduParser.parser.parseGoose(super.getSrcData(), super.getPayloadOffset());
         }
-        return goosePdu;
+        return _goosePdu;
     }
 
     public IPacketPayload exceptPayload() {

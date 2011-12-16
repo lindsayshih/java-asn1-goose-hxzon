@@ -23,10 +23,10 @@ public class UdpPacket extends Packet {
     public static final int MaxTotalLength = 1472;
     public static final int HeaderLength = 8;
     public static final String IpType_Udp = "11";
-    private ProtocolInt31Field sourcePort;
-    private ProtocolInt31Field destPort;
-    private ProtocolInt31Field totalLen;
-    private ProtocolInt31Field checksum;
+    private ProtocolInt31Field _sourcePort;
+    private ProtocolInt31Field _destPort;
+    private ProtocolInt31Field _totalLen;
+    private ProtocolInt31Field _checksum;
 
     protected int expectHeaderLength() {
         return HeaderLength;
@@ -37,47 +37,47 @@ public class UdpPacket extends Packet {
     }
 
     public ProtocolInt31Field fetchSourcePort() {
-        if (sourcePort == null) {
-            sourcePort = new ProtocolInt31Field("sourcePort", "源端口", 0, 2, true, this);
+        if (_sourcePort == null) {
+            _sourcePort = new ProtocolInt31Field("sourcePort", "源端口", 0, 2, true, this);
         }
-        return sourcePort;
+        return _sourcePort;
     }
 
     public void setSourcePort(ProtocolInt31Field sourcePort) {
-        this.sourcePort = sourcePort;
+        this._sourcePort = sourcePort;
     }
 
     public ProtocolInt31Field fetchDestPort() {
-        if (destPort == null) {
-            destPort = new ProtocolInt31Field("destPort", "目的端口", 2, 2, true, this);
+        if (_destPort == null) {
+            _destPort = new ProtocolInt31Field("destPort", "目的端口", 2, 2, true, this);
         }
-        return destPort;
+        return _destPort;
     }
 
     public void setDestPort(ProtocolInt31Field destPort) {
-        this.destPort = destPort;
+        this._destPort = destPort;
     }
 
     public ProtocolInt31Field fetchTotalLen() {
-        if (totalLen == null) {
-            totalLen = new ProtocolInt31Field("totalLen", "总长度", 4, 2, true, this);
+        if (_totalLen == null) {
+            _totalLen = new ProtocolInt31Field("totalLen", "总长度", 4, 2, true, this);
         }
-        return totalLen;
+        return _totalLen;
     }
 
     public void setTotalLen(ProtocolInt31Field headerLen) {
-        this.totalLen = headerLen;
+        this._totalLen = headerLen;
     }
 
     public ProtocolInt31Field fetchChecksum() {
-        if (checksum == null) {
-            checksum = new ProtocolInt31Field("check sum", "校验和", 6, 2, this);
+        if (_checksum == null) {
+            _checksum = new ProtocolInt31Field("check sum", "校验和", 6, 2, this);
         }
-        return checksum;
+        return _checksum;
     }
 
     public void setChecksum(ProtocolInt31Field checksum) {
-        this.checksum = checksum;
+        this._checksum = checksum;
     }
 
     public String getProtocolTypeDesc() {

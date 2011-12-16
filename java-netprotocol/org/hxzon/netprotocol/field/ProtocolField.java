@@ -3,12 +3,12 @@ package org.hxzon.netprotocol.field;
 import org.hxzon.netprotocol.packet.Packet;
 
 public abstract class ProtocolField {
-    private Packet packet;
-    private int offset;
-    private int len;
-    private String name;
-    private String displayString;
-    private int miss = State_Rigth;
+    private Packet _packet;
+    private int _offset;
+    private int _len;
+    private String _name;
+    private String _displayString;
+    private int _miss = State_Rigth;
     public static final int State_Rigth = 0;
     public static final int State_WrongOffset = 1;
     public static final int State_WrongLen = 2;
@@ -16,9 +16,9 @@ public abstract class ProtocolField {
     public abstract String getValueAsString();
 
     public String getValueAsDisplay() {
-        if (miss == State_WrongOffset) {
+        if (_miss == State_WrongOffset) {
             return "wrong offset";
-        } else if (miss == State_WrongLen) {
+        } else if (_miss == State_WrongLen) {
             return "miss";
         } else {
             return getValueAsString();
@@ -26,7 +26,7 @@ public abstract class ProtocolField {
     }
 
     public boolean isRight() {
-        return miss == State_Rigth;
+        return _miss == State_Rigth;
     }
 
     public void setSaveOffsetAndLen(Packet packet, int offset, int len) {
@@ -37,7 +37,7 @@ public abstract class ProtocolField {
         if (offset > headerLength) {
             System.err.println("err offset(" + offset + ") when headerLength=" + headerLength);
             offset = headerLength;
-            miss = State_WrongOffset;
+            _miss = State_WrongOffset;
         }
         setOffset(packet.getOffset() + offset);
         if (len < 0) {
@@ -46,52 +46,52 @@ public abstract class ProtocolField {
         if (offset + len > headerLength) {
             System.err.println("err len(" + len + ") when offset=" + offset + ",and headerLength=" + headerLength);
             len = headerLength - offset;
-            miss = State_WrongLen;
+            _miss = State_WrongLen;
         }
         setLen(len);
     }
 
     public int getOffset() {
-        return offset;
+        return _offset;
     }
 
     private void setOffset(int offset) {
-        this.offset = offset;
+        this._offset = offset;
     }
 
     public int getLen() {
-        return len;
+        return _len;
     }
 
     private void setLen(int len) {
-        this.len = len;
+        this._len = len;
     }
 
     public String getName() {
-        return name;
+        return _name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this._name = name;
     }
 
     public String getDisplayString() {
-        return displayString;
+        return _displayString;
     }
 
     public void setDisplayString(String display) {
-        this.displayString = display;
+        this._displayString = display;
     }
 
     public String toString() {
-        return name;
+        return _name;
     }
 
     public Packet getPacket() {
-        return packet;
+        return _packet;
     }
 
     public void setPacket(Packet packet) {
-        this.packet = packet;
+        this._packet = packet;
     }
 }

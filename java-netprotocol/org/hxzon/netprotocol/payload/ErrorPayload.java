@@ -1,14 +1,14 @@
 package org.hxzon.netprotocol.payload;
 
 public class ErrorPayload extends DataPayload {
-    private String errorMessage;
+    private String _errorMessage;
 
     public ErrorPayload() {
 
     }
 
     public ErrorPayload(String error) {
-        this.errorMessage = error;
+        this._errorMessage = error;
     }
 
     public String getProtocolTypeDesc() {
@@ -16,7 +16,7 @@ public class ErrorPayload extends DataPayload {
     }
 
     public String getDisplayString() {
-        return "error payload(" + errorMessage + ")";
+        return "error payload(" + _errorMessage + ")";
     }
 
     public int getLength() {

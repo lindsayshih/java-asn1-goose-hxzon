@@ -18,9 +18,9 @@ public class EthernetPacket extends Packet {
         });
     }
     public static final int HeaderLength = 14;
-    private ProtocolMacField srcMac;
-    private ProtocolMacField destMac;
-    private ProtocolStringField type;
+    private ProtocolMacField _srcMac;
+    private ProtocolMacField _destMac;
+    private ProtocolStringField _type;
 
     protected int expectHeaderLength() {
         return HeaderLength;
@@ -31,10 +31,10 @@ public class EthernetPacket extends Packet {
     }
 
     public ProtocolMacField fetchSrcMac() {
-        if (srcMac == null) {
-            srcMac = new ProtocolMacField("srcMac", "源网卡地址", 6, 6, this);
+        if (_srcMac == null) {
+            _srcMac = new ProtocolMacField("srcMac", "源网卡地址", 6, 6, this);
         }
-        return srcMac;
+        return _srcMac;
     }
 
     public void setSrcMac(byte[] srcMac) {
@@ -42,10 +42,10 @@ public class EthernetPacket extends Packet {
     }
 
     public ProtocolMacField fetchDestMac() {
-        if (destMac == null) {
-            destMac = new ProtocolMacField("destMac", "目的网卡地址", 0, 6, this);
+        if (_destMac == null) {
+            _destMac = new ProtocolMacField("destMac", "目的网卡地址", 0, 6, this);
         }
-        return destMac;
+        return _destMac;
     }
 
     public void setDestMac(byte[] destMac) {
@@ -53,13 +53,13 @@ public class EthernetPacket extends Packet {
     }
 
     public ProtocolStringField fetchType() {
-        if (type == null) {
-            type = new ProtocolStringField("type", "以太网类型", 12, 2, this);
-            if (VlanPacket.EthernetType_Vlan.equals(type.getValue())) {
-                type.setDisplayString("vlan");
+        if (_type == null) {
+            _type = new ProtocolStringField("type", "以太网类型", 12, 2, this);
+            if (VlanPacket.EthernetType_Vlan.equals(_type.getValue())) {
+                _type.setDisplayString("vlan");
             }
         }
-        return type;
+        return _type;
     }
 
     public String getProtocolTypeDesc() {

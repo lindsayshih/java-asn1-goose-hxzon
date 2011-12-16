@@ -15,19 +15,19 @@ public class ProtocolInt31Field extends ProtocolField {
 //        this.unsigned = unsigned;
         if (isRight()) {
             if (unsigned) {
-                value = (int) srcPacket.getUnsigned(getOffset(), getLen());
+                _value = (int) srcPacket.getUnsigned(getOffset(), getLen());
             } else {
-                value = (int) srcPacket.getSigned(getOffset(), getLen());
+                _value = (int) srcPacket.getSigned(getOffset(), getLen());
             }
         }
     }
 
 //    private boolean unsigned = false;
 //    private int bitLen = 31;
-    private int value;
+    private int _value;
 
     public int getValue() {
-        return value;
+        return _value;
     }
 
     @Override

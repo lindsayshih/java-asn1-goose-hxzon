@@ -5,41 +5,41 @@ import org.hxzon.netprotocol.common.IPacketPayload;
 import org.hxzon.util.BytesUtil;
 
 public class DataPayload implements IPacketPayload {
-    private byte[] srcData;
-    private int offset;
-    private IPacket srcPacket;
-    private boolean miss;
+    private byte[] _srcData;
+    private int _offset;
+    private IPacket _srcPacket;
+    private boolean _miss;
 
     @Override
     public byte[] getData() {
-        return BytesUtil.copyBytes(srcData, offset, getLength());
+        return BytesUtil.copyBytes(_srcData, _offset, getLength());
     }
 
     @Override
     public int getLength() {
-        return srcData.length - offset;
+        return _srcData.length - _offset;
     }
 
     @Override
     public int getOffset() {
-        return offset;
+        return _offset;
     }
 
     @Override
     public byte[] getSrcData() {
-        return srcData;
+        return _srcData;
     }
 
     @Override
     public IPacket getSrcPacket() {
-        return srcPacket;
+        return _srcPacket;
     }
 
     @Override
     public void setSrcPacket(IPacket srcPacket) {
-        this.srcPacket = srcPacket;
-        this.srcData = srcPacket.getSrcData();
-        this.offset = srcPacket.getOffset() + srcPacket.getHeaderLength();
+        this._srcPacket = srcPacket;
+        this._srcData = srcPacket.getSrcData();
+        this._offset = srcPacket.getOffset() + srcPacket.getHeaderLength();
     }
 
     public String getDisplayString() {

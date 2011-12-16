@@ -21,10 +21,10 @@ public class TpktPacket extends Packet {
         });
     }
     public static final int HeaderLength = 4;
-    private ProtocolInt31Field version;
-    private ProtocolInt31Field reserved;
+    private ProtocolInt31Field _version;
+    private ProtocolInt31Field _reserved;
     //min=7, max=65535
-    private ProtocolInt31Field totalLen;
+    private ProtocolInt31Field _totalLen;
 
     protected int expectHeaderLength() {
         return HeaderLength;
@@ -35,36 +35,36 @@ public class TpktPacket extends Packet {
     }
 
     public ProtocolInt31Field fetchVersion() {
-        if (version == null) {
-            version = new ProtocolInt31Field("version", "版本", 0, 1, true, this);
+        if (_version == null) {
+            _version = new ProtocolInt31Field("version", "版本", 0, 1, true, this);
         }
-        return version;
+        return _version;
     }
 
     public void setVersion(ProtocolInt31Field version) {
-        this.version = version;
+        this._version = version;
     }
 
     public ProtocolInt31Field fetchReserved() {
-        if (reserved == null) {
-            reserved = new ProtocolInt31Field("reserved", "保留", 1, 1, this);
+        if (_reserved == null) {
+            _reserved = new ProtocolInt31Field("reserved", "保留", 1, 1, this);
         }
-        return reserved;
+        return _reserved;
     }
 
     public void setReserved(ProtocolInt31Field reserved) {
-        this.reserved = reserved;
+        this._reserved = reserved;
     }
 
     public ProtocolInt31Field fetchTotalLen() {
-        if (totalLen == null) {
-            totalLen = new ProtocolInt31Field("total length", "总长度", 2, 2, true, this);
+        if (_totalLen == null) {
+            _totalLen = new ProtocolInt31Field("total length", "总长度", 2, 2, true, this);
         }
-        return totalLen;
+        return _totalLen;
     }
 
     public void setTotalLen(ProtocolInt31Field length) {
-        this.totalLen = length;
+        this._totalLen = length;
     }
 
     public String getProtocolTypeDesc() {
