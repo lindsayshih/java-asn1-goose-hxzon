@@ -24,24 +24,24 @@ public class OsiPresentationPacket extends Packet {
         return 0;
     }
 
-    private BerNode pres;
+    private BerNode _pres;
 
     public IPacketPayload exceptPayload() {
         return (IPacketPayload) fetchOsiPresentation();
     }
 
     public BerNode[] getUserData() {
-        if (pres instanceof OsiPresentation) {
-            return ((OsiPresentation) pres).getUserData();
+        if (_pres instanceof OsiPresentation) {
+            return ((OsiPresentation) _pres).getUserData();
         }
         return new BerNode[0];
     }
 
     public BerNode fetchOsiPresentation() {
-        if (pres == null) {
-            pres = OsiPresentationParser.parser.parsePresentation(getSrcData(), getOffset());
+        if (_pres == null) {
+            _pres = OsiPresentationParser.parser.parsePresentation(getSrcData(), getOffset());
         }
-        return pres;
+        return _pres;
     }
 
 //	public boolean isEmptyPayload() {

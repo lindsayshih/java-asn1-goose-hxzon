@@ -11,14 +11,14 @@ public class ProtocolBitField extends ProtocolField {
         int len = (bitLen + 7) / 8;
         setSaveOffsetAndLen(srcPacket, offset, len);
         if (isRight()) {
-            value = srcPacket.getIntByBit(getOffset(), getLen(), bitOffset, bitLen);
+            _value = srcPacket.getIntByBit(getOffset(), getLen(), bitOffset, bitLen);
         }
     }
 
-    private int value;
+    private int _value;
 
     public int getValue() {
-        return value;
+        return _value;
     }
 
     @Override

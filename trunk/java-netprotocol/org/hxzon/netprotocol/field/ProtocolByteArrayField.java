@@ -9,14 +9,14 @@ public class ProtocolByteArrayField extends ProtocolField {
         setDisplayString(display);
         setSaveOffsetAndLen(srcPacket, offset, len);
 //		if (isRight()) {
-        value = srcPacket.getByteArray(getOffset(), getLen());
+        _value = srcPacket.getByteArray(getOffset(), getLen());
 //		}
     }
 
-    private byte[] value;
+    private byte[] _value;
 
     public byte[] getValue() {
-        return value;
+        return _value;
     }
 
     @Override

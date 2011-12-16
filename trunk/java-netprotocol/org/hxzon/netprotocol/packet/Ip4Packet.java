@@ -38,18 +38,18 @@ public class Ip4Packet extends Packet {
     }
     public static final int MaxPayloadLength = 1480;
     public static final String EthernetType_Ip4 = "0800";
-    private ProtocolInt31Field version;
-    private ProtocolBitField headerLen;
-    private ProtocolInt31Field differentiatedServices;
-    private ProtocolInt31Field totalLen;
-    private ProtocolInt31Field identification;
-    private ProtocolBitField fragmentFlags;
-    private ProtocolBitField fragmentOffset;
-    private ProtocolInt31Field ttl;
-    private ProtocolStringField protocolCode;
-    private ProtocolInt31Field checksum;
-    private ProtocolIpField sourceIp;
-    private ProtocolIpField destIp;
+    private ProtocolInt31Field _version;
+    private ProtocolBitField _headerLen;
+    private ProtocolInt31Field _differentiatedServices;
+    private ProtocolInt31Field _totalLen;
+    private ProtocolInt31Field _identification;
+    private ProtocolBitField _fragmentFlags;
+    private ProtocolBitField _fragmentOffset;
+    private ProtocolInt31Field _ttl;
+    private ProtocolStringField _protocolCode;
+    private ProtocolInt31Field _checksum;
+    private ProtocolIpField _sourceIp;
+    private ProtocolIpField _destIp;
 
     protected int expectHeaderLength() {
         return fetchHeaderLen().getValue() * 4;
@@ -61,7 +61,7 @@ public class Ip4Packet extends Packet {
     }
 
     public ProtocolInt31Field fetchVersion() {
-        return version;
+        return _version;
     }
 
     public void setVersion(int version) {
@@ -75,29 +75,29 @@ public class Ip4Packet extends Packet {
 //		return totalLen;
 //	}
     public ProtocolInt31Field fetchTotalLen() {
-        if (totalLen == null) {
-            totalLen = new ProtocolInt31Field("total len", "总长度", 2, 2, true, this);
+        if (_totalLen == null) {
+            _totalLen = new ProtocolInt31Field("total len", "总长度", 2, 2, true, this);
         }
-        return totalLen;
+        return _totalLen;
     }
 
     public ProtocolBitField fetchHeaderLen() {
-        if (headerLen == null) {
-            headerLen = new ProtocolBitField("headerLength", "头部长度", 0, 4, 4, this) {
+        if (_headerLen == null) {
+            _headerLen = new ProtocolBitField("headerLength", "头部长度", 0, 4, 4, this) {
                 public String getValueAsString() {
                     return String.valueOf(getValue() + "*4");
                 }
             };
         }
-        return headerLen;
+        return _headerLen;
     }
 
     public ProtocolInt31Field fetchDifferentiatedServices() {
-        if (differentiatedServices == null) {
+        if (_differentiatedServices == null) {
 //			differentiatedServices = new ProtocolBitField("tos", 1, 0, 8, this);
-            differentiatedServices = new ProtocolInt31Field("tos", "差别服务", 1, 1, this);
+            _differentiatedServices = new ProtocolInt31Field("tos", "差别服务", 1, 1, this);
         }
-        return differentiatedServices;
+        return _differentiatedServices;
     }
 
     public void setDifferentiatedServices(int differentiatedServices) {
@@ -105,10 +105,10 @@ public class Ip4Packet extends Packet {
     }
 
     public ProtocolInt31Field fetchIdentification() {
-        if (identification == null) {
-            identification = new ProtocolInt31Field("identification", "标识", 4, 2, this);
+        if (_identification == null) {
+            _identification = new ProtocolInt31Field("identification", "标识", 4, 2, this);
         }
-        return identification;
+        return _identification;
     }
 
     public void setIdentification(int identification) {
@@ -116,14 +116,14 @@ public class Ip4Packet extends Packet {
     }
 
     public ProtocolBitField fetchFragmentFlags() {
-        if (fragmentFlags == null) {
-            fragmentFlags = new ProtocolBitField("fragment flags", "段标识", 6, 0, 3, this) {
+        if (_fragmentFlags == null) {
+            _fragmentFlags = new ProtocolBitField("fragment flags", "段标识", 6, 0, 3, this) {
                 public String getValueAsString() {
                     return fragmentFlagDescription(getValue());
                 }
             };
         }
-        return fragmentFlags;
+        return _fragmentFlags;
     }
 
     public static final int DontFragment = 1 << 1;
@@ -153,10 +153,10 @@ public class Ip4Packet extends Packet {
     }
 
     public ProtocolBitField fetchFragmentOffset() {
-        if (fragmentOffset == null) {
-            fragmentOffset = new ProtocolBitField("fragment offset", "段偏移", 6, 3, 13, this);
+        if (_fragmentOffset == null) {
+            _fragmentOffset = new ProtocolBitField("fragment offset", "段偏移", 6, 3, 13, this);
         }
-        return fragmentOffset;
+        return _fragmentOffset;
     }
 
     public void setFragmentOffset(int fragmentOffset) {
@@ -164,10 +164,10 @@ public class Ip4Packet extends Packet {
     }
 
     public ProtocolInt31Field fetchTtl() {
-        if (ttl == null) {
-            ttl = new ProtocolInt31Field("ttl", "生存时间", 8, 1, true, this);
+        if (_ttl == null) {
+            _ttl = new ProtocolInt31Field("ttl", "生存时间", 8, 1, true, this);
         }
-        return ttl;
+        return _ttl;
     }
 
     public void setTtl(int ttl) {
@@ -175,10 +175,10 @@ public class Ip4Packet extends Packet {
     }
 
     public ProtocolStringField fetchProtocolCode() {
-        if (protocolCode == null) {
-            protocolCode = new ProtocolStringField("protocol", "协议类型", 9, 1, this);
+        if (_protocolCode == null) {
+            _protocolCode = new ProtocolStringField("protocol", "协议类型", 9, 1, this);
         }
-        return protocolCode;
+        return _protocolCode;
     }
 
     public void setProtocolCode(String code) {
@@ -186,7 +186,7 @@ public class Ip4Packet extends Packet {
     }
 
     public ProtocolInt31Field fetchChecksum() {
-        return checksum;
+        return _checksum;
     }
 
     public void setChecksum(int checksum) {
@@ -194,10 +194,10 @@ public class Ip4Packet extends Packet {
     }
 
     public ProtocolIpField fetchSourceIp() {
-        if (sourceIp == null) {
-            sourceIp = new ProtocolIpField("sourceIp", "源IP", 12, 4, this);
+        if (_sourceIp == null) {
+            _sourceIp = new ProtocolIpField("sourceIp", "源IP", 12, 4, this);
         }
-        return sourceIp;
+        return _sourceIp;
     }
 
 //	public String getSourceIpAsString(){
@@ -213,10 +213,10 @@ public class Ip4Packet extends Packet {
     }
 
     public ProtocolIpField fetchDestIp() {
-        if (destIp == null) {
-            destIp = new ProtocolIpField("destIp", "目的IP", 16, 4, this);
+        if (_destIp == null) {
+            _destIp = new ProtocolIpField("destIp", "目的IP", 16, 4, this);
         }
-        return destIp;
+        return _destIp;
     }
 
 //	public String getDestIpAsString(){

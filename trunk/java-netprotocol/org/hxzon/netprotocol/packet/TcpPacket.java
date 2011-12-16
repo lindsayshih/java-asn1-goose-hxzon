@@ -24,15 +24,15 @@ public class TcpPacket extends Packet {
         });
     }
     public static final String IpType_Tcp = "06";
-    private ProtocolInt31Field sourcePort;
-    private ProtocolInt31Field destPort;
-    private ProtocolInt63Field sequenceNumber;
-    private ProtocolInt63Field acknowledgementNumber;
-    private ProtocolBitField headerLen;
-    private ProtocolBitField flag;
-    private ProtocolInt31Field windowSize;
-    private ProtocolInt31Field checksum;
-    private ProtocolInt31Field urgentPointer;
+    private ProtocolInt31Field _sourcePort;
+    private ProtocolInt31Field _destPort;
+    private ProtocolInt63Field _sequenceNumber;
+    private ProtocolInt63Field _acknowledgementNumber;
+    private ProtocolBitField _headerLen;
+    private ProtocolBitField _flag;
+    private ProtocolInt31Field _windowSize;
+    private ProtocolInt31Field _checksum;
+    private ProtocolInt31Field _urgentPointer;
 
     protected int expectHeaderLength() {
         return fetchHeaderLen().getValue() * 4;
@@ -44,71 +44,71 @@ public class TcpPacket extends Packet {
     }
 
     public ProtocolInt31Field fetchSourcePort() {
-        if (sourcePort == null) {
-            sourcePort = new ProtocolInt31Field("sourcePort", "源端口", 0, 2, true, this);
+        if (_sourcePort == null) {
+            _sourcePort = new ProtocolInt31Field("sourcePort", "源端口", 0, 2, true, this);
         }
-        return sourcePort;
+        return _sourcePort;
     }
 
     public void setSourcePort(ProtocolInt31Field sourcePort) {
-        this.sourcePort = sourcePort;
+        this._sourcePort = sourcePort;
     }
 
     public ProtocolInt31Field fetchDestPort() {
-        if (destPort == null) {
-            destPort = new ProtocolInt31Field("destPort", "目的端口", 2, 2, true, this);
+        if (_destPort == null) {
+            _destPort = new ProtocolInt31Field("destPort", "目的端口", 2, 2, true, this);
         }
-        return destPort;
+        return _destPort;
     }
 
     public void setDestPort(ProtocolInt31Field destPort) {
-        this.destPort = destPort;
+        this._destPort = destPort;
     }
 
     public ProtocolInt63Field fetchSequenceNumber() {
-        if (sequenceNumber == null) {
-            sequenceNumber = new ProtocolInt63Field("sequenceNumber", "序列号", 4, 4, true, this);
+        if (_sequenceNumber == null) {
+            _sequenceNumber = new ProtocolInt63Field("sequenceNumber", "序列号", 4, 4, true, this);
         }
-        return sequenceNumber;
+        return _sequenceNumber;
     }
 
     public void setSequenceNumber(long sequenceNumber) {
     }
 
     public ProtocolInt63Field fetchAcknowledgementNumber() {
-        if (acknowledgementNumber == null) {
-            acknowledgementNumber = new ProtocolInt63Field("acknowledgementNumber", "确认序列号", 8, 4, true, this);
+        if (_acknowledgementNumber == null) {
+            _acknowledgementNumber = new ProtocolInt63Field("acknowledgementNumber", "确认序列号", 8, 4, true, this);
         }
-        return acknowledgementNumber;
+        return _acknowledgementNumber;
     }
 
     public void setAcknowledgementNumber(long acknowledgementNumber) {
     }
 
     public ProtocolBitField fetchHeaderLen() {
-        if (headerLen == null) {
-            headerLen = new ProtocolBitField("header len", "头部长度", 12, 0, 4, this) {
+        if (_headerLen == null) {
+            _headerLen = new ProtocolBitField("header len", "头部长度", 12, 0, 4, this) {
                 public String getValueAsString() {
                     return String.valueOf(getValue() + "*4");
                 }
             };
         }
-        return headerLen;
+        return _headerLen;
     }
 
     public void setHeaderLen(ProtocolBitField headerLen) {
-        this.headerLen = headerLen;
+        this._headerLen = headerLen;
     }
 
     public ProtocolBitField fetchFlag() {
-        if (flag == null) {
-            flag = new ProtocolBitField("flag", "标识", 13, 2, 6, this) {
+        if (_flag == null) {
+            _flag = new ProtocolBitField("flag", "标识", 13, 2, 6, this) {
                 public String getValueAsString() {
                     return flagDescription(getValue());
                 }
             };
         }
-        return flag;
+        return _flag;
     }
 
     public static final int Urg = 1 << 5;
@@ -142,40 +142,40 @@ public class TcpPacket extends Packet {
     }
 
     public void setFlag(ProtocolBitField flag) {
-        this.flag = flag;
+        this._flag = flag;
     }
 
     public ProtocolInt31Field fetchWindowSize() {
-        if (windowSize == null) {
-            windowSize = new ProtocolInt31Field("window size", "窗口大小", 14, 2, true, this);
+        if (_windowSize == null) {
+            _windowSize = new ProtocolInt31Field("window size", "窗口大小", 14, 2, true, this);
         }
-        return windowSize;
+        return _windowSize;
     }
 
     public void setWindowSize(ProtocolInt31Field windowSize) {
-        this.windowSize = windowSize;
+        this._windowSize = windowSize;
     }
 
     public ProtocolInt31Field fetchChecksum() {
-        if (checksum == null) {
-            checksum = new ProtocolInt31Field("check sum", "校验和", 16, 2, this);
+        if (_checksum == null) {
+            _checksum = new ProtocolInt31Field("check sum", "校验和", 16, 2, this);
         }
-        return checksum;
+        return _checksum;
     }
 
     public void setChecksum(ProtocolInt31Field checksum) {
-        this.checksum = checksum;
+        this._checksum = checksum;
     }
 
     public ProtocolInt31Field fetchUrgentPointer() {
-        if (urgentPointer == null) {
-            urgentPointer = new ProtocolInt31Field("urgent pointer", "紧急指针", 18, 2, true, this);
+        if (_urgentPointer == null) {
+            _urgentPointer = new ProtocolInt31Field("urgent pointer", "紧急指针", 18, 2, true, this);
         }
-        return urgentPointer;
+        return _urgentPointer;
     }
 
     public void setUrgentPointer(ProtocolInt31Field urgentPointer) {
-        this.urgentPointer = urgentPointer;
+        this._urgentPointer = urgentPointer;
     }
 
     public String getProtocolTypeDesc() {

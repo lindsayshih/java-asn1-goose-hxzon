@@ -10,9 +10,9 @@ import java.util.List;
 import org.hxzon.util.DebugUtil;
 
 public class PcapHandler implements Runnable {
-    private List<PcapHandlerListener> listeners = new ArrayList<PcapHandlerListener>();
+    private List<PcapHandlerListener> _listeners = new ArrayList<PcapHandlerListener>();
     private final List<File> _files = new ArrayList<File>();
-    private boolean stop;
+    private boolean _stop;
 
     public void addFile(File file) {
         _files.add(file);
@@ -33,36 +33,36 @@ public class PcapHandler implements Runnable {
     }
 
     public void addListener(PcapHandlerListener listener) {
-        listeners.add(listener);
+        _listeners.add(listener);
     }
 
     public void fireListenersForAddPcapPacket(PcapPacket pcapPacket, PcapFile ownerFile) {
-        for (PcapHandlerListener listener : listeners) {
+        for (PcapHandlerListener listener : _listeners) {
             listener.addPcapPacket(pcapPacket, ownerFile);
         }
     }
 
     public void fireListenersForStartPcapFile(PcapFile pcapFile) {
-        for (PcapHandlerListener listener : listeners) {
+        for (PcapHandlerListener listener : _listeners) {
             listener.startPcapFile(pcapFile);
         }
     }
 
     public void fireListenersForEndPcapFile(PcapFile pcapFile) {
-        for (PcapHandlerListener listener : listeners) {
+        for (PcapHandlerListener listener : _listeners) {
             listener.endPcapFile(pcapFile);
         }
     }
 
     public void fireListenersForEndAll() {
-        for (PcapHandlerListener listener : listeners) {
+        for (PcapHandlerListener listener : _listeners) {
             listener.endAll();
         }
     }
 
     public void run() {
         for (File file : _files) {
-            if (stop) {
+            if (_stop) {
                 break;
             }
             readFile(file);
@@ -71,7 +71,7 @@ public class PcapHandler implements Runnable {
     }
 
     public void stop() {
-        this.stop = true;
+        this._stop = true;
     }
 
     private void readFile(File filepath) {

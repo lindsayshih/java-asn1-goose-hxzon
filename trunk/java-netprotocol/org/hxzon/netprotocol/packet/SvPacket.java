@@ -37,11 +37,11 @@ public class SvPacket extends Packet {
     }
     public static final int HeaderLength = 8;
     public static final String EthernetType_Sv = "88ba";
-    private ProtocolInt31Field appId;
-    private ProtocolInt31Field pduLen;
-    private ProtocolInt31Field reserved1;
-    private ProtocolInt31Field reserved2;
-    private BerNode svPdu;
+    private ProtocolInt31Field _appId;
+    private ProtocolInt31Field _pduLen;
+    private ProtocolInt31Field _reserved1;
+    private ProtocolInt31Field _reserved2;
+    private BerNode _svPdu;
 
     protected int expectHeaderLength() {
         return HeaderLength;
@@ -52,10 +52,10 @@ public class SvPacket extends Packet {
     }
 
     public ProtocolInt31Field fetchAppId() {
-        if (appId == null) {
-            appId = new ProtocolInt31Field("appId", "应用标识", 0, 2, true, this);
+        if (_appId == null) {
+            _appId = new ProtocolInt31Field("appId", "应用标识", 0, 2, true, this);
         }
-        return appId;
+        return _appId;
     }
 
     public void setAppId(int appId) {
@@ -63,10 +63,10 @@ public class SvPacket extends Packet {
     }
 
     public ProtocolInt31Field fetchPduLen() {
-        if (pduLen == null) {
-            pduLen = new ProtocolInt31Field("pduLen", "PDU长度", 2, 2, true, this);
+        if (_pduLen == null) {
+            _pduLen = new ProtocolInt31Field("pduLen", "PDU长度", 2, 2, true, this);
         }
-        return pduLen;
+        return _pduLen;
     }
 
     public void setPduLen(int pduLen) {
@@ -74,10 +74,10 @@ public class SvPacket extends Packet {
     }
 
     public ProtocolInt31Field fetchReserved1() {
-        if (reserved1 == null) {
-            reserved1 = new ProtocolInt31Field("reserved1", "保留1", 4, 2, this);
+        if (_reserved1 == null) {
+            _reserved1 = new ProtocolInt31Field("reserved1", "保留1", 4, 2, this);
         }
-        return reserved1;
+        return _reserved1;
     }
 
     public void setReserved1(int reserved1) {
@@ -85,10 +85,10 @@ public class SvPacket extends Packet {
     }
 
     public ProtocolInt31Field fetchReserved2() {
-        if (reserved2 == null) {
-            reserved2 = new ProtocolInt31Field("reserved2", "保留2", 6, 2, this);
+        if (_reserved2 == null) {
+            _reserved2 = new ProtocolInt31Field("reserved2", "保留2", 6, 2, this);
         }
-        return reserved2;
+        return _reserved2;
     }
 
     public void setReserved2(int reserved2) {
@@ -96,10 +96,10 @@ public class SvPacket extends Packet {
     }
 
     public BerNode fetchSvpdu() {
-        if (svPdu == null) {
-            svPdu = SvPduParser.parser.parseSv(getSrcData(), getPayloadOffset());
+        if (_svPdu == null) {
+            _svPdu = SvPduParser.parser.parseSv(getSrcData(), getPayloadOffset());
         }
-        return svPdu;
+        return _svPdu;
     }
 
     public IPacketPayload exceptPayload() {

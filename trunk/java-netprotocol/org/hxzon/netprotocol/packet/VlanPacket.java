@@ -23,10 +23,10 @@ public class VlanPacket extends Packet {
     public static final int HeaderLength = 4;
     public static final String EthernetType_Vlan = "8100";
 
-    private ProtocolBitField priority;
-    private ProtocolBitField cfi;
-    private ProtocolBitField valnId;
-    private ProtocolStringField type;
+    private ProtocolBitField _priority;
+    private ProtocolBitField _cfi;
+    private ProtocolBitField _vlanId;
+    private ProtocolStringField _type;
 
     protected int expectHeaderLength() {
         return HeaderLength;
@@ -37,35 +37,35 @@ public class VlanPacket extends Packet {
     }
 
     public ProtocolStringField fetchType() {
-        if (type == null) {
-            type = new ProtocolStringField("type", "以太网类型", 2, 2, this);
+        if (_type == null) {
+            _type = new ProtocolStringField("type", "以太网类型", 2, 2, this);
         }
-        return type;
+        return _type;
     }
 
     public ProtocolBitField fetchPriority() {
-        if (priority == null) {
-            priority = new ProtocolBitField("priority", "优先级", 0, 0, 3, this);
+        if (_priority == null) {
+            _priority = new ProtocolBitField("priority", "优先级", 0, 0, 3, this);
         }
-        return priority;
+        return _priority;
     }
 
     public ProtocolBitField fetchCfi() {
-        if (cfi == null) {
-            cfi = new ProtocolBitField("cfi", "格式", 0, 3, 1, this) {
+        if (_cfi == null) {
+            _cfi = new ProtocolBitField("cfi", "格式", 0, 3, 1, this) {
                 public String getValueAsString() {
                     return getValue() == 0 ? "规范格式" : "非规范格式";
                 }
             };
         }
-        return cfi;
+        return _cfi;
     }
 
     public ProtocolBitField fetchVlanId() {
-        if (valnId == null) {
-            valnId = new ProtocolBitField("vlan id", "VLAN ID", 0, 4, 12, this);
+        if (_vlanId == null) {
+            _vlanId = new ProtocolBitField("vlan id", "VLAN ID", 0, 4, 12, this);
         }
-        return valnId;
+        return _vlanId;
     }
 
     public String getProtocolTypeDesc() {

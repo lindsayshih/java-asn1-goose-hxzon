@@ -6,19 +6,19 @@ import org.jnetpcap.packet.JHeader;
 import org.jnetpcap.packet.PcapPacket;
 
 public class JPcapPacket extends PcapPacket {
-    private Class<? extends JHeader> clazz;
+    private Class<? extends JHeader> _clazz;
 
     public JPcapPacket(byte[] data, Class<? extends JHeader> clazz) {
         super(POINTER);
         PcapHeader pcapHeader = new PcapHeader();
         super.transferHeaderAndDataFrom(pcapHeader, new JBuffer(data));
 //		super.getDefaultScanner().scan(this, Ethernet.ID);
-        this.clazz = clazz;
+        this._clazz = clazz;
     }
 
     public JPcapPacket(PcapPacket src, Class<? extends JHeader> clazz) {
         super(src);
-        this.clazz = clazz;
+        this._clazz = clazz;
     }
 
     public JPcapPacket(PcapPacket src) {
@@ -26,7 +26,7 @@ public class JPcapPacket extends PcapPacket {
     }
 
     public Class<? extends JHeader> getType() {
-        return clazz;
+        return _clazz;
     }
 
     public byte[] getBytes() {

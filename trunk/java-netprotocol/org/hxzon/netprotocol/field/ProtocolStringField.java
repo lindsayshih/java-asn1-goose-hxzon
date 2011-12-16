@@ -8,17 +8,17 @@ public class ProtocolStringField extends ProtocolField {
         setName(name);
         setDisplayString(display);
         setSaveOffsetAndLen(srcPacket, offset, len);
-        value = srcPacket.getHexString(getOffset(), getLen());
+        _value = srcPacket.getHexString(getOffset(), getLen());
     }
 
-    private String value;
+    private String _value;
 
     public String getValue() {
-        return value;
+        return _value;
     }
 
     @Override
     public String getValueAsString() {
-        return value;
+        return _value;
     }
 }
