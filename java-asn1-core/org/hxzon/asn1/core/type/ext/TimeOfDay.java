@@ -55,6 +55,11 @@ public class TimeOfDay extends BerOctetString {
 //
 //        return offset;
 //    }
+    //有两个时间概念需要区分，第一个MMS UTC时间，也就是timestamp(时间标签)类型，
+    //值的格式应包括3部分：距离格林尼治标准时间1970年1月1日午夜的秒数(s)、秒的小数部分(f)、质量标记(q)。
+    //第二个MMS Btime6(天的时间)，类型应是八位组串，该类型的值包括4个字节，值分为两个部分：
+    //第一部分表示从当天午夜之后的毫秒数(日期不在该数值中)，
+    //第二部分包含时间和日期，以从1984年1月1日之后的相对天数来表示。
     public String getValueAsString() {
         try {
             String str = BytesUtil.toHexString(getValue());
