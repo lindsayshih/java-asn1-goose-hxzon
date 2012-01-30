@@ -36,6 +36,7 @@ public class BerChoice extends BerNode implements FakeBerConstruct {
         if (!hasTag) {
             setTag(Tag.NoTag);
         }
+        this.reInit();
         return this;
     }
 

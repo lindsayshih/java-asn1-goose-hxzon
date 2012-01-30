@@ -178,11 +178,16 @@ public abstract class BerNode {
     //add by hxzon
     protected abstract void readValue(BerInputStream stream);
 
+    public void reInit() {
+
+    }
+
     public BerNode init(String name, String display, int tag, BerInputStream stream) {
         this.setTag(tag);
         this.setName(name);
         this.setDisplayString(display);
         this.readValue(stream);
+        this.reInit();
         return this;
     }
 
