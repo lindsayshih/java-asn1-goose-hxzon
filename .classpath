@@ -14,9 +14,9 @@
 	<classpathentry kind="lib" path="lib/log/jcl-over-slf4j-1.6.1.jar"/>
 	<classpathentry kind="lib" path="lib/log/jul-to-slf4j-1.6.1.jar"/>
 	<classpathentry kind="lib" path="lib/log/log4j-over-slf4j-1.6.1.jar"/>
-	<classpathentry kind="lib" path="lib/log/logback-classic-0.9.24.jar"/>
-	<classpathentry kind="lib" path="lib/log/logback-core-0.9.24.jar"/>
-	<classpathentry kind="lib" path="lib/log/slf4j-api-1.6.1.jar"/>
+	<classpathentry kind="lib" path="lib/log/logback-classic-0.9.24.jar" sourcepath="D:/workspace/java-asn1-goose/lib/log/src/logback-classic-0.9.24-sources.jar"/>
+	<classpathentry kind="lib" path="lib/log/logback-core-0.9.24.jar" sourcepath="D:/workspace/java-asn1-goose/lib/log/src/logback-core-0.9.24-sources.jar"/>
+	<classpathentry kind="lib" path="lib/log/slf4j-api-1.6.1.jar" sourcepath="D:/workspace/java-asn1-goose/lib/log/src/slf4j-api-1.6.1-sources.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

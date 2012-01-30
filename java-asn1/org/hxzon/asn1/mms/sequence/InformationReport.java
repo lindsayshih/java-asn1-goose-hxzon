@@ -85,25 +85,39 @@ public class InformationReport extends BerSequence {
                     successDataRealNode.setName("moreSegmentFollow");
                     successDataRealNode.setDisplayString("有后续数据段");
                 }
+                //
                 index++;
                 successDataRealNode = getAccessResult_Success_RealNode(seqOf, index);
                 successDataRealNode.setName("inclusionBitstring");
                 successDataRealNode.setDisplayString("包含位串");
-                if (bitString.charAt(5) == '1') {
-                    index++;
-                    successDataRealNode = getAccessResult_Success_RealNode(seqOf, index);
-                    successDataRealNode.setName("dataReferences");
-                    successDataRealNode.setDisplayString("数据集引用");
+                int datasetNum = 0;
+                String inclusionBitString = successDataRealNode.getValueAsString();
+                for (char c : inclusionBitString.toCharArray()) {
+                    datasetNum += (c == '1' ? 1 : 0);
                 }
-                index++;
-                successDataRealNode = getAccessResult_Success_RealNode(seqOf, index);
-                successDataRealNode.setName("values");
-                successDataRealNode.setDisplayString("值");
-                if (bitString.charAt(3) == '1') {
+                if (bitString.charAt(5) == '1') {
+                    for (int i = 0; i < datasetNum; i++) {
+                        index++;
+                        successDataRealNode = getAccessResult_Success_RealNode(seqOf, index);
+                        successDataRealNode.setName("dataReferences");
+                        successDataRealNode.setDisplayString("数据集引用");
+                    }
+                }
+                //
+                for (int i = 0; i < datasetNum; i++) {
                     index++;
                     successDataRealNode = getAccessResult_Success_RealNode(seqOf, index);
-                    successDataRealNode.setName("reasonCodes");
-                    successDataRealNode.setDisplayString("原因代码");
+                    successDataRealNode.setName("values");
+                    successDataRealNode.setDisplayString("值");
+                }
+                //
+                if (bitString.charAt(3) == '1') {
+                    for (int i = 0; i < datasetNum; i++) {
+                        index++;
+                        successDataRealNode = getAccessResult_Success_RealNode(seqOf, index);
+                        successDataRealNode.setName("reasonCodes");
+                        successDataRealNode.setDisplayString("原因代码");
+                    }
                 }
             }
         }

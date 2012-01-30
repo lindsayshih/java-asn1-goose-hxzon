@@ -62,6 +62,13 @@ public class UIUtil {
             + "40 00 05 48 00 00 03 00 00 20 02 f0 80 01 00 01 " + "00 61 13 30 11 02 01 03 a0 0c a1 0a 02 03 66 0b " + "b9 a5 03 80 01 0a ";
     public static String testMms5 = "00 10 18 97 87 03 08 01 c6 78 01 39 08 00 45 00 " + "00 4a 42 9e 40 00 40 06 69 31 c6 78 01 39 c6 78 " + "00 b5 00 66 d0 bc a6 90 29 87 58 6a dd 97 50 18 "
             + "20 00 97 ee 00 00 03 00 00 22 02 f0 80 01 00 01 " + "00 61 15 30 13 02 01 03 a0 0e a2 0c 80 03 66 0b " + "af a2 05 a0 03 87 01 02 ";
+    public static String testMms6 = "18 a9 05 6e f2 a8 08 01 c6 78 00 25 08 00 45 00 " + "01 1d 68 f6 40 00 40 06 43 1a c6 78 00 25 c6 78 " + "00 b5 00 66 aa 00 00 8a 4b e2 13 de c1 1d 50 18 "
+            + "40 00 9b de 00 00 03 00 00 f5 02 f0 80 01 00 01 " + "00 61 81 e7 30 81 e4 02 01 03 a0 81 de a3 81 db " + "a0 81 d8 a1 05 80 03 52 50 54 a0 81 ce 8a 07 75 "
+            + "72 63 62 41 69 6e 84 03 06 38 00 8c 06 00 e6 23 " + "04 26 1b 8a 13 43 47 31 31 30 31 43 31 2f 4c 4c " + "4e 30 24 64 73 41 69 6e 84 07 07 57 d5 f0 00 00 "
+            + "00 87 05 08 42 84 5c 29 87 05 08 42 84 5c 29 87 " + "05 08 40 9f ae 14 87 05 08 40 9f ae 14 87 05 08 " + "41 b0 28 f6 87 05 08 41 b0 28 f6 87 05 08 42 7e "
+            + "5c 29 87 05 08 40 65 1e b8 87 05 08 40 65 1e b8 " + "87 05 08 40 65 1e b8 87 05 08 40 65 1e b8 87 05 " + "08 40 09 99 99 87 05 08 40 09 99 99 87 05 08 40 "
+            + "e5 70 a4 84 02 02 40 84 02 02 40 84 02 02 40 84 " + "02 02 40 84 02 02 40 84 02 02 40 84 02 02 40 84 " + "02 02 40 84 02 02 40 84 02 02 40 84 02 02 40 84 "
+            + "02 02 40 84 02 02 40 84 02 02 40";
     public static String testSmv91 = "01 0c cd 04 01 03 08 ac 7d 01 26 64 81 00 80 00 " + "88 ba 40 00 00 c5 00 00 00 00 80 81 ba 00 04 00 " + "2c 02 01 00 03 01 f4 01 f4 16 8e 0f a0 00 00 00 "
             + "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 " + "00 00 00 00 00 0f f0 40 1f 0e bf 64 00 00 2c 02 " + "01 00 03 01 f4 01 f4 16 8e 0f a0 00 00 00 00 00 "
             + "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 " + "00 00 00 0f f0 40 1f 0e c0 64 00 00 2c 02 01 00 " + "03 01 f4 01 f4 16 8e 0f a0 00 00 00 00 00 00 00 "
@@ -100,6 +107,7 @@ public class UIUtil {
         examplePackets.add(new Packet(BytesUtil.fromHexString(testMms3)));
         examplePackets.add(new Packet(BytesUtil.fromHexString(testMms4)));
         examplePackets.add(new Packet(BytesUtil.fromHexString(testMms5)));
+        examplePackets.add(new Packet(BytesUtil.fromHexString(testMms6)));
         examplePackets.add(new Packet(BytesUtil.fromHexString(testSmv91)));
         examplePackets.add(new Packet(BytesUtil.fromHexString(testSmv92)));
         examplePackets.add(new Packet(BytesUtil.fromHexString(testSmv92_2)));

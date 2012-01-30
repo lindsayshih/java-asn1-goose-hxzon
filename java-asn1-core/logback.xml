@@ -29,6 +29,7 @@
  <logger name="org.apache.commons" level="ERROR" />
  <logger name="net.sf.ehcache" level="ERROR" />
  <logger name="org.hxzon" level="INFO" />
+ <logger name="org.hxzon.asn1" level="WARN" />
  <logger name="org.hxzon.project" level="WARN" />
  <root level="WARN">
   <appender-ref ref="stdout" />
