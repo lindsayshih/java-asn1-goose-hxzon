@@ -27,6 +27,7 @@ public class TcpPacket extends Packet {
     private ProtocolInt31Field _sourcePort;
     private ProtocolInt31Field _destPort;
     private ProtocolInt63Field _sequenceNumber;
+    //希望接收的下一序号，表示已正确接收了所有序号小于确认号的数据字节
     private ProtocolInt63Field _acknowledgementNumber;
     private ProtocolBitField _headerLen;
     private ProtocolBitField _flag;
@@ -111,11 +112,17 @@ public class TcpPacket extends Packet {
         return _flag;
     }
 
+    //紧急数据偏移量(紧急指针)有效
     public static final int Urg = 1 << 5;
+    //确认序号有效
     public static final int Ack = 1 << 4;
+    //接收方应该立即将数据提交给应用程序
     public static final int Psh = 1 << 3;
+    //连接复位
     public static final int Rst = 1 << 2;
+    //序号同步(建立连接)
     public static final int Syn = 1 << 1;
+    //发送方字节流结束
     public static final int Fin = 1 << 0;
 
     public String flagDescription(int flag) {
