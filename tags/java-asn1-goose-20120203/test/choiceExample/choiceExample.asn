@@ -1,0 +1,61 @@
+--SailajaK on 12-1-09
+--ASN.1 description of the UUS1 content associated to the CC link(with out imports)
+
+
+HI3CCLinkData DEFINITIONS IMPLICIT TAGS::= 
+BEGIN
+ 
+UUS1-Content ::= SEQUENCE
+{
+domainID [0] OBJECT IDENTIFIER (hi3CCLinkIdOperationId) OPTIONAL,
+lawfullInterceptionIdentifier [1] LawfulInterceptionIdentifier,
+communicationIdentifier [2] CommunicationIdentifier,
+cC-Link-Identifier [3] CC-Link-Identifier OPTIONAL,
+direction-Indication [4] Direction-Indication,
+bearer-capability [5] OCTET STRING (SIZE(1..12)) OPTIONAL,
+service-Information [7] Service-Information OPTIONAL
+}
+
+CommunicationIdentifier ::= SEQUENCE
+{
+communication-Identity-Number [0] OCTET STRING (SIZE (1..8)) OPTIONAL,
+network-Identifier [1] Network-Identifier
+}
+
+Network-Identifier ::= SEQUENCE
+{
+operator-Identifier [0] OCTET STRING (SIZE (1..5)),
+network-Element-Identifier [1] Network-Element-Identifier OPTIONAL
+}
+
+Network-Element-Identifier ::= CHOICE
+{
+e164-Format [1] OCTET STRING (SIZE (1..25)),
+x25-Format [2] OCTET STRING (SIZE (1..25)),
+iP-Format [3] OCTET STRING (SIZE (1..25)),
+dNS-Format [4] OCTET STRING (SIZE (1..25))
+}
+
+Service-Information ::= SET
+{
+high-layer-capability [0] OCTET STRING (SIZE(1)) OPTIONAL,
+tMR [1] OCTET STRING (SIZE(1)) OPTIONAL,
+bearerServiceCode [2] OCTET STRING (SIZE(1)) OPTIONAL,
+teleServiceCode [3] OCTET STRING (SIZE(1)) OPTIONAL
+}
+
+LawfulInterceptionIdentifier ::= OCTET STRING (SIZE (1..25))
+
+CC-Link-Identifier ::= OCTET STRING (SIZE (1..8))
+
+Direction-Indication ::= ENUMERATED
+{
+mono-mode(0),
+cc-from-target(1),
+cc-from-other-party(2),
+direction-unknown(3)
+}
+
+END --end of HI3CCLinkData
+
+

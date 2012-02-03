@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="java-asn1-core"/>
+	<classpathentry excluding="test/hxzon/asn1/Asn1Test.java|test/hxzon/asn1/TestGooseEncoder.java|org/hxzon/asn1/smv/SmvPdu.java" kind="src" path="java-asn1"/>
+	<classpathentry kind="src" path="java-netprotocol"/>
+	<classpathentry kind="src" path="java-netprotocol-quick"/>
+	<classpathentry kind="src" path="java-netprotocol-ui"/>
+	<classpathentry kind="src" path="java-netprotocol-ui-javafx"/>
+	<classpathentry kind="src" path="org.hxzon"/>
+	<classpathentry kind="lib" path="lib/jnetpcap-1.3.b3-1.jar"/>
+	<classpathentry kind="lib" path="lib/jcommon-1.0.16.jar" sourcepath="lib/jcommon-1.0.16-source.zip"/>
+	<classpathentry kind="lib" path="lib/jfreechart-1.0.13.jar" sourcepath="lib/jfreechart-1.0.13-source.zip"/>
+	<classpathentry kind="lib" path="D:/develop/java/javafx2.0/rt/lib/jfxrt.jar"/>
+	<classpathentry kind="lib" path="lib/log/jcl-over-slf4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="lib/log/jul-to-slf4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="lib/log/log4j-over-slf4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="lib/log/logback-classic-0.9.24.jar" sourcepath="D:/workspace/java-asn1-goose/lib/log/src/logback-classic-0.9.24-sources.jar"/>
+	<classpathentry kind="lib" path="lib/log/logback-core-0.9.24.jar" sourcepath="D:/workspace/java-asn1-goose/lib/log/src/logback-core-0.9.24-sources.jar"/>
+	<classpathentry kind="lib" path="lib/log/slf4j-api-1.6.1.jar" sourcepath="D:/workspace/java-asn1-goose/lib/log/src/slf4j-api-1.6.1-sources.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
