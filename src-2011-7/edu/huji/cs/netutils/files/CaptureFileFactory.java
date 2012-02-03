@@ -27,16 +27,18 @@ public class CaptureFileFactory
 	 */
 	public static CaptureFileReader createCaptureFileReader(String theFileName) throws IOException, NetUtilsException
 	{
-		if(theFileName.toLowerCase().endsWith("cap"))
-		{
-			return new PCapFileReader(theFileName);
-		}
-		else if (theFileName.toLowerCase().endsWith("enc"))
-		{
-			return new EncFileReader(theFileName);
-		}
+//		if(theFileName.toLowerCase().endsWith("cap"))
+//		{
+//			return new PCapFileReader(theFileName);
+//		}
+//		else 
+        if (theFileName.toLowerCase().endsWith("enc")) {
+            return new EncFileReader(theFileName);
+        } else {
+            return new PCapFileReader(theFileName);
+        }
 		
-		throw new NetUtilsException("Capture Format not supported");
+//		throw new NetUtilsException("Capture Format not supported");
 	}
 	
 	/**

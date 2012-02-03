@@ -37,7 +37,7 @@ public class Ping
 	{
 		try
 		{
-		if(args.length>1)
+		if(args.length<1)
 		{
 			System.out.println("Missing parameter: destination IP");
 			System.exit(-1);
