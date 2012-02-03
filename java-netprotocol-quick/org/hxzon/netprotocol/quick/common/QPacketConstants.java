@@ -11,8 +11,8 @@ public interface QPacketConstants {
     public static final int UdpHeaderLength = 8;
 
     public static final String EthernetType_Vlan = "8100";
-    public static final String EthernetType_Goose = "88b8";
-    public static final String EthernetType_Smv = "88ba";
+    public static final int EthernetType_Goose = 0x88b8;
+    public static final int EthernetType_Smv = 0x88ba;
     public static final String EthernetType_Ip4 = "0800";
 
     public static final String PacketTypeDesc_Ethernet = "ethernet";

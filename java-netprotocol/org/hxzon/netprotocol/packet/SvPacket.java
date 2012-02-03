@@ -14,7 +14,7 @@ public class SvPacket extends Packet {
 
             @Override
             public Packet match(EthernetPacket packet) {
-                if (packet.fetchType().getValue().equalsIgnoreCase(EthernetType_Sv)) {
+                if (packet.fetchType().getValue() == EthernetType_Sv) {
                     return new SvPacket();
                 } else {
                     return null;
@@ -26,7 +26,7 @@ public class SvPacket extends Packet {
 
             @Override
             public Packet match(VlanPacket packet) {
-                if (packet.fetchType().getValue().equalsIgnoreCase(EthernetType_Sv)) {
+                if (packet.fetchType().getValue() == EthernetType_Sv) {
                     return new SvPacket();
                 } else {
                     return null;
@@ -36,7 +36,7 @@ public class SvPacket extends Packet {
         });
     }
     public static final int HeaderLength = 8;
-    public static final String EthernetType_Sv = "88ba";
+    public static final int EthernetType_Sv = 0x88ba;
     private ProtocolInt31Field _appId;
     private ProtocolInt31Field _pduLen;
     private ProtocolInt31Field _reserved1;

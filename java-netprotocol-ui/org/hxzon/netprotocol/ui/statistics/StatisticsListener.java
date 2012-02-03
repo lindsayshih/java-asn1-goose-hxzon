@@ -181,10 +181,10 @@ public class StatisticsListener implements PcapHandlerListener {
     private static int detectType(PcapPacket pcapPacket) {
         byte[] data = pcapPacket.getPacketData();
         try {
-            String ethernetType = PacketUtils.ethernetType(data);
-            if (GoosePacket.EthernetType_Goose.equals(ethernetType)) {
+            int ethernetType = PacketUtils.ethernetType(data);
+            if (GoosePacket.EthernetType_Goose == ethernetType) {
                 return Type_Goose;
-            } else if (SvPacket.EthernetType_Sv.equals(ethernetType)) {
+            } else if (SvPacket.EthernetType_Sv == ethernetType) {
                 return Type_Smv;
             } else if (PacketUtils.isTpktPacket(data)) {
                 return Type_Mms;
