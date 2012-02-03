@@ -1,8 +1,8 @@
 package org.hxzon.netprotocol.packet;
 
 import org.hxzon.netprotocol.field.ProtocolField;
+import org.hxzon.netprotocol.field.ProtocolInt31HexField;
 import org.hxzon.netprotocol.field.ProtocolMacField;
-import org.hxzon.netprotocol.field.ProtocolStringField;
 import org.hxzon.netprotocol.parse.ProtocolBinding;
 import org.hxzon.netprotocol.parse.ProtocolBindingList;
 
@@ -20,7 +20,7 @@ public class EthernetPacket extends Packet {
     public static final int HeaderLength = 14;
     private ProtocolMacField _srcMac;
     private ProtocolMacField _destMac;
-    private ProtocolStringField _type;
+    private ProtocolInt31HexField _type;
 
     protected int expectHeaderLength() {
         return HeaderLength;
@@ -52,10 +52,10 @@ public class EthernetPacket extends Packet {
 //		this.destMac = destMac;
     }
 
-    public ProtocolStringField fetchType() {
+    public ProtocolInt31HexField fetchType() {
         if (_type == null) {
-            _type = new ProtocolStringField("type", "以太网类型", 12, 2, this);
-            if (VlanPacket.EthernetType_Vlan.equals(_type.getValue())) {
+            _type = new ProtocolInt31HexField("type", "以太网类型", 12, 2, true, this);
+            if (VlanPacket.EthernetType_Vlan == _type.getValue()) {
                 _type.setDisplayString("vlan");
             }
         }

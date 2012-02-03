@@ -2,7 +2,7 @@ package org.hxzon.netprotocol.packet;
 
 import org.hxzon.netprotocol.field.ProtocolBitField;
 import org.hxzon.netprotocol.field.ProtocolField;
-import org.hxzon.netprotocol.field.ProtocolStringField;
+import org.hxzon.netprotocol.field.ProtocolInt31HexField;
 import org.hxzon.netprotocol.parse.ProtocolBinding;
 import org.hxzon.netprotocol.parse.ProtocolBindingList;
 
@@ -12,7 +12,7 @@ public class VlanPacket extends Packet {
 
             @Override
             public Packet match(EthernetPacket packet) {
-                if (packet.fetchType().getValue().equals(EthernetType_Vlan)) {
+                if (packet.fetchType().getValue() == EthernetType_Vlan) {
                     return new VlanPacket();
                 }
                 return null;
@@ -21,12 +21,12 @@ public class VlanPacket extends Packet {
         });
     }
     public static final int HeaderLength = 4;
-    public static final String EthernetType_Vlan = "8100";
+    public static final int EthernetType_Vlan = 0x8100;
 
     private ProtocolBitField _priority;
     private ProtocolBitField _cfi;
     private ProtocolBitField _vlanId;
-    private ProtocolStringField _type;
+    private ProtocolInt31HexField _type;
 
     protected int expectHeaderLength() {
         return HeaderLength;
@@ -36,9 +36,9 @@ public class VlanPacket extends Packet {
         return new ProtocolField[] { fetchPriority(), fetchCfi(), fetchVlanId(), fetchType() };
     }
 
-    public ProtocolStringField fetchType() {
+    public ProtocolInt31HexField fetchType() {
         if (_type == null) {
-            _type = new ProtocolStringField("type", "以太网类型", 2, 2, this);
+            _type = new ProtocolInt31HexField("type", "以太网类型", 2, 2, true, this);
         }
         return _type;
     }

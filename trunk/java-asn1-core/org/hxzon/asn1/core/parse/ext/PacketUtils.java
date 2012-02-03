@@ -8,24 +8,24 @@ import org.hxzon.netprotocol.packet.VlanPacket;
 import org.hxzon.util.BytesUtil;
 
 public class PacketUtils {
-    public static String ethernetType(byte[] data) {
-        String ethernetType = BytesUtil.toHexString(data, 12, 2);
-        if (VlanPacket.EthernetType_Vlan.equalsIgnoreCase(ethernetType)) {
-            ethernetType = BytesUtil.toHexString(data, 16, 2);
+    public static int ethernetType(byte[] data) {
+        int ethernetType = BytesUtil.toInt(data, 12, 2, 0);
+        if (VlanPacket.EthernetType_Vlan == ethernetType) {
+            ethernetType = BytesUtil.toInt(data, 16, 2, 0);
         }
         return ethernetType;
     }
 
     public static int ethernetHeaderLen(byte[] data) {
-        String ethernetType = BytesUtil.toHexString(data, 12, 2);
-        if (VlanPacket.EthernetType_Vlan.equalsIgnoreCase(ethernetType)) {
+        int ethernetType = BytesUtil.toInt(data, 12, 2, 0);
+        if (VlanPacket.EthernetType_Vlan == ethernetType) {
             return 14 + 4;
         }
         return 14;
     }
 
     public static boolean isIp4Packet(byte[] data) {
-        return Ip4Packet.EthernetType_Ip4.equalsIgnoreCase(ethernetType(data));
+        return Ip4Packet.EthernetType_Ip4 == ethernetType(data);
     }
 
     public static String ipType(byte[] data) {

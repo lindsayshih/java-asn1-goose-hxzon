@@ -16,7 +16,7 @@ public class Ip4Packet extends Packet {
 
             @Override
             public Packet match(EthernetPacket packet) {
-                if (packet.fetchType().getValue().equals(EthernetType_Ip4)) {
+                if (packet.fetchType().getValue() == EthernetType_Ip4) {
                     return new Ip4Packet();
                 } else {
                     return null;
@@ -28,7 +28,7 @@ public class Ip4Packet extends Packet {
 
             @Override
             public Packet match(VlanPacket packet) {
-                if (packet.fetchType().getValue().equals(EthernetType_Ip4)) {
+                if (packet.fetchType().getValue() == EthernetType_Ip4) {
                     return new Ip4Packet();
                 } else {
                     return null;
@@ -38,7 +38,7 @@ public class Ip4Packet extends Packet {
         });
     }
     public static final int MaxPayloadLength = 1480;
-    public static final String EthernetType_Ip4 = "0800";
+    public static final int EthernetType_Ip4 = 0x0800;
     private ProtocolInt31Field _version;
     private ProtocolBitField _headerLen;
     private ProtocolInt31Field _differentiatedServices;

@@ -17,7 +17,7 @@ public class TestQPacketDecoder {
     public static void main(String[] args) {
         byte[] data = BytesUtil.fromHexString(UIUtil.testSmv91);
         QEthernetPacket ethernetPacket = new QEthernetPacket();
-        String ethernetType = PacketUtils.ethernetType(data);
+        int ethernetType = PacketUtils.ethernetType(data);
         int ethernetHeaderLen = PacketUtils.ethernetHeaderLen(data);
         QProtocolStringField ethernetTypeField = QEthernetPacket.fetchEthernetType(data, 0);
         if (QPacketConstants.EthernetType_Vlan.equalsIgnoreCase(ethernetTypeField.getValue())) {
@@ -26,7 +26,7 @@ public class TestQPacketDecoder {
             ethernetPacket.setPayload(vlanPacket);
         }
         ethernetPacket.addField(ethernetTypeField);
-        if (QPacketConstants.EthernetType_Goose.equalsIgnoreCase(ethernetType)) {
+        if (QPacketConstants.EthernetType_Goose == ethernetType) {
             QGoosePacket goosePacket = new QGoosePacket();
             goosePacket.addField(QGoosePacket.fetchAppId(data, ethernetHeaderLen));
             goosePacket.addField(QGoosePacket.fetchPduLen(data, ethernetHeaderLen));
@@ -35,7 +35,7 @@ public class TestQPacketDecoder {
             } else {
                 ethernetPacket.getPayload().setPayload(goosePacket);
             }
-        } else if (QPacketConstants.EthernetType_Smv.equalsIgnoreCase(ethernetType)) {
+        } else if (QPacketConstants.EthernetType_Smv == ethernetType) {
             QSvPacket smvPacket = new QSvPacket();
             smvPacket.addField(QSvPacket.fetchAppId(data, ethernetHeaderLen));
             smvPacket.addField(QSvPacket.fetchPduLen(data, ethernetHeaderLen));
