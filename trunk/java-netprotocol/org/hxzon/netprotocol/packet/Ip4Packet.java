@@ -5,7 +5,6 @@ import org.hxzon.netprotocol.field.ProtocolBitField;
 import org.hxzon.netprotocol.field.ProtocolField;
 import org.hxzon.netprotocol.field.ProtocolInt31Field;
 import org.hxzon.netprotocol.field.ProtocolIpField;
-import org.hxzon.netprotocol.field.ProtocolStringField;
 import org.hxzon.netprotocol.parse.ProtocolBinding;
 import org.hxzon.netprotocol.parse.ProtocolBindingList;
 import org.hxzon.util.BitUtil;
@@ -47,7 +46,7 @@ public class Ip4Packet extends Packet {
     private ProtocolBitField _fragmentFlags;
     private ProtocolBitField _fragmentOffset;
     private ProtocolInt31Field _ttl;
-    private ProtocolStringField _protocolCode;
+    private ProtocolInt31Field _protocolCode;
     private ProtocolInt31Field _checksum;
     private ProtocolIpField _sourceIp;
     private ProtocolIpField _destIp;
@@ -183,9 +182,9 @@ public class Ip4Packet extends Packet {
 //		this.ttl = ttl;
     }
 
-    public ProtocolStringField fetchProtocolCode() {
+    public ProtocolInt31Field fetchProtocolCode() {
         if (_protocolCode == null) {
-            _protocolCode = new ProtocolStringField("protocol", "协议类型", 9, 1, this);
+            _protocolCode = new ProtocolInt31Field("protocol", "协议类型", 9, 1, true, this);
         }
         return _protocolCode;
     }

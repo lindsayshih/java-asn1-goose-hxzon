@@ -28,9 +28,8 @@ public class PacketUtils {
         return Ip4Packet.EthernetType_Ip4 == ethernetType(data);
     }
 
-    public static String ipType(byte[] data) {
-        String ipType = BytesUtil.toHexString(data, ethernetHeaderLen(data) + 10, 2);
-        return ipType;
+    public static int ipType(byte[] data) {
+        return BytesUtil.toInt(data, ethernetHeaderLen(data) + 10, 2, 0);
     }
 
     public static int ipHeaderIndex(byte[] data) {
@@ -42,11 +41,11 @@ public class PacketUtils {
     }
 
     public static boolean isTcpPacket(byte[] data) {
-        return TcpPacket.IpType_Tcp.equalsIgnoreCase(ipType(data));
+        return TcpPacket.IpType_Tcp == ipType(data);
     }
 
     public static boolean isUdpPacket(byte[] data) {
-        return UdpPacket.IpType_Udp.equalsIgnoreCase(ipType(data));
+        return UdpPacket.IpType_Udp == ipType(data);
     }
 
     public static int tcpHeaderIndex(byte[] data) {
