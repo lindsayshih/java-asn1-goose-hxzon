@@ -71,7 +71,7 @@ public class UdpPacket extends Packet {
 
     public ProtocolInt31Field fetchChecksum() {
         if (_checksum == null) {
-            _checksum = new ProtocolInt31Field("check sum", "校验和", 6, 2, this);
+            _checksum = new ProtocolInt31Field("check sum", "校验和", 6, 2, true, this);
         }
         return _checksum;
     }

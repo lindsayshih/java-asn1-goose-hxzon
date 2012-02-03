@@ -1,5 +1,6 @@
 package org.hxzon.netprotocol.packet;
 
+import org.hxzon.netprotocol.common.IPacketPayload;
 import org.hxzon.netprotocol.field.ProtocolBitField;
 import org.hxzon.netprotocol.field.ProtocolField;
 import org.hxzon.netprotocol.field.ProtocolInt31Field;
@@ -41,7 +42,7 @@ public class Ip4Packet extends Packet {
     private ProtocolInt31Field _version;
     private ProtocolBitField _headerLen;
     private ProtocolInt31Field _differentiatedServices;
-    private ProtocolInt31Field _totalLen;
+    private ProtocolInt31Field _totalLen;//ipHeader+payload
     private ProtocolInt31Field _identification;
     private ProtocolBitField _fragmentFlags;
     private ProtocolBitField _fragmentOffset;
@@ -58,6 +59,10 @@ public class Ip4Packet extends Packet {
     protected ProtocolField[] expectHeaderFields() {
         return new ProtocolField[] { fetchVersion(), fetchHeaderLen(), fetchDifferentiatedServices(), fetchTotalLen(), fetchIdentification(), fetchFragmentFlags(), fetchFragmentOffset(), fetchTtl(),
                 fetchProtocolCode(), fetchChecksum(), fetchSourceIp(), fetchDestIp() };
+    }
+
+    public IPacketPayload exceptPayload() {
+        return null;
     }
 
     public ProtocolInt31Field fetchVersion() {
@@ -85,7 +90,7 @@ public class Ip4Packet extends Packet {
         if (_headerLen == null) {
             _headerLen = new ProtocolBitField("headerLength", "头部长度", 0, 4, 4, this) {
                 public String getValueAsString() {
-                    return String.valueOf(getValue() + "*4");
+                    return (getValue() * 4) + "(=" + getValue() + "*4)";
                 }
             };
         }
@@ -154,7 +159,11 @@ public class Ip4Packet extends Packet {
 
     public ProtocolBitField fetchFragmentOffset() {
         if (_fragmentOffset == null) {
-            _fragmentOffset = new ProtocolBitField("fragment offset", "段偏移", 6, 3, 13, this);
+            _fragmentOffset = new ProtocolBitField("fragment offset", "段偏移", 6, 3, 13, this) {
+                public String getValueAsString() {
+                    return (getValue() * 8) + "(=" + getValue() + "*8)";
+                }
+            };
         }
         return _fragmentOffset;
     }
@@ -186,6 +195,9 @@ public class Ip4Packet extends Packet {
     }
 
     public ProtocolInt31Field fetchChecksum() {
+        if (_checksum == null) {
+            _checksum = new ProtocolInt31Field("protocol", "校验和", 10, 2, true, this);
+        }
         return _checksum;
     }
 
