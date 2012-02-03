@@ -90,7 +90,7 @@ public class TcpPacket extends Packet {
         if (_headerLen == null) {
             _headerLen = new ProtocolBitField("header len", "头部长度", 12, 0, 4, this) {
                 public String getValueAsString() {
-                    return String.valueOf(getValue() + "*4");
+                    return (getValue() * 4) + "(=" + getValue() + "*4)";
                 }
             };
         }
@@ -103,7 +103,7 @@ public class TcpPacket extends Packet {
 
     public ProtocolBitField fetchFlag() {
         if (_flag == null) {
-            _flag = new ProtocolBitField("flag", "标识", 13, 2, 6, this) {
+            _flag = new ProtocolBitField("flag", "标识", 12, 7, 9, this) {
                 public String getValueAsString() {
                     return flagDescription(getValue());
                 }
@@ -112,6 +112,9 @@ public class TcpPacket extends Packet {
         return _flag;
     }
 
+    public static final int Ns = 1 << 8;
+    public static final int Cwr = 1 << 7;
+    public static final int Ece = 1 << 6;
     //紧急数据偏移量(紧急指针)有效
     public static final int Urg = 1 << 5;
     //确认序号有效
@@ -127,6 +130,15 @@ public class TcpPacket extends Packet {
 
     public String flagDescription(int flag) {
         StringBuilder sb = new StringBuilder();
+        if (BitUtil.isSet(flag, Ns)) {
+            sb.append("ECN-nonce concealment protection,");
+        }
+        if (BitUtil.isSet(flag, Cwr)) {
+            sb.append("Congestion Window Reduced,");
+        }
+        if (BitUtil.isSet(flag, Ece)) {
+            sb.append("ECN-Echo,");
+        }
         if (BitUtil.isSet(flag, Urg)) {
             sb.append("Urgent,");
         }
