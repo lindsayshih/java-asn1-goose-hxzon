@@ -26,12 +26,15 @@
 
 package com.act365.net.tcp ;
 
-import com.act365.net.*;
-import com.act365.net.ip.*;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+import java.io.IOException;
+import java.net.SocketException;
 
-import java.beans.*;
-import java.io.*;
-import java.net.*;
+import com.act365.net.JSWDatagramSocket;
+import com.act365.net.SocketConstants;
+import com.act365.net.SocketWrenchSession;
+import com.act365.net.ip.IP4Message;
 
 /**
  <code>RawTCPListener</code> is a singleton class that polls for TCP or TCPJ messages.

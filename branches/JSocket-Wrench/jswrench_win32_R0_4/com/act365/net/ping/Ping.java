@@ -26,12 +26,20 @@
 
 package com.act365.net.ping ;
 
-import com.act365.net.*;
-import com.act365.net.icmp.*;
-import com.act365.net.ip.*;
+import java.net.InetAddress;
+import java.net.SocketException;
+import java.net.UnknownHostException;
+import java.util.Date;
 
-import java.net.*;
-import java.util.*;
+import com.act365.net.GeneralSocketImpl;
+import com.act365.net.JSWDatagramSocket;
+import com.act365.net.SocketConstants;
+import com.act365.net.SocketUtils;
+import com.act365.net.SocketWrenchSession;
+import com.act365.net.icmp.ICMP;
+import com.act365.net.icmp.ICMPMessage;
+import com.act365.net.ip.IP4;
+import com.act365.net.ip.IP4Message;
 
 /**
  Implements the well-known ping network utility.

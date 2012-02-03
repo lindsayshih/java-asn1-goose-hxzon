@@ -26,7 +26,8 @@
 
 package com.act365.net.tftp;
 
-import java.io.* ;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 
 /**
  * ErrorHandler provides error-handling for the entire TFTP project.

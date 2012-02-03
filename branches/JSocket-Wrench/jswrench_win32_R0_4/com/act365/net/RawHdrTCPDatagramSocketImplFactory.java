@@ -26,7 +26,8 @@
 
 package com.act365.net;
 
-import java.net.*;
+import java.net.DatagramSocketImpl;
+import java.net.DatagramSocketImplFactory;
 
 /**
  * Factory to create <code>RawHdrTCPDatagramSocketImpl</code> objects.

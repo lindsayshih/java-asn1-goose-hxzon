@@ -26,10 +26,17 @@
 
 package com.act365.net.tftp;
 
-import com.act365.net.* ;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.StreamTokenizer;
+import java.util.Date;
 
-import java.io.*;
-import java.util.*;
+import com.act365.net.SocketConstants;
+import com.act365.net.SocketWrenchSession;
 
 /**
  * The class TFTP implements a TFTP client.

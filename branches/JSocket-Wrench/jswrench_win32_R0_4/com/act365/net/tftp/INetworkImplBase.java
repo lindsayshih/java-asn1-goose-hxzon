@@ -26,7 +26,7 @@
 
 package com.act365.net.tftp;
 
-import java.io.InterruptedIOException ;
+import java.io.InterruptedIOException;
 
 /**
  * INetworkImpl provides a basic set of network functions common to the

@@ -26,7 +26,7 @@
 
 package com.act365.net.tcp ;
 
-import java.util.Random ;
+import java.util.Random;
 
 /**
  Class ISNCounter provides access to a counter that is

@@ -26,13 +26,25 @@
 
 package com.act365.net.tcp ;
 
-import com.act365.net.*;
-import com.act365.net.ip.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.io.FileDescriptor;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.SocketAddress;
+import java.net.SocketException;
+import java.net.SocketImpl;
+import java.util.Random;
 
-import java.beans.* ;
-import java.io.* ;
-import java.net.* ;
-import java.util.*;
+import com.act365.net.GeneralSocketImpl;
+import com.act365.net.JSWDatagramSocket;
+import com.act365.net.RetransmissionTimer;
+import com.act365.net.SocketConstants;
+import com.act365.net.ip.IP4;
+import com.act365.net.ip.IP4Message;
 
 /**
  * Implements the TCPJ protocol, which is a clone of TCP that would typically be

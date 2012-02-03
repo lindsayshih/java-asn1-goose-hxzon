@@ -26,7 +26,8 @@
 
 package com.act365.net.tcp ;
 
-import com.act365.net.* ;
+import com.act365.net.SocketConstants;
+import com.act365.net.SocketWrenchSession;
 
 /**
  * Class <code>TCP</code> defines constants associated with the TCP protocol.

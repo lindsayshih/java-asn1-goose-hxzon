@@ -26,11 +26,13 @@
 
 package com.act365.net.ping ;
 
-import com.act365.net.*;
-import com.act365.net.icmp.* ;
+import java.net.InetAddress;
+import java.util.Date;
 
-import java.net.*;
-import java.util.*;
+import com.act365.net.JSWDatagramSocket;
+import com.act365.net.SocketUtils;
+import com.act365.net.icmp.ICMP;
+import com.act365.net.icmp.ICMPMessage;
 
 /**
  * 

@@ -26,9 +26,11 @@
 
 package com.act365.net.tcp;
 
-import com.act365.net.*;
+import java.net.SocketException;
+import java.net.SocketImpl;
+import java.net.SocketImplFactory;
 
-import java.net.*;
+import com.act365.net.TCPSocketImpl;
 
 /**
  * Factory to create <code>RawTCPSocketImpl</code> objects.

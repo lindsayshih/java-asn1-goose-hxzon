@@ -26,7 +26,7 @@
 
 package com.act365.net;
 
-import java.io.*;
+import java.io.IOException;
 
 /**
  * Implements a TCP socket in native code using the standard Berkeley library. 

@@ -26,8 +26,8 @@
 
 package com.act365.net.dns ;
 
-import java.io.IOException ;
-import java.util.*;
+import java.io.IOException;
+import java.util.StringTokenizer;
 
 /**
  Represents a DNS Query Message.

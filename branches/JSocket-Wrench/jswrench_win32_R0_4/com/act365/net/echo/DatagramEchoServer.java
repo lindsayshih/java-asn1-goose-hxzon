@@ -27,12 +27,17 @@
 
 package com.act365.net.echo ;
 
-import com.act365.net.* ;
-import com.act365.net.ip.*;
-import com.act365.net.udp.*;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 
-import java.io.*;
-import java.net.*;
+import com.act365.net.GeneralSocketImpl;
+import com.act365.net.JSWDatagramSocket;
+import com.act365.net.SocketConstants;
+import com.act365.net.SocketWrenchSession;
+import com.act365.net.ip.IP4Message;
+import com.act365.net.udp.UDPMessage;
 
 /**
  DatagramEchoServer acts as the server for the UDP echo service.
