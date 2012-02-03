@@ -13,6 +13,10 @@ public class ProtocolInt31HexField extends ProtocolInt31Field {
 
     @Override
     public String getValueAsString() {
-        return Integer.toHexString(getValue());
+        String tmp = Integer.toHexString(getValue());
+        while (tmp.length() < this.getLen() * 2) {
+            tmp = "0" + tmp;
+        }
+        return tmp;
     }
 }
