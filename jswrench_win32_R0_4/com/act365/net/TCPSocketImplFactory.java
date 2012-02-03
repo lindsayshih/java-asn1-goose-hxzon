@@ -26,7 +26,8 @@
 
 package com.act365.net;
 
-import java.net.*;
+import java.net.SocketImpl;
+import java.net.SocketImplFactory;
 
 /**
  * Factory to create <code>TCPSocketImpl</code> objects.

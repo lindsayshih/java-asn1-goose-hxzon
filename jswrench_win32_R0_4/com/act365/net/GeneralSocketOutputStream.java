@@ -26,7 +26,8 @@
 
 package com.act365.net ;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.OutputStream;
 
 /**
  * <code>GeneralSocketOutputStream</code> writes to a TCP socket. 

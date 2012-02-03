@@ -26,7 +26,7 @@
 
 package com.act365.net;
 
-import java.io.IOException ;
+import java.io.IOException;
 
 /**
  * IProtocolMessage defines a template for any protocol message that is

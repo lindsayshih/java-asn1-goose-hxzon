@@ -26,7 +26,7 @@
 
 package com.act365.net.tftp;
 
-import com.act365.net.*;
+import com.act365.net.SocketUtils;
 
 /**
  * TFTPWriter writes TFTP messages as byte streams.

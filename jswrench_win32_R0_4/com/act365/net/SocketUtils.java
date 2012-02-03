@@ -26,7 +26,8 @@
 
 package com.act365.net;
 
-import java.io.*;
+import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
 
 /**
  * 

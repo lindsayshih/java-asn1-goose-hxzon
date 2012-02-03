@@ -26,7 +26,7 @@
 
 package com.act365.net;
 
-import java.util.Date ;
+import java.util.Date;
 
 /**
  * A RetransmissionTimer object stores all of the information about 

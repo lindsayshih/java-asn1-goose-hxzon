@@ -26,7 +26,9 @@
 
 package com.act365.net.echo ;
 
-import java.io.* ;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 
 /**
  * An instance of the <code>EchoWorker</code> is created by the <code>EchoServer</code>

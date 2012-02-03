@@ -26,11 +26,15 @@
 
 package com.act365.net.dns ;
 
-import com.act365.net.* ;
-import com.act365.net.ip.* ;
-
 import java.io.IOException;
-import java.net.*;
+import java.net.InetAddress;
+import java.net.SocketException;
+import java.net.UnknownHostException;
+
+import com.act365.net.JSWDatagramSocket;
+import com.act365.net.SocketConstants;
+import com.act365.net.SocketWrenchSession;
+import com.act365.net.ip.IP4;
 
 /**
  Implements a DNS client. 

@@ -26,11 +26,16 @@
 
 package com.act365.net;
 
-import com.act365.net.ip.* ;
-import com.act365.net.udp.* ;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.SocketException;
 
-import java.io.* ;
-import java.net.* ;
+import com.act365.net.ip.IP4;
+import com.act365.net.ip.IP4Message;
+import com.act365.net.udp.UDPMessage;
 
 /**
  * A JSWDatagramSocket socket appends the necessary headers (potentially an

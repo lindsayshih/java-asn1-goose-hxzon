@@ -26,7 +26,8 @@
 
 package com.act365.net.tcp ;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.OutputStream;
 
 /**
  * Writes to a Raw TCP socket.

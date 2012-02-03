@@ -26,7 +26,8 @@
 
 package com.act365.net.tcp ;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * <code>TCPJInputStream</code> reads data from a TCPJ socket.

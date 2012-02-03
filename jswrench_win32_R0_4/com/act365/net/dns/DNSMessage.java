@@ -26,9 +26,12 @@
 
 package com.act365.net.dns ;
 
-import com.act365.net.* ;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
 
-import java.io.* ;
+import com.act365.net.IServiceMessage;
+import com.act365.net.SocketUtils;
 
 /**
  * Represents a DNS message.

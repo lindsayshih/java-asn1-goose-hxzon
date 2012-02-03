@@ -26,9 +26,16 @@
 
 package com.act365.net.tftp;
 
-import com.act365.net.RetransmissionTimer ;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InterruptedIOException;
+import java.io.OutputStream;
 
-import java.io.*;
+import com.act365.net.RetransmissionTimer;
 
 /**
  * Utilities common to client and server

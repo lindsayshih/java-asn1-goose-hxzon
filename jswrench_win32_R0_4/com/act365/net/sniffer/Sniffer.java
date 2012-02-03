@@ -26,12 +26,16 @@
 
 package com.act365.net.sniffer;
 
-import com.act365.net.*;
-import com.act365.net.dns.*;
-import com.act365.net.ip.*;
+import java.io.IOException;
+import java.net.InetAddress;
 
-import java.io.IOException ;
-import java.net.*;
+import com.act365.net.IProtocolMessage;
+import com.act365.net.JSWDatagramSocket;
+import com.act365.net.SocketConstants;
+import com.act365.net.SocketUtils;
+import com.act365.net.SocketWrenchSession;
+import com.act365.net.dns.DNSMessage;
+import com.act365.net.ip.IP4Message;
 
 /**
  * Listens for received packets that implement a given protocol and writes

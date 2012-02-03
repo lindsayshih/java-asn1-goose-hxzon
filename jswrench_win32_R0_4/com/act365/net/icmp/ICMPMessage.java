@@ -26,10 +26,12 @@
 
 package com.act365.net.icmp ;
 
-import com.act365.net.*;
-import com.act365.net.ip.*;
+import java.io.IOException;
 
-import java.io.IOException ;
+import com.act365.net.IProtocolMessage;
+import com.act365.net.SocketConstants;
+import com.act365.net.SocketUtils;
+import com.act365.net.ip.IP4Message;
 
 /**
  Stores the contents of an ICMP message.

@@ -26,9 +26,7 @@
 
 package com.act365.net;
 
-import java.net.*;
-
-import com.act365.net.SocketConstants ;
+import java.net.SocketException;
 
 /**
  * A socket class for the transmission of ICMP packets.

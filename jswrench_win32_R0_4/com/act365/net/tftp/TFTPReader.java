@@ -26,9 +26,9 @@
 
 package com.act365.net.tftp;
 
-import com.act365.net.*;
+import java.io.UnsupportedEncodingException;
 
-import java.io.* ;
+import com.act365.net.SocketUtils;
 
 /**
  * TFTPReader reads TFTPMessage objects from byte streams.

@@ -26,9 +26,13 @@
 
 package com.act365.net.tftp;
 
-import com.act365.net.* ;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 
-import java.io.* ;
+import com.act365.net.SocketConstants;
+import com.act365.net.SocketWrenchSession;
 
 /**
  * TFTPServer implements the TFTP protocol on the server side.

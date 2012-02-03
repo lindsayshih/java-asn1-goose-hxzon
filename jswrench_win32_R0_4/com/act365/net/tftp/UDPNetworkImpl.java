@@ -26,8 +26,14 @@
 
 package com.act365.net.tftp;
 
-import java.io.* ;
-import java.net.* ;
+import java.io.IOException;
+import java.io.InterruptedIOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 
 /**
  * UDPNetworkImpl implements standard client-side TFTP network functions with UDP/IP.
