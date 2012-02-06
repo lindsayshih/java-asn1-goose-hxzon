@@ -11,7 +11,7 @@ import edu.huji.cs.netutils.NetUtilsException;
  */
 public abstract class IPPacket
 {
-	// holds the IP packet part, that can be both IPv4 and IPv4
+	// holds the IP packet part, that can be both IPv4 and IPv6
 	protected IPPacketBase myIPPacket = null;
 	
 	public abstract boolean isIPv4();
