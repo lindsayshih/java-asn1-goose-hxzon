@@ -14,8 +14,8 @@ import org.hxzon.util.BytesUtil;
 public class GoosePdu extends BerSequence implements IPacketPayload {
 
     public GoosePdu() {
-        setName("goosePdu");
-        setDisplayString("goose pdu");
+        setId("goosePdu");
+        setName("goose pdu");
     }
 
     //  IECGoosePdu ::= SEQUENCE {

@@ -10,8 +10,8 @@ import org.hxzon.asn1.mms.choice.TypeSpecification;
 public class VariableDescription extends BerSequence {
 
     public VariableDescription() {
+        setId("VariableDescription");
         setName("VariableDescription");
-        setDisplayString("VariableDescription");
     }
 
 //	VariableSpecification ::= CHOICE

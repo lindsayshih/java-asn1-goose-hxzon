@@ -72,7 +72,7 @@ public class GooseDataset extends BerSequence {
         BerNode[] children = getChildren();
         int minIndex = Math.min(displays.size(), children.length);
         for (int i = 0; i < minIndex; i++) {
-            children[i].setDisplayString(displays.get(i));
+            children[i].setName(displays.get(i));
         }
     }
 

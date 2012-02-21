@@ -10,8 +10,8 @@ import org.hxzon.asn1.mms.common.ObjectClass;
 public class ExtendedObjectClass extends BerChoice {
 
     public ExtendedObjectClass() {
+        setId("extended object class");
         setName("extended object class");
-        setDisplayString("extended object class");
     }
 
 //	GetNameList-Request ::= SEQUENCE

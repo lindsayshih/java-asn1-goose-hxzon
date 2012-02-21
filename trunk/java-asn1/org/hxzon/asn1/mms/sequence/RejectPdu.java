@@ -9,8 +9,8 @@ import org.hxzon.asn1.mms.choice.RejectReason;
 
 public class RejectPdu extends BerSequence {
     public RejectPdu() {
+        setId("rejectPDU");
         setName("rejectPDU");
-        setDisplayString("rejectPDU");
     }
 
 //	RejectPDU ::= SEQUENCE

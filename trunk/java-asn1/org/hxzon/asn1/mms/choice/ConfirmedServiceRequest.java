@@ -62,8 +62,8 @@ import org.hxzon.asn1.mms.sequence.WriteRequest;
 public class ConfirmedServiceRequest extends BerChoice {
 
     public ConfirmedServiceRequest() {
+        setId("ConfirmedServiceRequest");
         setName("ConfirmedServiceRequest");
-        setDisplayString("ConfirmedServiceRequest");
     }
 
 //		ConfirmedServiceRequest  ::= CHOICE 

@@ -10,8 +10,8 @@ import org.hxzon.asn1.mms.common.DataAccessError;
 
 public class AlternateAccess extends BerSequence {
     public AlternateAccess() {
+        setId("alternate access");
         setName("alternate access");
-        setDisplayString("alternate access");
     }
 
 //	AlternateAccess ::= SEQUENCE OF CHOICE

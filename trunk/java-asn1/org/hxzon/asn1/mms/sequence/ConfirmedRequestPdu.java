@@ -12,8 +12,8 @@ import org.hxzon.asn1.mms.choice.Modifier;
 public class ConfirmedRequestPdu extends BerSequence {
 
     public ConfirmedRequestPdu() {
+        setId("confirmed request pdu");
         setName("confirmed request pdu");
-        setDisplayString("confirmed request pdu");
     }
 
 //		Confirmed-RequestPDU ::= SEQUENCE

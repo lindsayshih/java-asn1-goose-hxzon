@@ -37,8 +37,8 @@ public class DataAccessError extends BerIntegerEx {
     }
 
     public DataAccessError() {
+        setId("data access error");
         setName("data access error");
-        setDisplayString("data access error");
     }
 
 }

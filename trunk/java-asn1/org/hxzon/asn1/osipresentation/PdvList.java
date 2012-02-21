@@ -11,8 +11,8 @@ import org.hxzon.asn1.mms.MmsPdu;
 public class PdvList extends BerSequence implements UserDataContainer {
 //FullyEncodedData
     public PdvList() {
+        setId("item");
         setName("item");
-        setDisplayString("item");
     }
 
 //	--  contains one or more PDV-list values.
@@ -57,8 +57,8 @@ public class PdvList extends BerSequence implements UserDataContainer {
     public static class PresentationDataValues extends BerChoice implements UserDataContainer {
 
         public PresentationDataValues() {
+            setId("presentation data values");
             setName("presentation data values");
-            setDisplayString("presentation data values");
         }
 
 //		  presentation-data-values

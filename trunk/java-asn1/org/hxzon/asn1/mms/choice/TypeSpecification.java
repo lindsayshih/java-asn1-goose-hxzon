@@ -131,8 +131,8 @@ public class TypeSpecification extends BerChoice {
 
     public static class TypeSpecificatComponent extends BerSequence {
         public TypeSpecificatComponent() {
+            setId("component");
             setName("component");
-            setDisplayString("component");
         }
 
         public BerNode create(int tag, BerInputStream stream) {

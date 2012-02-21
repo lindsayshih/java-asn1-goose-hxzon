@@ -11,8 +11,8 @@ import org.hxzon.asn1.mms.common.Identifier;
 public class ObjectScope extends BerChoice {
 
     public ObjectScope() {
+        setId("object scope");
         setName("object scope");
-        setDisplayString("object scope");
     }
 
 //	GetNameList-Request ::= SEQUENCE

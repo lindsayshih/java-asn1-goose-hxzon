@@ -14,8 +14,8 @@ import org.hxzon.util.BytesUtil;
 
 public class Sv92Pdu extends BerSequence implements IPacketPayload {
     public Sv92Pdu() {
-        setName("smv9-2Pdu");
-        setDisplayString("9-2采样值");
+        setId("smv9-2Pdu");
+        setName("9-2采样值");
     }
 
 //      -- $Id: sv.asn 33058 2010-06-02 19:01:16Z jake $

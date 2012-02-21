@@ -40,8 +40,8 @@ public class Sv91Asdu extends FakeBerNode implements FakeBerConstruct {
     private int version;//配置版本号,1
 
     public Sv91Asdu(Sv91Pdu pdu, int offset) {
+        setId("asdu");
         setName("asdu");
-        setDisplayString("asdu");
         this.setTagOffset(pdu.getValueOffset() + offset);
         this.setTotalLen(46);
         this.setValueOffset(pdu.getValueOffset());
