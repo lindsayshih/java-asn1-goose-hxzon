@@ -27,7 +27,7 @@ public class BerChoice extends BerNode implements FakeBerConstruct {
     }
 
     public BerChoice init(int tag, BerInputStream stream, boolean hasTag) {
-        return this.init(getName(), getDisplayString(), tag, stream, hasTag);
+        return this.init(getId(), getName(), tag, stream, hasTag);
     }
 
     public BerChoice init(String name, String displayString, int tag, BerInputStream stream, boolean hasTag) {
@@ -63,7 +63,7 @@ public class BerChoice extends BerNode implements FakeBerConstruct {
         _realNode = create(childTag, stream);
         _realNode.setParent(this);
         super.setTotalLen(stream.getTagOffset() - super.getTagOffset() + stream.getTotalLen());
-        _realNode.setName(this.getName() + "-" + _realNode.getName());
+        _realNode.setId(this.getId() + "-" + _realNode.getId());
     }
 
     public BerNode getRealNode() {

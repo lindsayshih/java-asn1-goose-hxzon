@@ -99,6 +99,7 @@ public abstract class BerNode {
     private int _valueOffset;
     private String _displayString;
     private String _name;
+    private String _id;
     private IBerConstruct _parent;
 
     public IBerConstruct getParent() {
@@ -107,6 +108,15 @@ public abstract class BerNode {
 
     public BerNode setParent(IBerConstruct parent) {
         this._parent = parent;
+        return this;
+    }
+
+    public String getId() {
+        return _id;
+    }
+
+    public BerNode setId(String id) {
+        this._id = id;
         return this;
     }
 
@@ -120,12 +130,14 @@ public abstract class BerNode {
     }
 
     public String getDisplayString() {
+        if (_displayString == null) {
+            return _displayString + ":" + this.getValueAsString();
+        }
         return _displayString;
     }
 
-    public BerNode setDisplayString(String display) {
-        this._displayString = display;
-        return this;
+    public void setDisplayString(String displayString) {
+        this._displayString = displayString;
     }
 
     public int getTagOffset() {
@@ -182,20 +194,20 @@ public abstract class BerNode {
 
     }
 
-    public BerNode init(String name, String display, int tag, BerInputStream stream) {
+    public BerNode init(String id, String name, int tag, BerInputStream stream) {
         this.setTag(tag);
+        this.setId(id);
         this.setName(name);
-        this.setDisplayString(display);
         this.readValue(stream);
         this.reInit();
         return this;
     }
 
-    public BerNode init(String name, int tag, BerInputStream stream) {
-        return init(name, getDisplayString(), tag, stream);
+    public BerNode init(String id, int tag, BerInputStream stream) {
+        return init(id, getName(), tag, stream);
     }
 
     public BerNode init(int tag, BerInputStream stream) {
-        return init(getName(), tag, stream);
+        return init(getId(), tag, stream);
     }
 }
