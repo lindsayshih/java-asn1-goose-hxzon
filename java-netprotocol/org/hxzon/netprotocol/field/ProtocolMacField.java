@@ -5,8 +5,8 @@ import org.hxzon.util.BytesUtil;
 
 public class ProtocolMacField extends ProtocolByteArrayField {
 
-    public ProtocolMacField(String name, String display, int offset, int len, Packet srcPacket) {
-        super(name, display, offset, len, srcPacket);
+    public ProtocolMacField(String id, String name, int offset, int len, Packet srcPacket) {
+        super(id, name, offset, len, srcPacket);
     }
 
     public String getValueAsString() {

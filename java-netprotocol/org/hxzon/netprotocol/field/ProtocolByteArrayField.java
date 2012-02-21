@@ -3,10 +3,10 @@ package org.hxzon.netprotocol.field;
 import org.hxzon.netprotocol.packet.Packet;
 
 public class ProtocolByteArrayField extends ProtocolField {
-    public ProtocolByteArrayField(String name, String display, int offset, int len, Packet srcPacket) {
+    public ProtocolByteArrayField(String id, String name, int offset, int len, Packet srcPacket) {
         setPacket(srcPacket);
-        setId(name);
-        setName(display);
+        setId(id);
+        setName(name);
         setSaveOffsetAndLen(srcPacket, offset, len);
 //		if (isRight()) {
         _value = srcPacket.getByteArray(getOffset(), getLen());
