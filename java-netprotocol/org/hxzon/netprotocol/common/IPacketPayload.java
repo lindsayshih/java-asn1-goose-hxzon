@@ -13,7 +13,7 @@ public interface IPacketPayload {
 
     public IPacket getSrcPacket();
 
-    public String getDisplayString();
+    public String getName();
 
     public String getProtocolTypeDesc();
 }

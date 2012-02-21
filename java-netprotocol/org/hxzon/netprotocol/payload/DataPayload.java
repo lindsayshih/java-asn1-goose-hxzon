@@ -42,7 +42,7 @@ public class DataPayload implements IPacketPayload {
         this._offset = srcPacket.getOffset() + srcPacket.getHeaderLength();
     }
 
-    public String getDisplayString() {
+    public String getName() {
         return "user data";
     }
 
