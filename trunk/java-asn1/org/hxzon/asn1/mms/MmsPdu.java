@@ -15,11 +15,11 @@ import org.hxzon.asn1.mms.sequence.RejectPdu;
 import org.hxzon.asn1.mms.sequence.ServiceError;
 import org.hxzon.asn1.mms.sequence.UnconfirmedPdu;
 
-public class MmsPdu extends BerChoice {
+public class MmsPdu extends BerChoice implements InformationReportContainer {
 
     public MmsPdu() {
+        setId("MMS");
         setName("MMS");
-        setDisplayString("MMS");
     }
 
 //	MMSpdu ::= CHOICE
@@ -81,4 +81,20 @@ public class MmsPdu extends BerChoice {
         }
     }
 
+    public String getInformationReportId() {
+        for (BerNode child : getChildren()) {
+            if (child instanceof InformationReportContainer) {
+                return ((InformationReportContainer) child).getInformationReportId();
+            }
+        }
+        return null;
+    }
+
+    public void updateValueNodes(String[] valueNameStrings) {
+        for (BerNode child : getChildren()) {
+            if (child instanceof InformationReportContainer) {
+                ((InformationReportContainer) child).updateValueNodes(valueNameStrings);
+            }
+        }
+    }
 }
