@@ -47,7 +47,7 @@ public class Asn1Utils {
     public static String printBerNode(BerNode node) {
         StringBuffer buffer = new StringBuffer();
 
-        buffer.append(node.getName()).append(":");
+        buffer.append(node.getId()).append(":");
         if (node instanceof BerConstruct) {
             buffer.append(Tag.toString(node.getTag())).append("{");
             Iterator<BerNode> it = (Iterator<BerNode>) ((BerConstruct) node).iterator();
@@ -127,7 +127,7 @@ public class Asn1Utils {
         default:
             node = new UnknownBerNode(tag);
         }
-        return node.init(tag, stream).setDisplayString("unknown " + Tag.toString(tag));
+        return node.init(tag, stream).setName("unknown " + Tag.toString(tag));
     }
 
     public static BerNode createBerOID(String name, String display, int tag, BerInputStream stream) {
@@ -228,8 +228,8 @@ public class Asn1Utils {
 
     public static BerNode createFakeBerInteger(String name, String display, long value, int offset, int len) {
         FakeBerNode node = new FakeBerInteger(value);
-        node.setName(name);
-        node.setDisplayString(display);
+        node.setId(name);
+        node.setName(display);
         node.setTagOffset(offset);
         node.setTotalLen(len);
         return node;

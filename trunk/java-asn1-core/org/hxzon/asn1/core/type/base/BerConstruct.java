@@ -213,13 +213,13 @@ public abstract class BerConstruct extends BerNode implements IBerConstruct {
     protected void readValue(BerInputStream stream) {
         try {
             int readTag;
-            ReadSequence seq = new ReadSequence(this.getDisplayString(), stream);
+            ReadSequence seq = new ReadSequence(this.getName(), stream);
             //add by hxzon:after read len
             super.setOffsetAndLen(stream);
             readTag = seq.readBerTag();
             while (Tag.EOFTYPE != readTag) {
                 BerNode cnode = create(readTag, stream);
-                logger.trace("create " + cnode.getDisplayString() + "," + cnode.getTagDisplay() + ",tag offset:" + cnode.getTagOffset() + ",len:" + cnode.getTotalLen());
+                logger.trace("create " + cnode.getName() + "," + cnode.getTagDisplay() + ",tag offset:" + cnode.getTagOffset() + ",len:" + cnode.getTotalLen());
                 /** always add choice?
                 				//if child is a choice ,and no tag ,and global set don't add choice node
                 				if (cnode instanceof BerChoice && !((BerChoice) cnode).hasTag() && Asn1Utils.isNotAddChoiceNode()) {

@@ -38,7 +38,7 @@ public class BerIntegerEx2 extends BerInteger {
         _displayStrings.put(prefix, displayString);
     }
 
-    public String getDisplayString() {
+    public String getName() {
         int tagNumber = getTag() & Tag.TAGNUMBER_MASK;
         String prefix = getClass().getName() + "-" + tagNumber;
         return _displayStrings.get(prefix);

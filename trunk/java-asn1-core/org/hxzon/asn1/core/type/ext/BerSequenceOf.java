@@ -15,7 +15,7 @@ public class BerSequenceOf extends BerSequence {
     public BerSequenceOf(Class<? extends BerNode> type, boolean choiceChildHasTag) {
         this._type = type;
         this._choiceChildHasTag = choiceChildHasTag;
-        setName("seq of " + type.getSimpleName());
+        setId("seq of " + type.getSimpleName());
     }
 
     @Override

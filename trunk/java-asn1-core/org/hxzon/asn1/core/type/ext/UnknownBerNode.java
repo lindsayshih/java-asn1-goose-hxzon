@@ -6,7 +6,7 @@ import org.hxzon.asn1.core.type.BerOctetString;
 public class UnknownBerNode extends BerOctetString {
 
     public UnknownBerNode(int tag) {
+        setId("unknown " + Tag.toString(tag));
         setName("unknown " + Tag.toString(tag));
-        setDisplayString("unknown " + Tag.toString(tag));
     }
 }
