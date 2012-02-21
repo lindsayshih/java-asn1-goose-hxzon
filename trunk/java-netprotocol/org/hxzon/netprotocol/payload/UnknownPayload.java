@@ -5,7 +5,7 @@ public class UnknownPayload extends DataPayload {
         return getSrcPacket().getProtocolTypeDesc() + "(unknow payload)";
     }
 
-    public String getDisplayString() {
+    public String getName() {
         return "unknow";
     }
 }

@@ -33,7 +33,7 @@ public class PacketTreeItem extends TreeItem<Object> {
             return;
         }
         userObject = packet;
-        this.setDisplayString(packet.getDisplayString());
+        this.setDisplayString(packet.getName());
         this.offset = packet.getOffset();
         if (packet instanceof IPacket) {
             IPacket gpacket = (IPacket) packet;
@@ -67,7 +67,7 @@ public class PacketTreeItem extends TreeItem<Object> {
         userObject = asn1;
         this.len = asn1.getTotalLen();
         this.offset = asn1.getTagOffset();
-        this.setDisplayString(asn1.getDisplayString() + ":" + asn1.getValueAsString() + ":\t" + Tag.toString(asn1.getTag()));
+        this.setDisplayString(asn1.getName() + ":" + asn1.getValueAsString() + ":\t" + Tag.toString(asn1.getTag()));
     }
 
     public PacketTreeItem(String value) {

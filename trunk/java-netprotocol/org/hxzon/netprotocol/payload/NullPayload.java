@@ -5,7 +5,7 @@ public class NullPayload extends DataPayload {
         return getSrcPacket().getProtocolTypeDesc();
     }
 
-    public String getDisplayString() {
+    public String getName() {
         return "null";
     }
 }

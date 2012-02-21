@@ -178,7 +178,7 @@ public class Packet implements IPacket {
         return "Packet";
     }
 
-    public String getDisplayString() {
+    public String getName() {
         return getProtocolTypeDesc() + (_miss ? "(miss)" : "");
     }
 

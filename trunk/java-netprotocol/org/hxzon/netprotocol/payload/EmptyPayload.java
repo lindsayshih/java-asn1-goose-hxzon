@@ -5,7 +5,7 @@ public class EmptyPayload extends DataPayload {
         return getSrcPacket().getProtocolTypeDesc();
     }
 
-    public String getDisplayString() {
+    public String getName() {
         return "empty";
     }
 }
