@@ -5,8 +5,8 @@ import org.hxzon.netprotocol.packet.Packet;
 public class ProtocolByteArrayField extends ProtocolField {
     public ProtocolByteArrayField(String name, String display, int offset, int len, Packet srcPacket) {
         setPacket(srcPacket);
-        setName(name);
-        setDisplayString(display);
+        setId(name);
+        setName(display);
         setSaveOffsetAndLen(srcPacket, offset, len);
 //		if (isRight()) {
         _value = srcPacket.getByteArray(getOffset(), getLen());

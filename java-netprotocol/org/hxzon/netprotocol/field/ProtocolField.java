@@ -6,6 +6,7 @@ public abstract class ProtocolField {
     private Packet _packet;
     private int _offset;
     private int _len;
+    private String _id;
     private String _name;
     private String _displayString;
     private int _miss = State_Rigth;
@@ -67,6 +68,14 @@ public abstract class ProtocolField {
         this._len = len;
     }
 
+    public String getId() {
+        return _id;
+    }
+
+    public void setId(String id) {
+        this._id = id;
+    }
+
     public String getName() {
         return _name;
     }
@@ -76,15 +85,18 @@ public abstract class ProtocolField {
     }
 
     public String getDisplayString() {
+        if (_displayString == null) {
+            return getName() + ":" + getValueAsString();
+        }
         return _displayString;
     }
 
-    public void setDisplayString(String display) {
-        this._displayString = display;
+    public void setDisplayString(String displayString) {
+        this._displayString = displayString;
     }
 
     public String toString() {
-        return _name;
+        return _id;
     }
 
     public Packet getPacket() {
