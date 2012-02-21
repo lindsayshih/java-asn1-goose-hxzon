@@ -1,20 +1,27 @@
 package org.hxzon.asn1.mms.sequence;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hxzon.asn1.core.parse.BerInputStream;
 import org.hxzon.asn1.core.parse.Tag;
 import org.hxzon.asn1.core.parse.ext.Asn1Utils;
 import org.hxzon.asn1.core.type.BerSequence;
 import org.hxzon.asn1.core.type.base.BerNode;
 import org.hxzon.asn1.core.type.ext.BerSequenceOf;
+import org.hxzon.asn1.mms.InformationReportContainer;
 import org.hxzon.asn1.mms.choice.AccessResult;
 import org.hxzon.asn1.mms.choice.Data;
 import org.hxzon.asn1.mms.choice.VariableAccessSpecification;
 
-public class InformationReport extends BerSequence {
+public class InformationReport extends BerSequence implements InformationReportContainer {
+
+    private BerNode reportIdNode;
+    private List<BerNode> valueNodes;
 
     public InformationReport() {
-        setName("information report");
-        setDisplayString("信息报告");
+        setId("information report");
+        setName("信息报告");
     }
 
 //	InformationReport ::= SEQUENCE
@@ -35,61 +42,62 @@ public class InformationReport extends BerSequence {
 
     public void reInit() {
         for (BerNode node : getChildren()) {
-            if ("listOfAccessResult".equals(node.getName())) {
+            if ("listOfAccessResult".equals(node.getId())) {
                 int index = 0;
                 BerSequenceOf seqOf = (BerSequenceOf) node;
                 BerNode successDataRealNode = getAccessResult_Success_RealNode(seqOf, index);
-                successDataRealNode.setName("reportId");
-                successDataRealNode.setDisplayString("报告标志");
+                successDataRealNode.setId("reportId");
+                successDataRealNode.setName("报告标志");
+                reportIdNode = successDataRealNode;
                 index++;
                 successDataRealNode = getAccessResult_Success_RealNode(seqOf, index);
-                successDataRealNode.setName("reportedOptFields");
-                successDataRealNode.setDisplayString("报告所含字段");
+                successDataRealNode.setId("reportedOptFields");
+                successDataRealNode.setName("报告所含字段");
                 String bitString = successDataRealNode.getValueAsString().replace(" ", "");
                 if (bitString.charAt(1) == '1') {
                     index++;
                     successDataRealNode = getAccessResult_Success_RealNode(seqOf, index);
-                    successDataRealNode.setName("seqNum");
-                    successDataRealNode.setDisplayString("顺序编号");
+                    successDataRealNode.setId("seqNum");
+                    successDataRealNode.setName("顺序编号");
                 }
                 if (bitString.charAt(2) == '1') {
                     index++;
                     successDataRealNode = getAccessResult_Success_RealNode(seqOf, index);
-                    successDataRealNode.setName("timeOfEntry");
-                    successDataRealNode.setDisplayString("条目时间");
+                    successDataRealNode.setId("timeOfEntry");
+                    successDataRealNode.setName("条目时间");
                 }
                 if (bitString.charAt(4) == '1') {
                     index++;
                     successDataRealNode = getAccessResult_Success_RealNode(seqOf, index);
-                    successDataRealNode.setName("DataSet");
-                    successDataRealNode.setDisplayString("数据集名称");
+                    successDataRealNode.setId("DataSet");
+                    successDataRealNode.setName("数据集名称");
                 }
                 if (bitString.charAt(6) == '1') {
                     index++;
                     successDataRealNode = getAccessResult_Success_RealNode(seqOf, index);
-                    successDataRealNode.setName("bufOverflow");
-                    successDataRealNode.setDisplayString("缓冲溢出");
+                    successDataRealNode.setId("bufOverflow");
+                    successDataRealNode.setName("缓冲溢出");
                 }
                 if (bitString.charAt(7) == '1') {
                     index++;
                     successDataRealNode = getAccessResult_Success_RealNode(seqOf, index);
-                    successDataRealNode.setName("entryId");
-                    successDataRealNode.setDisplayString("条目标识");
+                    successDataRealNode.setId("entryId");
+                    successDataRealNode.setName("条目标识");
                 }
                 if (bitString.charAt(9) == '1') {
                     successDataRealNode = getAccessResult_Success_RealNode(seqOf, index);
-                    successDataRealNode.setName("subSeqNum");
-                    successDataRealNode.setDisplayString("子序号");
+                    successDataRealNode.setId("subSeqNum");
+                    successDataRealNode.setName("子序号");
                     index++;
                     successDataRealNode = getAccessResult_Success_RealNode(seqOf, index);
-                    successDataRealNode.setName("moreSegmentFollow");
-                    successDataRealNode.setDisplayString("有后续数据段");
+                    successDataRealNode.setId("moreSegmentFollow");
+                    successDataRealNode.setName("有后续数据段");
                 }
                 //
                 index++;
                 successDataRealNode = getAccessResult_Success_RealNode(seqOf, index);
-                successDataRealNode.setName("inclusionBitstring");
-                successDataRealNode.setDisplayString("包含位串");
+                successDataRealNode.setId("inclusionBitstring");
+                successDataRealNode.setName("包含位串");
                 int datasetNum = 0;
                 String inclusionBitString = successDataRealNode.getValueAsString();
                 for (char c : inclusionBitString.toCharArray()) {
@@ -99,24 +107,26 @@ public class InformationReport extends BerSequence {
                     for (int i = 0; i < datasetNum; i++) {
                         index++;
                         successDataRealNode = getAccessResult_Success_RealNode(seqOf, index);
-                        successDataRealNode.setName("dataReferences");
-                        successDataRealNode.setDisplayString("数据集引用");
+                        successDataRealNode.setId("dataReferences");
+                        successDataRealNode.setName("数据集引用");
                     }
                 }
                 //
+                valueNodes = new ArrayList<BerNode>(datasetNum);
                 for (int i = 0; i < datasetNum; i++) {
                     index++;
                     successDataRealNode = getAccessResult_Success_RealNode(seqOf, index);
-                    successDataRealNode.setName("values");
-                    successDataRealNode.setDisplayString("值");
+                    successDataRealNode.setId("values");
+                    successDataRealNode.setName("值");
+                    valueNodes.add(successDataRealNode);
                 }
                 //
                 if (bitString.charAt(3) == '1') {
                     for (int i = 0; i < datasetNum; i++) {
                         index++;
                         successDataRealNode = getAccessResult_Success_RealNode(seqOf, index);
-                        successDataRealNode.setName("reasonCodes");
-                        successDataRealNode.setDisplayString("原因代码");
+                        successDataRealNode.setId("reasonCodes");
+                        successDataRealNode.setName("原因代码");
                     }
                 }
             }
@@ -130,6 +140,18 @@ public class InformationReport extends BerSequence {
             return ((Data) result).getChildren()[0];
         }
         return null;
+    }
+
+    public String getInformationReportId() {
+        return reportIdNode.getValueAsString();
+    }
+
+    public void updateValueNodes(String[] valueNameStrings) {
+        int min = Math.min(valueNameStrings.length - 1, valueNodes.size());
+        for (int i = 0; i < min; i++) {
+            valueNodes.get(i).setDisplayString(valueNameStrings[i]);
+        }
+        reportIdNode.setDisplayString("报告标志:" + valueNameStrings[valueNameStrings.length - 1] + reportIdNode.getValueAsString());
     }
 
 }

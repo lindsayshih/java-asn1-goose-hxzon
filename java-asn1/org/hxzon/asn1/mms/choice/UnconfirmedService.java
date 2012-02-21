@@ -5,15 +5,16 @@ import org.hxzon.asn1.core.parse.Tag;
 import org.hxzon.asn1.core.parse.ext.Asn1Utils;
 import org.hxzon.asn1.core.type.base.BerNode;
 import org.hxzon.asn1.core.type.ext.BerChoice;
+import org.hxzon.asn1.mms.InformationReportContainer;
 import org.hxzon.asn1.mms.sequence.EventNotification;
 import org.hxzon.asn1.mms.sequence.InformationReport;
 import org.hxzon.asn1.mms.sequence.UnsolicitedStatus;
 
-public class UnconfirmedService extends BerChoice {
+public class UnconfirmedService extends BerChoice implements InformationReportContainer {
 
     public UnconfirmedService() {
+        setId("unconfirmedService");
         setName("unconfirmedService");
-        setDisplayString("unconfirmedService");
     }
 
 //	UnconfirmedService ::= CHOICE 
@@ -37,4 +38,20 @@ public class UnconfirmedService extends BerChoice {
         }
     }
 
+    public String getInformationReportId() {
+        for (BerNode child : getChildren()) {
+            if (child instanceof InformationReportContainer) {
+                return ((InformationReportContainer) child).getInformationReportId();
+            }
+        }
+        return null;
+    }
+
+    public void updateValueNodes(String[] valueNameStrings) {
+        for (BerNode child : getChildren()) {
+            if (child instanceof InformationReportContainer) {
+                ((InformationReportContainer) child).updateValueNodes(valueNameStrings);
+            }
+        }
+    }
 }

@@ -4,13 +4,14 @@ import org.hxzon.asn1.core.parse.BerInputStream;
 import org.hxzon.asn1.core.parse.Tag;
 import org.hxzon.asn1.core.type.BerSequence;
 import org.hxzon.asn1.core.type.base.BerNode;
+import org.hxzon.asn1.mms.InformationReportContainer;
 import org.hxzon.asn1.mms.choice.CSRequestDetail;
 import org.hxzon.asn1.mms.choice.UnconfirmedService;
 
-public class UnconfirmedPdu extends BerSequence {
+public class UnconfirmedPdu extends BerSequence implements InformationReportContainer {
     public UnconfirmedPdu() {
+        setId("unconfirmed pdu");
         setName("unconfirmed pdu");
-        setDisplayString("unconfirmed pdu");
     }
 
 //	Unconfirmed-PDU ::= SEQUENCE
@@ -29,4 +30,20 @@ public class UnconfirmedPdu extends BerSequence {
         }
     }
 
+    public String getInformationReportId() {
+        for (BerNode child : getChildren()) {
+            if (child instanceof InformationReportContainer) {
+                return ((InformationReportContainer) child).getInformationReportId();
+            }
+        }
+        return null;
+    }
+
+    public void updateValueNodes(String[] valueNameStrings) {
+        for (BerNode child : getChildren()) {
+            if (child instanceof InformationReportContainer) {
+                ((InformationReportContainer) child).updateValueNodes(valueNameStrings);
+            }
+        }
+    }
 }
