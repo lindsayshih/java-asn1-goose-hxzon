@@ -12,8 +12,8 @@ import org.hxzon.util.BytesUtil;
 
 public class Sv92AsduData extends BerOctetString implements FakeBerConstruct {
     public Sv92AsduData() {
-        setName("asdu data");
-        setDisplayString("asdu数据集");
+        setId("asdu data");
+        setName("asdu数据集");
     }
 
     private List<BerNode> fList;
@@ -29,8 +29,8 @@ public class Sv92AsduData extends BerOctetString implements FakeBerConstruct {
             node = new Sv92AsduDataItem(value, quality);
             node.setTagOffset(super.getValueOffset() + i);
             node.setTotalLen(8);
+            node.setId(String.valueOf(i / 8));
             node.setName(String.valueOf(i / 8));
-            node.setDisplayString(String.valueOf(i / 8));
             node.setParent(this);
             fList.add(node);
         }
@@ -40,7 +40,7 @@ public class Sv92AsduData extends BerOctetString implements FakeBerConstruct {
         BerNode[] children = getChildren();
         int minIndex = Math.min(displays.size(), children.length);
         for (int i = 0; i < minIndex; i++) {
-            children[i].setDisplayString(displays.get(i));
+            children[i].setName(displays.get(i));
         }
     }
 

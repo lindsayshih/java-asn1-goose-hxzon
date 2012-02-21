@@ -9,8 +9,8 @@ import org.hxzon.util.BytesUtil;
 
 public class OsiPresentation extends BerSequence implements UserDataContainer, IPacketPayload {
     public OsiPresentation() {
+        setId("iso 8823 osi presentation");
         setName("iso 8823 osi presentation");
-        setDisplayString("iso 8823 osi presentation");
     }
 
     @Override

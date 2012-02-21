@@ -11,8 +11,8 @@ import org.hxzon.asn1.mms.common.Identifier;
 
 public class GetNameListRequest extends BerSequence {
     public GetNameListRequest() {
+        setId("get name list request");
         setName("get name list request");
-        setDisplayString("get name list request");
     }
 
 //	GetNameList-Request ::= SEQUENCE

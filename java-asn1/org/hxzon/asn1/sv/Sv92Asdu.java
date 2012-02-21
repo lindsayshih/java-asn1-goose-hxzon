@@ -12,8 +12,8 @@ import org.hxzon.asn1.core.type.ext.BerIntegerEx;
 public class Sv92Asdu extends BerSequence {
 //	private static final Logger logger=LoggerFactory.getLogger(Smv92Asdu.class);
     public Sv92Asdu() {
+        setId("asdu");
         setName("asdu");
-        setDisplayString("asdu");
     }
 
 //      -- $Id: sv.asn 33058 2010-06-02 19:01:16Z jake $

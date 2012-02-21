@@ -11,8 +11,8 @@ import org.hxzon.asn1.mms.common.Identifier;
 public class ObjectName extends BerChoice {
 
     public ObjectName() {
+        setId("object name");
         setName("object name");
-        setDisplayString("object name");
     }
 
 //	ObjectName ::= CHOICE 

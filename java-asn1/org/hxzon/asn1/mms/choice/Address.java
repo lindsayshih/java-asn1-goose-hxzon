@@ -9,8 +9,8 @@ import org.hxzon.asn1.core.type.ext.BerChoice;
 public class Address extends BerChoice {
 
     public Address() {
+        setId("address");
         setName("address");
-        setDisplayString("address");
     }
 
 //	Address ::= CHOICE

@@ -8,8 +8,8 @@ import org.hxzon.asn1.core.type.ext.BerChoice;
 public class CSRequestDetail extends BerChoice {
 
     public CSRequestDetail() {
+        setId("cs-request-detail");
         setName("cs-request-detail");
-        setDisplayString("cs-request-detail");
     }
 
 //	CS-Request-Detail ::= CHOICE {

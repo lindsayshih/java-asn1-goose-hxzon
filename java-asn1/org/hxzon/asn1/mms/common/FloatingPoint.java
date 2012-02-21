@@ -14,8 +14,8 @@ public class FloatingPoint extends BerOctetString {
     }
 
     public FloatingPoint() {
+        setId("floatingPoint");
         setName("floatingPoint");
-        setDisplayString("floatingPoint");
     }
 
     public byte[] getValue() {

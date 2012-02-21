@@ -7,8 +7,8 @@ import org.hxzon.asn1.core.type.base.BerNode;
 public class DomainSpecific extends BerSequence {
 
     public DomainSpecific() {
+        setId("domainSpecific");
         setName("domainSpecific");
-        setDisplayString("domainSpecific");
     }
 
 //	ObjectName ::= CHOICE 

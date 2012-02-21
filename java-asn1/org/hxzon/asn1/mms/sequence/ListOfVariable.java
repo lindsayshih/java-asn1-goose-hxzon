@@ -8,7 +8,7 @@ import org.hxzon.asn1.mms.choice.VariableSpecification;
 
 public class ListOfVariable extends BerSequence {
     public ListOfVariable() {
-        setName("listOfVariable");
+        setId("listOfVariable");
     }
 
 //	GetNamedVariableListAttributes-Response ::= SEQUENCE

@@ -14,8 +14,8 @@ import org.hxzon.util.BytesUtil;
 
 public class Sv91Pdu extends BerOctetString implements FakeBerConstruct, IPacketPayload {
     public Sv91Pdu() {
-        setName("smv9-1");
-        setDisplayString("9-1采样值");
+        setId("smv9-1");
+        setName("9-1采样值");
     }
 
     private List<BerNode> fList;

@@ -6,7 +6,7 @@ public class Identifier extends BerVisibleString {
 //	Identifier ::= VisibleString
 
     public Identifier() {
+        setId("Identifier");
         setName("Identifier");
-        setDisplayString("Identifier");
     }
 }

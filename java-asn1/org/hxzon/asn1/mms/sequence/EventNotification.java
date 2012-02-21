@@ -14,8 +14,8 @@ import org.hxzon.asn1.mms.common.ECState;
 
 public class EventNotification extends BerSequence {
     public EventNotification() {
+        setId("eventNotification");
         setName("eventNotification");
-        setDisplayString("eventNotification");
     }
 
 //	EventNotification ::= SEQUENCE

@@ -42,8 +42,8 @@ import org.hxzon.asn1.mms.sequence.UploadSegmentResponse;
 
 public class ConfirmedServiceResponse extends BerChoice {
     public ConfirmedServiceResponse() {
+        setId("ConfirmedServiceResponse");
         setName("ConfirmedServiceResponse");
-        setDisplayString("ConfirmedServiceResponse");
     }
 
 //	ConfirmedServiceResponse  ::= CHOICE

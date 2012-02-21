@@ -11,8 +11,8 @@ import org.hxzon.asn1.mms.common.MMSString;
 public class Data extends BerChoice {
 
     public Data() {
+        setId("data");
         setName("data");
-        setDisplayString("data");
     }
 
 //	Data ::= CHOICE

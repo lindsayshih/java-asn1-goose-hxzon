@@ -8,8 +8,8 @@ import org.hxzon.asn1.core.type.base.BerNode;
 
 public class InitiateResponsePdu extends BerSequence {
     public InitiateResponsePdu() {
+        setId("initiate-ResponsePDU");
         setName("initiate-ResponsePDU");
-        setDisplayString("initiate-ResponsePDU");
     }
 
 //	Initiate-ResponsePDU ::= SEQUENCE

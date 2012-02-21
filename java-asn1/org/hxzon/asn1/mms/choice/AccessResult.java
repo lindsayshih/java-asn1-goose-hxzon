@@ -9,8 +9,8 @@ import org.hxzon.asn1.mms.common.DataAccessError;
 public class AccessResult extends BerChoice {
 
     public AccessResult() {
+        setId("access result");
         setName("access result");
-        setDisplayString("access result");
     }
 
 //	AccessResult ::= CHOICE 

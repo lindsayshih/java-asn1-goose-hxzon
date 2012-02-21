@@ -10,8 +10,8 @@ import org.hxzon.asn1.mms.sequence.ListOfVariable;
 public class VariableAccessSpecification extends BerChoice {
 
     public VariableAccessSpecification() {
+        setId("variable access specification");
         setName("variable access specification");
-        setDisplayString("variable access specification");
     }
 
 //	VariableAccessSpecification ::= CHOICE

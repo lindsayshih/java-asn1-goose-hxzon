@@ -9,8 +9,8 @@ public class FileName extends BerSequence {
 //	FileName ::= SEQUENCE OF GraphicString
 
     public FileName() {
+        setId("FileName");
         setName("FileName");
-        setDisplayString("FileName");
     }
 
     public BerNode create(int tag, BerInputStream stream) {

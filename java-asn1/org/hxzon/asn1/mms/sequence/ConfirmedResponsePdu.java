@@ -10,8 +10,8 @@ import org.hxzon.asn1.mms.choice.ConfirmedServiceResponse;
 
 public class ConfirmedResponsePdu extends BerSequence {
     public ConfirmedResponsePdu() {
+        setId("confirmed-ResponsePDU");
         setName("confirmed-ResponsePDU");
-        setDisplayString("confirmed-ResponsePDU");
     }
 
 //	Confirmed-ResponsePDU ::= SEQUENCE 

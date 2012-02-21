@@ -8,8 +8,8 @@ import org.hxzon.asn1.core.type.ext.BerChoice;
 
 public class OsiUserData extends BerChoice implements UserDataContainer {
     public OsiUserData() {
+        setId("user data");
         setName("user data");
-        setDisplayString("user data");
     }
 
 //	User-data ::= CHOICE {
