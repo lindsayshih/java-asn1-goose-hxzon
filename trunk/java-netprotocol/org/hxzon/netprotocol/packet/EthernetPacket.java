@@ -56,7 +56,7 @@ public class EthernetPacket extends Packet {
         if (_type == null) {
             _type = new ProtocolInt31HexField("type", "以太网类型", 12, 2, true, this);
             if (VlanPacket.EthernetType_Vlan == _type.getValue()) {
-                _type.setDisplayString("vlan");
+                _type.setName("vlan");
             }
         }
         return _type;

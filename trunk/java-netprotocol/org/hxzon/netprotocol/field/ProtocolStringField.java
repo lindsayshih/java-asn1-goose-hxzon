@@ -5,8 +5,8 @@ import org.hxzon.netprotocol.packet.Packet;
 public class ProtocolStringField extends ProtocolField {
     public ProtocolStringField(String name, String display, int offset, int len, Packet srcPacket) {
         setPacket(srcPacket);
-        setName(name);
-        setDisplayString(display);
+        setId(name);
+        setName(display);
         setSaveOffsetAndLen(srcPacket, offset, len);
         _value = srcPacket.getHexString(getOffset(), getLen());
     }

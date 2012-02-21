@@ -6,8 +6,8 @@ public class ProtocolBitField extends ProtocolField {
 
     public ProtocolBitField(String name, String display, int offset, int bitOffset, int bitLen, Packet srcPacket) {
         setPacket(srcPacket);
-        setName(name);
-        setDisplayString(display);
+        setId(name);
+        setName(display);
         int len = (bitLen + 7) / 8;
         setSaveOffsetAndLen(srcPacket, offset, len);
         if (isRight()) {

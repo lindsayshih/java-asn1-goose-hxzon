@@ -59,7 +59,7 @@ public class PacketTreeItem extends TreeItem<Object> {
         userObject = field;
         this.len = field.getLen();
         this.offset = field.getOffset();
-        this.setDisplayString(field.getDisplayString() + ":" + field.getValueAsDisplay() + "[" + field.getOffset() + "," + field.getLen() + "]");
+        this.setDisplayString(field.getDisplayString() + "[" + field.getOffset() + "," + field.getLen() + "]");
     }
 
     public PacketTreeItem(BerNode asn1) {

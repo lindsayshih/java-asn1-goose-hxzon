@@ -9,8 +9,8 @@ public class ProtocolInt31Field extends ProtocolField {
 
     public ProtocolInt31Field(String name, String display, int offset, int len, boolean unsigned, Packet srcPacket) {
         setPacket(srcPacket);
-        setName(name);
-        setDisplayString(display);
+        setId(name);
+        setName(display);
         setSaveOffsetAndLen(srcPacket, offset, len);
 //        this.unsigned = unsigned;
         if (isRight()) {
