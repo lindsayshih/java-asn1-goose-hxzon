@@ -131,13 +131,14 @@ public abstract class BerNode {
 
     public String getDisplayString() {
         if (_displayString == null) {
-            return _displayString + ":" + this.getValueAsString();
+            return this.getName() + ":" + this.getValueAsString();
         }
         return _displayString;
     }
 
-    public void setDisplayString(String displayString) {
+    public BerNode setDisplayString(String displayString) {
         this._displayString = displayString;
+        return this;
     }
 
     public int getTagOffset() {
