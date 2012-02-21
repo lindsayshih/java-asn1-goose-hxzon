@@ -4,10 +4,10 @@ import org.hxzon.netprotocol.packet.Packet;
 
 public class ProtocolBitField extends ProtocolField {
 
-    public ProtocolBitField(String name, String display, int offset, int bitOffset, int bitLen, Packet srcPacket) {
+    public ProtocolBitField(String id, String name, int offset, int bitOffset, int bitLen, Packet srcPacket) {
         setPacket(srcPacket);
-        setId(name);
-        setName(display);
+        setId(id);
+        setName(name);
         int len = (bitLen + 7) / 8;
         setSaveOffsetAndLen(srcPacket, offset, len);
         if (isRight()) {

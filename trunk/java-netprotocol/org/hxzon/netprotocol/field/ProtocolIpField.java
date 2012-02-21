@@ -4,8 +4,8 @@ import org.hxzon.netprotocol.packet.Packet;
 
 public class ProtocolIpField extends ProtocolInt63Field {
 
-    public ProtocolIpField(String name, String display, int offset, int len, Packet srcPacket) {
-        super(name, display, offset, len, true, srcPacket);
+    public ProtocolIpField(String id, String name, int offset, int len, Packet srcPacket) {
+        super(id, name, offset, len, true, srcPacket);
     }
 
     public String getValueAsString() {
