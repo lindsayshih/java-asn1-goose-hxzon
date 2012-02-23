@@ -14,8 +14,6 @@ public interface IPacket extends IPacketPayload {
 
     public List<ProtocolField> getHeaderFields();
 
-    public IPacket getSrcPacket();
-
     public IPacketPayload getPayload();
 
     public IPacket getLastPacket();
