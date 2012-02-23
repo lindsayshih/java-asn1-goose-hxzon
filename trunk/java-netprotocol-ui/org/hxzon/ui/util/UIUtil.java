@@ -71,6 +71,9 @@ public class UIUtil {
             + "02 02 40 84 02 02 40 84 02 02 40";
     public static String testMms7 = "00 10 18 97 4a a2 08 01 c6 78 00 20 08 00 45 00 " + "00 52 05 33 40 00 40 06 a7 ac c6 78 00 20 c6 78 " + "00 b6 00 66 c4 02 88 e1 f3 2a 8e 82 21 3a 50 18 "
             + "40 00 00 4d 00 00 03 00 00 2a 02 f0 80 01 00 01 " + "00 61 1d 30 1b 02 01 03 a0 16 a1 14 02 03 18 3b " + "5b a6 0d 80 01 00 a2 08 a7 06 02 01 20 02 01 08";
+    public static String testMms8 = "00 10 18 97 4a a2 08 01 c6 78 00 20 08 00 45 00 " + "00 52 05 33 40 00 40 06 a7 ac c6 78 00 20 c6 78 " + "00 b6 00 66 c4 02 88 e1 f3 2a 8e 82 21 3a 50 18 "
+            + "40 00 00 4d 00 00 03 00 00 2a 02 f0 80 01 00 01 " + "00 61 1d 30 1b 02 01 04 a0 16 a1 14 02 03 18 3b " + "5b a6 0d 80 01 00 a2 08 a7 06 02 01 20 02 01 08";
+
     public static String testSmv91 = "01 0c cd 04 01 03 08 ac 7d 01 26 64 81 00 80 00 " + "88 ba 40 00 00 c5 00 00 00 00 80 81 ba 00 04 00 " + "2c 02 01 00 03 01 f4 01 f4 16 8e 0f a0 00 00 00 "
             + "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 " + "00 00 00 00 00 0f f0 40 1f 0e bf 64 00 00 2c 02 " + "01 00 03 01 f4 01 f4 16 8e 0f a0 00 00 00 00 00 "
             + "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 " + "00 00 00 0f f0 40 1f 0e c0 64 00 00 2c 02 01 00 " + "03 01 f4 01 f4 16 8e 0f a0 00 00 00 00 00 00 00 "
@@ -145,6 +148,7 @@ public class UIUtil {
         examplePackets.add(new Packet(BytesUtil.fromHexString(testMms5)));
         examplePackets.add(new Packet(BytesUtil.fromHexString(testMms6)));
         examplePackets.add(new Packet(BytesUtil.fromHexString(testMms7)));
+        examplePackets.add(new Packet(BytesUtil.fromHexString(testMms8)));
         examplePackets.add(new Packet(BytesUtil.fromHexString(testSmv91)));
         examplePackets.add(new Packet(BytesUtil.fromHexString(testSmv92)));
         examplePackets.add(new Packet(BytesUtil.fromHexString(testSmv92_2)));

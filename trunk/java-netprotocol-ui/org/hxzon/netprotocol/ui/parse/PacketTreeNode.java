@@ -16,6 +16,7 @@ import org.hxzon.netprotocol.common.IPacket;
 import org.hxzon.netprotocol.common.IPacketPayload;
 import org.hxzon.netprotocol.field.ProtocolField;
 import org.hxzon.netprotocol.packet.OsiPresentationPacket;
+import org.hxzon.netprotocol.payload.BerNodePayload;
 
 public class PacketTreeNode implements TreeNode {
     private boolean removeBerChoice = true;
@@ -49,11 +50,11 @@ public class PacketTreeNode implements TreeNode {
                     this.add((IPacket) payload);
                     payload = ((IPacket) payload).getPayload();
                 }
-//				if (payload instanceof NullPayload) {
-//
-//				} else {
-                this.add(payload);
-//				}
+                if (payload instanceof BerNodePayload) {
+                    this.add(((BerNodePayload) payload).getBerNode());
+                } else {
+                    this.add(payload);
+                }
             }
         } else {
             this.len = packet.getLength();
