@@ -6,6 +6,7 @@ import org.hxzon.asn1.osipresentation.OsiPresentationParser;
 import org.hxzon.netprotocol.common.IPacketPayload;
 import org.hxzon.netprotocol.parse.ProtocolBinding;
 import org.hxzon.netprotocol.parse.ProtocolBindingList;
+import org.hxzon.netprotocol.payload.BerNodePayload;
 
 public class OsiPresentationPacket extends Packet {
     static {
@@ -24,7 +25,7 @@ public class OsiPresentationPacket extends Packet {
         return 0;
     }
 
-    private BerNode _pres;
+    private IPacketPayload _pres;
 
     public IPacketPayload exceptPayload() {
         return (IPacketPayload) fetchOsiPresentation();
@@ -37,9 +38,10 @@ public class OsiPresentationPacket extends Packet {
         return new BerNode[0];
     }
 
-    public BerNode fetchOsiPresentation() {
+    public IPacketPayload fetchOsiPresentation() {
         if (_pres == null) {
-            _pres = OsiPresentationParser.parser.parsePresentation(getSrcData(), getOffset());
+            BerNode node = OsiPresentationParser.parser.parsePresentation(getSrcData(), getOffset());
+            _pres = new BerNodePayload(node, this);
         }
         return _pres;
     }

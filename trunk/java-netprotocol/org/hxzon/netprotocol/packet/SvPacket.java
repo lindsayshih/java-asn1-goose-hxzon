@@ -7,6 +7,7 @@ import org.hxzon.netprotocol.field.ProtocolField;
 import org.hxzon.netprotocol.field.ProtocolInt31Field;
 import org.hxzon.netprotocol.parse.ProtocolBinding;
 import org.hxzon.netprotocol.parse.ProtocolBindingList;
+import org.hxzon.netprotocol.payload.BerNodePayload;
 
 public class SvPacket extends Packet {
     static {
@@ -41,7 +42,7 @@ public class SvPacket extends Packet {
     private ProtocolInt31Field _pduLen;
     private ProtocolInt31Field _reserved1;
     private ProtocolInt31Field _reserved2;
-    private BerNode _svPdu;
+    private IPacketPayload _svPdu;
 
     protected int expectHeaderLength() {
         return HeaderLength;
@@ -95,15 +96,16 @@ public class SvPacket extends Packet {
 //		this.reserved2 = reserved2;
     }
 
-    public BerNode fetchSvpdu() {
+    public IPacketPayload fetchSvpdu() {
         if (_svPdu == null) {
-            _svPdu = SvPduParser.parser.parseSv(getSrcData(), getPayloadOffset());
+            BerNode node = SvPduParser.parser.parseSv(getSrcData(), getPayloadOffset());
+            _svPdu = new BerNodePayload(node, this);
         }
         return _svPdu;
     }
 
     public IPacketPayload exceptPayload() {
-        return (IPacketPayload) fetchSvpdu();
+        return fetchSvpdu();
     }
 
     public String getProtocolTypeDesc() {
