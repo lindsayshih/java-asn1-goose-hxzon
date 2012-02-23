@@ -6,10 +6,13 @@ import org.hxzon.asn1.core.parse.ext.Asn1Utils;
 import org.hxzon.asn1.core.type.BerSequence;
 import org.hxzon.asn1.core.type.base.BerNode;
 import org.hxzon.asn1.core.type.ext.BerChoice;
+import org.hxzon.asn1.core.type.ext.UnknownBerNode;
 import org.hxzon.asn1.mms.MmsPdu;
 
 public class PdvList extends BerSequence implements UserDataContainer {
 //FullyEncodedData
+    private PresentationContextIdentifier contextIdentifier;
+
     public PdvList() {
         setId("item");
         setName("item");
@@ -39,9 +42,11 @@ public class PdvList extends BerSequence implements UserDataContainer {
         case Tag.UNIVERSAL | Tag.OBJECTID:
             return new TransferSyntaxName().init(tag, stream);
         case Tag.UNIVERSAL | Tag.INTEGER:
-            return new PresentationContextIdentifier().init(tag, stream);
+            contextIdentifier = (PresentationContextIdentifier) new PresentationContextIdentifier().init(tag, stream);
+            return contextIdentifier;
         default:
-            return new PresentationDataValues().init(tag, stream, false);
+            long contextValue = contextIdentifier == null ? 0 : contextIdentifier.getValue();
+            return new PresentationDataValues(contextValue).init(tag, stream, false);
         }
     }
 
@@ -56,9 +61,12 @@ public class PdvList extends BerSequence implements UserDataContainer {
 
     public static class PresentationDataValues extends BerChoice implements UserDataContainer {
 
-        public PresentationDataValues() {
+        private long _contextValue = 0;
+
+        public PresentationDataValues(long contextValue) {
             setId("presentation data values");
             setName("presentation data values");
+            _contextValue = contextValue;
         }
 
 //		  presentation-data-values
@@ -73,8 +81,11 @@ public class PdvList extends BerSequence implements UserDataContainer {
         public BerNode create(int tag, BerInputStream stream) {
             switch (tag) {
             case Tag.CONTEXT | 0:
-//				return Asn1Utils.createBerSequenceOf("single-ASN1-type", "single-ASN1-type", tag, stream, MmsPdu.class);
-                return new SingleAsn1Type(MmsPdu.class).init("single-ASN1-type", "single-ASN1-type", tag, stream);
+                if (_contextValue == 3) {
+                    return new SingleAsn1Type(MmsPdu.class).init("single-ASN1-type", "single-ASN1-type", tag, stream);
+                } else {
+                    return new SingleAsn1Type(UnknownBerNode.class).init("single-ASN1-type", "single-ASN1-type", tag, stream);
+                }
             case Tag.CONTEXT | 1:
                 return Asn1Utils.createBerOctetString("octet aligned", "octet aligned", tag, stream);
             case Tag.CONTEXT | 2:
