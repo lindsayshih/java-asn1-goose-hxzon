@@ -8,11 +8,8 @@ import org.hxzon.asn1.core.parse.ext.Asn1Utils;
 import org.hxzon.asn1.core.type.BerSequence;
 import org.hxzon.asn1.core.type.base.BerNode;
 import org.hxzon.asn1.core.type.ext.BerSequenceOf;
-import org.hxzon.netprotocol.common.IPacket;
-import org.hxzon.netprotocol.common.IPacketPayload;
-import org.hxzon.util.BytesUtil;
 
-public class Sv92Pdu extends BerSequence implements IPacketPayload {
+public class Sv92Pdu extends BerSequence {
     public Sv92Pdu() {
         setId("smv9-2Pdu");
         setName("9-2采样值");
@@ -63,50 +60,6 @@ public class Sv92Pdu extends BerSequence implements IPacketPayload {
                 }
             }
         }
-    }
-
-    private IPacket srcPacket;
-
-    @Override
-    public byte[] getData() {
-        return BytesUtil.copyBytes(getSrcData(), getOffset(), getLength());
-    }
-
-    @Override
-    public int getLength() {
-        return this.getTotalLen();
-    }
-
-    @Override
-    public int getOffset() {
-        return this.getTagOffset();
-    }
-
-    @Override
-    public byte[] getSrcData() {
-        return this.srcPacket.getSrcData();
-    }
-
-    public void setSrcData(byte[] srcData) {
-
-    }
-
-    @Override
-    public IPacket getSrcPacket() {
-        return srcPacket;
-    }
-
-    @Override
-    public void setSrcPacket(IPacket srcPacket) {
-        this.srcPacket = srcPacket;
-    }
-
-    public void initBySrcPacket(IPacket srcPacket) {
-        this.setSrcPacket(srcPacket);
-    }
-
-    public String getProtocolTypeDesc() {
-        return "9-2采样值";
     }
 
 }

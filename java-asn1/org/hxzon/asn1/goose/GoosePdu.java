@@ -7,11 +7,8 @@ import org.hxzon.asn1.core.parse.Tag;
 import org.hxzon.asn1.core.parse.ext.Asn1Utils;
 import org.hxzon.asn1.core.type.BerSequence;
 import org.hxzon.asn1.core.type.base.BerNode;
-import org.hxzon.netprotocol.common.IPacket;
-import org.hxzon.netprotocol.common.IPacketPayload;
-import org.hxzon.util.BytesUtil;
 
-public class GoosePdu extends BerSequence implements IPacketPayload {
+public class GoosePdu extends BerSequence {
 
     public GoosePdu() {
         setId("goosePdu");
@@ -77,50 +74,6 @@ public class GoosePdu extends BerSequence implements IPacketPayload {
                 break;
             }
         }
-    }
-
-    private IPacket srcPacket;
-
-    @Override
-    public byte[] getData() {
-        return BytesUtil.copyBytes(getSrcData(), getOffset(), getLength());
-    }
-
-    @Override
-    public int getLength() {
-        return super.getTotalLen();
-    }
-
-    @Override
-    public int getOffset() {
-        return super.getTagOffset();
-    }
-
-    @Override
-    public byte[] getSrcData() {
-        return srcPacket.getSrcData();
-    }
-
-    public void setSrcData(byte[] srcData) {
-
-    }
-
-    @Override
-    public IPacket getSrcPacket() {
-        return srcPacket;
-    }
-
-    @Override
-    public void setSrcPacket(IPacket srcPacket) {
-        this.srcPacket = srcPacket;
-    }
-
-    public void initBySrcPacket(IPacket srcPacket) {
-        this.setSrcPacket(srcPacket);
-    }
-
-    public String getProtocolTypeDesc() {
-        return getSrcPacket().getProtocolTypeDesc();
     }
 
 }
