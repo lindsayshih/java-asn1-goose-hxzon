@@ -8,11 +8,9 @@ import org.hxzon.asn1.core.parse.ext.Asn1Utils;
 import org.hxzon.asn1.core.type.BerOctetString;
 import org.hxzon.asn1.core.type.base.BerNode;
 import org.hxzon.asn1.core.type.ext.FakeBerConstruct;
-import org.hxzon.netprotocol.common.IPacket;
-import org.hxzon.netprotocol.common.IPacketPayload;
 import org.hxzon.util.BytesUtil;
 
-public class Sv91Pdu extends BerOctetString implements FakeBerConstruct, IPacketPayload {
+public class Sv91Pdu extends BerOctetString implements FakeBerConstruct {
     public Sv91Pdu() {
         setId("smv9-1");
         setName("9-1采样值");
@@ -45,50 +43,6 @@ public class Sv91Pdu extends BerOctetString implements FakeBerConstruct, IPacket
 
     public boolean remove(BerNode o) {
         return fList.remove(o);
-    }
-
-    private IPacket srcPacket;
-
-    @Override
-    public byte[] getData() {
-        return BytesUtil.copyBytes(getSrcData(), getOffset(), getLength());
-    }
-
-    @Override
-    public int getLength() {
-        return this.getTotalLen();
-    }
-
-    @Override
-    public int getOffset() {
-        return this.getTagOffset();
-    }
-
-    @Override
-    public byte[] getSrcData() {
-        return this.srcPacket.getSrcData();
-    }
-
-    public void setSrcData(byte[] srcData) {
-
-    }
-
-    @Override
-    public IPacket getSrcPacket() {
-        return srcPacket;
-    }
-
-    @Override
-    public void setSrcPacket(IPacket srcPacket) {
-        this.srcPacket = srcPacket;
-    }
-
-    public void initBySrcPacket(IPacket srcPacket) {
-        this.setSrcPacket(srcPacket);
-    }
-
-    public String getProtocolTypeDesc() {
-        return "9-1采样值";
     }
 
 }

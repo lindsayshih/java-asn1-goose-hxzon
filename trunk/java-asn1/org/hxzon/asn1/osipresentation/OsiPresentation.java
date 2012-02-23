@@ -3,11 +3,8 @@ package org.hxzon.asn1.osipresentation;
 import org.hxzon.asn1.core.parse.BerInputStream;
 import org.hxzon.asn1.core.type.BerSequence;
 import org.hxzon.asn1.core.type.base.BerNode;
-import org.hxzon.netprotocol.common.IPacket;
-import org.hxzon.netprotocol.common.IPacketPayload;
-import org.hxzon.util.BytesUtil;
 
-public class OsiPresentation extends BerSequence implements UserDataContainer, IPacketPayload {
+public class OsiPresentation extends BerSequence implements UserDataContainer {
     public OsiPresentation() {
         setId("iso 8823 osi presentation");
         setName("iso 8823 osi presentation");
@@ -33,42 +30,6 @@ public class OsiPresentation extends BerSequence implements UserDataContainer, I
             }
         }
         return new BerNode[0];
-    }
-
-    private IPacket srcPacket;
-
-    @Override
-    public byte[] getData() {
-        return BytesUtil.copyBytes(getSrcData(), getOffset(), getLength());
-    }
-
-    @Override
-    public int getLength() {
-        return super.getTotalLen();
-    }
-
-    @Override
-    public int getOffset() {
-        return super.getTagOffset();
-    }
-
-    @Override
-    public byte[] getSrcData() {
-        return this.srcPacket.getSrcData();
-    }
-
-    @Override
-    public IPacket getSrcPacket() {
-        return this.srcPacket;
-    }
-
-    @Override
-    public void setSrcPacket(IPacket srcPacket) {
-        this.srcPacket = srcPacket;
-    }
-
-    public String getProtocolTypeDesc() {
-        return "osi presentation";
     }
 
 }

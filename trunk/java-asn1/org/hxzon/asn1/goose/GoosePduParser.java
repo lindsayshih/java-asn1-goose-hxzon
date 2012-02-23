@@ -28,12 +28,12 @@ public class GoosePduParser extends BerParser {
         }
     }
 
-    public GoosePdu parseGoose(byte[] data, int offset) {
+    public BerNode parseGoose(byte[] data, int offset) {
         ByteArrayInputStream inStream = new ByteArrayInputStream(BytesUtil.copyBytes(data, offset));
         BerInputStream in = new BerInputStream(inStream);
         in.setTagOffset(offset);
         try {
-            return (GoosePdu) super.readPacket(in);
+            return super.readPacket(in);
         } catch (IOException e) {
             e.printStackTrace();
             return null;
