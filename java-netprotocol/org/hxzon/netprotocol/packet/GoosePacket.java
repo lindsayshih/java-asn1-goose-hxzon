@@ -1,13 +1,13 @@
 package org.hxzon.netprotocol.packet;
 
 import org.hxzon.asn1.core.type.base.BerNode;
-import org.hxzon.asn1.goose.GoosePdu;
 import org.hxzon.asn1.goose.GoosePduParser;
 import org.hxzon.netprotocol.common.IPacketPayload;
 import org.hxzon.netprotocol.field.ProtocolField;
 import org.hxzon.netprotocol.field.ProtocolInt31Field;
 import org.hxzon.netprotocol.parse.ProtocolBinding;
 import org.hxzon.netprotocol.parse.ProtocolBindingList;
+import org.hxzon.netprotocol.payload.BerNodePayload;
 
 public class GoosePacket extends Packet {
     static {
@@ -42,7 +42,7 @@ public class GoosePacket extends Packet {
     private ProtocolInt31Field _pduLen;
     private ProtocolInt31Field _reserved1;
     private ProtocolInt31Field _reserved2;
-    private GoosePdu _goosePdu;
+    private IPacketPayload _goosePdu;
 
     protected int expectHeaderLength() {
         return HeaderLength;
@@ -96,15 +96,16 @@ public class GoosePacket extends Packet {
 //		this.reserved2 = reserved2;
     }
 
-    public BerNode fetchGoosepdu() {
+    public IPacketPayload fetchGoosepdu() {
         if (_goosePdu == null) {
-            _goosePdu = GoosePduParser.parser.parseGoose(super.getSrcData(), super.getPayloadOffset());
+            BerNode berNode = GoosePduParser.parser.parseGoose(super.getSrcData(), super.getPayloadOffset());
+            _goosePdu = new BerNodePayload(berNode, this);
         }
         return _goosePdu;
     }
 
     public IPacketPayload exceptPayload() {
-        return (IPacketPayload) fetchGoosepdu();
+        return fetchGoosepdu();
     }
 
     public String getProtocolTypeDesc() {
