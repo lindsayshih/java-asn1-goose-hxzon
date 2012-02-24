@@ -6,6 +6,7 @@ import org.hxzon.netprotocol.field.ProtocolInt31Field;
 import org.hxzon.netprotocol.field.ProtocolInt63Field;
 import org.hxzon.netprotocol.parse.ProtocolBinding;
 import org.hxzon.netprotocol.parse.ProtocolBindingList;
+import org.hxzon.netprotocol.parse.ProtocolDescUtil;
 import org.hxzon.util.BitUtil;
 
 public class TcpPacket extends Packet {
@@ -22,6 +23,7 @@ public class TcpPacket extends Packet {
             }
 
         });
+        ProtocolDescUtil.putDesc(TcpPacket.class, "tcp");
     }
     public static final int IpType_Tcp = 6;
     private ProtocolInt31Field _sourcePort;
@@ -197,7 +199,4 @@ public class TcpPacket extends Packet {
         this._urgentPointer = urgentPointer;
     }
 
-    public String getProtocolTypeDesc() {
-        return "tcp";
-    }
 }

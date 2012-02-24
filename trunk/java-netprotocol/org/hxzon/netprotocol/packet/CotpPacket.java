@@ -6,6 +6,7 @@ import org.hxzon.netprotocol.field.ProtocolField;
 import org.hxzon.netprotocol.field.ProtocolInt31Field;
 import org.hxzon.netprotocol.parse.ProtocolBinding;
 import org.hxzon.netprotocol.parse.ProtocolBindingList;
+import org.hxzon.netprotocol.parse.ProtocolDescUtil;
 import org.hxzon.netprotocol.payload.DataPayload;
 
 public class CotpPacket extends Packet {
@@ -18,6 +19,7 @@ public class CotpPacket extends Packet {
             }
 
         });
+        ProtocolDescUtil.putDesc(CotpPacket.class, "cotp");
     }
     private ProtocolInt31Field _length;
     private ProtocolBitField _pduType;
@@ -123,10 +125,6 @@ public class CotpPacket extends Packet {
             return new DataPayload();
         }
         return null;
-    }
-
-    public String getProtocolTypeDesc() {
-        return "cotp";
     }
 
 }

@@ -7,6 +7,7 @@ import org.hxzon.netprotocol.field.ProtocolField;
 import org.hxzon.netprotocol.field.ProtocolInt31Field;
 import org.hxzon.netprotocol.parse.ProtocolBinding;
 import org.hxzon.netprotocol.parse.ProtocolBindingList;
+import org.hxzon.netprotocol.parse.ProtocolDescUtil;
 import org.hxzon.netprotocol.payload.BerNodePayload;
 
 public class GoosePacket extends Packet {
@@ -35,6 +36,7 @@ public class GoosePacket extends Packet {
             }
 
         });
+        ProtocolDescUtil.putDesc(GoosePacket.class, "goose");
     }
     public static final int HeaderLength = 8;
     public static final int EthernetType_Goose = 0x88b8;
@@ -108,7 +110,4 @@ public class GoosePacket extends Packet {
         return fetchGoosepdu();
     }
 
-    public String getProtocolTypeDesc() {
-        return "goose";
-    }
 }

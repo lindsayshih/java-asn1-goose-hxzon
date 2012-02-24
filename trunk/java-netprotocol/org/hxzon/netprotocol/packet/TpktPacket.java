@@ -4,6 +4,7 @@ import org.hxzon.netprotocol.field.ProtocolField;
 import org.hxzon.netprotocol.field.ProtocolInt31Field;
 import org.hxzon.netprotocol.parse.ProtocolBinding;
 import org.hxzon.netprotocol.parse.ProtocolBindingList;
+import org.hxzon.netprotocol.parse.ProtocolDescUtil;
 
 public class TpktPacket extends Packet {
     static {
@@ -19,6 +20,7 @@ public class TpktPacket extends Packet {
             }
 
         });
+        ProtocolDescUtil.putDesc(TpktPacket.class, "tpkt");
     }
     public static final int HeaderLength = 4;
     private ProtocolInt31Field _version;
@@ -67,7 +69,4 @@ public class TpktPacket extends Packet {
         this._totalLen = length;
     }
 
-    public String getProtocolTypeDesc() {
-        return "tpkt";
-    }
 }

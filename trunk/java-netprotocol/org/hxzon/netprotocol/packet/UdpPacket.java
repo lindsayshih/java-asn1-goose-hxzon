@@ -4,6 +4,7 @@ import org.hxzon.netprotocol.field.ProtocolField;
 import org.hxzon.netprotocol.field.ProtocolInt31Field;
 import org.hxzon.netprotocol.parse.ProtocolBinding;
 import org.hxzon.netprotocol.parse.ProtocolBindingList;
+import org.hxzon.netprotocol.parse.ProtocolDescUtil;
 
 public class UdpPacket extends Packet {
     static {
@@ -19,6 +20,7 @@ public class UdpPacket extends Packet {
             }
 
         });
+        ProtocolDescUtil.putDesc(UdpPacket.class, "udp");
     }
     public static final int MaxTotalLength = 1472;
     public static final int HeaderLength = 8;
@@ -80,7 +82,4 @@ public class UdpPacket extends Packet {
         this._checksum = checksum;
     }
 
-    public String getProtocolTypeDesc() {
-        return "udp";
-    }
 }
