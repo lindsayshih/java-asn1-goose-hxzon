@@ -40,13 +40,12 @@ public class OsiUserData extends BerChoice implements UserDataContainer {
 
     public BerNode[] getUserData() {
         BerNode child = this.getRealNode();
-        if (child instanceof SimplyEncodedData) {
-            return new BerNode[] { child };
-        } else if (child instanceof UserDataContainer) {
+        if (child instanceof UserDataContainer) {
             //pdv list or fully encoded data
             return ((UserDataContainer) child).getUserData();
         }
-        return new BerNode[0];
+        //simplyEncodedData,unknown
+        return new BerNode[] { child };
     }
 
 }
