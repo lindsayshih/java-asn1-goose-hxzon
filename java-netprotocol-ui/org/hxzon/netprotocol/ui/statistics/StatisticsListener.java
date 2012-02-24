@@ -1,8 +1,8 @@
 package org.hxzon.netprotocol.ui.statistics;
 
-import org.hxzon.asn1.core.parse.ext.PacketUtils;
 import org.hxzon.netprotocol.packet.GoosePacket;
 import org.hxzon.netprotocol.packet.SvPacket;
+import org.hxzon.netprotocol.parse.PacketUtils;
 import org.hxzon.pcap.PcapFile;
 import org.hxzon.pcap.PcapHandlerListener;
 import org.hxzon.pcap.PcapPacket;

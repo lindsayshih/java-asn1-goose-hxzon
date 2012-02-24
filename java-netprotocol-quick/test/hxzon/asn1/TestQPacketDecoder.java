@@ -1,6 +1,6 @@
 package test.hxzon.asn1;
 
-import org.hxzon.asn1.core.parse.ext.PacketUtils;
+import org.hxzon.netprotocol.parse.PacketUtils;
 import org.hxzon.netprotocol.quick.common.QIPacket;
 import org.hxzon.netprotocol.quick.common.QIProtocolField;
 import org.hxzon.netprotocol.quick.common.QPacketConstants;
