@@ -6,6 +6,7 @@ import org.hxzon.asn1.osipresentation.OsiPresentationParser;
 import org.hxzon.netprotocol.common.IPacketPayload;
 import org.hxzon.netprotocol.parse.ProtocolBinding;
 import org.hxzon.netprotocol.parse.ProtocolBindingList;
+import org.hxzon.netprotocol.parse.ProtocolDescUtil;
 import org.hxzon.netprotocol.payload.BerNodePayload;
 
 public class OsiPresentationPacket extends Packet {
@@ -18,6 +19,7 @@ public class OsiPresentationPacket extends Packet {
             }
 
         });
+        ProtocolDescUtil.putDesc(OsiPresentationPacket.class,"osi presentation");
     }
 
     protected int expectHeaderLength() {
@@ -50,7 +52,4 @@ public class OsiPresentationPacket extends Packet {
 //		return true;
 //	}
 
-    public String getProtocolTypeDesc() {
-        return "osi presentation";
-    }
 }

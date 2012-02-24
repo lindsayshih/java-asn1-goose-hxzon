@@ -10,7 +10,7 @@ import org.hxzon.netprotocol.field.ProtocolField;
 import org.hxzon.netprotocol.parse.ProtocolBindingList;
 import org.hxzon.netprotocol.payload.EmptyPayload;
 import org.hxzon.netprotocol.payload.ErrorPayload;
-import org.hxzon.netprotocol.payload.NullPayload;
+import org.hxzon.netprotocol.payload.MissPayload;
 import org.hxzon.netprotocol.payload.UnknownPayload;
 import org.hxzon.util.BytesUtil;
 
@@ -123,7 +123,7 @@ public class Packet extends PacketHelper implements IPacket {
             _payload = new EmptyPayload();
         }
         if (_miss) {
-            _payload = new NullPayload();
+            _payload = new MissPayload();
         }
         try {
             if (_payload == null) {
@@ -143,10 +143,6 @@ public class Packet extends PacketHelper implements IPacket {
     }
 
 //------------------------------------------------
-    public String getProtocolTypeDesc() {
-        return "Packet";
-    }
-
     public String getName() {
         return getProtocolTypeDesc() + (_miss ? "(miss)" : "");
     }

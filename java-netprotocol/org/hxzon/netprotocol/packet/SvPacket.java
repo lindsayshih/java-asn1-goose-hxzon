@@ -7,6 +7,7 @@ import org.hxzon.netprotocol.field.ProtocolField;
 import org.hxzon.netprotocol.field.ProtocolInt31Field;
 import org.hxzon.netprotocol.parse.ProtocolBinding;
 import org.hxzon.netprotocol.parse.ProtocolBindingList;
+import org.hxzon.netprotocol.parse.ProtocolDescUtil;
 import org.hxzon.netprotocol.payload.BerNodePayload;
 
 public class SvPacket extends Packet {
@@ -35,6 +36,7 @@ public class SvPacket extends Packet {
             }
 
         });
+        ProtocolDescUtil.putDesc(SvPacket.class,"sv");
     }
     public static final int HeaderLength = 8;
     public static final int EthernetType_Sv = 0x88ba;
@@ -108,7 +110,4 @@ public class SvPacket extends Packet {
         return fetchSvpdu();
     }
 
-    public String getProtocolTypeDesc() {
-        return "sv";
-    }
 }

@@ -5,6 +5,7 @@ import org.hxzon.netprotocol.field.ProtocolInt31HexField;
 import org.hxzon.netprotocol.field.ProtocolMacField;
 import org.hxzon.netprotocol.parse.ProtocolBinding;
 import org.hxzon.netprotocol.parse.ProtocolBindingList;
+import org.hxzon.netprotocol.parse.ProtocolDescUtil;
 
 public class EthernetPacket extends Packet {
     static {
@@ -16,6 +17,7 @@ public class EthernetPacket extends Packet {
             }
 
         });
+        ProtocolDescUtil.putDesc(EthernetPacket.class,"ethernet");
     }
     public static final int HeaderLength = 14;
     private ProtocolMacField _srcMac;
@@ -62,7 +64,4 @@ public class EthernetPacket extends Packet {
         return _type;
     }
 
-    public String getProtocolTypeDesc() {
-        return "ethernet";
-    }
 }

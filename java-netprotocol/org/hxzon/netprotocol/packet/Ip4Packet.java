@@ -5,8 +5,10 @@ import org.hxzon.netprotocol.field.ProtocolBitField;
 import org.hxzon.netprotocol.field.ProtocolField;
 import org.hxzon.netprotocol.field.ProtocolInt31Field;
 import org.hxzon.netprotocol.field.ProtocolIpField;
+import org.hxzon.netprotocol.parse.Ip4PacketGroup;
 import org.hxzon.netprotocol.parse.ProtocolBinding;
 import org.hxzon.netprotocol.parse.ProtocolBindingList;
+import org.hxzon.netprotocol.parse.ProtocolDescUtil;
 import org.hxzon.util.BitUtil;
 
 public class Ip4Packet extends Packet {
@@ -35,6 +37,7 @@ public class Ip4Packet extends Packet {
             }
 
         });
+        ProtocolDescUtil.putDesc(Ip4Packet.class,"ip4");
     }
     public static final int MaxPayloadLength = 1480;
     public static final int EthernetType_Ip4 = 0x0800;
@@ -50,6 +53,7 @@ public class Ip4Packet extends Packet {
     private ProtocolInt31Field _checksum;
     private ProtocolIpField _sourceIp;
     private ProtocolIpField _destIp;
+    private Ip4PacketGroup _ip4Group;
 
     protected int expectHeaderLength() {
         return fetchHeaderLen().getValue() * 4;
@@ -60,8 +64,16 @@ public class Ip4Packet extends Packet {
                 fetchProtocolCode(), fetchChecksum(), fetchSourceIp(), fetchDestIp() };
     }
 
-    public IPacketPayload exceptPayload() {
-        return null;
+    public IPacketPayload getPayload() {
+        IPacketPayload payload=super.getPayload();
+//        Ip4PacketCache.addIp4Packet(this);
+//        if (this.getIp4Group() != null && this.getIp4Group().isReachLast()) {
+//            byte[] reassembly = this._ip4Group.getReassemblyPayload();
+//            Packet bindingPacket = this.findBinding();
+//            bindingPacket.setSrcPacket(payload);
+//            return payload;
+//        }
+        return payload;
     }
 
     public ProtocolInt31Field fetchVersion() {
@@ -242,8 +254,12 @@ public class Ip4Packet extends Packet {
 //		this.destIp = destIp;
     }
 
-    public String getProtocolTypeDesc() {
-        return "ip4";
+    public Ip4PacketGroup getIp4Group() {
+        return _ip4Group;
+    }
+
+    public void setIp4Group(Ip4PacketGroup ip4Group) {
+        this._ip4Group = ip4Group;
     }
 
 }

@@ -5,6 +5,7 @@ import org.hxzon.netprotocol.field.ProtocolField;
 import org.hxzon.netprotocol.field.ProtocolInt31HexField;
 import org.hxzon.netprotocol.parse.ProtocolBinding;
 import org.hxzon.netprotocol.parse.ProtocolBindingList;
+import org.hxzon.netprotocol.parse.ProtocolDescUtil;
 
 public class VlanPacket extends Packet {
     static {
@@ -19,6 +20,7 @@ public class VlanPacket extends Packet {
             }
 
         });
+        ProtocolDescUtil.putDesc(VlanPacket.class, "vlan");
     }
     public static final int HeaderLength = 4;
     public static final int EthernetType_Vlan = 0x8100;
@@ -68,7 +70,4 @@ public class VlanPacket extends Packet {
         return _vlanId;
     }
 
-    public String getProtocolTypeDesc() {
-        return "vlan";
-    }
 }

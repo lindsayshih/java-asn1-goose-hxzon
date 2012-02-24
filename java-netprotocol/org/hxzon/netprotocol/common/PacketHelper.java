@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hxzon.netprotocol.field.ProtocolField;
+import org.hxzon.netprotocol.parse.ProtocolDescUtil;
 import org.hxzon.util.BytesUtil;
 
 public class PacketHelper implements IPacket {
@@ -104,7 +105,8 @@ public class PacketHelper implements IPacket {
     }
 
     public String getProtocolTypeDesc() {
-        return "Packet";
+        String desc = ProtocolDescUtil.getDesc(this.getClass());
+        return desc == null ? "unknown" : desc;
     }
 
     public String getName() {
