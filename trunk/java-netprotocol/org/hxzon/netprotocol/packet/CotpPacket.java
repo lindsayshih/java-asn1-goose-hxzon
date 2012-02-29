@@ -4,6 +4,7 @@ import org.hxzon.netprotocol.common.IPacketPayload;
 import org.hxzon.netprotocol.field.ProtocolBitField;
 import org.hxzon.netprotocol.field.ProtocolField;
 import org.hxzon.netprotocol.field.ProtocolInt31Field;
+import org.hxzon.netprotocol.parse.CotpPacketGroup;
 import org.hxzon.netprotocol.parse.ProtocolBinding;
 import org.hxzon.netprotocol.parse.ProtocolBindingList;
 import org.hxzon.netprotocol.parse.ProtocolDescUtil;
@@ -26,6 +27,7 @@ public class CotpPacket extends Packet {
 //	private ProtocolInt31Field nrAndEot;
     private ProtocolBitField _tpduNumber;
     private ProtocolBitField _isLast;
+    private CotpPacketGroup _cotpGroup;
 
     protected int expectHeaderLength() {
         return fetchPduLength().getValue() + 1;
@@ -118,6 +120,18 @@ public class CotpPacket extends Packet {
             };
         }
         return _isLast;
+    }
+
+    public boolean isLastUnit() {
+        return fetchIsLast().getValue() == LastUnit;
+    }
+
+    public CotpPacketGroup getCotpGroup() {
+        return _cotpGroup;
+    }
+
+    public void setCotpGroup(CotpPacketGroup cotpGroup) {
+        this._cotpGroup = cotpGroup;
     }
 
     public IPacketPayload exceptPayload() {
