@@ -103,21 +103,6 @@ public class Packet extends PacketHelper implements IPacket {
         return _payload;
     }
 
-    public IPacket getLastPacket() {
-        if (_lastPacket == null) {
-            IPacketPayload packet = getPayload();
-            while (packet instanceof IPacket) {
-                packet = ((IPacket) packet).getPayload();
-            }
-            _lastPacket = packet.getSrcPacket();
-        }
-        return _lastPacket;
-    }
-
-    public String getLastPayloadType() {
-        return getLastPacket().getPayload().getProtocolTypeDesc();
-    }
-
     private IPacketPayload parsePayload() {
         if (isEmptyPayload()) {
             _payload = new EmptyPayload();
