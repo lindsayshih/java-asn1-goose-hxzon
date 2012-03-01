@@ -33,7 +33,7 @@ public class PacketTableView extends TableView<Packet> {
 //        lastPayloadTypeColumn.setCellValueFactory(new PropertyValueFactory<Packet, String>("lastPayloadType"));
         lastPayloadTypeColumn.setCellValueFactory(new Callback<CellDataFeatures<Packet, String>, ObservableValue<String>>() {
             public ObservableValue<String> call(CellDataFeatures<Packet, String> p) {
-                return new SimpleStringProperty(p.getValue().getLastPayloadType());
+                return new SimpleStringProperty(p.getValue().getLastPayload().getProtocolTypeDesc());
             }
         });
         lastPayloadTypeColumn.setMinWidth(300);
