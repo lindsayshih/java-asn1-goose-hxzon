@@ -12,7 +12,6 @@ import org.hxzon.netprotocol.payload.EmptyPayload;
 import org.hxzon.netprotocol.payload.ErrorPayload;
 import org.hxzon.netprotocol.payload.MissPayload;
 import org.hxzon.netprotocol.payload.UnknownPayload;
-import org.hxzon.util.BytesUtil;
 
 public class Packet extends PacketHelper implements IPacket {
 
@@ -36,33 +35,12 @@ public class Packet extends PacketHelper implements IPacket {
             this._headerLength = _srcData.length - this._offset;
             this._miss = true;
         }
-//        this._len = this._srcData.length - this._offset;?
-    }
-
-    public IPacket getSrcPacket() {
-        return _srcPacket;
+        this._len = this._srcData.length - this._offset;
     }
 
     public void setSrcPacket(IPacket srcPacket) {
         this._srcPacket = srcPacket;
         init(srcPacket);
-    }
-
-    public void setSrcData(byte[] data) {
-        this._srcData = data;
-    }
-
-    public byte[] getData() {
-        return BytesUtil.copyBytes(_srcData, _offset, getTotalLength());
-    }
-
-//-----------------------------------------------
-    public int getLength() {
-        return getTotalLength();
-    }
-
-    public int getTotalLength() {
-        return _srcData.length - _offset;
     }
 
 //-----------------------------------------------
@@ -86,15 +64,14 @@ public class Packet extends PacketHelper implements IPacket {
 
 //---------------------------------------------
     public IPacketPayload exceptPayload() {
+        if (_miss) {
+            return new MissPayload();
+        }
         return null;
     }
 
     public Packet findBinding() {
         return ProtocolBindingList.findBinding(this);
-    }
-
-    public boolean isEmptyPayload() {
-        return false;
     }
 
     public IPacketPayload getPayload() {
@@ -105,12 +82,6 @@ public class Packet extends PacketHelper implements IPacket {
     }
 
     private IPacketPayload parsePayload() {
-        if (isEmptyPayload()) {
-            _payload = new EmptyPayload();
-        }
-        if (_miss) {
-            _payload = new MissPayload();
-        }
         try {
             if (_payload == null) {
                 _payload = exceptPayload();
@@ -126,11 +97,6 @@ public class Packet extends PacketHelper implements IPacket {
         }
         _payload.setSrcPacket(this);
         return _payload;
-    }
-
-//------------------------------------------------
-    public String getName() {
-        return getProtocolTypeDesc() + (_miss ? "(miss)" : "");
     }
 
 }
