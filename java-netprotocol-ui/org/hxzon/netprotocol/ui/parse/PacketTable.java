@@ -57,7 +57,7 @@ public class PacketTable extends JTable {
             case 0:
                 return rowIndex + 1;
             case 1:
-                return packets.get(rowIndex).getLastPayloadType();
+                return packets.get(rowIndex).getLastPayload().getProtocolTypeDesc();
             default:
                 return null;
             }

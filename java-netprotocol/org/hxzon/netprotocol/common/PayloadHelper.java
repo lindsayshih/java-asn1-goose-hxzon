@@ -5,8 +5,8 @@ import org.hxzon.util.BytesUtil;
 
 public class PayloadHelper implements IPacketPayload {
     protected byte[] _srcData;
-    protected int _offset = -1;
-    protected int _len = -1;
+    protected int _offset = 0;
+    protected int _len = 0;
     protected IPacket _srcPacket;
     protected boolean _miss;
 

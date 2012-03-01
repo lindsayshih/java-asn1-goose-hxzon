@@ -36,6 +36,7 @@ public class Packet extends PacketHelper implements IPacket {
             this._headerLength = _srcData.length - this._offset;
             this._miss = true;
         }
+//        this._len = this._srcData.length - this._offset;?
     }
 
     public IPacket getSrcPacket() {
