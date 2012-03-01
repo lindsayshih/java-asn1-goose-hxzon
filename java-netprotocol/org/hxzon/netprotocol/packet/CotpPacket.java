@@ -9,6 +9,7 @@ import org.hxzon.netprotocol.parse.ProtocolBinding;
 import org.hxzon.netprotocol.parse.ProtocolBindingList;
 import org.hxzon.netprotocol.parse.ProtocolDescUtil;
 import org.hxzon.netprotocol.payload.DataPayload;
+import org.hxzon.netprotocol.payload.MissPayload;
 
 public class CotpPacket extends Packet {
     static {
@@ -135,6 +136,9 @@ public class CotpPacket extends Packet {
     }
 
     public IPacketPayload exceptPayload() {
+        if (_miss) {
+            return new MissPayload();
+        }
         if (fetchIsLast().getValue() != LastUnit) {
             return new DataPayload();
         }
