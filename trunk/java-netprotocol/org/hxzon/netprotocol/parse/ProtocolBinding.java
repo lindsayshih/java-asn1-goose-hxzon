@@ -1,7 +1,7 @@
 package org.hxzon.netprotocol.parse;
 
-import org.hxzon.netprotocol.packet.Packet;
+import org.hxzon.netprotocol.common.IPacketPayload;
 
-public interface ProtocolBinding<T extends Packet> {
-    Packet match(T packet);
+public interface ProtocolBinding<T extends IPacketPayload> {
+    IPacketPayload match(T packet);
 }

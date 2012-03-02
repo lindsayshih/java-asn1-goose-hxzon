@@ -6,12 +6,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.hxzon.netprotocol.packet.Packet;
+import org.hxzon.netprotocol.common.IPacketPayload;
 
 public class ProtocolBindingList {
-    static Map<Class<? extends Packet>, List<ProtocolBinding>> _map = new HashMap<Class<? extends Packet>, List<ProtocolBinding>>();
+    static Map<Class<? extends IPacketPayload>, List<ProtocolBinding>> _map = new HashMap<Class<? extends IPacketPayload>, List<ProtocolBinding>>();
 
-    public static <T extends Packet> void addBinding(ProtocolBinding<T> binding) {
+    public static <T extends IPacketPayload> void addBinding(ProtocolBinding<T> binding) {
         Class<T> packetType = (Class<T>) ((ParameterizedType) binding.getClass().getGenericInterfaces()[0]).getActualTypeArguments()[0];
         List<ProtocolBinding> list = _map.get(packetType);
         if (list == null) {
@@ -21,11 +21,11 @@ public class ProtocolBindingList {
         list.add(binding);
     }
 
-    public static <T extends Packet> List<ProtocolBinding> getBindings(Class<T> packetType) {
+    public static <T extends IPacketPayload> List<ProtocolBinding> getBindings(Class<T> packetType) {
         return _map.get(packetType);
     }
 
-    public static <T extends Packet> void addBinding(List<ProtocolBinding> bindings) {
+    public static <T extends IPacketPayload> void addBinding(List<ProtocolBinding> bindings) {
         Class<T> packetType = (Class<T>) ((ParameterizedType) bindings.get(0).getClass().getGenericInterfaces()[0]).getActualTypeArguments()[0];
         List<ProtocolBinding> list = _map.get(packetType);
         if (list == null) {
@@ -35,11 +35,11 @@ public class ProtocolBindingList {
         list.addAll(bindings);
     }
 
-    public static Packet findBinding(Packet packet) {
+    public static IPacketPayload findBinding(IPacketPayload packet) {
         List<ProtocolBinding> list = _map.get(packet.getClass());
         if (list != null) {
             for (ProtocolBinding binding : list) {
-                Packet next = binding.match(packet);
+                IPacketPayload next = binding.match(packet);
                 if (next != null) {
                     return next;
                 }

@@ -8,7 +8,6 @@ import org.hxzon.netprotocol.common.IPacketPayload;
 import org.hxzon.netprotocol.common.PacketHelper;
 import org.hxzon.netprotocol.field.ProtocolField;
 import org.hxzon.netprotocol.parse.ProtocolBindingList;
-import org.hxzon.netprotocol.payload.EmptyPayload;
 import org.hxzon.netprotocol.payload.ErrorPayload;
 import org.hxzon.netprotocol.payload.MissPayload;
 import org.hxzon.netprotocol.payload.UnknownPayload;
@@ -63,6 +62,13 @@ public class Packet extends PacketHelper implements IPacket {
     }
 
 //---------------------------------------------
+    public IPacketPayload getPayload() {
+        if (_payload == null) {
+            _payload = parsePayload();
+        }
+        return _payload;
+    }
+
     public IPacketPayload exceptPayload() {
         if (_miss) {
             return new MissPayload();
@@ -70,15 +76,8 @@ public class Packet extends PacketHelper implements IPacket {
         return null;
     }
 
-    public Packet findBinding() {
+    public IPacketPayload findBinding() {
         return ProtocolBindingList.findBinding(this);
-    }
-
-    public IPacketPayload getPayload() {
-        if (_payload == null) {
-            _payload = parsePayload();
-        }
-        return _payload;
     }
 
     private IPacketPayload parsePayload() {
