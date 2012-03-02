@@ -43,10 +43,6 @@ public class TpktPacket extends Packet {
         return _version;
     }
 
-    public void setVersion(ProtocolInt31Field version) {
-        this._version = version;
-    }
-
     public ProtocolInt31Field fetchReserved() {
         if (_reserved == null) {
             _reserved = new ProtocolInt31Field("reserved", "保留", 1, 1, this);
@@ -54,19 +50,11 @@ public class TpktPacket extends Packet {
         return _reserved;
     }
 
-    public void setReserved(ProtocolInt31Field reserved) {
-        this._reserved = reserved;
-    }
-
     public ProtocolInt31Field fetchTotalLen() {
         if (_totalLen == null) {
             _totalLen = new ProtocolInt31Field("total length", "总长度", 2, 2, true, this);
         }
         return _totalLen;
-    }
-
-    public void setTotalLen(ProtocolInt31Field length) {
-        this._totalLen = length;
     }
 
 }

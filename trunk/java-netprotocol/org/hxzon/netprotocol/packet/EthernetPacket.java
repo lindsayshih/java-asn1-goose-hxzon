@@ -17,7 +17,7 @@ public class EthernetPacket extends Packet {
             }
 
         });
-        ProtocolDescUtil.putDesc(EthernetPacket.class,"ethernet");
+        ProtocolDescUtil.putDesc(EthernetPacket.class, "ethernet");
     }
     public static final int HeaderLength = 14;
     private ProtocolMacField _srcMac;
@@ -39,19 +39,11 @@ public class EthernetPacket extends Packet {
         return _srcMac;
     }
 
-    public void setSrcMac(byte[] srcMac) {
-//		this.srcMac = srcMac;
-    }
-
     public ProtocolMacField fetchDestMac() {
         if (_destMac == null) {
             _destMac = new ProtocolMacField("destMac", "目的网卡地址", 0, 6, this);
         }
         return _destMac;
-    }
-
-    public void setDestMac(byte[] destMac) {
-//		this.destMac = destMac;
     }
 
     public ProtocolInt31HexField fetchType() {

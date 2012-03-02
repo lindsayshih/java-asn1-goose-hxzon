@@ -61,19 +61,11 @@ public class GoosePacket extends Packet {
         return _appId;
     }
 
-    public void setAppId(int appId) {
-//		this.appId = appId;
-    }
-
     public ProtocolInt31Field fetchPduLen() {
         if (_pduLen == null) {
             _pduLen = new ProtocolInt31Field("pduLen", "PDU长度", 2, 2, true, this);
         }
         return _pduLen;
-    }
-
-    public void setPduLen(int pduLen) {
-//		this.pduLen = pduLen;
     }
 
     public ProtocolInt31Field fetchReserved1() {
@@ -83,19 +75,11 @@ public class GoosePacket extends Packet {
         return _reserved1;
     }
 
-    public void setReserved1(int reserved1) {
-//		this.reserved1 = reserved1;
-    }
-
     public ProtocolInt31Field fetchReserved2() {
         if (_reserved2 == null) {
             _reserved2 = new ProtocolInt31Field("reserved2", "保留2", 6, 2, this);
         }
         return _reserved2;
-    }
-
-    public void setReserved2(int reserved2) {
-//		this.reserved2 = reserved2;
     }
 
     public IPacketPayload fetchGoosepdu() {
