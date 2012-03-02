@@ -13,12 +13,23 @@ public class PayloadHelper implements IPacketPayload {
     public PayloadHelper() {
     }
 
-    public IPacket getSrcPacket() {
-        return _srcPacket;
+    public void init(IPacket srcPacket) {
+        init(srcPacket.getSrcData(), srcPacket.getOffset() + srcPacket.getHeaderLength());
+    }
+
+    public void init(byte[] srcData, int offset) {
+        this._srcData = srcData;
+        this._offset = offset;
+        this._len = this._srcData.length - this._offset;
     }
 
     public void setSrcPacket(IPacket srcPacket) {
         this._srcPacket = srcPacket;
+        init(srcPacket);
+    }
+
+    public IPacket getSrcPacket() {
+        return _srcPacket;
     }
 
     public byte[] getSrcData() {
