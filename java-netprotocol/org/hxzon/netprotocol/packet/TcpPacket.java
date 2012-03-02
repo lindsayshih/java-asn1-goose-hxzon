@@ -53,19 +53,11 @@ public class TcpPacket extends Packet {
         return _sourcePort;
     }
 
-    public void setSourcePort(ProtocolInt31Field sourcePort) {
-        this._sourcePort = sourcePort;
-    }
-
     public ProtocolInt31Field fetchDestPort() {
         if (_destPort == null) {
             _destPort = new ProtocolInt31Field("destPort", "目的端口", 2, 2, true, this);
         }
         return _destPort;
-    }
-
-    public void setDestPort(ProtocolInt31Field destPort) {
-        this._destPort = destPort;
     }
 
     public ProtocolInt63Field fetchSequenceNumber() {
@@ -75,17 +67,11 @@ public class TcpPacket extends Packet {
         return _sequenceNumber;
     }
 
-    public void setSequenceNumber(long sequenceNumber) {
-    }
-
     public ProtocolInt63Field fetchAcknowledgementNumber() {
         if (_acknowledgementNumber == null) {
             _acknowledgementNumber = new ProtocolInt63Field("acknowledgementNumber", "确认序列号", 8, 4, true, this);
         }
         return _acknowledgementNumber;
-    }
-
-    public void setAcknowledgementNumber(long acknowledgementNumber) {
     }
 
     public ProtocolBitField fetchHeaderLen() {
@@ -97,10 +83,6 @@ public class TcpPacket extends Packet {
             };
         }
         return _headerLen;
-    }
-
-    public void setHeaderLen(ProtocolBitField headerLen) {
-        this._headerLen = headerLen;
     }
 
     public ProtocolBitField fetchFlag() {
@@ -162,19 +144,11 @@ public class TcpPacket extends Packet {
         return sb.toString();
     }
 
-    public void setFlag(ProtocolBitField flag) {
-        this._flag = flag;
-    }
-
     public ProtocolInt31Field fetchWindowSize() {
         if (_windowSize == null) {
             _windowSize = new ProtocolInt31Field("window size", "窗口大小", 14, 2, true, this);
         }
         return _windowSize;
-    }
-
-    public void setWindowSize(ProtocolInt31Field windowSize) {
-        this._windowSize = windowSize;
     }
 
     public ProtocolInt31Field fetchChecksum() {
@@ -184,19 +158,11 @@ public class TcpPacket extends Packet {
         return _checksum;
     }
 
-    public void setChecksum(ProtocolInt31Field checksum) {
-        this._checksum = checksum;
-    }
-
     public ProtocolInt31Field fetchUrgentPointer() {
         if (_urgentPointer == null) {
             _urgentPointer = new ProtocolInt31Field("urgent pointer", "紧急指针", 18, 2, true, this);
         }
         return _urgentPointer;
-    }
-
-    public void setUrgentPointer(ProtocolInt31Field urgentPointer) {
-        this._urgentPointer = urgentPointer;
     }
 
 }

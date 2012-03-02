@@ -45,19 +45,11 @@ public class UdpPacket extends Packet {
         return _sourcePort;
     }
 
-    public void setSourcePort(ProtocolInt31Field sourcePort) {
-        this._sourcePort = sourcePort;
-    }
-
     public ProtocolInt31Field fetchDestPort() {
         if (_destPort == null) {
             _destPort = new ProtocolInt31Field("destPort", "目的端口", 2, 2, true, this);
         }
         return _destPort;
-    }
-
-    public void setDestPort(ProtocolInt31Field destPort) {
-        this._destPort = destPort;
     }
 
     public ProtocolInt31Field fetchTotalLen() {
@@ -67,19 +59,11 @@ public class UdpPacket extends Packet {
         return _totalLen;
     }
 
-    public void setTotalLen(ProtocolInt31Field headerLen) {
-        this._totalLen = headerLen;
-    }
-
     public ProtocolInt31Field fetchChecksum() {
         if (_checksum == null) {
             _checksum = new ProtocolInt31Field("check sum", "校验和", 6, 2, true, this);
         }
         return _checksum;
-    }
-
-    public void setChecksum(ProtocolInt31Field checksum) {
-        this._checksum = checksum;
     }
 
 }
