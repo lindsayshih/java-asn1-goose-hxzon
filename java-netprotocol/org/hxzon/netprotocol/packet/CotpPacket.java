@@ -1,10 +1,10 @@
 package org.hxzon.netprotocol.packet;
 
 import org.hxzon.netprotocol.common.IPacketPayload;
+import org.hxzon.netprotocol.common.PacketGroup;
 import org.hxzon.netprotocol.field.ProtocolBitField;
 import org.hxzon.netprotocol.field.ProtocolField;
 import org.hxzon.netprotocol.field.ProtocolInt31Field;
-import org.hxzon.netprotocol.parse.CotpPacketGroup;
 import org.hxzon.netprotocol.parse.ProtocolBinding;
 import org.hxzon.netprotocol.parse.ProtocolBindingList;
 import org.hxzon.netprotocol.parse.ProtocolDescUtil;
@@ -28,7 +28,7 @@ public class CotpPacket extends Packet {
 //	private ProtocolInt31Field nrAndEot;
     private ProtocolBitField _tpduNumber;
     private ProtocolBitField _isLast;
-    private CotpPacketGroup _cotpGroup;
+    private PacketGroup<CotpPacket> _group;
 
     protected int expectHeaderLength() {
         return fetchPduLength().getValue() + 1;
@@ -43,10 +43,6 @@ public class CotpPacket extends Packet {
             _length = new ProtocolInt31Field("pdu length", "PDU长度", 0, 1, true, this);
         }
         return _length;
-    }
-
-    public void setLength(ProtocolInt31Field length) {
-        this._length = length;
     }
 
     public ProtocolBitField fetchPduType() {
@@ -88,21 +84,6 @@ public class CotpPacket extends Packet {
         }
     }
 
-    public void setPduType(ProtocolBitField pduType) {
-        this._pduType = pduType;
-    }
-
-//	public ProtocolInt31Field fetchNrAndEot() {
-//		if (nrAndEot == null) {
-//			nrAndEot = new ProtocolInt31Field("TPDU-NR and EOT", "nr and eot", 2, 1, this);
-//		}
-//		return nrAndEot;
-//	}
-//
-//	public void setNrAndEot(ProtocolInt31Field nrAndEot) {
-//		this.nrAndEot = nrAndEot;
-//	}
-
     public ProtocolBitField fetchTpduNumber() {
         if (_tpduNumber == null) {
             _tpduNumber = new ProtocolBitField("TPDU number", "TPDU number", 2, 1, 7, this);
@@ -127,14 +108,6 @@ public class CotpPacket extends Packet {
         return fetchIsLast().getValue() == LastUnit;
     }
 
-    public CotpPacketGroup getCotpGroup() {
-        return _cotpGroup;
-    }
-
-    public void setCotpGroup(CotpPacketGroup cotpGroup) {
-        this._cotpGroup = cotpGroup;
-    }
-
     public IPacketPayload exceptPayload() {
         if (_miss) {
             return new MissPayload();
@@ -143,6 +116,14 @@ public class CotpPacket extends Packet {
             return new DataPayload();
         }
         return null;
+    }
+
+    public PacketGroup<CotpPacket> getGroup() {
+        return _group;
+    }
+
+    public void setGroup(PacketGroup<CotpPacket> group) {
+        this._group = group;
     }
 
 }
