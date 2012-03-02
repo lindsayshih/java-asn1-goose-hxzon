@@ -56,6 +56,7 @@ public class DisplayApplication extends Application {
     @Override
     public void start(Stage stage) {
         Scene scene = new Scene(new BorderPane());
+        scene.getStylesheets().add("stylesheet.css");
         stage.setTitle("java-asn1-goose parser");
         stage.setWidth(570);
         stage.setHeight(550);
