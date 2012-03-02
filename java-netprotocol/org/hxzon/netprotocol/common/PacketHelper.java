@@ -14,6 +14,31 @@ public class PacketHelper extends PayloadHelper implements IPacket {
     public PacketHelper() {
     }
 
+    public void init(IPacket srcPacket) {
+        init(srcPacket.getSrcData(), srcPacket.getOffset() + srcPacket.getHeaderLength());
+    }
+
+    public void init(byte[] srcData, int offset) {
+        this._srcData = srcData;
+        this._offset = offset;
+        this._headerLength = this._srcData.length;//for some field fetch before expectHeaderLength
+        this._headerLength = expectHeaderLength();
+        if (this._offset + this._headerLength > _srcData.length) {
+            this._headerLength = _srcData.length - this._offset;
+            this._miss = true;
+        }
+        this._len = this._srcData.length - this._offset;
+    }
+
+    protected int expectHeaderLength() {
+        return 0;
+    }
+
+    public void setSrcPacket(IPacket srcPacket) {
+        this._srcPacket = srcPacket;
+        init(srcPacket);
+    }
+
     public int getPayloadOffset() {
         return this._offset + this._headerLength;
     }
