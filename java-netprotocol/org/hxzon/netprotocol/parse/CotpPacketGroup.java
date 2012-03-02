@@ -1,57 +1,45 @@
 package org.hxzon.netprotocol.parse;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import org.hxzon.netprotocol.common.IPacketPayload;
+import org.hxzon.netprotocol.common.PacketGroup;
 import org.hxzon.netprotocol.packet.CotpPacket;
+import org.hxzon.netprotocol.packet.Packet;
 
-public class CotpPacketGroup {
+public class CotpPacketGroup extends PacketGroup<CotpPacket> {
 
-    private List<CotpPacket> _packets = new ArrayList<CotpPacket>();
-
-    private int _key;
-    private boolean _reachLast;
-    private byte[] _reassembly;
-
-    public CotpPacketGroup(int key) {
-        _key = key;
+    protected CotpPacketGroup(int key) {
+        super(key);
     }
 
     public void addPacket(CotpPacket packet) {
-        _packets.add(packet);
-        packet.setCotpGroup(this);
+        super.addPacket(packet);
+        packet.setGroup(this);
         if (packet.isLastUnit()) {
             _reachLast = true;
         }
     }
 
-    public byte[] getReassemblyPayload() {
-        if (_reassembly == null && _reachLast == true) {
-            int reassemblyLen = 0;
-            for (CotpPacket packet : _packets) {
-                reassemblyLen += packet.getPayloadLength();
-            }
-            _reassembly = new byte[reassemblyLen];
-            int i = 0;
-            int len = 0;
-            for (CotpPacket packet : _packets) {
-                len = packet.getPayloadLength();
-                System.arraycopy(packet.getSrcData(), packet.getPayloadOffset(), _reassembly, i, len);
-                i += len;
+    public IPacketPayload parsePayload() {
+        int reassemblyLen = 0;
+        for (CotpPacket packet : _packets) {
+            reassemblyLen += packet.getPayloadLength();
+        }
+        byte[] reassembly = new byte[reassemblyLen];
+        int i = 0;
+        int len = 0;
+        for (CotpPacket packet : _packets) {
+            len = packet.getPayloadLength();
+            System.arraycopy(packet.getSrcData(), packet.getPayloadOffset(), reassembly, i, len);
+            i += len;
+        }
+        _reassemblyData = reassembly;
+        IPacketPayload payload = ProtocolBindingList.findBinding(_packets.get(0));
+        if (payload != null) {
+            if (payload instanceof Packet) {
+                ((Packet) payload).init(reassembly, 0);
             }
         }
-        return _reassembly;
+        return payload;
     }
 
-    public List<CotpPacket> getPackets() {
-        return _packets;
-    }
-
-    public int getKey() {
-        return _key;
-    }
-
-    public boolean isReachLast() {
-        return _reachLast;
-    }
 }
