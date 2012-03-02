@@ -1,11 +1,10 @@
 package org.hxzon.netprotocol.packet;
 
-import org.hxzon.netprotocol.common.IPacketPayload;
+import org.hxzon.netprotocol.common.PacketGroup;
 import org.hxzon.netprotocol.field.ProtocolBitField;
 import org.hxzon.netprotocol.field.ProtocolField;
 import org.hxzon.netprotocol.field.ProtocolInt31Field;
 import org.hxzon.netprotocol.field.ProtocolIpField;
-import org.hxzon.netprotocol.parse.Ip4PacketGroup;
 import org.hxzon.netprotocol.parse.ProtocolBinding;
 import org.hxzon.netprotocol.parse.ProtocolBindingList;
 import org.hxzon.netprotocol.parse.ProtocolDescUtil;
@@ -37,7 +36,7 @@ public class Ip4Packet extends Packet {
             }
 
         });
-        ProtocolDescUtil.putDesc(Ip4Packet.class,"ip4");
+        ProtocolDescUtil.putDesc(Ip4Packet.class, "ip4");
     }
     public static final int MaxPayloadLength = 1480;
     public static final int EthernetType_Ip4 = 0x0800;
@@ -53,7 +52,7 @@ public class Ip4Packet extends Packet {
     private ProtocolInt31Field _checksum;
     private ProtocolIpField _sourceIp;
     private ProtocolIpField _destIp;
-    private Ip4PacketGroup _ip4Group;
+    private PacketGroup<Ip4Packet> _group;
 
     protected int expectHeaderLength() {
         return fetchHeaderLen().getValue() * 4;
@@ -64,32 +63,10 @@ public class Ip4Packet extends Packet {
                 fetchProtocolCode(), fetchChecksum(), fetchSourceIp(), fetchDestIp() };
     }
 
-    public IPacketPayload getPayload() {
-        IPacketPayload payload=super.getPayload();
-//        Ip4PacketCache.addIp4Packet(this);
-//        if (this.getIp4Group() != null && this.getIp4Group().isReachLast()) {
-//            byte[] reassembly = this._ip4Group.getReassemblyPayload();
-//            Packet bindingPacket = this.findBinding();
-//            bindingPacket.setSrcPacket(payload);
-//            return payload;
-//        }
-        return payload;
-    }
-
     public ProtocolInt31Field fetchVersion() {
         return _version;
     }
 
-    public void setVersion(int version) {
-//		this.version = version;
-    }
-
-//	public ProtocolBitField fetchTotalLen() {
-//		if (totalLen == null) {
-//			totalLen = new ProtocolBitField("totalLength", 2, 0, 16, this);
-//		}
-//		return totalLen;
-//	}
     public ProtocolInt31Field fetchTotalLen() {
         if (_totalLen == null) {
             _totalLen = new ProtocolInt31Field("total len", "总长度", 2, 2, true, this);
@@ -116,19 +93,11 @@ public class Ip4Packet extends Packet {
         return _differentiatedServices;
     }
 
-    public void setDifferentiatedServices(int differentiatedServices) {
-//		this.differentiatedServices = differentiatedServices;
-    }
-
     public ProtocolInt31Field fetchIdentification() {
         if (_identification == null) {
             _identification = new ProtocolInt31Field("identification", "标识", 4, 2, this);
         }
         return _identification;
-    }
-
-    public void setIdentification(int identification) {
-//		this.identification = identification;
     }
 
     public ProtocolBitField fetchFragmentFlags() {
@@ -164,10 +133,6 @@ public class Ip4Packet extends Packet {
         return BitUtil.isSet(fetchFragmentFlags().getValue(), MoreFragment);
     }
 
-    public void setFragmentFlags(int fragmentFlags) {
-//		this.fragmentFlags = fragmentFlags;
-    }
-
     public ProtocolBitField fetchFragmentOffset() {
         if (_fragmentOffset == null) {
             _fragmentOffset = new ProtocolBitField("fragment offset", "段偏移", 6, 3, 13, this) {
@@ -179,19 +144,11 @@ public class Ip4Packet extends Packet {
         return _fragmentOffset;
     }
 
-    public void setFragmentOffset(int fragmentOffset) {
-//		this.fragmentOffset = fragmentOffset;
-    }
-
     public ProtocolInt31Field fetchTtl() {
         if (_ttl == null) {
             _ttl = new ProtocolInt31Field("ttl", "生存时间", 8, 1, true, this);
         }
         return _ttl;
-    }
-
-    public void setTtl(int ttl) {
-//		this.ttl = ttl;
     }
 
     public ProtocolInt31Field fetchProtocolCode() {
@@ -201,19 +158,11 @@ public class Ip4Packet extends Packet {
         return _protocolCode;
     }
 
-    public void setProtocolCode(String code) {
-//		this.protocolCode = code;
-    }
-
     public ProtocolInt31Field fetchChecksum() {
         if (_checksum == null) {
             _checksum = new ProtocolInt31Field("protocol", "校验和", 10, 2, true, this);
         }
         return _checksum;
-    }
-
-    public void setChecksum(int checksum) {
-//		this.checksum = checksum;
     }
 
     public ProtocolIpField fetchSourceIp() {
@@ -223,18 +172,6 @@ public class Ip4Packet extends Packet {
         return _sourceIp;
     }
 
-//	public String getSourceIpAsString(){
-//		String tmp="";
-//		for(int i=0;i<4;i++){
-//			tmp+=super.getInt(12+i, 1)+".";
-//		}
-//		return tmp;
-//	}
-
-    public void setSourceIp(byte[] sourceIp) {
-//		this.sourceIp = sourceIp;
-    }
-
     public ProtocolIpField fetchDestIp() {
         if (_destIp == null) {
             _destIp = new ProtocolIpField("destIp", "目的IP", 16, 4, this);
@@ -242,24 +179,12 @@ public class Ip4Packet extends Packet {
         return _destIp;
     }
 
-//	public String getDestIpAsString(){
-//		String tmp="";
-//		for(int i=0;i<4;i++){
-//			tmp+=super.getInt(16+i, 1)+".";
-//		}
-//		return tmp;
-//	}
-
-    public void setDestIp(byte[] destIp) {
-//		this.destIp = destIp;
+    public PacketGroup<Ip4Packet> getIp4Group() {
+        return _group;
     }
 
-    public Ip4PacketGroup getIp4Group() {
-        return _ip4Group;
-    }
-
-    public void setIp4Group(Ip4PacketGroup ip4Group) {
-        this._ip4Group = ip4Group;
+    public void setGroup(PacketGroup<Ip4Packet> group) {
+        this._group = group;
     }
 
 }
