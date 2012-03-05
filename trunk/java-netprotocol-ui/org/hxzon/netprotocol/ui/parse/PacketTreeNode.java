@@ -16,7 +16,9 @@ import org.hxzon.netprotocol.common.IPacket;
 import org.hxzon.netprotocol.common.IPacketPayload;
 import org.hxzon.netprotocol.field.ProtocolField;
 import org.hxzon.netprotocol.packet.OsiPresentationPacket;
+import org.hxzon.netprotocol.packet.Packet;
 import org.hxzon.netprotocol.payload.BerNodePayload;
+import org.hxzon.netprotocol.payload.DataPayload;
 
 public class PacketTreeNode implements TreeNode {
     private boolean removeBerChoice = true;
@@ -44,20 +46,11 @@ public class PacketTreeNode implements TreeNode {
         if (packet instanceof IPacket) {
             IPacket gpacket = (IPacket) packet;
             this.len = gpacket.getHeaderLength();
-            if (gpacket.getSrcPacket() == null) {
-                IPacketPayload payload = gpacket.getPayload();
-                while (payload instanceof IPacket) {
-                    this.add((IPacket) payload);
-                    payload = ((IPacket) payload).getPayload();
-                }
-                if (payload instanceof BerNodePayload) {
-                    this.add(((BerNodePayload) payload).getBerNode());
-                } else {
-                    this.add(payload);
-                }
-            }
         } else {
             this.len = packet.getLength();
+        }
+        if (packet.getClass() == Packet.class) {
+            this.add(((IPacket) packet).getPayload());
         }
     }
 
@@ -90,24 +83,29 @@ public class PacketTreeNode implements TreeNode {
         this.len = len;
     }
 
-    public void add(IPacketPayload packet) {
-        if (packet instanceof OsiPresentationPacket) {
-            this.add(((OsiPresentationPacket) packet));
-        } else if (packet instanceof IPacket) {
-            IPacket gpacket = (IPacket) packet;
-            PacketTreeNode node = new PacketTreeNode(gpacket);
+    public void add(IPacketPayload payload) {
+        if (payload == null) {
+            return;
+        }
+        while (payload instanceof IPacket) {
+            IPacket packet = (IPacket) payload;
+            PacketTreeNode node = new PacketTreeNode(packet);
             this.implAddChildNode(node);
-
-            for (ProtocolField field : gpacket.getHeaderFields()) {
+            for (ProtocolField field : packet.getHeaderFields()) {
                 node.add(field);
             }
-//				this.add(new PacketTreeNode(packet));
-        } else if (packet instanceof BerNode) {
-            add((BerNode) packet);
-        } else {
-            this.implAddChildNode(new PacketTreeNode(packet));
+            payload = ((IPacket) payload).getPayload();
         }
-//		this.implAddChildNode(new PacketTreeNode(packet));
+        if (payload instanceof BerNodePayload) {
+            this.add(((BerNodePayload) payload).getBerNode());
+        } else if (payload instanceof DataPayload) {
+            this.implAddChildNode(new PacketTreeNode(payload));
+            DataPayload dataPayload = (DataPayload) payload;
+            if (dataPayload.getGroup() != null) {
+                this.add(dataPayload.getGroup().getPayload());
+            }
+        } else {
+        }
     }
 
     public void add(OsiPresentationPacket packet) {
@@ -165,6 +163,7 @@ public class PacketTreeNode implements TreeNode {
         this.implAddChildNode(new PacketTreeNode(field));
     }
 
+    //------------------------------
     public int getOffset() {
         return offset;
     }

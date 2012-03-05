@@ -1,6 +1,8 @@
 package org.hxzon.netprotocol.payload;
 
-public class EmptyPayload extends DataPayload {
+import org.hxzon.netprotocol.common.PayloadHelper;
+
+public class EmptyPayload extends PayloadHelper {
     public String getProtocolTypeDesc() {
         return getSrcPacket().getProtocolTypeDesc();
     }

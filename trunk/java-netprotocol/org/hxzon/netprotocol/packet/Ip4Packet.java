@@ -1,13 +1,17 @@
 package org.hxzon.netprotocol.packet;
 
+import org.hxzon.netprotocol.common.IPacketPayload;
 import org.hxzon.netprotocol.common.PacketGroup;
 import org.hxzon.netprotocol.field.ProtocolBitField;
 import org.hxzon.netprotocol.field.ProtocolField;
 import org.hxzon.netprotocol.field.ProtocolInt31Field;
 import org.hxzon.netprotocol.field.ProtocolIpField;
+import org.hxzon.netprotocol.parse.Ip4PacketCache;
 import org.hxzon.netprotocol.parse.ProtocolBinding;
 import org.hxzon.netprotocol.parse.ProtocolBindingList;
 import org.hxzon.netprotocol.parse.ProtocolDescUtil;
+import org.hxzon.netprotocol.payload.DataPayload;
+import org.hxzon.netprotocol.payload.MissPayload;
 import org.hxzon.util.BitUtil;
 
 public class Ip4Packet extends Packet {
@@ -185,6 +189,19 @@ public class Ip4Packet extends Packet {
 
     public void setGroup(PacketGroup<Ip4Packet> group) {
         this._group = group;
+    }
+
+    public IPacketPayload exceptPayload() {
+        if (_miss) {
+            return new MissPayload();
+        }
+        Ip4PacketCache.addIp4Packet(this);
+        if (_group != null) {
+            DataPayload dataPayload = new DataPayload();
+            dataPayload.setGroup(_group);
+            return dataPayload;
+        }
+        return null;
     }
 
 }
