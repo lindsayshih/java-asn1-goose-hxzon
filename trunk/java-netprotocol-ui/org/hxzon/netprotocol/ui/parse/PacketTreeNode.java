@@ -44,8 +44,7 @@ public class PacketTreeNode implements TreeNode {
         this.setDisplayString(packet.getName());
         this.offset = packet.getOffset();
         if (packet instanceof IPacket) {
-            IPacket gpacket = (IPacket) packet;
-            this.len = gpacket.getHeaderLength();
+            this.len = ((IPacket) packet).getHeaderLength();
         } else {
             this.len = packet.getLength();
         }
