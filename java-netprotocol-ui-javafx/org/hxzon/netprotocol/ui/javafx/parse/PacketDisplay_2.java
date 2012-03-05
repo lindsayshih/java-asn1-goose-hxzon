@@ -12,12 +12,14 @@ import org.hxzon.util.BytesUtil;
 
 public class PacketDisplay_2 extends SplitPane {
 
-    private final PacketTreeView packetTreeView;
-    private final WebView indexPane;
-    private final WebView hexPane;
 //    private static final Font font = Font.font("Courier New", 12);
     private static final int byteSplitLen = BytesUtil.HtmlWordSplit.length();
     private static final int lineSplitLen = BytesUtil.HtmlLineSplit.length();
+
+    private final PacketTreeView packetTreeView;
+    private final WebView indexPane;
+    private final WebView dataPane;
+    private byte[] dataByte;
 
     public PacketDisplay_2() {
         packetTreeView = new PacketTreeView();
@@ -26,14 +28,14 @@ public class PacketDisplay_2 extends SplitPane {
         indexPane.setPrefWidth(80);
         indexPane.setPrefHeight(1000);
         //
-        hexPane = new WebView();
-        hexPane.setPrefWidth(500);
-        hexPane.setPrefHeight(1000);
+        dataPane = new WebView();
+        dataPane.setPrefWidth(500);
+        dataPane.setPrefHeight(1000);
         //
         SimplePane messagePane = new SimplePane(true);
         messagePane.setStyle("-fx-background-color:red");
         messagePane.getChildren().add(indexPane);
-        messagePane.getChildren().add(hexPane);
+        messagePane.getChildren().add(dataPane);
         //
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setContent(messagePane);
@@ -44,11 +46,9 @@ public class PacketDisplay_2 extends SplitPane {
             @Override
             public void invalidated(Observable arg0) {
                 PacketTreeItem node = (PacketTreeItem) packetTreeView.getSelectionModel().getSelectedItem();
-                PacketTreeItem root = (PacketTreeItem) packetTreeView.getRoot();
-                if (node == null || root == null) {
+                if (node == null) {
                     return;
                 }
-                Packet packet = (Packet) root.getData();
                 //
                 int charLenForByte = byteSplitLen + 2;
                 int offset = node.getOffset();
@@ -62,10 +62,14 @@ public class PacketDisplay_2 extends SplitPane {
                 if (end > offset) {
                     end -= byteSplitLen;
                 }
-                StringBuffer detailText = new StringBuffer(BytesUtil.toDisplayHexString(packet.getData(), true));
+                if (dataByte != node.getBytes()) {
+                    dataByte = node.getBytes();
+                    setText(indexPane, BytesUtil.toIndex(dataByte, true));
+                }
+                StringBuffer detailText = new StringBuffer(BytesUtil.toDisplayHexString(dataByte, true));
                 detailText.insert(end, "</span>");
                 detailText.insert(offset, "<span style='background:#bce2ec'>");
-                setText(hexPane, detailText.toString());
+                setText(dataPane, detailText.toString());
             }
 
         });
@@ -100,13 +104,11 @@ public class PacketDisplay_2 extends SplitPane {
     public void updateData(Packet packet) {
         if (packet == null) {
             indexPane.getEngine().loadContent("");
-            hexPane.getEngine().loadContent("");
+            dataPane.getEngine().loadContent("");
             packetTreeView.updateData(null);
         } else {
-            byte[] data = packet.getData();
-            setText(indexPane, BytesUtil.toIndex(data, true));
-            setText(hexPane, BytesUtil.toDisplayHexString(data, true));
             packetTreeView.updateData(packet);
+            packetTreeView.getSelectionModel().select(0);
         }
     }
 

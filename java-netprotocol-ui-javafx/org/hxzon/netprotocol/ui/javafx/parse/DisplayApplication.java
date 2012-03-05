@@ -120,8 +120,4 @@ public class DisplayApplication extends Application {
         return packetsTableView;
     }
 
-    public PacketDisplay getPacketDisplay() {
-        return packetDisplay;
-    }
-
 }
