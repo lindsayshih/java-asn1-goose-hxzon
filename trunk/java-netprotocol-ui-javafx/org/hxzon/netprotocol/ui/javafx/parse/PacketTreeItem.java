@@ -10,7 +10,6 @@ import org.hxzon.asn1.core.type.ext.FakeBerConstruct;
 import org.hxzon.netprotocol.common.IPacket;
 import org.hxzon.netprotocol.common.IPacketPayload;
 import org.hxzon.netprotocol.field.ProtocolField;
-import org.hxzon.netprotocol.packet.OsiPresentationPacket;
 import org.hxzon.netprotocol.packet.Packet;
 import org.hxzon.netprotocol.payload.BerNodePayload;
 import org.hxzon.netprotocol.payload.DataPayload;
@@ -21,6 +20,7 @@ public class PacketTreeItem extends TreeItem<Object> {
 //    private ObservableList<TreeItem<Object>> children;
     private Object userObject;
     private String displayString;
+    private byte[] bytes;
     private int offset;
     private int len;
 
@@ -37,6 +37,7 @@ public class PacketTreeItem extends TreeItem<Object> {
         }
         userObject = packet;
         this.setDisplayString(packet.getName());
+        this.bytes = packet.getSrcData();
         this.offset = packet.getOffset();
         if (packet instanceof IPacket) {
             this.len = ((IPacket) packet).getHeaderLength();
@@ -50,6 +51,7 @@ public class PacketTreeItem extends TreeItem<Object> {
 
     public PacketTreeItem(ProtocolField field) {
         userObject = field;
+        this.bytes = field.getPacket().getSrcData();
         this.len = field.getLen();
         this.offset = field.getOffset();
         this.setDisplayString(field.getDisplayString() + "[" + field.getOffset() + "," + field.getLen() + "]");
@@ -63,15 +65,15 @@ public class PacketTreeItem extends TreeItem<Object> {
         this.setDisplayString(asn1.getDisplayString() + ":\t" + Tag.toString(asn1.getTag()));
     }
 
-    public PacketTreeItem(String value) {
-        userObject = value;
-    }
-
-    public PacketTreeItem(String value, int offset, int len) {
-        this.userObject = value;
-        this.offset = offset;
-        this.len = len;
-    }
+//    public PacketTreeItem(String value) {
+//        userObject = value;
+//    }
+//
+//    public PacketTreeItem(String value, int offset, int len) {
+//        this.userObject = value;
+//        this.offset = offset;
+//        this.len = len;
+//    }
 
     public void add(IPacketPayload payload) {
         if (payload == null) {
@@ -87,7 +89,7 @@ public class PacketTreeItem extends TreeItem<Object> {
             payload = ((IPacket) payload).getPayload();
         }
         if (payload instanceof BerNodePayload) {
-            this.add(((BerNodePayload) payload).getBerNode());
+            this.add(((BerNodePayload) payload).getBerNode(), payload.getSrcData());
         } else if (payload instanceof DataPayload) {
             this.implAddChildNode(new PacketTreeItem(payload));
             DataPayload dataPayload = (DataPayload) payload;
@@ -98,32 +100,7 @@ public class PacketTreeItem extends TreeItem<Object> {
         }
     }
 
-    public void add(OsiPresentationPacket packet) {
-//		PacketTreeNode node = new PacketTreeNode(packet);
-//		this.implAddChildNode(node);
-//		node.add(packet.fetchPresentation());
-//        for (BerNode node : packet.getUserData()) {
-//            this.add(node);
-//        }
-    }
-
-    public void add(String value) {
-        implAddChildNode(new PacketTreeItem(value));
-    }
-
-    public void add(String value, int offset, int len) {
-        implAddChildNode(new PacketTreeItem(value, offset, len));
-    }
-
-    public void add(String label, String value) {
-        implAddChildNode(new PacketTreeItem(label + ":" + value));
-    }
-
-    public void add(String label, String value, int offset, int len) {
-        implAddChildNode(new PacketTreeItem(label + ":" + value, offset, len));
-    }
-
-    public void add(BerNode asn1) {
+    public void add(BerNode asn1, byte[] bytes) {
         if (asn1 == null) {
             return;
         }
@@ -132,16 +109,17 @@ public class PacketTreeItem extends TreeItem<Object> {
         }
         PacketTreeItem node = new PacketTreeItem(asn1);
         this.implAddChildNode(node);
+        node.bytes = bytes;
         node.len = asn1.getTotalLen();
         node.offset = asn1.getTagOffset();
         if (asn1 instanceof BerConstruct) {
             for (BerNode child : ((BerConstruct) asn1).getChildren()) {
-                node.add(child);
+                node.add(child, bytes);
             }
         }
         if (asn1 instanceof FakeBerConstruct) {
             for (BerNode child : ((FakeBerConstruct) asn1).getChildren()) {
-                node.add(child);
+                node.add(child, bytes);
             }
         }
     }
@@ -153,7 +131,26 @@ public class PacketTreeItem extends TreeItem<Object> {
         this.implAddChildNode(new PacketTreeItem(field));
     }
 
+//    public void add(String value) {
+//        implAddChildNode(new PacketTreeItem(value));
+//    }
+//
+//    public void add(String value, int offset, int len) {
+//        implAddChildNode(new PacketTreeItem(value, offset, len));
+//    }
+//
+//    public void add(String label, String value) {
+//        implAddChildNode(new PacketTreeItem(label + ":" + value));
+//    }
+//
+//    public void add(String label, String value, int offset, int len) {
+//        implAddChildNode(new PacketTreeItem(label + ":" + value, offset, len));
+//    }
     //------------------------
+    public byte[] getBytes() {
+        return bytes;
+    }
+
     public int getOffset() {
         return offset;
     }

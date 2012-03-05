@@ -9,7 +9,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTextPane;
-import javax.swing.JTree;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.text.SimpleAttributeSet;
@@ -23,12 +22,15 @@ import org.hxzon.util.BytesUtil;
 
 public class PacketDisplay extends JPanel {
     private static final long serialVersionUID = 1L;
-    private PacketTree messageTree;
-    private JTextPane hexPane;
+    private PacketTree packetTree;
+    private JTextPane dataPane;
     private JTextPane indexPane;
     private SimpleAttributeSet notSelected;
     private SimpleAttributeSet selected;
     private static final Font font = Font.decode("Courier New PLAIN 12");
+    private byte[] dataByte;
+    private String dataIndex;
+    private String dataString;
 
     public PacketDisplay() {
         super(new BorderLayout());
@@ -41,24 +43,24 @@ public class PacketDisplay extends JPanel {
         indexPane = new JTextPane();
         indexPane.setMinimumSize(new Dimension(30, 300));
         indexPane.setEditable(false);
-        hexPane = new JTextPane();
-        hexPane.setMinimumSize(new Dimension(350, 300));
-        hexPane.setEditable(false);
+        dataPane = new JTextPane();
+        dataPane.setMinimumSize(new Dimension(350, 300));
+        dataPane.setEditable(false);
 //        for(Font font:GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts()){
 //            System.out.println(font);
 //        }
 //        System.out.println(hexPane.getFont());
         indexPane.setFont(font);
-        hexPane.setFont(font);
+        dataPane.setFont(font);
 //        System.out.println(hexPane.getFont());
         messagePane.setLayout(new BoxLayout(messagePane, BoxLayout.X_AXIS));
         messagePane.add(indexPane);
-        messagePane.add(hexPane);
+        messagePane.add(dataPane);
 //		messagePane.setMinimumSize(new Dimension(410, 300));
         //tree
-        messageTree = new PacketTree();
-        messageTree.setMinimumSize(new Dimension(350, 300));
-        messageTree.addTreeSelectionListener(new TreeSelectionListener() {
+        packetTree = new PacketTree();
+        packetTree.setMinimumSize(new Dimension(350, 300));
+        packetTree.addTreeSelectionListener(new TreeSelectionListener() {
 
             public void valueChanged(TreeSelectionEvent e) {
                 TreePath treePath = e.getPath();
@@ -67,7 +69,7 @@ public class PacketDisplay extends JPanel {
                 }
                 PacketTreeNode node = (PacketTreeNode) treePath.getLastPathComponent();
                 if (!node.isLeaf()) {
-                    messageTree.expandPath(treePath);
+                    packetTree.expandPath(treePath);
                 }
                 //
                 int offset = node.getOffset();//byte offset
@@ -87,11 +89,18 @@ public class PacketDisplay extends JPanel {
                 if (end > offset) {
                     end -= wordSplitLen;
                 }
+                if (dataByte != node.getBytes()) {
+                    dataByte = node.getBytes();
+                    dataIndex = BytesUtil.toIndex(dataByte);
+                    dataString = BytesUtil.toDisplayHexString(dataByte);
+                    indexPane.setText(dataIndex);
+                    dataPane.setText(dataString);
+                }
                 try {
-                    StyledDocument doc = hexPane.getStyledDocument();
+                    StyledDocument doc = dataPane.getStyledDocument();
                     doc.setCharacterAttributes(0, doc.getLength(), notSelected, true);
                     doc.setCharacterAttributes(offset, end - offset, selected, true);
-                    hexPane.select(offset, end);//let auto scroll
+                    dataPane.select(offset, end);//let auto scroll
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
@@ -101,7 +110,7 @@ public class PacketDisplay extends JPanel {
         JSplitPane split = new JSplitPane();
         split.setOrientation(JSplitPane.HORIZONTAL_SPLIT);
         split.setLeftComponent(new JScrollPane(messagePane));
-        split.setRightComponent(new JScrollPane(messageTree));
+        split.setRightComponent(new JScrollPane(packetTree));
         split.setDividerLocation(380);
         split.setBorder(null);
         this.add(split, BorderLayout.CENTER);
@@ -109,36 +118,20 @@ public class PacketDisplay extends JPanel {
 
     public void updateData(Packet packet) {
         if (packet != null) {
-            byte[] data = packet.getSrcData();
             try {
-                messageTree.updateModel(packet);//must before editPane.setText or throw exception
+                packetTree.updateModel(packet);//must before editPane.setText or throw exception
+                packetTree.setSelectionRow(0);
             } catch (Exception e) {
-                messageTree.updateModel(null);
+                packetTree.updateModel(null);
                 e.printStackTrace();
             }
-            indexPane.setText(BytesUtil.toIndex(data));
-            indexPane.select(0, 0);
-            String hex = BytesUtil.toDisplayHexString(data);
-            hexPane.setText(hex);
-            hexPane.select(0, 0);
         } else {
-            messageTree.updateModel(null);
+            packetTree.updateModel(null);
             indexPane.setText("");
             indexPane.select(0, 0);
-            hexPane.setText("");
-            hexPane.select(0, 0);
+            dataPane.setText("");
+            dataPane.select(0, 0);
         }
     }
 
-    public JTree getMessageTree() {
-        return messageTree;
-    }
-
-    public JTextPane getHexPane() {
-        return hexPane;
-    }
-
-    public JTextPane getIndexPane() {
-        return indexPane;
-    }
 }
