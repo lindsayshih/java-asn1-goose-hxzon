@@ -1,52 +1,31 @@
 package org.hxzon.netprotocol.payload;
 
-import org.hxzon.netprotocol.common.IPacket;
 import org.hxzon.netprotocol.common.IPacketPayload;
-import org.hxzon.util.BytesUtil;
+import org.hxzon.netprotocol.common.PacketGroup;
+import org.hxzon.netprotocol.common.PayloadHelper;
 
-public class DataPayload implements IPacketPayload {
-    private byte[] _srcData;
-    private int _offset;
-    private IPacket _srcPacket;
-    private boolean _miss;
+public class DataPayload extends PayloadHelper implements IPacketPayload {
+    private PacketGroup<?> _group;
 
-    @Override
-    public byte[] getData() {
-        return BytesUtil.copyBytes(_srcData, _offset, getLength());
+    public PacketGroup<?> getGroup() {
+        return _group;
     }
 
-    @Override
-    public int getLength() {
-        return _srcData.length - _offset;
-    }
-
-    @Override
-    public int getOffset() {
-        return _offset;
-    }
-
-    @Override
-    public byte[] getSrcData() {
-        return _srcData;
-    }
-
-    @Override
-    public IPacket getSrcPacket() {
-        return _srcPacket;
-    }
-
-    @Override
-    public void setSrcPacket(IPacket srcPacket) {
-        this._srcPacket = srcPacket;
-        this._srcData = srcPacket.getSrcData();
-        this._offset = srcPacket.getOffset() + srcPacket.getHeaderLength();
-    }
-
-    public String getName() {
-        return "user data";
+    public void setGroup(PacketGroup<?> group) {
+        this._group = group;
     }
 
     public String getProtocolTypeDesc() {
+        if (_group != null) {
+            IPacketPayload payload = _group.getPayload();
+            if (payload != null) {
+                return payload.getProtocolTypeDesc();
+            }
+        }
+        return getSrcPacket().getProtocolTypeDesc();
+    }
+
+    public String getName() {
         return "user data";
     }
 

@@ -1,6 +1,8 @@
 package org.hxzon.netprotocol.payload;
 
-public class ErrorPayload extends DataPayload {
+import org.hxzon.netprotocol.common.PayloadHelper;
+
+public class ErrorPayload extends PayloadHelper {
     private String _errorMessage;
 
     public ErrorPayload() {
