@@ -18,7 +18,6 @@ import org.hxzon.netprotocol.packet.CotpPacket;
 import org.hxzon.netprotocol.packet.EthernetPacket;
 import org.hxzon.netprotocol.packet.GoosePacket;
 import org.hxzon.netprotocol.packet.Ip4Packet;
-import org.hxzon.netprotocol.packet.OsiPresentationPacket;
 import org.hxzon.netprotocol.packet.OsiSessionPacket;
 import org.hxzon.netprotocol.packet.Packet;
 import org.hxzon.netprotocol.packet.SvPacket;
@@ -43,7 +42,7 @@ public class DisplayFrame extends JFrame {
         new TpktPacket();
         new CotpPacket();
         new OsiSessionPacket();
-        new OsiPresentationPacket();
+//        new OsiPresentationPacket();
     }
     private PacketTable packetsTable;
     private PacketDisplay packetDisplay;
