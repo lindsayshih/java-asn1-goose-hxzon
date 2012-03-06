@@ -42,6 +42,9 @@ public class CotpPacketCache {
         }
         if (group != null) {
             group.addPacket(cotpPacket);
+            if (group.isReachLast()) {
+                groups.remove(group.getKey());
+            }
         }
     }
 }
