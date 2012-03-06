@@ -23,6 +23,9 @@ public class Ip4PacketCache {
         }
         if (group != null) {
             group.addPacket(ip4Packet);
+            if (group.isReachLast()) {
+                groups.remove(group.getKey());
+            }
         }
     }
 }

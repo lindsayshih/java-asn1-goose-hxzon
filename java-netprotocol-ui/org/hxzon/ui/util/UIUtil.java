@@ -137,11 +137,29 @@ public class UIUtil {
     public static String testIp4_12 = "01 00 5e 01 00 03 18 a9 05 6e f2 a9 08 00 45 00 " + "00 64 78 66 00 b9 01 11 99 37 c6 79 00 b5 e0 01 " + "00 03 14 fc 09 28 2b 01 00 00 14 fc 09 28 2b 01 "
             + "00 00 14 fc 09 28 2b 01 00 00 14 fc 09 28 2b 01 " + "00 00 14 fc 09 28 2b 01 00 00 14 fc 09 28 2b 01 " + "00 00 14 fc 09 28 2b 01 00 00 14 fc 09 28 2b 01 "
             + "00 00 14 fc 09 28 2b 01 00 00 14 fc 09 28 2b 01 " + "00 00 ";
-    public static String testIp4_21 = "00 50 04 07 76 d6 00 0c 02 b0 89 3a 08 00 45 00 " + "00 9a 3d 63 20 00 40 06 db 58 ac 1e 04 02 ac 1e " + "05 64 00 66 05 6b 9c 41 29 05 dc 4f 5c b0 50 18 "
-            + "39 08 6d 60 00 00 03 00 ";
-    public static String testIp4_22 = "00 50 04 07 76 d6 00 0c 02 b0 89 3a 08 00 45 00 " + "00 9a 3d 63 00 16 40 06 db 58 ac 1e 04 02 ac 1e " + "05 64 " + "00 72 02 f0 80 01 00 01 "
-            + "00 61 65 30 63 02 01 03 a0 5e a3 5c a0 5a a1 05 " + "80 03 52 50 54 a0 51 8a 19 46 37 31 34 4c 44 30 " + "2f 4c 4c 4e 30 24 72 63 62 4d 65 61 73 46 6c 74 "
+    public static String testIp4_21 = "00 50 04 07 76 d6 00 0c 02 b0 89 3a 08 00 "
+    //ip header,wrong total len
+            + "45 00 " + "00 9a 3d 63 20 00 40 06 db 58 ac 1e 04 02 ac 1e " + "05 64 "
+            //user data
+            + "00 66 05 6b 9c 41 29 05 dc 4f 5c b0 50 18 " + "39 08 6d 60 00 00 03 00 ";
+    public static String testIp4_22 = "00 50 04 07 76 d6 00 0c 02 b0 89 3a 08 00 "
+            //ip header,wrong total len,wrong fragment offset
+            + "45 00 " + "00 9a 3d 63 00 16 40 06 db 58 ac 1e 04 02 ac 1e " + "05 64 "
+            //user data
+            + "00 72 02 f0 80 01 00 01 " + "00 61 65 30 63 02 01 03 a0 5e a3 5c a0 5a a1 05 " + "80 03 52 50 54 a0 51 8a 19 46 37 31 34 4c 44 30 " + "2f 4c 4c 4e 30 24 72 63 62 4d 65 61 73 46 6c 74 "
             + "30 31 84 03 06 51 00 86 01 71 89 08 00 06 10 ae " + "00 00 00 00 84 09 04 00 00 00 00 00 00 14 00 87 " + "05 08 40 be 66 66 91 08 47 c2 7c 6e 17 4f c3 0a " + "84 02 02 40 84 02 02 40 ";
+    public static String testIp4_31 = "00 50 04 07 76 d6 00 0c 02 b0 89 3a 08 00 "
+    //ip header
+            + "45 00 " + "00 34 3d 63 20 00 40 06 db 58 ac 1e 04 02 ac 1e " + "05 64 "
+            //user data
+            + "00 66 05 6b 9c 41 29 05 dc 4f 5c b0 50 18 " + "39 08 6d 60 00 00 03 00 00 72 02 f0 80 01 00 01 " + "00 61 ";
+    public static String testIp4_32 = "00 50 04 07 76 d6 00 0c 02 b0 89 3a 08 00 "
+            //ip header
+            + "45 00 " + "00 64 3d 63 00 04 40 06 db 58 ac 1e 04 02 ac 1e " + "05 64 "
+            //user data
+            + "65 30 63 02 01 03 a0 5e a3 5c a0 5a a1 05 " + "80 03 52 50 54 a0 51 8a 19 46 37 31 34 4c 44 30 " + "2f 4c 4c 4e 30 24 72 63 62 4d 65 61 73 46 6c 74 "
+            + "30 31 84 03 06 51 00 86 01 71 89 08 00 06 10 ae " + "00 00 00 00 84 09 04 00 00 00 00 00 00 14 00 87 " + "05 08 40 be 66 66 91 08 47 c2 7c 6e 17 4f c3 0a " + "84 02 02 40 84 02 02 40 ";
+
     public static List<Packet> examplePackets = new ArrayList<Packet>();
     static {
         examplePackets.add(new Packet(BytesUtil.fromHexString(testGoose1)));
@@ -164,5 +182,7 @@ public class UIUtil {
         examplePackets.add(new Packet(BytesUtil.fromHexString(testIp4_12)));
         examplePackets.add(new Packet(BytesUtil.fromHexString(testIp4_21)));
         examplePackets.add(new Packet(BytesUtil.fromHexString(testIp4_22)));
+        examplePackets.add(new Packet(BytesUtil.fromHexString(testIp4_31)));
+        examplePackets.add(new Packet(BytesUtil.fromHexString(testIp4_32)));
     }
 }
