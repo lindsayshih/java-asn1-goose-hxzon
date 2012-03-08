@@ -13,8 +13,11 @@ import org.hxzon.asn1.mms.InformationReportContainer;
 import org.hxzon.asn1.mms.choice.AccessResult;
 import org.hxzon.asn1.mms.choice.Data;
 import org.hxzon.asn1.mms.choice.VariableAccessSpecification;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class InformationReport extends BerSequence implements InformationReportContainer {
+    private static Logger logger = LoggerFactory.getLogger(InformationReport.class);
 
     private BerNode reportIdNode;
     private List<BerNode> valueNodes;
@@ -106,6 +109,10 @@ public class InformationReport extends BerSequence implements InformationReportC
                 if (bitString.charAt(5) == '1') {
                     for (int i = 0; i < datasetNum; i++) {
                         index++;
+                        if (index >= seqOf.getChildren().length) {
+                            logger.error("index " + index + " out of range:" + seqOf.getChildren().length);
+                            break;
+                        }
                         successDataRealNode = getAccessResult_Success_RealNode(seqOf, index);
                         successDataRealNode.setId("dataReferences");
                         successDataRealNode.setName("数据集引用");
@@ -115,6 +122,10 @@ public class InformationReport extends BerSequence implements InformationReportC
                 valueNodes = new ArrayList<BerNode>(datasetNum);
                 for (int i = 0; i < datasetNum; i++) {
                     index++;
+                    if (index >= seqOf.getChildren().length) {
+                        logger.error("index " + index + " out of range:" + seqOf.getChildren().length);
+                        break;
+                    }
                     successDataRealNode = getAccessResult_Success_RealNode(seqOf, index);
                     successDataRealNode.setId("values");
                     successDataRealNode.setName("值");
@@ -124,6 +135,10 @@ public class InformationReport extends BerSequence implements InformationReportC
                 if (bitString.charAt(3) == '1') {
                     for (int i = 0; i < datasetNum; i++) {
                         index++;
+                        if (index >= seqOf.getChildren().length) {
+                            logger.error("index " + index + " out of range:" + seqOf.getChildren().length);
+                            break;
+                        }
                         successDataRealNode = getAccessResult_Success_RealNode(seqOf, index);
                         successDataRealNode.setId("reasonCodes");
                         successDataRealNode.setName("原因代码");
