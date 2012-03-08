@@ -92,14 +92,14 @@ public class Ip4Packet extends Packet {
     public ProtocolInt31Field fetchDifferentiatedServices() {
         if (_differentiatedServices == null) {
 //			differentiatedServices = new ProtocolBitField("tos", 1, 0, 8, this);
-            _differentiatedServices = new ProtocolInt31Field("tos", "差别服务", 1, 1, this);
+            _differentiatedServices = new ProtocolInt31Field("tos", "差别服务", 1, 1, true, this);
         }
         return _differentiatedServices;
     }
 
     public ProtocolInt31Field fetchIdentification() {
         if (_identification == null) {
-            _identification = new ProtocolInt31Field("identification", "标识", 4, 2, this);
+            _identification = new ProtocolInt31Field("identification", "标识", 4, 2, true, this);
         }
         return _identification;
     }

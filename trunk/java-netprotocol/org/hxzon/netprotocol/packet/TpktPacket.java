@@ -45,7 +45,7 @@ public class TpktPacket extends Packet {
 
     public ProtocolInt31Field fetchReserved() {
         if (_reserved == null) {
-            _reserved = new ProtocolInt31Field("reserved", "保留", 1, 1, this);
+            _reserved = new ProtocolInt31Field("reserved", "保留", 1, 1, true, this);
         }
         return _reserved;
     }

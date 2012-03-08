@@ -70,14 +70,14 @@ public class SvPacket extends Packet {
 
     public ProtocolInt31Field fetchReserved1() {
         if (_reserved1 == null) {
-            _reserved1 = new ProtocolInt31Field("reserved1", "保留1", 4, 2, this);
+            _reserved1 = new ProtocolInt31Field("reserved1", "保留1", 4, 2, true, this);
         }
         return _reserved1;
     }
 
     public ProtocolInt31Field fetchReserved2() {
         if (_reserved2 == null) {
-            _reserved2 = new ProtocolInt31Field("reserved2", "保留2", 6, 2, this);
+            _reserved2 = new ProtocolInt31Field("reserved2", "保留2", 6, 2, true, this);
         }
         return _reserved2;
     }
