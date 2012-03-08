@@ -30,6 +30,10 @@ public class OsiSessionPacket extends Packet {
         if (_miss) {
             return new MissPayload();
         }
+        //FIXME right?
+        if ("01000100".equals(getHexString(getPayloadOffset(), 4))) {
+            return new OsiSessionPacket();
+        }
         BerNode node = OsiPresentationParser.parser.parsePresentation(getSrcData(), getPayloadOffset());
         return new BerNodePayload(node, this);
     }
