@@ -28,13 +28,12 @@ public class CotpPacketCache {
         if (ip4Packet == null || tcpPacket == null) {
             return;
         }
-        int identification = ip4Packet.fetchIdentification().getValue();
         int protocolCode = ip4Packet.fetchProtocolCode().getValue();
         long sourceIp = ip4Packet.fetchSourceIp().getValue();
         long destIp = ip4Packet.fetchDestIp().getValue();
         int sourcePort = tcpPacket.fetchSourcePort().getValue();
         int destPort = tcpPacket.fetchDestPort().getValue();
-        int key = new HashCodeBuilder().append(identification).append(protocolCode).append(sourceIp).append(destIp).append(sourcePort).append(destPort).toHashCode();
+        int key = new HashCodeBuilder().append(protocolCode).append(sourceIp).append(destIp).append(sourcePort).append(destPort).toHashCode();
         CotpPacketGroup group = groups.get(key);
         if (group == null && !cotpPacket.isLastUnit()) {
             group = new CotpPacketGroup(key);

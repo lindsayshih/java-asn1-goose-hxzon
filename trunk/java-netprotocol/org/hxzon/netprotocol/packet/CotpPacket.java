@@ -5,6 +5,7 @@ import org.hxzon.netprotocol.common.PacketGroup;
 import org.hxzon.netprotocol.field.ProtocolBitField;
 import org.hxzon.netprotocol.field.ProtocolField;
 import org.hxzon.netprotocol.field.ProtocolInt31Field;
+import org.hxzon.netprotocol.parse.CotpPacketCache;
 import org.hxzon.netprotocol.parse.ProtocolBinding;
 import org.hxzon.netprotocol.parse.ProtocolBindingList;
 import org.hxzon.netprotocol.parse.ProtocolDescUtil;
@@ -112,8 +113,11 @@ public class CotpPacket extends Packet {
         if (_miss) {
             return new MissPayload();
         }
-        if (fetchIsLast().getValue() != LastUnit) {
-            return new DataPayload();
+        CotpPacketCache.addCotpPacket(this);
+        if (_group != null) {
+            DataPayload dataPayload = new DataPayload();
+            dataPayload.setGroup(_group);
+            return dataPayload;
         }
         return null;
     }
