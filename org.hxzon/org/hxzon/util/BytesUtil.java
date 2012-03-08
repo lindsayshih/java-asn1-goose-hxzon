@@ -349,7 +349,7 @@ public class BytesUtil {
 
     //--------------------------------------------------------------------------
     public static byte[] fromHexString(String src) {
-        src = src.replaceAll(" |\t|\n", "");
+        src = src.replaceAll(" |\t|\n|\r", "");
         //        System.out.println(src);
         return fromHexCharArray(src.toCharArray());
     }
