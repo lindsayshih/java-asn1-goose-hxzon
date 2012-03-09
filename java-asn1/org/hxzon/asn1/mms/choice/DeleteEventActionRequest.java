@@ -18,7 +18,7 @@ public class DeleteEventActionRequest extends BerChoice {
     public BerNode create(int tag, BerInputStream stream) {
         switch (tag) {
         case Tag.CONTEXT | 0:
-            return Asn1Utils.createBerSequenceOf("specific", "specific", tag, stream, ObjectName.class);
+            return Asn1Utils.createBerSequenceOf("specific", "specific", tag, stream, ObjectName.class, false);
         case Tag.CONTEXT | 1:
             return Asn1Utils.createBerNull("aa-specific", "aa-specific", tag, stream);
         case Tag.CONTEXT | 3:

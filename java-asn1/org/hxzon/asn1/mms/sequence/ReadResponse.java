@@ -19,7 +19,7 @@ public class ReadResponse extends BerSequence {
         case Tag.CONTEXT | 0:
             return new VariableAccessSpecification().init("variableAccessSpecificatn", "variableAccessSpecificatn", tag, stream);
         case Tag.CONTEXT | 1:
-            return Asn1Utils.createBerSequenceOf("listOfAccessResult", "listOfAccessResult", tag, stream, AccessResult.class);
+            return Asn1Utils.createBerSequenceOf("listOfAccessResult", "listOfAccessResult", tag, stream, AccessResult.class, false);
         default:
             return Asn1Utils.createUnknown(tag, stream);
         }

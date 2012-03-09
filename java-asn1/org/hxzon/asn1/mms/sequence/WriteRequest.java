@@ -18,7 +18,7 @@ public class WriteRequest extends BerSequence {
     public BerNode create(int tag, BerInputStream stream) {
         switch (tag) {
         case Tag.CONTEXT | 0:
-            return Asn1Utils.createBerSequenceOf("listOfData", "listOfData", tag, stream, Data.class);
+            return Asn1Utils.createBerSequenceOf("listOfData", "listOfData", tag, stream, Data.class, false);
         default:
             return new VariableAccessSpecification().init(tag, stream, false);
         }

@@ -9,10 +9,17 @@ public class BerSequenceOf extends BerSequence {
     private boolean _choiceChildHasTag = false;
 
     public BerSequenceOf(Class<? extends BerNode> type) {
-        this(type, false);
+        if (BerChoice.class.isAssignableFrom(type)) {
+            throw new UnsupportedOperationException("please use BerSequenceOf(Class type, boolean choiceChildHasTag)");
+        }
+        implInit(type, false);
     }
 
-    public BerSequenceOf(Class<? extends BerNode> type, boolean choiceChildHasTag) {
+    public BerSequenceOf(Class<? extends BerChoice> type, boolean choiceChildHasTag) {
+        implInit(type, choiceChildHasTag);
+    }
+
+    private void implInit(Class<? extends BerNode> type, boolean choiceChildHasTag) {
         this._type = type;
         this._choiceChildHasTag = choiceChildHasTag;
         setId("seq of " + type.getSimpleName());

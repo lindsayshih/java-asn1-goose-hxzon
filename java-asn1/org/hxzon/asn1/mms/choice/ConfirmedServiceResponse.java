@@ -143,7 +143,7 @@ public class ConfirmedServiceResponse extends BerChoice {
         case Tag.CONTEXT | 4:
             return new ReadResponse().init("read", "read", tag, stream);
         case Tag.CONTEXT | 5:
-            return Asn1Utils.createBerSequenceOf("write", "write", tag, stream, WriteResponse.class);
+            return Asn1Utils.createBerSequenceOf("write", "write", tag, stream, WriteResponse.class, false);
         case Tag.CONTEXT | 6:
             return new GetVariableAccessAttributesResponse().init("getVariableAccessAttributes", "getVariableAccessAttributes", tag, stream);
         case Tag.CONTEXT | 7:

@@ -31,7 +31,7 @@ public class PresentationDataValues extends BerChoice implements UserDataContain
         switch (tag) {
         case Tag.CONTEXT | 0:
             if (_contextValue == 3) {
-                return new SingleAsn1Type(MmsPdu.class).init("single-ASN1-type", "single-ASN1-type", tag, stream);
+                return new SingleAsn1Type(MmsPdu.class, false).init("single-ASN1-type", "single-ASN1-type", tag, stream);
             } else {
                 return new SingleAsn1Type(UnknownBerNode.class).init("single-ASN1-type", "single-ASN1-type", tag, stream);
             }
