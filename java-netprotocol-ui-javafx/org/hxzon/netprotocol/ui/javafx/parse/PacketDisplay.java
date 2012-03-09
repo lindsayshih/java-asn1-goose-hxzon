@@ -10,11 +10,15 @@ import org.hxzon.util.BytesUtil;
 
 public class PacketDisplay extends SplitPane {
 
-    private final PacketTreeView packetTreeView;
-    private final WebView hexPane;
 //    private static final Font font = Font.font("Courier New", 12);
     private static final int byteSplitLen = BytesUtil.HtmlWordSplit.length();
     private static final int lineSplitLen = BytesUtil.HtmlLineSplit.length();
+
+    private final PacketTreeView packetTreeView;
+    private final WebView hexPane;
+    private byte[] dataByte;
+    private String dataIndex;
+    private String dataString;
 
     public PacketDisplay() {
         packetTreeView = new PacketTreeView();
@@ -46,12 +50,15 @@ public class PacketDisplay extends SplitPane {
                 if (end > offset) {
                     end -= byteSplitLen;
                 }
-                String hex = BytesUtil.toDisplayHexString(node.getBytes(), true);
-                String index = BytesUtil.toIndex(node.getBytes(), true);
-                StringBuffer detailText = new StringBuffer(hex);
+                if (dataByte != node.getBytes()) {
+                    dataByte = node.getBytes();
+                    dataIndex = BytesUtil.toIndex(dataByte, true);
+                    dataString = BytesUtil.toDisplayHexString(dataByte, true);
+                }
+                StringBuffer detailText = new StringBuffer(dataString);
                 detailText.insert(end, "</span>");
                 detailText.insert(offset, "<span style='background:#bce2ec'>");
-                setText(hexPane, index, detailText.toString());
+                setText(hexPane, dataIndex, detailText.toString());
             }
 
         });

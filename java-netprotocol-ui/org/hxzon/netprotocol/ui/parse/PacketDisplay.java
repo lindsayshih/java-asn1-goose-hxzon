@@ -119,7 +119,7 @@ public class PacketDisplay extends JPanel {
     public void updateData(Packet packet) {
         if (packet != null) {
             try {
-                packetTree.updateModel(packet);//must before editPane.setText or throw exception
+                packetTree.updateModel(packet);
                 packetTree.setSelectionRow(0);
             } catch (Exception e) {
                 packetTree.updateModel(null);
