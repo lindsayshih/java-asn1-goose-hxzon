@@ -27,7 +27,7 @@ public class DeleteNamedVariableListRequest extends BerSequence {
         case Tag.CONTEXT | 0:
             return new ScopeOfDelete().init("scopeOfDelete", "scopeOfDelete", tag, stream);
         case Tag.CONTEXT | 1:
-            return Asn1Utils.createBerSequenceOf("listOfVariableListName", "listOfVariableListName", tag, stream, ObjectName.class);
+            return Asn1Utils.createBerSequenceOf("listOfVariableListName", "listOfVariableListName", tag, stream, ObjectName.class, false);
         case Tag.CONTEXT | 2:
             return new Identifier().init("domainName", "domainName", tag, stream);
         default:

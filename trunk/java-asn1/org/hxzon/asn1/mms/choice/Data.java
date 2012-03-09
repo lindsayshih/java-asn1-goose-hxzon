@@ -40,9 +40,9 @@ public class Data extends BerChoice {
     public BerNode create(int tag, BerInputStream stream) {
         switch (tag) {
         case Tag.CONTEXT | 1:
-            return Asn1Utils.createBerSequenceOf("array", "array", tag, stream, Data.class);
+            return Asn1Utils.createBerSequenceOf("array", "array", tag, stream, Data.class, false);
         case Tag.CONTEXT | 2:
-            return Asn1Utils.createBerSequenceOf("structure", "structure", tag, stream, Data.class);
+            return Asn1Utils.createBerSequenceOf("structure", "structure", tag, stream, Data.class, false);
         case Tag.CONTEXT | 3:
             return Asn1Utils.createBerBoolean("boolean", "boolean", tag, stream);
         case Tag.CONTEXT | 4:

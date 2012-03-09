@@ -22,7 +22,7 @@ public class ReportPoolSemaphoreStatusResponse extends BerSequence {
     public BerNode create(int tag, BerInputStream stream) {
         switch (tag) {
         case Tag.CONTEXT | 0:
-            return Asn1Utils.createBerSequenceOf("listOfNamedTokens", "listOfNamedTokens", tag, stream, NamedTokens.class);
+            return Asn1Utils.createBerSequenceOf("listOfNamedTokens", "listOfNamedTokens", tag, stream, NamedTokens.class, false);
         case Tag.CONTEXT | 1:
             return Asn1Utils.createBerBoolean("moreFollows", "moreFollows", tag, stream);
         default:

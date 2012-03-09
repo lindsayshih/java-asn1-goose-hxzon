@@ -34,6 +34,7 @@ import org.hxzon.asn1.core.type.BerVideoTextString;
 import org.hxzon.asn1.core.type.BerVisibleString;
 import org.hxzon.asn1.core.type.base.BerConstruct;
 import org.hxzon.asn1.core.type.base.BerNode;
+import org.hxzon.asn1.core.type.ext.BerChoice;
 import org.hxzon.asn1.core.type.ext.BerSequenceOf;
 import org.hxzon.asn1.core.type.ext.FakeBerInteger;
 import org.hxzon.asn1.core.type.ext.FakeBerNode;
@@ -214,7 +215,7 @@ public class Asn1Utils {
         return new BerSequenceOf(clazz).init(name, display, tag, stream);
     }
 
-    public static BerNode createBerSequenceOf(String name, String display, int tag, BerInputStream stream, Class<? extends BerNode> clazz, boolean choiceChildHasTag) {
+    public static BerNode createBerSequenceOf(String name, String display, int tag, BerInputStream stream, Class<? extends BerChoice> clazz, boolean choiceChildHasTag) {
         return new BerSequenceOf(clazz, choiceChildHasTag).init(name, display, tag, stream);
     }
 

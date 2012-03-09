@@ -20,7 +20,7 @@ public class GetEventActionAttributesResponse extends BerSequence {
         case Tag.CONTEXT | 0:
             return Asn1Utils.createBerBoolean("mmsDeletable", "mmsDeletable", tag, stream);
         case Tag.CONTEXT | 1:
-            return Asn1Utils.createBerSequenceOf("listOfModifier", "listOfModifier", tag, stream, Modifier.class);
+            return Asn1Utils.createBerSequenceOf("listOfModifier", "listOfModifier", tag, stream, Modifier.class, false);
         default:
             return Asn1Utils.createUnknown(tag, stream);
         }

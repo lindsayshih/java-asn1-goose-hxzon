@@ -37,7 +37,7 @@ public class InformationReport extends BerSequence implements InformationReportC
     public BerNode create(int tag, BerInputStream stream) {
         switch (tag) {
         case Tag.CONTEXT | 0:
-            return Asn1Utils.createBerSequenceOf("listOfAccessResult", "访问结果集", tag, stream, AccessResult.class);
+            return Asn1Utils.createBerSequenceOf("listOfAccessResult", "访问结果集", tag, stream, AccessResult.class, false);
         default:
             return new VariableAccessSpecification().init(tag, stream, false);
         }

@@ -16,7 +16,7 @@ public class DeleteEventEnrollmentRequest extends BerChoice {
     public BerNode create(int tag, BerInputStream stream) {
         switch (tag) {
         case Tag.CONTEXT | 0:
-            return Asn1Utils.createBerSequenceOf("specific", "specific", tag, stream, ObjectName.class);
+            return Asn1Utils.createBerSequenceOf("specific", "specific", tag, stream, ObjectName.class, false);
         case Tag.CONTEXT | 1:
             return new ObjectName().init("ec", "ec", tag, stream);
         case Tag.CONTEXT | 2:

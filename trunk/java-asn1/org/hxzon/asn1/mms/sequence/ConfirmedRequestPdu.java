@@ -30,7 +30,7 @@ public class ConfirmedRequestPdu extends BerSequence {
         case Tag.UNIVERSAL | Tag.INTEGER:
             return Asn1Utils.createBerUnsigned32("invokeID", "invokeID", tag, stream);
         case Tag.UNIVERSAL | Tag.SEQUENCE:
-            return Asn1Utils.createBerSequenceOf("seq of modifier", "list of modifier", tag, stream, Modifier.class);
+            return Asn1Utils.createBerSequenceOf("seq of modifier", "list of modifier", tag, stream, Modifier.class, false);
         case Tag.CONTEXT | 79:
             return new CSRequestDetail().init(tag, stream, true);
         default:

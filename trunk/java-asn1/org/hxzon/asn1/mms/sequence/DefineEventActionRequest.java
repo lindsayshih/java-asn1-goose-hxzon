@@ -22,7 +22,7 @@ public class DefineEventActionRequest extends BerSequence {
         case Tag.CONTEXT | 0:
             return new ObjectName().init("eventActionName", "eventActionName", tag, stream);
         case Tag.CONTEXT | 1:
-            return Asn1Utils.createBerSequenceOf("listOfModifier", "listOfModifier", tag, stream, Modifier.class);
+            return Asn1Utils.createBerSequenceOf("listOfModifier", "listOfModifier", tag, stream, Modifier.class, false);
         default:
             return Asn1Utils.createUnknown(tag, stream);
         }

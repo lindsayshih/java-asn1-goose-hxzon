@@ -29,7 +29,7 @@ public class GetEventEnrollmentAttributesRequest extends BerSequence {
         case Tag.CONTEXT | 0:
             return new ScopeOfRequest().init("scopeOfRequest", "scopeOfRequest", tag, stream);
         case Tag.CONTEXT | 1:
-            return Asn1Utils.createBerSequenceOf("eventEnrollmentNames", "eventEnrollmentNames", tag, stream, ObjectName.class);
+            return Asn1Utils.createBerSequenceOf("eventEnrollmentNames", "eventEnrollmentNames", tag, stream, ObjectName.class, false);
         case Tag.CONTEXT | 2:
             return new ApplicationReference().init("clientApplication", "clientApplication", tag, stream);
         case Tag.CONTEXT | 3:
