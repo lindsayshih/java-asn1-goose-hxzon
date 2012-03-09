@@ -1,5 +1,6 @@
 package org.hxzon.netprotocol.payload;
 
+import org.hxzon.netprotocol.common.IPacket;
 import org.hxzon.netprotocol.common.IPacketPayload;
 import org.hxzon.netprotocol.common.PacketGroup;
 import org.hxzon.netprotocol.common.PayloadHelper;
@@ -19,6 +20,9 @@ public class DataPayload extends PayloadHelper implements IPacketPayload {
         if (_group != null) {
             IPacketPayload payload = _group.getPayload();
             if (payload != null) {
+                if (payload instanceof IPacket) {
+                    payload = ((IPacket) payload).getLastPayload();
+                }
                 return payload.getProtocolTypeDesc();
             }
         }
