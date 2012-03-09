@@ -109,8 +109,8 @@ public class InformationReport extends BerSequence implements InformationReportC
                 if (bitString.charAt(5) == '1') {
                     for (int i = 0; i < datasetNum; i++) {
                         index++;
-                        if (index >= seqOf.getChildren().length) {
-                            logger.error("index " + index + " out of range:" + seqOf.getChildren().length);
+                        if (index >= seqOf.size()) {
+                            logger.error("index " + index + " out of range:" + seqOf.size());
                             break;
                         }
                         successDataRealNode = getAccessResult_Success_RealNode(seqOf, index);
@@ -122,8 +122,8 @@ public class InformationReport extends BerSequence implements InformationReportC
                 valueNodes = new ArrayList<BerNode>(datasetNum);
                 for (int i = 0; i < datasetNum; i++) {
                     index++;
-                    if (index >= seqOf.getChildren().length) {
-                        logger.error("index " + index + " out of range:" + seqOf.getChildren().length);
+                    if (index >= seqOf.size()) {
+                        logger.error("index " + index + " out of range:" + seqOf.size());
                         break;
                     }
                     successDataRealNode = getAccessResult_Success_RealNode(seqOf, index);
@@ -135,8 +135,8 @@ public class InformationReport extends BerSequence implements InformationReportC
                 if (bitString.charAt(3) == '1') {
                     for (int i = 0; i < datasetNum; i++) {
                         index++;
-                        if (index >= seqOf.getChildren().length) {
-                            logger.error("index " + index + " out of range:" + seqOf.getChildren().length);
+                        if (index >= seqOf.size()) {
+                            logger.error("index " + index + " out of range:" + seqOf.size());
                             break;
                         }
                         successDataRealNode = getAccessResult_Success_RealNode(seqOf, index);
