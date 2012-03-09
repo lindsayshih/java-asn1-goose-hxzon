@@ -45,7 +45,6 @@ import org.slf4j.LoggerFactory;
  */
 public class ReadSequence {
     private static final Logger logger = LoggerFactory.getLogger(ReadSequence.class);
-    private String _display;
     private BerInputStream _fInputStream;
     private long _fStart;
     private int _fLength;
@@ -55,14 +54,13 @@ public class ReadSequence {
      * Creates a new sequence tracking wrapper.
      * @param stream
      */
-    public ReadSequence(String display, BerInputStream stream) throws IOException {
-        this._display = display;
+    public ReadSequence(String name, BerInputStream stream) throws IOException {
         _fInputStream = stream;
         _fLength = _fInputStream.readBerLength();
         _fStart = _fInputStream.getReadBytes();
 
         _fEOF = (_fLength == 0);
-        logger.trace("read sequence " + display + ", start:" + _fStart + ",len:" + _fLength);
+        logger.trace("read sequence " + name + ", start:" + _fStart + ",len:" + _fLength);
     }
 
     /**
