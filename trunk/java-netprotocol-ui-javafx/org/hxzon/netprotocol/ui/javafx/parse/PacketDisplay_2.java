@@ -20,6 +20,7 @@ public class PacketDisplay_2 extends SplitPane {
     private final WebView indexPane;
     private final WebView dataPane;
     private byte[] dataByte;
+    private String dataString;
 
     public PacketDisplay_2() {
         packetTreeView = new PacketTreeView();
@@ -64,9 +65,10 @@ public class PacketDisplay_2 extends SplitPane {
                 }
                 if (dataByte != node.getBytes()) {
                     dataByte = node.getBytes();
+                    dataString = BytesUtil.toDisplayHexString(dataByte, true);
                     setText(indexPane, BytesUtil.toIndex(dataByte, true));
                 }
-                StringBuffer detailText = new StringBuffer(BytesUtil.toDisplayHexString(dataByte, true));
+                StringBuffer detailText = new StringBuffer(dataString);
                 detailText.insert(end, "</span>");
                 detailText.insert(offset, "<span style='background:#bce2ec'>");
                 setText(dataPane, detailText.toString());
