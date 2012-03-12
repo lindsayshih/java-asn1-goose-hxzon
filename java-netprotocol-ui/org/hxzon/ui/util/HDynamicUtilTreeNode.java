@@ -9,6 +9,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeNode;
 
 public class HDynamicUtilTreeNode extends DefaultMutableTreeNode {
+    private static final long serialVersionUID = 1L;
     protected boolean hasChildren;
     /** Value to create children with. */
     protected Object childValue;
