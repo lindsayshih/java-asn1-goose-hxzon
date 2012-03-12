@@ -36,7 +36,7 @@ public class PacketHelper extends PayloadHelper implements IPacket {
 
     public void setSrcPacket(IPacket srcPacket) {
         this._srcPacket = srcPacket;
-        init(srcPacket);
+//        init(srcPacket);
     }
 
     public int getPayloadOffset() {

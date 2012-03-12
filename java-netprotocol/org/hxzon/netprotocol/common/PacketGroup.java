@@ -25,6 +25,7 @@ public class PacketGroup<P extends IPacket> {
     public IPacketPayload getPayload() {
         if (_reassemblyPayload == null && isReachLast()) {
             _reassemblyPayload = parsePayload();
+            _reassemblyPayload.setSrcPacket(_packets.get(0));
         }
         return _reassemblyPayload;
     }
