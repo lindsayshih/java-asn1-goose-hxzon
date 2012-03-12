@@ -25,7 +25,7 @@ public class PayloadHelper implements IPacketPayload {
 
     public void setSrcPacket(IPacket srcPacket) {
         this._srcPacket = srcPacket;
-        init(srcPacket);
+//        init(srcPacket);
     }
 
     public IPacket getSrcPacket() {

@@ -6,6 +6,7 @@ import java.util.List;
 import org.hxzon.netprotocol.common.IPacket;
 import org.hxzon.netprotocol.common.IPacketPayload;
 import org.hxzon.netprotocol.common.PacketHelper;
+import org.hxzon.netprotocol.common.PayloadHelper;
 import org.hxzon.netprotocol.field.ProtocolField;
 import org.hxzon.netprotocol.parse.ProtocolBindingList;
 import org.hxzon.netprotocol.payload.ErrorPayload;
@@ -70,6 +71,9 @@ public class Packet extends PacketHelper implements IPacket {
             _payload = new ErrorPayload(e.getMessage());
         }
         _payload.setSrcPacket(this);
+        if (_payload instanceof PayloadHelper) {
+            ((PayloadHelper) _payload).init(this);
+        }
         return _payload;
     }
 
