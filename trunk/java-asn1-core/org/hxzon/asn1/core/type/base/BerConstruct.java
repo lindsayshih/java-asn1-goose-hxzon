@@ -218,17 +218,21 @@ public abstract class BerConstruct extends BerNode implements IBerConstruct {
             super.setOffsetAndLen(stream);
             readTag = seq.readBerTag();
             while (Tag.EOFTYPE != readTag) {
-                BerNode cnode = create(readTag, stream);
-                logger.trace("create " + cnode.getName() + "," + cnode.getTagDisplay() + ",tag offset:" + cnode.getTagOffset() + ",len:" + cnode.getTotalLen());
-                /** always add choice?
-                				//if child is a choice ,and no tag ,and global set don't add choice node
-                				if (cnode instanceof BerChoice && !((BerChoice) cnode).hasTag() && Asn1Utils.isNotAddChoiceNode()) {
-                					cnode.setParent(this);
-                					cnode = ((BerChoice) cnode).getLastRealNode();
-                				}
-                				**/
-                cnode.setParent(this);
-                _fList.add(cnode);
+                try {
+                    BerNode cnode = create(readTag, stream);
+                    logger.trace("create " + cnode.getName() + "," + cnode.getTagDisplay() + ",tag offset:" + cnode.getTagOffset() + ",len:" + cnode.getTotalLen());
+                    /** always add choice?
+                    				//if child is a choice ,and no tag ,and global set don't add choice node
+                    				if (cnode instanceof BerChoice && !((BerChoice) cnode).hasTag() && Asn1Utils.isNotAddChoiceNode()) {
+                    					cnode.setParent(this);
+                    					cnode = ((BerChoice) cnode).getLastRealNode();
+                    				}
+                    				**/
+                    cnode.setParent(this);
+                    _fList.add(cnode);
+                } catch (Exception e) {
+                    logger.error(this.getClass().getSimpleName() + "[" + this.getName() + "]", e);
+                }
                 readTag = seq.readBerTag();
             }
 //			logger.trace("stream tag offset:"+stream.getTagOffset()+","+super.getDisplayString()+" tag offset:"+super.getTagOffset()
