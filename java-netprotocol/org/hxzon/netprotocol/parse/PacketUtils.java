@@ -1,6 +1,13 @@
 package org.hxzon.netprotocol.parse;
 
+import org.hxzon.netprotocol.packet.ArpPacket;
+import org.hxzon.netprotocol.packet.CotpPacket;
+import org.hxzon.netprotocol.packet.EthernetPacket;
+import org.hxzon.netprotocol.packet.GoosePacket;
 import org.hxzon.netprotocol.packet.Ip4Packet;
+import org.hxzon.netprotocol.packet.OsiSessionPacket;
+import org.hxzon.netprotocol.packet.RarpPacket;
+import org.hxzon.netprotocol.packet.SvPacket;
 import org.hxzon.netprotocol.packet.TcpPacket;
 import org.hxzon.netprotocol.packet.TpktPacket;
 import org.hxzon.netprotocol.packet.UdpPacket;
@@ -8,6 +15,21 @@ import org.hxzon.netprotocol.packet.VlanPacket;
 import org.hxzon.util.BytesUtil;
 
 public class PacketUtils {
+    public static void initPacket() {
+        new EthernetPacket();
+        new VlanPacket();
+        new GoosePacket();
+        new SvPacket();
+        new Ip4Packet();
+        new TcpPacket();
+        new UdpPacket();
+        new TpktPacket();
+        new CotpPacket();
+        new OsiSessionPacket();
+        new ArpPacket();
+        new RarpPacket();
+    }
+
     public static int ethernetType(byte[] data) {
         int ethernetType = BytesUtil.toInt(data, 12, 2, 0);
         if (VlanPacket.EthernetType_Vlan == ethernetType) {
