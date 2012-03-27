@@ -63,6 +63,8 @@ public class UIUtil {
         examplePackets.add(new Packet(readExample("cotp.3.piece.1.hex.txt")));
         examplePackets.add(new Packet(readExample("cotp.3.piece.2.hex.txt")));
         examplePackets.add(new Packet(readExample("cotp.3.piece.3.hex.txt")));
+        examplePackets.add(new Packet(readExample("arp.1.hex.txt")));
+        examplePackets.add(new Packet(readExample("arp.2.hex.txt")));
     }
 
     public static byte[] readExample(String filename) {

@@ -14,17 +14,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.SwingUtilities;
 
-import org.hxzon.netprotocol.packet.CotpPacket;
-import org.hxzon.netprotocol.packet.EthernetPacket;
-import org.hxzon.netprotocol.packet.GoosePacket;
-import org.hxzon.netprotocol.packet.Ip4Packet;
-import org.hxzon.netprotocol.packet.OsiSessionPacket;
 import org.hxzon.netprotocol.packet.Packet;
-import org.hxzon.netprotocol.packet.SvPacket;
-import org.hxzon.netprotocol.packet.TcpPacket;
-import org.hxzon.netprotocol.packet.TpktPacket;
-import org.hxzon.netprotocol.packet.UdpPacket;
-import org.hxzon.netprotocol.packet.VlanPacket;
+import org.hxzon.netprotocol.parse.PacketUtils;
 import org.hxzon.pcap.PcapHandler;
 import org.hxzon.ui.util.ListSelectionAction;
 import org.hxzon.ui.util.UIUtil;
@@ -32,17 +23,7 @@ import org.hxzon.ui.util.UIUtil;
 public class DisplayFrame extends JFrame {
     private static final long serialVersionUID = 1L;
     static {
-        new EthernetPacket();
-        new VlanPacket();
-        new GoosePacket();
-        new SvPacket();
-        new Ip4Packet();
-        new TcpPacket();
-        new UdpPacket();
-        new TpktPacket();
-        new CotpPacket();
-        new OsiSessionPacket();
-//        new OsiPresentationPacket();
+        PacketUtils.initPacket();
     }
     private PacketTable packetsTable;
     private PacketDisplay packetDisplay;
