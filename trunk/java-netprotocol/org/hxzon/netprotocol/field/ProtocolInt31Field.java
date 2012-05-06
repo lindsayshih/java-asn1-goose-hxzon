@@ -3,9 +3,9 @@ package org.hxzon.netprotocol.field;
 import org.hxzon.netprotocol.packet.Packet;
 
 public class ProtocolInt31Field extends ProtocolField {
-    public ProtocolInt31Field(String id, String name, int offset, int len, Packet srcPacket) {
-        this(id, name, offset, len, false, srcPacket);
-    }
+//    public ProtocolInt31Field(String id, String name, int offset, int len, Packet srcPacket) {
+//        this(id, name, offset, len, false, srcPacket);
+//    }
 
     public ProtocolInt31Field(String id, String name, int offset, int len, boolean unsigned, Packet srcPacket) {
         setPacket(srcPacket);
