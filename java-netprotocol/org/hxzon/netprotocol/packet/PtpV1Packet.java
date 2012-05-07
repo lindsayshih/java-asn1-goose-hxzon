@@ -375,7 +375,7 @@ public class PtpV1Packet extends Packet {
         return _sync_utcReasonable;
     }
 
-    //follow up
+    //v1 follow up
     private ProtocolInt31Field _followUp_reserved;
     private PtpSequenceIdField _followUp_associatedSequenceId;
     private PtpV1TimestampField _followUp_preciseOriginTimestamp;
@@ -401,7 +401,7 @@ public class PtpV1Packet extends Packet {
         return _followUp_preciseOriginTimestamp;
     }
 
-    //delay resp
+    //v1 delay resp
     private PtpV1TimestampField _delayResp_delayReceiptTimestamp;
     private PtpCommunicationTechnologyField _delayResp_requestingSourceCommunicationTechnology;
     private PtpUuidField _delayResp_requestingSourceUuid;
