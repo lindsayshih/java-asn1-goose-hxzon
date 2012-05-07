@@ -82,6 +82,10 @@ public class PayloadHelper implements IPacketPayload {
         return BytesUtil.toHexString(_srcData, offset, len);
     }
 
+    public long getHexValue(int offset, int len) {
+        return Long.valueOf(BytesUtil.toHexString(_srcData, offset, len), 16);
+    }
+
     public long getSigned(int offset, int len) {
         return BytesUtil.toSigned(_srcData, offset, len);
     }
