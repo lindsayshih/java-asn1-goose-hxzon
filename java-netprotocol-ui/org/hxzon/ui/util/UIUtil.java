@@ -78,10 +78,9 @@ public class UIUtil {
         examplePackets.add(new Packet(readExample("ptpV2.2.delayReq.udp.hex.txt")));
         examplePackets.add(new Packet(readExample("ptpV2.8.delayResp.hex.txt")));
         examplePackets.add(new Packet(readExample("ptpV2.3.pdelayReq.hex.txt")));
-        examplePackets.add(new Packet(readExample("ptpV2.9.pdelayReq.udp.hex.txt")));
+        examplePackets.add(new Packet(readExample("ptpV2.6.pdelayReq.udp.hex.txt")));
         examplePackets.add(new Packet(readExample("ptpV2.5.announce.hex.txt")));
         examplePackets.add(new Packet(readExample("ptpV2.7.announce.udp.hex.txt")));
-        examplePackets.add(new Packet(readExample("ptpV2.6.pdelayReq.udp.hex.txt")));
     }
 
     public static byte[] readExample(String filename) {
