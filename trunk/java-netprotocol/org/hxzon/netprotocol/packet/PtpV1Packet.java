@@ -310,7 +310,7 @@ public class PtpV1Packet extends Packet {
 
     public ProtocolInt31Field fetchLocalStepsRemoved() {
         if (_sync_localStepsRemoved == null) {
-            _sync_localStepsRemoved = new ProtocolInt31Field("stepsRemoved", "stepsRemoved", 90, 2, true, this);//2 byte reserved
+            _sync_localStepsRemoved = new ProtocolInt31Field("localStepsRemoved", "stepsRemoved", 90, 2, true, this);//2 byte reserved
         }
         return _sync_localStepsRemoved;
     }

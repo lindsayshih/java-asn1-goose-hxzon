@@ -115,11 +115,7 @@ public class PtpV2Packet extends Packet {
 
     public ProtocolBitField fetchPtpVersion() {
         if (_ptpVersion == null) {
-            _ptpVersion = new ProtocolBitField("ptpVersion", "协议版本", 1, 4, 4, this) {
-                public String getValueAsString() {
-                    return "ieee1588 v" + getValue();
-                }
-            };
+            _ptpVersion = new ProtocolBitField("ptpVersion", "协议版本", 1, 4, 4, this);
         }
         return _ptpVersion;
     }
