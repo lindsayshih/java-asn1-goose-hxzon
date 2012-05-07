@@ -262,7 +262,7 @@ public class PtpV2Packet extends Packet {
     }
 
     //v2 announce
-    private PtpV2TimestampField _originTimestamp;
+    private PtpV2TimestampField _originTimestamp;//announce,sync,delay_req,pdelay_req
     private ProtocolInt31Field _announce_currentUtcOffset;
     private ProtocolInt31Field _announce_reserved;
     private ProtocolInt31Field _announce_grandmasterPriority1;
@@ -381,7 +381,7 @@ public class PtpV2Packet extends Packet {
         return _delayResp_requestingPortIdentity;
     }
 
-    //v2 pdelay_req :originTimestamp
+    //v2 pdelay_req :+originTimestamp
     private ProtocolHexStringField _pdelayReq_reserved;
 
     public ProtocolHexStringField fetchPdelayReqReserved() {
@@ -427,6 +427,68 @@ public class PtpV2Packet extends Packet {
         return _pdelayRespFollowUp_requestingPortIdentity;
     }
 
+    //v2 signaling
+    private ProtocolHexStringField _signaling_targetPortIdentity;
+    private ProtocolHexStringField _signaling_tlvs;//TODO
+
+    public ProtocolHexStringField fetchSignalingTargetPortIdentity() {
+        if (_signaling_targetPortIdentity == null) {
+            _signaling_targetPortIdentity = new ProtocolHexStringField("targetPortIdentity", "targetPortIdentity", 34, 10, this);
+        }
+        return _signaling_targetPortIdentity;
+    }
+
+    //v2 management
+    private ProtocolHexStringField _management_targetPortIdentity;
+    private ProtocolInt31Field _management_startingBoundaryHops;
+    private ProtocolInt31Field _management_boundaryHops;
+    private ProtocolBitField _management_reserved1;
+    private ProtocolBitField _management_action;
+    private ProtocolInt31Field _management_reserved2;
+    private ProtocolHexStringField _management_managementTlv;//TODO
+
+    public ProtocolHexStringField fetchManagementTargetPortIdentity() {
+        if (_management_targetPortIdentity == null) {
+            _management_targetPortIdentity = new ProtocolHexStringField("targetPortIdentity", "targetPortIdentity", 34, 10, this);
+        }
+        return _management_targetPortIdentity;
+    }
+
+    public ProtocolInt31Field fetchManagementStartingBoundaryHops() {
+        if (_management_startingBoundaryHops == null) {
+            _management_startingBoundaryHops = new ProtocolInt31Field("startingBoundaryHops", "startingBoundaryHops", 44, 1, true, this);
+        }
+        return _management_startingBoundaryHops;
+    }
+
+    public ProtocolInt31Field fetchManagementBoundaryHops() {
+        if (_management_boundaryHops == null) {
+            _management_boundaryHops = new ProtocolInt31Field("boundaryHops", "boundaryHops", 45, 1, true, this);
+        }
+        return _management_boundaryHops;
+    }
+
+    public ProtocolBitField fetchManagementReserved1() {
+        if (_management_reserved1 == null) {
+            _management_reserved1 = new ProtocolBitField("reserved1", "reserved1", 46, 0, 4, this);
+        }
+        return _management_reserved1;
+    }
+
+    public ProtocolBitField fetchManagementAction() {
+        if (_management_action == null) {
+            _management_action = new ProtocolBitField("action", "action", 46, 4, 4, this);
+        }
+        return _management_action;
+    }
+
+    public ProtocolInt31Field fetchManagementReserved2() {
+        if (_management_reserved2 == null) {
+            _management_reserved2 = new ProtocolInt31Field("reserved2", "reserved2", 47, 1, true, this);
+        }
+        return _management_reserved2;
+    }
+
     //------------------------------------
     private void addExtensionFields(int messageType, List<ProtocolField> fields) {
         switch (messageType) {
@@ -450,9 +512,11 @@ public class PtpV2Packet extends Packet {
         case MessageType_PDelayResp:
             fields.add(fetchPdelayRespReceiveReceiptTimestamp());
             fields.add(fetchPdelayRespRequestingPortIdentity());
+            break;
         case MessageType_PDelayRespFollowUp:
             fields.add(fetchPdelayRespFollowUpResponseOriginTimestamp());
             fields.add(fetchPdelayRespFollowUpRequestingPortIdentity());
+            break;
         case MessageType_Announce:
             fields.add(fetchOriginTimestamp());
             fields.add(fetchAnnounceCurrentUtcOffset());
@@ -465,6 +529,17 @@ public class PtpV2Packet extends Packet {
             fields.add(fetchAnnounceGrandmasterIdentity());
             fields.add(fetchAnnounceStepRemoved());
             fields.add(fetchAnnounceTimeSource());
+            break;
+        case MessageType_Signaling:
+            fields.add(fetchSignalingTargetPortIdentity());
+            break;
+        case MessageType_Management:
+            fields.add(fetchManagementTargetPortIdentity());
+            fields.add(fetchManagementStartingBoundaryHops());
+            fields.add(fetchManagementBoundaryHops());
+            fields.add(fetchManagementReserved1());
+            fields.add(fetchManagementAction());
+            fields.add(fetchManagementReserved2());
             break;
         }
     }
