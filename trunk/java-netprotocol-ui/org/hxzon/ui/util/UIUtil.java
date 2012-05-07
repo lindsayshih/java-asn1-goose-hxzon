@@ -65,6 +65,23 @@ public class UIUtil {
         examplePackets.add(new Packet(readExample("cotp.3.piece.3.hex.txt")));
         examplePackets.add(new Packet(readExample("arp.1.hex.txt")));
         examplePackets.add(new Packet(readExample("arp.2.hex.txt")));
+        //
+        examplePackets.add(new Packet(readExample("ptpV1.1.sync.hex.txt")));
+        examplePackets.add(new Packet(readExample("ptpV1.2.delayReq.hex.txt")));
+        examplePackets.add(new Packet(readExample("ptpV1.3.followUp.hex.txt")));
+        examplePackets.add(new Packet(readExample("ptpV1.4.delayResp.hex.txt")));
+        //
+        examplePackets.add(new Packet(readExample("ptpV2.1.sync.hex.txt")));
+        examplePackets.add(new Packet(readExample("ptpV2.10.sync.udp.hex.txt")));
+        examplePackets.add(new Packet(readExample("ptpV2.11.followUp.hex.txt")));
+        examplePackets.add(new Packet(readExample("ptpV2.4.followUp.udp.hex.txt")));
+        examplePackets.add(new Packet(readExample("ptpV2.2.delayReq.udp.hex.txt")));
+        examplePackets.add(new Packet(readExample("ptpV2.8.delayResp.hex.txt")));
+        examplePackets.add(new Packet(readExample("ptpV2.3.pdelayReq.hex.txt")));
+        examplePackets.add(new Packet(readExample("ptpV2.9.pdelayReq.udp.hex.txt")));
+        examplePackets.add(new Packet(readExample("ptpV2.5.announce.hex.txt")));
+        examplePackets.add(new Packet(readExample("ptpV2.7.announce.udp.hex.txt")));
+        examplePackets.add(new Packet(readExample("ptpV2.6.pdelayReq.udp.hex.txt")));
     }
 
     public static byte[] readExample(String filename) {
