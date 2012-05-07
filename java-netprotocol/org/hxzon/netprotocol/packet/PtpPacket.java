@@ -8,6 +8,7 @@ import org.hxzon.netprotocol.field.ProtocolBitField;
 import org.hxzon.netprotocol.field.ProtocolByteArrayField;
 import org.hxzon.netprotocol.field.ProtocolField;
 import org.hxzon.netprotocol.field.ProtocolInt31Field;
+import org.hxzon.netprotocol.field.ProtocolInt63Field;
 import org.hxzon.netprotocol.parse.ProtocolBinding;
 import org.hxzon.netprotocol.parse.ProtocolBindingList;
 import org.hxzon.netprotocol.parse.ProtocolDescUtil;
@@ -134,7 +135,7 @@ public class PtpPacket extends Packet {
 
     }
 
-    public static class PtpPortIdField extends ProtocolInt31Field {
+    public static class PtpPortIdField extends ProtocolInt63Field {
 
         public PtpPortIdField(String name, String display, int offset, int len, Packet srcPacket) {
             super(name, display, offset, len, true, srcPacket);
