@@ -6,6 +6,7 @@ import org.hxzon.netprotocol.packet.EthernetPacket;
 import org.hxzon.netprotocol.packet.GoosePacket;
 import org.hxzon.netprotocol.packet.Ip4Packet;
 import org.hxzon.netprotocol.packet.OsiSessionPacket;
+import org.hxzon.netprotocol.packet.PtpPacket;
 import org.hxzon.netprotocol.packet.RarpPacket;
 import org.hxzon.netprotocol.packet.SvPacket;
 import org.hxzon.netprotocol.packet.TcpPacket;
@@ -28,6 +29,7 @@ public class PacketUtils {
         new OsiSessionPacket();
         new ArpPacket();
         new RarpPacket();
+        new PtpPacket();
     }
 
     public static int ethernetType(byte[] data) {
