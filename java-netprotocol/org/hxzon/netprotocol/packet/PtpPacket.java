@@ -215,26 +215,29 @@ public class PtpPacket extends Packet {
         return _ptpVersion;
     }
 
+    //v1 use 0,1,2,3,4
     public static final int Control_Sync = 0;
     public static final int Control_DelayReq = 1;
     public static final int Control_FollowUp = 2;
     public static final int Control_DelayResp = 3;
-    public static final int Control_Announce = 5;
+    public static final int Control_Management = 4;
+    public static final int Control_AllOthers = 5;
 
     public static String controlDescription(int control) {
+        String append = "(" + control + ")";
         switch (control) {
         case Control_Sync:
-            return "sync";
+            return "sync" + append;
         case Control_DelayReq:
-            return "delay req";
+            return "delay req" + append;
         case Control_FollowUp:
-            return "follow up";
+            return "follow up" + append;
         case Control_DelayResp:
-            return "delay resp";
-        case Control_Announce:
-            return "announce";
+            return "delay resp" + append;
+        case Control_AllOthers:
+            return "all others" + append;
         default:
-            return "未知";
+            return "未知" + append;
         }
     }
 

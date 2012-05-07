@@ -76,29 +76,30 @@ public class PtpV2Packet extends Packet {
     public static final int MessageType_Management = 13;
 
     private String messageTypeDescription(int messageType) {
+        String append = "(" + messageType + ")";
         switch (messageType) {
         case MessageType_Sync:
-            return "sync";
+            return "sync" + append;
         case MessageType_DelayReq:
-            return "delay req";
+            return "delay req" + append;
         case MessageType_PDelayReq:
-            return "pdelay req";
+            return "pdelay req" + append;
         case MessageType_PDelayResp:
-            return "pdelay resp";
+            return "pdelay resp" + append;
         case MessageType_FollowUp:
-            return "follow up";
+            return "follow up" + append;
         case MessageType_DelayResp:
-            return "delay resp";
+            return "delay resp" + append;
         case MessageType_PDelayRespFollowUp:
-            return "pdelay resp follow up";
+            return "pdelay resp follow up" + append;
         case MessageType_Announce:
-            return "announce";
+            return "announce" + append;
         case MessageType_Signaling:
-            return "signaling";
+            return "signaling" + append;
         case MessageType_Management:
-            return "management";
+            return "management" + append;
         default:
-            return "reserved";
+            return "reserved" + append;
         }
     }
 
@@ -241,7 +242,7 @@ public class PtpV2Packet extends Packet {
         return _sequenceId;
     }
 
-    //为了兼容版本1
+    //for compatibility with hardware designed to conform to version 1 of this standard
     public ProtocolInt31Field fetchControl() {
         if (_control == null) {
             _control = new ProtocolInt31Field("control", "控制", 32, 1, true, this) {

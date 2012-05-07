@@ -233,7 +233,7 @@ public class PtpV1Packet extends Packet {
 
     public PtpCommunicationTechnologyField fetchGrandmasterCommunicationTechnology() {
         if (_sync_grandmasterCommunicationTechnology == null) {
-            _sync_grandmasterCommunicationTechnology = new PtpCommunicationTechnologyField("grandmasterCommunication", "grandmasterCommunication", 53, 1, this);//1 byte reserved
+            _sync_grandmasterCommunicationTechnology = new PtpCommunicationTechnologyField("grandmasterCommunicationTechnology", "grandmasterCommunicationTechnology", 53, 1, this);//1 byte reserved
         }
         return _sync_grandmasterCommunicationTechnology;
     }
@@ -310,7 +310,7 @@ public class PtpV1Packet extends Packet {
 
     public ProtocolInt31Field fetchLocalStepsRemoved() {
         if (_sync_localStepsRemoved == null) {
-            _sync_localStepsRemoved = new ProtocolInt31Field("localStepsRemoved", "stepsRemoved", 90, 2, true, this);//2 byte reserved
+            _sync_localStepsRemoved = new ProtocolInt31Field("localStepsRemoved", "localStepsRemoved", 90, 2, true, this);//2 byte reserved
         }
         return _sync_localStepsRemoved;
     }
@@ -417,7 +417,7 @@ public class PtpV1Packet extends Packet {
 
     public PtpCommunicationTechnologyField fetchDelayRespRequestingSourceCommunicationTechnology() {
         if (_delayResp_requestingSourceCommunicationTechnology == null) {
-            _delayResp_requestingSourceCommunicationTechnology = new PtpCommunicationTechnologyField("requestingSourceTechnology", "requestingSourceTechnology", 49, 1, this);//1 byte reserved
+            _delayResp_requestingSourceCommunicationTechnology = new PtpCommunicationTechnologyField("requestingSourceCommunicationTechnology", "requestingSourceCommunicationTechnology", 49, 1, this);//1 byte reserved
         }
         return _delayResp_requestingSourceCommunicationTechnology;
     }
@@ -438,7 +438,7 @@ public class PtpV1Packet extends Packet {
 
     public PtpSequenceIdField fetchDelayRespRequestingSourceSequenceId() {
         if (_delayResp_requestingSourceSequenceId == null) {
-            _delayResp_requestingSourceSequenceId = new PtpSequenceIdField("requestingSequenceId", "requesting序列号", 58, 2, this);
+            _delayResp_requestingSourceSequenceId = new PtpSequenceIdField("requestingSourceSequenceId", "requestingSource序列号", 58, 2, this);
         }
         return _delayResp_requestingSourceSequenceId;
     }
@@ -455,9 +455,6 @@ public class PtpV1Packet extends Packet {
             break;
         case PtpPacket.Control_DelayResp:
             addDelayRespFields(fields);
-            break;
-        case PtpPacket.Control_Announce:
-//            addAnnounceFields(fields);
             break;
         }
     }
