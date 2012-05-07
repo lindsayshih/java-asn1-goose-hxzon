@@ -5,6 +5,7 @@ import java.util.List;
 import org.hxzon.netprotocol.field.ProtocolAsciiStringField;
 import org.hxzon.netprotocol.field.ProtocolField;
 import org.hxzon.netprotocol.field.ProtocolInt31Field;
+import org.hxzon.netprotocol.field.ProtocolInt63Field;
 import org.hxzon.netprotocol.packet.PtpPacket.PtpClockIdField;
 import org.hxzon.netprotocol.packet.PtpPacket.PtpCommunicationTechnologyField;
 import org.hxzon.netprotocol.packet.PtpPacket.PtpPortIdField;
@@ -443,6 +444,65 @@ public class PtpV1Packet extends Packet {
         return _delayResp_requestingSourceSequenceId;
     }
 
+    //v2 management
+    private ProtocolInt31Field _management_targetCommunicationTechnology;
+    private PtpUuidField _management_targetUuid;
+    private PtpPortIdField _management_targetPortId;
+    private ProtocolInt63Field _management_startingBoundaryHops;
+    private ProtocolInt63Field _management_boundaryHops;
+    private ProtocolInt63Field _management_managementMessageKey;
+    private ProtocolInt63Field _management_parameterLength;
+    private ProtocolInt63Field _management_messageParameters;//TODO
+
+    public ProtocolInt31Field fetchManagementTargetCommunicationTechnology() {
+        if (_management_targetCommunicationTechnology == null) {
+            _management_targetCommunicationTechnology = new ProtocolInt31Field("targetCommunicationTechnology", "targetCommunicationTechnology", 40, 1, true, this);
+        }
+        return _management_targetCommunicationTechnology;
+    }
+
+    public PtpUuidField fetchManagementTargetUuid() {
+        if (_management_targetUuid == null) {
+            _management_targetUuid = new PtpUuidField("targetUuid", "targetUuid", 41, 6, this);
+        }
+        return _management_targetUuid;
+    }
+
+    public PtpPortIdField fetchManagementTargetPortId() {
+        if (_management_targetPortId == null) {
+            _management_targetPortId = new PtpPortIdField("targetPortId", "targetPortId", 47, 6, this);
+        }
+        return _management_targetPortId;
+    }
+
+    public ProtocolInt63Field fetchManagementStartingBoundaryHops() {
+        if (_management_startingBoundaryHops == null) {
+            _management_startingBoundaryHops = new ProtocolInt63Field("startingBoundaryHops", "startingBoundaryHops", 53, 6, true, this);
+        }
+        return _management_startingBoundaryHops;
+    }
+
+    public ProtocolInt63Field fetchManagementBoundaryHops() {
+        if (_management_boundaryHops == null) {
+            _management_boundaryHops = new ProtocolInt63Field("boundaryHops", "boundaryHops", 59, 6, true, this);
+        }
+        return _management_boundaryHops;
+    }
+
+    public ProtocolInt63Field fetchManagementManagementMessageKey() {
+        if (_management_managementMessageKey == null) {
+            _management_managementMessageKey = new ProtocolInt63Field("managementMessageKey", "managementMessageKey", 65, 8, true, this);
+        }
+        return _management_managementMessageKey;
+    }
+
+    public ProtocolInt63Field fetchManagementParameterLength() {
+        if (_management_parameterLength == null) {
+            _management_parameterLength = new ProtocolInt63Field("parameterLength", "parameterLength", 73, 6, true, this);
+        }
+        return _management_parameterLength;
+    }
+
     //--------------------------------------------------------------------------------------
     private void addExtensionFields(int control, List<ProtocolField> fields) {
         switch (control) {
@@ -455,6 +515,9 @@ public class PtpV1Packet extends Packet {
             break;
         case PtpPacket.Control_DelayResp:
             addDelayRespFields(fields);
+            break;
+        case PtpPacket.Control_Management:
+            addManagementFields(fields);
             break;
         }
     }
@@ -498,5 +561,15 @@ public class PtpV1Packet extends Packet {
         fields.add(fetchDelayRespRequestingSourceUuid());
         fields.add(fetchDelayRespRequestingSourcePortId());
         fields.add(fetchDelayRespRequestingSourceSequenceId());
+    }
+
+    private void addManagementFields(List<ProtocolField> fields) {
+        fields.add(fetchManagementTargetCommunicationTechnology());
+        fields.add(fetchManagementTargetUuid());
+        fields.add(fetchManagementTargetPortId());
+        fields.add(fetchManagementStartingBoundaryHops());
+        fields.add(fetchManagementBoundaryHops());
+        fields.add(fetchManagementManagementMessageKey());
+        fields.add(fetchManagementParameterLength());
     }
 }
