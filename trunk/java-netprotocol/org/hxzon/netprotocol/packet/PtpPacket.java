@@ -176,6 +176,30 @@ public class PtpPacket extends Packet {
 
     }
 
+    public static class PtpTlvField extends ProtocolField {
+
+        public PtpTlvField(String name, String display, int offset, int len, Packet srcPacket) {
+            setPacket(srcPacket);
+            setName(name);
+            setDisplayString(display);
+            setSaveOffsetAndLen(srcPacket, offset, len);
+            tlvType = srcPacket.getUnsigned(getOffset(), 2);
+            valueLength = srcPacket.getUnsigned(getOffset() + 2, 2);
+            value = srcPacket.getByteArray(getOffset() + 4, (int) valueLength);
+            //setLen((int)(4+valueLength));//TODO
+        }
+
+        private long tlvType;
+        private long valueLength;
+        private byte[] value;
+
+        @Override
+        public String getValueAsString() {
+            return "tlvType:" + tlvType + "," + BytesUtil.toHexString(value);
+        }
+
+    }
+
     //--------------------------------------------------------
     public static final int EthernetType_Ptp = 0x88f7;
     public static final int HeaderLength = 34;
