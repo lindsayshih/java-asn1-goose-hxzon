@@ -42,10 +42,12 @@ public class PtpV1Packet extends Packet {
     }
 
     public List<ProtocolField> getHeaderFields() {
-        List<ProtocolField> headerFields = super.getHeaderFields();
-        int control = fetchControl().getValue();
-        addExtensionFields(control, headerFields);
-        return headerFields;
+        if (_headerFields == null) {
+            _headerFields = super.getHeaderFields();
+            int control = fetchControl().getValue();
+            addExtensionFields(control, _headerFields);
+        }
+        return _headerFields;
     }
 
     //----------------------------

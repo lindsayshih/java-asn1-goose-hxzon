@@ -43,10 +43,12 @@ public class PtpV2Packet extends Packet {
     }
 
     public List<ProtocolField> getHeaderFields() {
-        List<ProtocolField> headerFields = super.getHeaderFields();
-        int messageType = fetchMessageType().getValue();
-        addExtensionFields(messageType, headerFields);
-        return headerFields;
+        if (_headerFields == null) {
+            _headerFields = super.getHeaderFields();
+            int messageType = fetchMessageType().getValue();
+            addExtensionFields(messageType, _headerFields);
+        }
+        return _headerFields;
     }
 
     public ProtocolBitField fetchTransportSpecific() {
