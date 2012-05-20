@@ -71,62 +71,91 @@ public class Asn1Utils {
         switch (tag) {
         case Tag.UNIVERSAL | Tag.BITSTRING:
             node = new BerBitString();
+            break;
         case Tag.UNIVERSAL | Tag.BMPSTRING:
             node = new BerBMPString();
+            break;
         case Tag.UNIVERSAL | Tag.BOOLEAN:
             node = new BerBoolean();
+            break;
         case Tag.UNIVERSAL | Tag.CHARACTERSTRING:
             node = new BerCharacterString();
+            break;
         case Tag.UNIVERSAL | Tag.EMBEDDEDPDV:
             node = new BerEmbeddedPDV();
+            break;
         case Tag.UNIVERSAL | Tag.ENUMERATED:
             node = new BerEnumerated();
+            break;
         case Tag.UNIVERSAL | Tag.EXTERNAL:
             node = new BerExternal();
+            break;
         case Tag.UNIVERSAL | Tag.GENERALSTRING:
             node = new BerGeneralString();
+            break;
         case Tag.UNIVERSAL | Tag.GENERALTIME:
             node = new BerGeneralTime();
+            break;
         case Tag.UNIVERSAL | Tag.GRAPHICSTRING:
             node = new BerGraphicsString();
+            break;
         case Tag.UNIVERSAL | Tag.IA5STRING:
             node = new BerIA5String();
+            break;
         case Tag.UNIVERSAL | Tag.INTEGER:
             node = new BerInteger();
+            break;
         case Tag.UNIVERSAL | Tag.NULL:
             node = new BerNull();
+            break;
         case Tag.UNIVERSAL | Tag.NUMERICSTRING:
             node = new BerNumericString();
+            break;
         case Tag.UNIVERSAL | Tag.OBJECTDESCRIPTOR:
             node = new BerObjectDescriptor();
+            break;
         case Tag.UNIVERSAL | Tag.OBJECTID:
             node = new BerOID();
+            break;
         case Tag.UNIVERSAL | Tag.OCTETSTRING:
             node = new BerOctetString();
+            break;
         case Tag.UNIVERSAL | Tag.PRINTABLESTRING:
             node = new BerPrintableString();
+            break;
         case Tag.UNIVERSAL | Tag.REAL:
             node = new BerReal();
+            break;
         case Tag.UNIVERSAL | Tag.RELATIVEOID:
             node = new BerRelativeOID();
+            break;
         case Tag.UNIVERSAL | Tag.SEQUENCE:
             node = new BerSequence();
+            break;
         case Tag.UNIVERSAL | Tag.SET:
             node = new BerSet();
+            break;
         case Tag.UNIVERSAL | Tag.TELETEXSTRING:
             node = new BerTeletexString();
+            break;
         case Tag.UNIVERSAL | Tag.UNIVERSALSTRING:
             node = new BerUniversalString();
+            break;
         case Tag.UNIVERSAL | Tag.UTCTIME:
             node = new BerUTCTime();
+            break;
         case Tag.UNIVERSAL | Tag.UTF8STRING:
             node = new BerUTF8String();
+            break;
         case Tag.UNIVERSAL | Tag.VIDEOTEXTSTRING:
             node = new BerVideoTextString();
+            break;
         case Tag.UNIVERSAL | Tag.VISIBLESTRING:
             node = new BerVisibleString();
+            break;
         default:
             node = new UnknownBerNode(tag);
+            break;
         }
         return node.init(tag, stream).setName("unknown " + Tag.toString(tag));
     }
