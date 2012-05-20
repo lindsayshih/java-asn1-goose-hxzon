@@ -40,6 +40,7 @@ public class UIUtil {
         basePath = UIUtil.class.getResource("").toString().substring(5);
         examplePackets.add(new Packet(readExample("goose.1.hex.txt")));
         examplePackets.add(new Packet(readExample("goose.2.hex.txt")));
+        examplePackets.add(new Packet(readExample("goose.3.hex.txt")));
         examplePackets.add(new Packet(readExample("mms.1.hex.txt")));
         examplePackets.add(new Packet(readExample("mms.2.hex.txt")));
         examplePackets.add(new Packet(readExample("mms.3.hex.txt")));

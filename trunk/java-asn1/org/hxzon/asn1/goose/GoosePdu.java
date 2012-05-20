@@ -60,7 +60,7 @@ public class GoosePdu extends BerSequence {
         case Tag.CONTEXT | 10:
             return Asn1Utils.createBerUnsignedX("numDatSetEntries", "数据集条目数", tag, stream);
         case Tag.CONTEXT | 11:
-            return new GooseDataset().init("dataset", "数据集", tag, stream);
+            return Asn1Utils.createBerSequenceOf("dataset", "数据集", tag, stream, GooseDataset.class, false);
         default:
             return Asn1Utils.createUnknown(tag, stream);
 
