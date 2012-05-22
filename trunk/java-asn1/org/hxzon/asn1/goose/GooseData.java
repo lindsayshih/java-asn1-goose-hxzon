@@ -8,8 +8,8 @@ import org.hxzon.asn1.core.parse.ext.Asn1Utils;
 import org.hxzon.asn1.core.type.base.BerNode;
 import org.hxzon.asn1.core.type.ext.BerChoice;
 
-public class GooseDataset extends BerChoice {
-    public GooseDataset() {
+public class GooseData extends BerChoice {
+    public GooseData() {
     }
 
 //  TimeOfDay ::= OCTET STRING -- (SIZE (4 | 6))
@@ -34,9 +34,9 @@ public class GooseDataset extends BerChoice {
     public BerNode create(int tag, BerInputStream stream) {
         switch (tag) {
         case Tag.CONTEXT | 1:
-            return Asn1Utils.createBerSequenceOf("array", "array", tag, stream, GooseDataset.class, false);
+            return Asn1Utils.createBerSequenceOf("array", "array", tag, stream, GooseData.class, false);
         case Tag.CONTEXT | 2:
-            return Asn1Utils.createBerSequenceOf("structure", "structure", tag, stream, GooseDataset.class, false);
+            return Asn1Utils.createBerSequenceOf("structure", "structure", tag, stream, GooseData.class, false);
         case Tag.CONTEXT | 3:
             return Asn1Utils.createBerBoolean("boolean", "boolean", tag, stream);
         case Tag.CONTEXT | 4:
