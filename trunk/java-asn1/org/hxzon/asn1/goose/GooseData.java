@@ -1,7 +1,5 @@
 package org.hxzon.asn1.goose;
 
-import java.util.List;
-
 import org.hxzon.asn1.core.parse.BerInputStream;
 import org.hxzon.asn1.core.parse.Tag;
 import org.hxzon.asn1.core.parse.ext.Asn1Utils;
@@ -68,12 +66,8 @@ public class GooseData extends BerChoice {
         }
     }
 
-    public void updateDatasetDisplay(List<String> displays) {
-        BerNode[] children = getChildren();
-        int minIndex = Math.min(displays.size(), children.length);
-        for (int i = 0; i < minIndex; i++) {
-            children[i].setName(displays.get(i));
-        }
+    public void updateDisplay(String display) {
+        getRealNode().setName(display);
     }
 
 }
