@@ -60,7 +60,7 @@ public class GoosePdu extends BerSequence {
         case Tag.CONTEXT | 10:
             return Asn1Utils.createBerUnsignedX("numDatSetEntries", "数据集条目数", tag, stream);
         case Tag.CONTEXT | 11:
-            return Asn1Utils.createBerSequenceOf("dataset", "数据集", tag, stream, GooseData.class, false);
+            return new GooseDataset().init("dataset", "数据集", tag, stream);
         default:
             return Asn1Utils.createUnknown(tag, stream);
 
@@ -69,8 +69,8 @@ public class GoosePdu extends BerSequence {
 
     public void updateGooseDatasetDisplay(List<String> displays) {
         for (BerNode child : getChildren()) {
-            if (child instanceof GooseData) {
-                ((GooseData) child).updateDatasetDisplay(displays);
+            if (child instanceof GooseDataset) {
+                ((GooseDataset) child).updateDatasetDisplay(displays);
                 break;
             }
         }
